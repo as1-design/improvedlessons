@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>have: lexical and grammatical uses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBEBDD; --surface:#FFFBF5; --ink:#2B1A12; --muted:#7A5E4E; --line:#E6CDB7;
+  --c1:#0E8A7E; --c2:#D6336C; --c3:#3651D4; --butter:#FFD23F; --coffee:#6B3E26; --crema:#C9955F;
+  --ok:#1E9E5A; --bad:#D6336C;
+  --display:"Bricolage Grotesque", "Trebuchet MS", sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1C130F; --surface:#2A1E18; --ink:#F7E6D6; --muted:#C3A58F; --line:#4A382D;
+    --c1:#3CC2B3; --c2:#F2628F; --c3:#8595FF; --coffee:#A8683F; --crema:#E0B07C; --ok:#4CD68A; --bad:#F2628F;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1C130F; --surface:#2A1E18; --ink:#F7E6D6; --muted:#C3A58F; --line:#4A382D;
+  --c1:#3CC2B3; --c2:#F2628F; --c3:#8595FF; --coffee:#A8683F; --crema:#E0B07C; --ok:#4CD68A; --bad:#F2628F;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 90px)}
+body{
+  margin:0; background:var(--bg); color:var(--ink); font-family:var(--body);
+  font-size:clamp(17px,1.1vw + 11px,21px); line-height:1.5;
+  background-image:radial-gradient(color-mix(in srgb,var(--coffee) 9%,transparent) 1.2px,transparent 1.3px);
+  background-size:22px 22px;
+}
+button{font:inherit;color:inherit;cursor:pointer}
+b{font-weight:700}
+
+/* ---------- hero ---------- */
+.hero{position:relative;max-width:1120px;margin:0 auto;padding:clamp(24px,5vw,56px) clamp(18px,4vw,40px) 12px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:20px;overflow:hidden}
+.ring{position:absolute;border-radius:50%;border:clamp(10px,1.6vw,18px) solid var(--coffee);opacity:.16;pointer-events:none}
+.ring.r1{width:clamp(220px,34vw,420px);height:clamp(220px,34vw,420px);left:-6%;top:-40%;border-width:14px 22px 10px 18px}
+.ring.r2{width:clamp(120px,16vw,200px);height:clamp(120px,16vw,200px);right:18%;top:-8%;border-width:8px 12px 14px 9px;opacity:.12}
+.word{position:relative;font-family:var(--display);font-weight:800;font-size:clamp(88px,17vw,220px);line-height:.82;letter-spacing:-.05em;margin:0;color:var(--ink)}
+.word .dot{color:var(--c2)}
+.word span.w{display:inline-block;animation:bob 6s ease-in-out infinite}
+.word span.w:nth-child(2){animation-delay:.25s}.word span.w:nth-child(3){animation-delay:.5s}.word span.w:nth-child(4){animation-delay:.75s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.sub{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.4vw,30px);margin:.35em 0 0;color:var(--muted)}
+.cupwrap{position:relative;text-align:center}
+.cup{width:clamp(110px,14vw,170px);height:auto;display:block}
+.cup .steam path{fill:none;stroke:var(--muted);stroke-width:5;stroke-linecap:round;opacity:0;transition:opacity .8s}
+.cup.warm .steam path{opacity:.55;animation:steam 3.4s ease-in-out infinite}
+.cup.warm .steam path:nth-child(2){animation-delay:.6s}.cup.warm .steam path:nth-child(3){animation-delay:1.2s}
+@keyframes steam{0%{transform:translateY(6px);opacity:0}40%{opacity:.6}100%{transform:translateY(-14px);opacity:0}}
+.cup .liquid{transition:transform 1.1s cubic-bezier(.34,1.56,.64,1)}
+.cuplabel{font-family:var(--display);font-weight:700;font-size:15px;color:var(--muted);margin-top:4px}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding-top:env(safe-area-inset-top,0px)}
+.tabs{max-width:1120px;margin:0 auto;display:flex;gap:10px;padding:12px clamp(18px,4vw,40px);overflow-x:auto}
+.tab{--sc:var(--c1);flex:1 0 auto;display:flex;align-items:center;gap:10px;border:3px solid var(--sc);background:var(--surface);border-radius:999px;padding:8px 18px 8px 10px;font-family:var(--display);font-weight:700;font-size:clamp(15px,1.3vw,19px);transition:transform .15s,background .2s,color .2s}
+.tab:hover{transform:translateY(-2px)}
+.tab:active{transform:scale(.96)}
+.tab[aria-selected="true"]{background:var(--sc);color:#fff}
+.tab .pip{width:30px;height:30px;border-radius:50%;background:conic-gradient(var(--butter) calc(var(--p,0)*1turn),color-mix(in srgb,var(--sc) 22%,transparent) 0);display:grid;place-items:center;font-size:13px;flex:none;color:var(--ink)}
+.tab[aria-selected="true"] .pip{background:conic-gradient(var(--butter) calc(var(--p,0)*1turn),rgba(255,255,255,.3) 0)}
+.tab .pip i{font-style:normal;width:20px;height:20px;border-radius:50%;background:var(--surface);display:grid;place-items:center}
+
+/* ---------- sections ---------- */
+main{max-width:1120px;margin:0 auto;padding:10px clamp(18px,4vw,40px) 40px}
+.panel{--sc:var(--c1)}
+.panel[hidden]{display:none}
+.phead{position:relative;margin:26px 0 8px;padding-left:22px;border-left:10px solid var(--sc)}
+.phead h2{font-family:var(--display);font-weight:800;font-size:clamp(32px,4.6vw,58px);line-height:1;letter-spacing:-.02em;margin:0}
+.phead h2 em{font-style:normal;color:var(--sc)}
+.phead p{margin:.5em 0 0;color:var(--muted);max-width:60ch}
+.act{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:clamp(18px,3vw,34px);margin:26px 0;box-shadow:0 18px 40px -22px color-mix(in srgb,var(--sc) 55%,transparent);animation:rise .6s cubic-bezier(.34,1.56,.64,1) both}
+.act:nth-of-type(2){animation-delay:.12s}.act:nth-of-type(3){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.act h3{font-family:var(--display);font-weight:700;font-size:clamp(22px,2.4vw,30px);margin:0 0 4px;display:flex;gap:12px;align-items:center}
+.act h3 .emo{font-size:1.4em;line-height:1}
+.act .prompt{margin:0 0 18px;color:var(--muted)}
+.act.done{border-color:var(--sc);border-width:3px}
+.act.done h3::after{content:"✓";margin-left:auto;background:var(--sc);color:#fff;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:22px;animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pop{from{transform:scale(0) rotate(-40deg)}to{transform:none}}
+
+/* matching */
+.board{display:grid;gap:22px}
+@media (min-width:860px){.board.two{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}}
+.pool{display:flex;flex-direction:column;gap:12px;align-content:flex-start}
+.pool.chips{flex-direction:row;flex-wrap:wrap}
+.pool:empty::after{content:"All placed.";color:var(--muted);font-style:italic}
+.item{text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:0 4px 0 var(--line);transition:transform .15s,box-shadow .15s,border-color .15s;line-height:1.45}
+.item:hover{transform:translateY(-3px);box-shadow:0 7px 0 var(--line)}
+.item:active{transform:scale(.97)}
+.item.sel{border-color:var(--sc);box-shadow:0 7px 0 var(--sc);transform:translateY(-3px) rotate(-.6deg);background:var(--surface)}
+.item b{color:var(--sc);background:color-mix(in srgb,var(--sc) 14%,transparent);border-radius:6px;padding:0 3px}
+.chips .item{border-radius:999px;padding:10px 18px}
+.item.placed{box-shadow:none;border-color:transparent;background:color-mix(in srgb,var(--sc) 10%,var(--surface));cursor:default;font-size:.92em;padding:10px 12px;transform:none;animation:land .45s cubic-bezier(.34,1.56,.64,1)}
+@keyframes land{from{transform:scale(.7);opacity:0}to{transform:none;opacity:1}}
+.targets{display:grid;gap:12px}
+.targets.bins{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.targets.grid{grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.target{text-align:left;border:3px dashed color-mix(in srgb,var(--sc) 55%,transparent);border-radius:20px;padding:14px 16px;background:transparent;transition:transform .15s,background .2s,border-color .2s;display:flex;flex-direction:column;gap:8px;min-height:64px}
+.board.armed .target:not(.full){border-color:var(--sc);background:color-mix(in srgb,var(--sc) 7%,transparent)}
+.board.armed .target:not(.full):hover{transform:scale(1.02)}
+.target .tl{font-family:var(--display);font-weight:700;font-size:1.08em;line-height:1.2}
+.target .th{font-size:.85em;color:var(--muted)}
+.target .slot{display:flex;flex-direction:column;gap:8px}
+.target.full{border-style:solid;border-color:var(--sc);background:color-mix(in srgb,var(--sc) 6%,var(--surface));cursor:default}
+.target .rule{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s ease}
+.target .rule>div{overflow:hidden}
+.target.full .rule{grid-template-rows:1fr}
+.target .rule p{margin:4px 0 0;padding:12px 14px;border-radius:14px;background:var(--sc);color:#fff;font-size:.95em}
+.target .rule p i{font-style:italic}
+.bins .target{min-height:150px}
+.bins .target .tl{font-size:1.3em}
+.shake{animation:shake .32s}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+
+/* pick */
+.picks{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.pick{font-size:1.15em;text-align:left;padding:20px 22px;border-radius:20px;background:var(--bg);border:2px solid var(--line);box-shadow:0 5px 0 var(--line);transition:transform .15s,box-shadow .15s}
+.pick:hover{transform:translateY(-3px) rotate(.4deg)}
+.pick:active{transform:scale(.97)}
+.pick.nope{opacity:.55}
+.pick.hit{background:var(--surface);border-color:var(--sc);box-shadow:0 5px 0 var(--sc)}
+.pick.hit.strike .t{text-decoration:line-through;text-decoration-color:var(--bad);text-decoration-thickness:4px}
+.pick .tag{display:inline-block;margin-top:8px;font-family:var(--display);font-weight:700;font-size:.8em;padding:2px 12px;border-radius:999px;background:var(--sc);color:#fff}
+
+.foot{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:18px}
+.status{flex:1;min-height:1.5em;font-weight:700}
+.status.good{color:var(--ok)}.status.bad{color:var(--bad)}
+.ghost{background:none;border:2px solid var(--line);border-radius:999px;padding:6px 16px;font-size:.8em;color:var(--muted);transition:transform .15s}
+.ghost:hover{transform:translateY(-2px);border-color:var(--muted)}
+.ghost:active{transform:scale(.96)}
+.note{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s ease}
+.note>div{overflow:hidden}
+.note.open{grid-template-rows:1fr}
+.note .in{margin-top:18px;padding:18px 20px;border-radius:18px;background:var(--butter);color:#2B1A12;position:relative}
+.note .in::before{content:"☕";position:absolute;right:14px;top:-18px;font-size:34px;transform:rotate(12deg)}
+.note .in p{margin:0 0 .5em}.note .in p:last-child{margin:0}
+.note .in i{font-style:italic}
+.note .in s{text-decoration-color:var(--bad);text-decoration-thickness:3px}
+
+.next{display:none;margin:0 0 20px auto;background:var(--sc);color:#fff;border:0;border-radius:999px;padding:14px 28px;font-family:var(--display);font-weight:700;font-size:1.1em;box-shadow:0 6px 0 color-mix(in srgb,var(--sc) 55%,#000);transition:transform .15s}
+.next.show{display:block;animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+.next:hover{transform:translateY(-3px)}
+.next:active{transform:scale(.96)}
+
+footer{max-width:1120px;margin:0 auto;padding:10px clamp(18px,4vw,40px) 40px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;color:var(--muted);font-size:.85em}
+footer .credit{font-family:var(--display);font-weight:700}
+
+/* celebration */
+.party{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50}
+.party i{position:absolute;top:-20px;width:12px;height:18px;border-radius:3px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,140%);background:var(--ink);color:var(--bg);font-family:var(--display);font-weight:700;padding:14px 26px;border-radius:999px;z-index:60;transition:transform .5s cubic-bezier(.34,1.56,.64,1);max-width:90vw;text-align:center}
+.toast.show{transform:translate(-50%,0)}
+:focus-visible{outline:4px solid var(--butter);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:640px){.hero{grid-template-columns:1fr}.cupwrap{position:absolute;right:14px;top:18px}.cup{width:84px}.cuplabel{display:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="ring r1"></div><div class="ring r2"></div>
+  <div>
+    <h1 class="word" aria-label="have"><span class="w">h</span><span class="w">a</span><span class="w">v</span><span class="w">e</span><span class="dot">.</span></h1>
+    <p class="sub">lexical and grammatical uses</p>
+  </div>
+  <div class="cupwrap" aria-hidden="true">
+    <svg class="cup" id="cup" viewBox="0 0 160 170">
+      <defs><clipPath id="inside"><rect x="36" y="60" width="72" height="80" rx="10"/></clipPath></defs>
+      <g class="steam"><path d="M55 40c-8-8 8-14 0-24"/><path d="M72 40c-8-8 8-14 0-24"/><path d="M89 40c-8-8 8-14 0-24"/></g>
+      <g clip-path="url(#inside)">
+        <g class="liquid" id="liquid" style="transform:translateY(80px)">
+          <rect x="30" y="60" width="90" height="90" fill="var(--coffee)"/>
+          <rect x="30" y="60" width="90" height="8" fill="var(--crema)"/>
+        </g>
+      </g>
+      <rect x="30" y="54" width="84" height="92" rx="14" fill="none" stroke="var(--ink)" stroke-width="7"/>
+      <path d="M114 72h10a16 16 0 0 1 0 32h-10" fill="none" stroke="var(--ink)" stroke-width="7"/>
+      <ellipse cx="72" cy="158" rx="54" ry="7" fill="var(--c2)" opacity=".85"/>
+    </svg>
+    <div class="cuplabel" id="cuplabel">Fill the cup</div>
+  </div>
+</header>
+
+<nav><div class="tabs" role="tablist" id="tabs"></div></nav>
+<main id="main"></main>
+
+<footer>
+  <span class="credit">Class of Coffee – with AI assistance</span>
+  <button class="ghost" id="reset">Start again</button>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const SECTIONS = [
+{
+  id:"main", tab:"Main verb", colour:"var(--c1)",
+  title:'<em>have</em> as a main verb',
+  intro:"Here are five sentences and four different jobs for <i>have</i>. Work out which job each one is doing.",
+  acts:[
+    {type:"match", emoji:"🧩", title:"Match the sentences to the uses",
+     prompt:"Tap a sentence, then tap the use it shows. Look at the highlighted words.",
+     layout:"rules",
+     items:[
+      {id:"a",to:"poss",html:"I <b>have</b> a large extended family."},
+      {id:"b",to:"act",html:"I’<b>m having</b> problems with my wi-fi."},
+      {id:"c",to:"obl",html:"<b>Do</b> we really <b>have to</b> spend Christmas with your parents again?"},
+      {id:"d",to:"caus",html:"We’re going to <b>have</b> our house <b>repainted</b> next week."},
+      {id:"e",to:"caus",html:"I <b>had</b> my phone <b>stolen</b> when I was paying at the checkout."}
+     ],
+     targets:[
+      {id:"poss",label:"Possession",hint:"what you own or have in your life",
+       rule:"This <i>have</i> is <b>stative</b>, so it isn’t used in continuous tenses. The same is true when <i>have</i> is about relationships or illnesses."},
+      {id:"act",label:"Actions and experiences",hint:"have + a noun for something you do or go through",
+       rule:"<i>have a bath, have a drink, have a problem</i>… This <i>have</i> is <b>dynamic</b>, so continuous tenses are fine."},
+      {id:"obl",label:"Obligation",hint:"something you must do",
+       rule:"<i>have to</i> often expresses obligation that comes from other people, or from rules and regulations."},
+      {id:"caus",label:"Something done for you, or to you",hint:"have + object + past participle",
+       rule:"You ask or pay someone else to do something for you, <b>or</b> something bad happens to you."}
+     ]},
+    {type:"match", emoji:"⏳", title:"Continuous or not?",
+     prompt:"Stative or dynamic? Decide if each sentence is possible.",
+     layout:"bins",
+     items:[
+      {id:"s1",to:"yes",html:"I’<b>m having</b> problems with my wi-fi."},
+      {id:"s2",to:"no",html:"I’<b>m having</b> a large extended family."},
+      {id:"s3",to:"yes",html:"She’<b>s having</b> a bath."},
+      {id:"s4",to:"no",html:"<b>Are</b> you <b>having</b> a car?"}
+     ],
+     targets:[
+      {id:"yes",label:"✓ Possible",hint:"an action or experience"},
+      {id:"no",label:"✗ Not possible",hint:"possession is stative"}
+     ]},
+    {type:"pick", emoji:"👂", title:"Which sounds more natural?",
+     prompt:"Only one of these is how people usually say it.",
+     options:[{t:"I have a large extended family.",ok:true},{t:"I’ve a large extended family."}],
+     strike:false,
+     note:"<p>We don’t usually contract <i>have</i> when it’s a <b>main verb</b>.</p>"}
+  ]
+},
+{
+  id:"aux", tab:"Auxiliary", colour:"var(--c2)",
+  title:'<em>have</em> as an auxiliary',
+  intro:"Here <i>have</i> is a helping verb. Match each group of examples to the way it’s being used.",
+  acts:[
+    {type:"match", emoji:"🧩", title:"Match the examples to the uses",
+     prompt:"Tap an example, then tap the use it shows.",
+     layout:"rules",
+     items:[
+      {id:"a",to:"got",html:"We’<b>ve got</b> two sons, but we <b>haven’t got</b> a daughter."},
+      {id:"b",to:"neg",html:"I <b>haven’t</b> the time to go to the bank."},
+      {id:"c",to:"gotto",html:"I’<b>ve got to</b> go now – I’m meeting my girlfriend for lunch."},
+      {id:"d",to:"pp",html:"They’<b>ve been</b> married for 15 years.<br>How long <b>has</b> Anna <b>been going</b> out with James?"},
+      {id:"e",to:"perf",html:"She’<b>ll have finished</b> lunch in a few minutes, so call her then.<br>If I <b>hadn’t taken</b> a taxi, I wouldn’t <b>have</b> arrived in time."}
+     ],
+     targets:[
+      {id:"got",label:"have got for possession",hint:"very common",
+       rule:"We often use <i>have got</i> for possession. For the past, use <i>had</i>, not <i>had got</i>."},
+      {id:"neg",label:"Negatives without got",hint:"a short, fixed feel",
+       rule:"In negatives we sometimes drop <i>got</i>, especially in fixed expressions: <i>I haven’t time, I haven’t a clue.</i>"},
+      {id:"gotto",label:"have got to for obligation",hint:"informal",
+       rule:"<i>have got to</i> expresses obligation in informal English, usually a <b>specific</b> one."},
+      {id:"pp",label:"Present perfect simple and continuous",hint:"have + past participle / been + -ing",
+       rule:"<i>have</i> is the auxiliary that forms the present perfect simple and continuous."},
+      {id:"perf",label:"Other perfect forms",hint:"future perfect, past perfect, perfect infinitive…",
+       rule:"<i>have</i> also builds the future perfect, the perfect infinitive and the past perfect."}
+     ],
+     note:"<p>As an auxiliary, <i>have</i> is often <b>contracted</b>: <i>’ve, ’s, ’d, ’ll have</i>.</p>"},
+    {type:"pick", emoji:"🔎", title:"One of these is wrong. Tap it.",
+     prompt:"Think about <i>have got</i> in the past.",
+     options:[{t:"My grandparents had six children."},{t:"My grandparents had got six children.",ok:true}],
+     strike:true,
+     note:"<p>For the past, we normally use <i>had</i>: <i>My grandparents had six children.</i> <b>NOT</b> <s>My grandparents had got six children.</s></p>"},
+    {type:"match", emoji:"⚖️", title:"A one-off, or a general rule?",
+     prompt:"Which obligation is specific, and which is general?",
+     layout:"bins",
+     items:[
+      {id:"x",to:"spec",html:"I’<b>ve got to</b> make a quick phone call."},
+      {id:"y",to:"gen",html:"I <b>have to</b> wear a suit to work."}
+     ],
+     targets:[
+      {id:"spec",label:"Specific, right now",hint:"a single occasion"},
+      {id:"gen",label:"General or repeated",hint:"it’s always the case"}
+     ],
+     note:"<p><i>have got to</i> is normally used for a <b>specific</b> obligation, rather than a general or repeated one. For those, <i>have to</i> is the natural choice.</p>"}
+  ]
+},
+{
+  id:"idioms", tab:"Idioms", colour:"var(--c3)",
+  title:'<em>have</em> or <em>have got</em> in idioms',
+  intro:"<i>have</i> turns up in lots of idioms and expressions. Work out what these ones mean.",
+  acts:[
+    {type:"match", emoji:"💬", title:"Match the idioms to their meanings",
+     prompt:"Tap a sentence, then tap what the highlighted idiom means.",
+     layout:"grid",
+     items:[
+      {id:"i1",to:"m1",html:"I think my sister has been borrowing money from my mother. I’m going to <b>have it out with</b> her."},
+      {id:"i2",to:"m2",html:"You’re getting married? You’re <b>having me on</b>!"},
+      {id:"i3",to:"m3",html:"I’m going to <b>have a go</b> at making home-made pasta."},
+      {id:"i4",to:"m4",html:"We <b>had</b> such <b>a laugh</b> at the party last night."},
+      {id:"i5",to:"m5",html:"That’s it. <b>I’ve had it with</b> Mark. I’m never going to speak to him again."},
+      {id:"i6",to:"m6",html:"My boss is constantly asking me to work late. She really <b>has it in for me</b>."},
+      {id:"i7",to:"m7",html:"I don’t think <b>I’ve got it in me</b> to find somebody new."}
+     ],
+     targets:[
+      {id:"m1",label:"talk openly about a problem"},
+      {id:"m2",label:"play a joke on somebody"},
+      {id:"m3",label:"try"},
+      {id:"m4",label:"enjoy yourself"},
+      {id:"m5",label:"have had enough of somebody or something"},
+      {id:"m6",label:"not like somebody and be unpleasant to them"},
+      {id:"m7",label:"feel capable of something"}
+     ]},
+    {type:"match", emoji:"🗂️", title:"have only, or have got too?",
+     prompt:"Two of these idioms also work with <i>have got</i>. Which two?",
+     layout:"bins", chips:true,
+     items:[
+      {id:"j1",to:"only",html:"have it out with sb"},
+      {id:"j6",to:"both",html:"have it in for sb"},
+      {id:"j2",to:"only",html:"have sb on"},
+      {id:"j3",to:"only",html:"have a go"},
+      {id:"j7",to:"both",html:"have it in you"},
+      {id:"j4",to:"only",html:"have a laugh"},
+      {id:"j5",to:"only",html:"have had it with sb"}
+     ],
+     targets:[
+      {id:"only",label:"have only",hint:"got isn’t possible"},
+      {id:"both",label:"have or have got",hint:"both are possible"}
+     ],
+     note:"<p>There are many idioms and expressions with <i>have</i>. Some only exist with <i>have</i>, while others work with both <i>have</i> and <i>have got</i>. Learn each one together with the verb it takes.</p>"}
+  ]
+}
+];
+
+const WIN = ["Spot on.","Yes!","Exactly.","That’s the one.","Nicely done.","Correct."];
+const TRY = ["Not that one. Try another.","Hmm, look at the highlighted words again.","Close, but no. Have another go."];
+const rnd = a => a[Math.floor(Math.random()*a.length)];
+const shuffle = a => a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
+const total = SECTIONS.reduce((n,s)=>n+s.acts.length,0);
+let done = new Set();
+
+const tabsEl = document.getElementById("tabs"), mainEl = document.getElementById("main");
+
+function el(tag, cls, html){const e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e;}
+function toast(msg){const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toast.h); toast.h=setTimeout(()=>t.classList.remove("show"),2400);}
+function shake(n){n.classList.remove("shake"); void n.offsetWidth; n.classList.add("shake");}
+
+function confetti(n=70){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const box=el("div","party"); document.body.appendChild(box);
+  const cols=["#0E8A7E","#D6336C","#3651D4","#FFD23F","#C9955F"];
+  for(let i=0;i<n;i++){const c=el("i"); c.style.left=Math.random()*100+"vw"; c.style.background=cols[i%cols.length];
+    c.style.animationDuration=(1.8+Math.random()*1.8)+"s"; c.style.animationDelay=Math.random()*.4+"s"; box.appendChild(c);}
+  setTimeout(()=>box.remove(),4200);
+}
+
+function progress(){
+  const p = done.size/total;
+  document.getElementById("liquid").style.transform = `translateY(${80*(1-p)}px)`;
+  document.getElementById("cup").classList.toggle("warm", p>0);
+  document.getElementById("cuplabel").textContent = p===1 ? "Full cup!" : p>0 ? `${done.size} of ${total} done` : "Fill the cup";
+  SECTIONS.forEach((s,si)=>{
+    const d = s.acts.filter((_,ai)=>done.has(si+"-"+ai)).length;
+    const tab = tabsEl.children[si]; tab.style.setProperty("--p", d/s.acts.length);
+    tab.querySelector(".pip i").textContent = d===s.acts.length ? "✓" : d;
+    const nx = document.querySelector(`#panel-${s.id} .next`); if(nx) nx.classList.toggle("show", d===s.acts.length);
+  });
+}
+
+function complete(key, card, noteEl){
+  if(done.has(key)) return;
+  done.add(key); card.classList.add("done");
+  if(noteEl) noteEl.classList.add("open");
+  progress();
+  const [si] = key.split("-").map(Number);
+  const s = SECTIONS[si];
+  const secDone = s.acts.every((_,ai)=>done.has(si+"-"+ai));
+  if(done.size===total){ confetti(140); toast("Full cup. That’s everything about have! ☕"); }
+  else if(secDone){ confetti(60); toast(`${s.tab} section complete!`); }
+}
+
+function noteBlock(html){const n=el("div","note"); const w=el("div"); w.appendChild(el("div","in",html)); n.appendChild(w); return n;}
+
+function buildMatch(act, key, card){
+  const board = el("div","board"+(act.layout==="rules"||act.layout==="grid"?" two":""));
+  const pool = el("div","pool"+(act.chips?" chips":""));
+  const targets = el("div","targets "+(act.layout==="bins"?"bins":act.layout==="grid"?"grid":""));
+  const status = el("div","status"); status.setAttribute("aria-live","polite");
+  let sel = null, left = act.items.length;
+  const need = {}; act.items.forEach(i=>need[i.to]=(need[i.to]||0)+1);
+  const tNodes = {};
+
+  act.targets.forEach(t=>{
+    const b = el("button","target");
+    b.innerHTML = `<span class="tl">${t.label}</span>${t.hint?`<span class="th">${t.hint}</span>`:""}<span class="slot"></span>${t.rule?`<span class="rule"><div><p>${t.rule}</p></div></span>`:""}`;
+    b.dataset.id=t.id; tNodes[t.id]=b;
+    b.addEventListener("click",()=>{
+      if(b.classList.contains("full")) return;
+      if(!sel){ status.className="status"; status.textContent="First tap one of the sentences."; pool.querySelectorAll(".item").forEach(shake); return; }
+      const it = act.items.find(i=>i.id===sel.dataset.id);
+      if(it.to===t.id){ place(sel,b); status.className="status good"; status.textContent=rnd(WIN); }
+      else { shake(b); shake(sel); status.className="status bad"; status.textContent=rnd(TRY); }
+    });
+    targets.appendChild(b);
+  });
+
+  function place(node,b){
+    node.classList.remove("sel"); node.classList.add("placed"); node.disabled=true; node.setAttribute("aria-pressed","false");
+    b.querySelector(".slot").appendChild(node);
+    need[b.dataset.id]--; if(need[b.dataset.id]===0 && act.layout!=="bins" && act.layout!=="grid") b.classList.add("full");
+    if(act.layout==="grid") b.classList.add("full");
+    sel=null; board.classList.remove("armed"); left--;
+    if(left===0){ act.targets.forEach(t=>tNodes[t.id].classList.add("full")); complete(key,card,card.querySelector(".note")); status.textContent = act.note ? "All matched. Read the note below." : "All matched!"; }
+  }
+
+  shuffle(act.items).forEach(i=>{
+    const b = el("button","item",i.html); b.dataset.id=i.id; b.setAttribute("aria-pressed","false");
+    b.addEventListener("click",()=>{
+      if(b.classList.contains("placed")) return;
+      if(sel===b){ b.classList.remove("sel"); b.setAttribute("aria-pressed","false"); sel=null; board.classList.remove("armed"); return; }
+      if(sel){ sel.classList.remove("sel"); sel.setAttribute("aria-pressed","false"); }
+      sel=b; b.classList.add("sel"); b.setAttribute("aria-pressed","true"); board.classList.add("armed"); status.textContent="";
+    });
+    pool.appendChild(b);
+  });
+
+  board.append(pool, targets);
+  const foot = el("div","foot"); const show = el("button","ghost","Show answers");
+  show.addEventListener("click",()=>{ [...pool.querySelectorAll(".item")].forEach(n=>{const it=act.items.find(i=>i.id===n.dataset.id); place(n,tNodes[it.to]);}); });
+  foot.append(status, show);
+  return [board, foot];
+}
+
+function buildPick(act, key, card){
+  const wrap = el("div","picks"); const status = el("div","status"); status.setAttribute("aria-live","polite");
+  let finished=false;
+  act.options.forEach(o=>{
+    const b = el("button","pick",`<span class="t">${o.t}</span>`);
+    b.addEventListener("click",()=>{
+      if(finished) return;
+      if(o.ok){ finished=true; b.classList.add("hit"); if(act.strike) b.classList.add("strike");
+        b.insertAdjacentHTML("beforeend",`<br><span class="tag">${act.strike?"Wrong – well spotted":"Natural"}</span>`);
+        wrap.querySelectorAll(".pick:not(.hit)").forEach(x=>x.classList.add("nope"));
+        status.className="status good"; status.textContent=rnd(WIN); complete(key,card,card.querySelector(".note")); }
+      else { shake(b); status.className="status bad"; status.textContent = act.strike ? "That one’s actually fine. Look at the other." : "Possible, but people rarely say it like this."; }
+    });
+    wrap.appendChild(b);
+  });
+  const foot = el("div","foot"); const show = el("button","ghost","Show answer");
+  show.addEventListener("click",()=>{ const i=act.options.findIndex(o=>o.ok); if(!finished) wrap.children[i].click(); });
+  foot.append(status, show);
+  return [wrap, foot];
+}
+
+function selectTab(i, scroll){
+  [...tabsEl.children].forEach((t,j)=>t.setAttribute("aria-selected", j===i));
+  [...mainEl.children].forEach((p,j)=>p.hidden = j!==i);
+  if(scroll) document.getElementById("main").scrollIntoView({behavior:"smooth"});
+}
+
+function build(){
+  tabsEl.innerHTML=""; mainEl.innerHTML=""; done=new Set();
+  SECTIONS.forEach((s,si)=>{
+    const tab = el("button","tab",`<span class="pip"><i>0</i></span>${s.tab}`);
+    tab.setAttribute("role","tab"); tab.style.setProperty("--sc",s.colour);
+    tab.addEventListener("click",()=>selectTab(si,false)); tabsEl.appendChild(tab);
+
+    const panel = el("section","panel"); panel.id="panel-"+s.id; panel.style.setProperty("--sc",s.colour); panel.setAttribute("role","tabpanel");
+    const head = el("div","phead",`<h2>${s.title}</h2><p>${s.intro}</p>`); panel.appendChild(head);
+    s.acts.forEach((a,ai)=>{
+      const key = si+"-"+ai; const card = el("div","act");
+      card.appendChild(el("h3","",`<span class="emo">${a.emoji}</span>${a.title}`));
+      card.appendChild(el("p","prompt",a.prompt));
+      const parts = a.type==="match" ? buildMatch(a,key,card) : buildPick(a,key,card);
+      parts.forEach(p=>card.appendChild(p));
+      if(a.note) card.appendChild(noteBlock(a.note));
+      panel.appendChild(card);
+    });
+    if(si<SECTIONS.length-1){ const nx=el("button","next",`Next: ${SECTIONS[si+1].tab}`); nx.addEventListener("click",()=>selectTab(si+1,true)); panel.appendChild(nx); }
+    mainEl.appendChild(panel);
+  });
+  selectTab(0,false); progress();
+}
+
+document.getElementById("reset").addEventListener("click",()=>{ build(); window.scrollTo({top:0,behavior:"smooth"}); });
+build();
+</script>
+</body>
+</html>
