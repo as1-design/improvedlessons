@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>a, an, the… or nothing? | Articles refresher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFE27A; --panel:#FFFFFF; --ink:#1E1B4B; --muted:#4A4680;
+  --a:#FF5A36; --an:#7B5CFF; --the:#12A77F; --zero:#1E1B4B;
+  --line:#1E1B4B; --soft:#FFF4C2; --good:#12A77F; --bad:#E0402A;
+  --display:"Bricolage Grotesque", "Trebuchet MS", "Segoe UI", sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, "Segoe UI", sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16143A; --panel:#241F5C; --ink:#FFF4D6; --muted:#C9C3F2;
+    --zero:#FFF4D6; --line:#FFE27A; --soft:#2F2A70; --a:#FF7A5C; --an:#9C85FF; --the:#2FD1A4;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16143A; --panel:#241F5C; --ink:#FFF4D6; --muted:#C9C3F2;
+  --zero:#FFF4D6; --line:#FFE27A; --soft:#2F2A70; --a:#FF7A5C; --an:#9C85FF; --the:#2FD1A4;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{height:100%; scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; min-height:100%; background:var(--bg); color:var(--ink);
+  font-family:var(--body); font-size:clamp(17px,1.35vw,22px); line-height:1.5;
+  background-image:radial-gradient(color-mix(in srgb,var(--ink) 9%,transparent) 1.5px,transparent 1.6px);
+  background-size:26px 26px; overflow-x:hidden;
+}
+button{font:inherit; color:inherit; cursor:pointer}
+.app{max-width:1280px; margin:0 auto; padding:clamp(12px,2vw,28px); display:flex; flex-direction:column; min-height:100vh; gap:clamp(12px,1.6vw,22px)}
+
+/* ---------- header ---------- */
+header{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
+.brand{font-family:var(--display); font-weight:800; font-size:1.15rem; display:flex; align-items:center; gap:10px}
+.brand .cup{font-size:1.6rem; display:inline-block; animation:steam 5s ease-in-out infinite}
+@keyframes steam{0%,100%{transform:rotate(-6deg) translateY(0)}50%{transform:rotate(6deg) translateY(-3px)}}
+.rail{display:flex; gap:8px; flex-wrap:wrap}
+.rail button{
+  border:3px solid var(--line); background:var(--panel); border-radius:999px;
+  padding:6px 16px 6px 8px; font-weight:700; display:flex; align-items:center; gap:8px;
+  transition:transform .15s ease, background .2s;
+}
+.rail button .n{width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:var(--soft); font-family:var(--display)}
+.rail button:hover{transform:translateY(-2px)}
+.rail button[aria-current="step"]{background:var(--ink); color:var(--bg)}
+.rail button[aria-current="step"] .n{background:var(--a); color:#fff}
+.rail button.done .n{background:var(--the); color:#fff}
+
+/* ---------- stage ---------- */
+main{flex:1; position:relative}
+.stage{
+  background:var(--panel); border:4px solid var(--line); border-radius:28px;
+  box-shadow:10px 10px 0 var(--line); padding:clamp(20px,3.4vw,52px);
+  min-height:min(72vh,720px); position:relative; overflow:hidden;
+  display:flex; flex-direction:column;
+}
+.stage.enter{animation:stageIn .55s cubic-bezier(.34,1.56,.64,1) both}
+.stage.leave{animation:stageOut .22s ease-in both}
+@keyframes stageIn{from{opacity:0; transform:translateY(26px) scale(.98)}to{opacity:1; transform:none}}
+@keyframes stageOut{to{opacity:0; transform:translateY(-14px)}}
+.bigletter{
+  position:absolute; right:-2vw; bottom:-8vw; font-family:var(--display); font-weight:800;
+  font-size:clamp(220px,34vw,460px); line-height:1; color:var(--ink); opacity:.07; pointer-events:none; user-select:none;
+}
+h1,h2,h3{font-family:var(--display); line-height:1.05; margin:0}
+h2{font-size:clamp(2rem,3.6vw,3.4rem); font-weight:800; letter-spacing:-.02em}
+.lede{font-size:1.15em; color:var(--muted); margin:.5em 0 0; max-width:60ch}
+.stack{display:flex; flex-direction:column; gap:clamp(14px,2vw,26px); position:relative; z-index:1; flex:1}
+.row{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
+.spacer{flex:1}
+
+.btn{
+  border:3px solid var(--line); background:var(--ink); color:var(--bg);
+  border-radius:16px; padding:.7em 1.3em; font-weight:700; font-size:1.05em;
+  box-shadow:4px 4px 0 var(--a); transition:transform .12s ease, box-shadow .12s ease;
+}
+.btn:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--a)}
+.btn:active{transform:translate(2px,2px) scale(.97); box-shadow:1px 1px 0 var(--a)}
+.btn.ghost{background:var(--panel); color:var(--ink); box-shadow:4px 4px 0 var(--line)}
+.btn.ghost:hover{box-shadow:6px 6px 0 var(--line)}
+.btn:disabled{opacity:.35; pointer-events:none}
+:focus-visible{outline:4px solid var(--an); outline-offset:3px}
+
+/* ---------- intro ---------- */
+.tokens{display:flex; gap:clamp(12px,2.2vw,30px); flex-wrap:wrap; margin:clamp(10px,3vw,40px) 0}
+.tok{
+  font-family:var(--display); font-weight:800; font-size:clamp(3.2rem,8vw,7.5rem); line-height:1;
+  padding:.18em .38em .24em; border-radius:26px; color:#fff; border:4px solid var(--line);
+  box-shadow:8px 8px 0 var(--line); opacity:0; animation:drop .7s cubic-bezier(.34,1.56,.64,1) forwards;
+  position:relative;
+}
+.tok.t-a{background:var(--a); transform:rotate(-5deg); animation-delay:.1s; --r:-5deg}
+.tok.t-an{background:var(--an); animation-delay:.24s; --r:3deg}
+.tok.t-the{background:var(--the); animation-delay:.38s; --r:-2deg}
+.tok.t-zero{background:transparent; color:var(--zero); border-style:dashed; box-shadow:none; animation:drop .7s cubic-bezier(.34,1.56,.64,1) .52s forwards, shy 6s ease-in-out 1.4s infinite; --r:6deg; cursor:help}
+@keyframes drop{from{opacity:0; transform:translateY(-60px) rotate(0)}to{opacity:1; transform:translateY(0) rotate(var(--r))}}
+@keyframes shy{0%,100%{opacity:1}45%{opacity:.25}55%{opacity:.25}}
+.psst{
+  position:absolute; left:50%; top:calc(100% + 14px); transform:translateX(-50%) scale(.8); opacity:0;
+  background:var(--ink); color:var(--bg); font-family:var(--body); font-weight:700; font-size:1rem; line-height:1.3;
+  padding:.7em 1em; border-radius:14px; width:max-content; max-width:260px; transition:.25s cubic-bezier(.34,1.56,.64,1); pointer-events:none; z-index:3;
+}
+.tok.t-zero:hover .psst,.tok.t-zero.talk .psst{opacity:1; transform:translateX(-50%) scale(1)}
+.tok.t-zero:hover,.tok.t-zero.talk{animation:none; opacity:1; transform:rotate(6deg)}
+.intro-h{font-size:clamp(2.2rem,4.6vw,4.4rem); font-weight:800; letter-spacing:-.025em; max-width:18ch}
+.plan{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; max-width:900px}
+.plan div{border:3px solid var(--line); border-radius:16px; padding:.8em 1em; background:var(--soft)}
+.plan b{font-family:var(--display); font-size:1.15em; display:block}
+
+/* ---------- warm-up ---------- */
+.counter{font-family:var(--display); font-weight:700; color:var(--muted)}
+.dots{display:flex; gap:8px}
+.dots i{width:16px; height:16px; border-radius:50%; border:3px solid var(--line); display:block; transition:.3s}
+.dots i.on{background:var(--a); transform:scale(1.25)}
+.dots i.past{background:var(--the)}
+.sentence{
+  font-family:var(--display); font-weight:700; font-size:clamp(1.9rem,4.3vw,3.9rem); line-height:1.25; letter-spacing:-.01em;
+  padding:.6em .7em; border-radius:22px; background:var(--soft); border:3px dashed var(--line);
+}
+@keyframes pop{0%{opacity:0; transform:scale(.3)}100%{opacity:1; transform:none}}
+.pairs{display:grid; grid-template-columns:1fr 1fr; gap:clamp(14px,2vw,28px)}
+.pair{
+  position:relative; text-align:left; border:4px solid var(--line); border-radius:24px; background:var(--soft);
+  padding:1.1em 1.2em 1.2em 1.2em; box-shadow:7px 7px 0 var(--line); display:flex; flex-direction:column; gap:.6em;
+  transition:transform .15s, box-shadow .15s, opacity .35s, background .3s;
+}
+.pair:hover{transform:translate(-3px,-4px) rotate(-.6deg); box-shadow:10px 11px 0 var(--line)}
+.pair:active{transform:scale(.98)}
+.pair .badge{
+  width:2.2em; height:2.2em; border-radius:50%; display:grid; place-items:center; font-family:var(--display); font-weight:800; font-size:1.5em;
+  background:var(--an); color:#fff; border:3px solid var(--line);
+}
+.pair[data-i="1"] .badge{background:var(--a)}
+.pair .ptxt{font-family:var(--display); font-weight:700; font-size:clamp(1.6rem,3.1vw,2.9rem); line-height:1.25; letter-spacing:-.01em}
+.pair mark{background:none; color:inherit; border-bottom:.14em solid var(--an); padding:0 .05em}
+.pair .verdict{position:absolute; top:.35em; right:.5em; font-family:var(--display); font-weight:800; font-size:clamp(2.4rem,4vw,3.6rem); line-height:1}
+.pairs.done .pair{pointer-events:none}
+.pair.right{background:color-mix(in srgb,var(--the) 22%,var(--panel)); border-color:var(--the); box-shadow:7px 7px 0 var(--the); animation:pop .45s cubic-bezier(.34,1.56,.64,1)}
+.pair.right .verdict{color:var(--the)}
+.pair.right mark{border-color:var(--the)}
+.pair.wrong{opacity:.45}
+.pair.wrong .verdict{color:var(--bad)}
+.pair.wrong mark{border-color:var(--bad); text-decoration:line-through; text-decoration-color:var(--bad)}
+.pair.shake{animation:shake .35s}
+@media (max-width:760px){ .pairs{grid-template-columns:1fr} }
+.why{
+  display:flex; gap:16px; align-items:flex-start; max-width:64ch; opacity:0; transform:translateY(10px); transition:.4s .15s;
+}
+.why.show{opacity:1; transform:none}
+.chip{
+  flex:none; font-family:var(--display); font-weight:700; font-size:.9em; padding:.35em .9em; border-radius:999px; color:#fff; background:var(--an); border:3px solid var(--line);
+}
+.why p{margin:0; font-size:1.15em}
+.prompt{font-size:1.2em; font-weight:700}
+
+/* ---------- rule cards ---------- */
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:clamp(14px,1.8vw,24px)}
+.card{perspective:1400px; border:none; background:none; padding:0; text-align:left; min-height:370px; opacity:0; animation:stageIn .6s cubic-bezier(.34,1.56,.64,1) forwards}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.15s}.card:nth-child(3){animation-delay:.25s}.card:nth-child(4){animation-delay:.35s}.card:nth-child(5){animation-delay:.45s}.card:nth-child(6){animation-delay:.55s}
+.card-in{position:relative; width:100%; height:100%; min-height:370px; transition:transform .7s cubic-bezier(.34,1.3,.64,1); transform-style:preserve-3d}
+.card.flipped .card-in{transform:rotateY(180deg)}
+.face{
+  position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border:4px solid var(--line); border-radius:22px;
+  padding:1.1em 1.2em; display:flex; flex-direction:column; gap:.5em; box-shadow:6px 6px 0 var(--line); overflow:auto;
+}
+.card:hover .card-in{transform:translateY(-4px)}
+.card.flipped:hover .card-in{transform:rotateY(180deg) translateY(-4px)}
+.front{color:#fff; justify-content:space-between}
+.front .q{font-family:var(--display); font-weight:800; font-size:clamp(1.6rem,2.4vw,2.2rem); line-height:1.1}
+.front .emo{font-size:3.6rem; line-height:1}
+.front .tap{font-weight:700; opacity:.9}
+.back{background:var(--panel); transform:rotateY(180deg); font-size:.98em}
+.back h3{font-size:1.3em}
+.back ul{margin:0; padding-left:1.1em}
+.back li{margin:.15em 0}
+.back em{font-style:normal; font-weight:700; background:var(--soft); padding:0 .25em; border-radius:6px}
+.watch{margin-top:auto; font-weight:700; border-top:3px dashed var(--line); padding-top:.5em}
+.c1 .front{background:var(--a)} .c2 .front{background:var(--an)} .c3 .front{background:var(--the)}
+.c4 .front{background:var(--ink); color:var(--bg)} .c5 .front{background:#E89A12} .c6 .front{background:#2F7DE1}
+.c1 .card-in{rotate:-1deg}.c3 .card-in{rotate:1deg}.c5 .card-in{rotate:-.6deg}
+
+/* ---------- practice ---------- */
+.score{display:flex; gap:12px; align-items:center; font-family:var(--display); font-weight:800}
+.score .pill{border:3px solid var(--line); border-radius:999px; padding:.2em .9em; background:var(--soft)}
+.gap{
+  display:inline-block; min-width:2.6em; text-align:center; border-bottom:.12em solid var(--ink); color:transparent; padding:0 .15em;
+}
+.gap.filled{color:var(--the); border-color:var(--the); animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+.choices{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(10px,1.6vw,20px); max-width:900px}
+.choice{
+  font-family:var(--display); font-weight:800; font-size:clamp(2rem,4vw,3.4rem); padding:.25em 0; border-radius:20px;
+  border:4px solid var(--line); color:#fff; box-shadow:6px 6px 0 var(--line); transition:transform .12s, box-shadow .12s, opacity .3s;
+}
+.choice:hover{transform:translate(-2px,-4px) rotate(-1.5deg); box-shadow:8px 10px 0 var(--line)}
+.choice:active{transform:scale(.95); box-shadow:2px 2px 0 var(--line)}
+.choice[data-v="a"]{background:var(--a)} .choice[data-v="an"]{background:var(--an)} .choice[data-v="the"]{background:var(--the)}
+.choice[data-v="Ø"]{background:var(--panel); color:var(--ink); border-style:dashed}
+.choice.nope{opacity:.25; pointer-events:none; animation:shake .3s}
+.choice.yes{outline:6px solid var(--the); outline-offset:4px}
+.choices.locked .choice:not(.yes){opacity:.25; pointer-events:none}
+@keyframes shake{0%,100%{translate:0}20%,60%{translate:-6px}40%,80%{translate:6px}}
+.feedback{min-height:3.2em; font-size:1.15em; max-width:64ch}
+.feedback b{font-family:var(--display)}
+.streak{
+  position:absolute; top:22px; right:22px; background:var(--a); color:#fff; font-family:var(--display); font-weight:800;
+  padding:.5em 1em; border-radius:16px; border:3px solid var(--line); transform:rotate(4deg) scale(0); transition:transform .5s cubic-bezier(.34,1.56,.64,1); z-index:4; max-width:320px;
+}
+.streak.show{transform:rotate(4deg) scale(1)}
+
+/* ---------- challenge ---------- */
+.story{
+  font-size:clamp(1.25rem,2.1vw,1.85rem); line-height:2.05; max-width:58ch; background:var(--soft); border:3px solid var(--line); border-radius:22px; padding:.8em 1.1em;
+}
+.story h3{font-size:1.2em; margin-bottom:.3em}
+.slot{
+  font-family:var(--display); font-weight:800; font-size:.95em; min-width:2.5em; padding:0 .45em; margin:0 .1em;
+  border:3px solid var(--line); border-radius:12px; background:var(--panel); line-height:1.35; transition:transform .12s, background .2s; position:relative;
+}
+.slot:hover{transform:translateY(-3px) rotate(-2deg)}
+.slot:active{transform:scale(.92)}
+.slot[data-v="a"]{background:var(--a); color:#fff} .slot[data-v="an"]{background:var(--an); color:#fff} .slot[data-v="the"]{background:var(--the); color:#fff}
+.slot[data-v="Ø"]{border-style:dashed}
+.slot.right{box-shadow:0 0 0 4px var(--good)}
+.slot.wrong{box-shadow:0 0 0 4px var(--bad); animation:shake .3s}
+.slot .fix{position:absolute; left:50%; bottom:calc(100% + 4px); transform:translateX(-50%); background:var(--bad); color:#fff; font-size:.6em; padding:0 .5em; border-radius:8px; white-space:nowrap; line-height:1.6}
+.result{font-family:var(--display); font-weight:800; font-size:clamp(1.6rem,3vw,2.6rem)}
+.hint{color:var(--muted); font-size:.95em}
+
+footer{display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap}
+.credit{font-weight:700; color:var(--muted)}
+.theme-t{border:3px solid var(--line); background:var(--panel); border-radius:999px; padding:.3em .8em; font-weight:700}
+
+canvas#fx{position:fixed; inset:0; pointer-events:none; z-index:50}
+
+@media (max-width:640px){
+  .choices{grid-template-columns:repeat(2,1fr)}
+  .rail button span.lbl{display:none}
+  .rail button{padding:6px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important}
+}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<div class="app">
+  <header>
+    <div class="brand"><span class="cup" aria-hidden="true">☕</span> Articles refresher, B2.1</div>
+    <nav class="rail" id="rail" aria-label="Lesson stages"></nav>
+  </header>
+  <main id="main"></main>
+  <footer>
+    <div class="row">
+      <button class="btn ghost" id="prev">Previous</button>
+      <button class="btn" id="next">Next stage</button>
+    </div>
+    <div class="row">
+      <button class="theme-t" id="theme" aria-label="Toggle light or dark theme">◐ Theme</button>
+      <span class="credit">Class of Coffee – with AI assistance</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const STAGES = [
+  {id:"intro", label:"Start"},
+  {id:"warm", label:"A or B?"},
+  {id:"rules", label:"Rules"},
+  {id:"practice", label:"Practice"},
+  {id:"story", label:"Challenge"}
+];
+
+const WARM = [
+  {ok:"[Life] is too short to drink bad coffee.", bad:"[The life] is too short to drink bad coffee.", tag:"In general", why:"Life in general: uncountable noun, general meaning, so no article."},
+  {ok:"My sister is [a nurse].", bad:"My sister is [nurse].", tag:"Jobs", why:"Saying what someone does for a living needs a or an. Catalan and Spanish drop it; English doesn't."},
+  {ok:"I usually stay [at home] on Sundays.", bad:"I usually stay [at the home] on Sundays.", tag:"Fixed phrases", why:"at home, at work, go to bed, go home: no article. Learn them as chunks."},
+  {ok:"[Catalonia] has some beautiful beaches.", bad:"[The Catalonia] has some beautiful beaches.", tag:"Places", why:"Regions, countries, cities and towns normally take no article in English."},
+  {ok:"She's studying at [a university] in Barcelona.", bad:"She's studying at [an university] in Barcelona.", tag:"a or an?", why:"Sound, not spelling. University starts with a /j/ sound, like you, so it's a university."},
+  {ok:"[Teenagers] spend too much time on [social media].", bad:"[The teenagers] spend too much time on [the social media].", tag:"In general", why:"A general statement: plural and uncountable nouns, no article."}
+];
+// which side the correct sentence appears on (0 = A, 1 = B), fixed so it never feels predictable
+const WARM_SIDE = [1,0,1,1,0,0];
+
+const PRACTICE = [
+  {s:"Can I borrow ___ umbrella? It's pouring.", a:["an"], why:"First mention, and umbrella starts with a vowel sound."},
+  {s:"It was ___ unique experience.", a:["a"], why:"Unique sounds like you-nique. /j/ sound, so a."},
+  {s:"We ordered pizza last night. ___ pizza was terrible, honestly.", a:["The"], why:"We already know which pizza: the one mentioned before."},
+  {s:"___ dogs are more loyal than cats.", a:["Ø"], why:"Dogs in general: plural noun, no article."},
+  {s:"My cousin wants to be ___ engineer.", a:["an"], why:"Jobs take a/an, and engineer starts with a vowel sound."},
+  {s:"I'm exhausted. I'm going to ___ bed.", a:["Ø"], why:"go to bed is a fixed phrase: no article."},
+  {s:"It's ___ honour to meet you.", a:["an"], why:"The h in honour is silent, so it starts with a vowel sound."},
+  {s:"Tom's in ___ hospital with a broken leg.", a:["Ø","the"], why:"Both are right! British English: in hospital (Tom is a patient). American English: in the hospital. Pick one and stay consistent."},
+  {s:"Her dad goes to ___ prison every day. He's the cook there.", a:["the","a"], why:"He isn't a prisoner, so we mean the building: the (or a). No article would mean he's serving time!"},
+  {s:"___ Pyrenees are only a few hours from Tarragona.", a:["The"], why:"Mountain ranges take the. A single mountain doesn't: Aneto, Mont Blanc."},
+  {s:"I've never swum in ___ Lake Geneva.", a:["Ø"], why:"Individual lakes and mountains: no article."},
+  {s:"___ Netherlands is famous for its cycle lanes.", a:["The"], why:"One of the exceptions, like the UK and the USA."},
+  {s:"We saw a brilliant opera at ___ Liceu.", a:["the"], why:"Theatres, cinemas, museums, galleries and hotels take the."}
+];
+
+const STORY = {
+  title:"A weekend in London",
+  // [answer] marks a slot
+  text:"Last month my best friend and I took [a] cheap flight from Reus to [Ø] London. We stayed at [a] tiny hotel near [Ø] Oxford Street. [The] hotel served [an] amazing breakfast, but [the] rooms were freezing. On Saturday we walked along [the] Thames, visited [the] British Museum and had fish and chips in [a] pub. My friend, who is [an] architect, spent [an] hour photographing [the] same bridge. On Sunday she felt ill, so we spent [the] morning in [Ø] bed. Never mind. We're going back [Ø] next year."
+};
+
+const CYCLE = ["a","an","the","Ø"];
+
+/* ================= STATE ================= */
+let stage = 0, warmI = 0, warmDone = false, warmScore = 0, pI = 0, pScore = 0, pStreak = 0, pAnswered = false, pFirstTry = true;
+const main = document.getElementById("main");
+
+/* ================= RAIL ================= */
+const visited = new Set([0]);
+function renderRail(){
+  const r = document.getElementById("rail"); r.innerHTML = "";
+  STAGES.forEach((s,i)=>{
+    const b = document.createElement("button");
+    b.innerHTML = `<span class="n">${i}</span><span class="lbl">${s.label}</span>`;
+    if(i===stage) b.setAttribute("aria-current","step");
+    if(visited.has(i) && i<stage) b.classList.add("done");
+    b.onclick = ()=>go(i);
+    r.appendChild(b);
+  });
+  document.getElementById("prev").disabled = stage===0;
+  document.getElementById("next").disabled = stage===STAGES.length-1;
+}
+
+function go(i){
+  if(i<0||i>=STAGES.length||(i===stage && main.firstChild)) return;
+  const old = main.firstElementChild;
+  const doIt = ()=>{ stage=i; visited.add(i); render(); };
+  if(old){ old.classList.add("leave"); setTimeout(doIt,200); } else doIt();
+}
+document.getElementById("prev").onclick=()=>go(stage-1);
+document.getElementById("next").onclick=()=>go(stage+1);
+
+function shell(inner, letter){
+  main.innerHTML = `<section class="stage enter">${letter?`<div class="bigletter" aria-hidden="true">${letter}</div>`:""}<div class="stack">${inner}</div></section>`;
+  return main.firstElementChild;
+}
+
+function render(){
+  renderRail();
+  ({intro:renderIntro, warm:renderWarm, rules:renderRules, practice:renderPractice, story:renderStory})[STAGES[stage].id]();
+}
+
+/* ================= INTRO ================= */
+function renderIntro(){
+  shell(`
+    <div class="tokens" aria-hidden="false">
+      <span class="tok t-a">a</span><span class="tok t-an">an</span><span class="tok t-the">the</span>
+      <span class="tok t-zero" tabindex="0" id="zero" aria-label="Zero article">Ø<span class="psst">Psst. I'm the zero article. I'm in more sentences than you think.</span></span>
+    </div>
+    <h1 class="intro-h">Four tiny words. One of them is invisible.</h1>
+    <div class="plan">
+      <div><b>1. Which sounds right?</b>Pick A or B.</div>
+      <div><b>2. Rules</b>Six cards, one flip each.</div>
+      <div><b>3. Practice</b>The class votes, you check.</div>
+      <div><b>4. Challenge</b>A whole weekend in London.</div>
+    </div>
+    <div class="row"><button class="btn" id="startBtn">Start the warm-up</button></div>
+  `,"Ø");
+  const z = document.getElementById("zero");
+  z.onclick = ()=>z.classList.toggle("talk");
+  document.getElementById("startBtn").onclick = ()=>go(1);
+}
+
+/* ================= WARM-UP ================= */
+const markUp = t => t.replace(/\[(.*?)\]/g,'<mark>$1</mark>');
+function renderWarm(){
+  const it = WARM[warmI];
+  warmDone = false;
+  const okSide = WARM_SIDE[warmI];
+  const sides = okSide===0 ? [it.ok,it.bad] : [it.bad,it.ok];
+  shell(`
+    <div class="row"><span class="counter">Pair ${warmI+1} of ${WARM.length}</span><span class="spacer"></span>
+      <div class="score"><span class="pill" id="wScore">Class score: ${warmScore}</span></div>
+      <div class="dots">${WARM.map((_,i)=>`<i class="${i===warmI?'on':i<warmI?'past':''}"></i>`).join("")}</div></div>
+    <p class="prompt">Which one sounds right? Vote A or B, then tap the class's choice.</p>
+    <div class="pairs" id="pairs">${sides.map((t,i)=>`
+      <button class="pair" data-i="${i}" aria-label="Option ${'AB'[i]}"><span class="badge">${'AB'[i]}</span><span class="ptxt">${markUp(t)}</span><span class="verdict" aria-hidden="true"></span></button>`).join("")}</div>
+    <div class="why" id="why"><span class="chip">${it.tag}</span><p id="whyTxt">${it.why}</p></div>
+    <div class="spacer"></div>
+    <div class="row">
+      <button class="btn" id="nextS" disabled>${warmI<WARM.length-1?'Next pair':'On to the rules'}</button>
+      <span class="hint">Keys: A / B to choose, space for next.</span>
+    </div>
+  `,"?");
+  main.querySelectorAll(".pair").forEach(b=>b.onclick=()=>chooseWarm(+b.dataset.i));
+  document.getElementById("nextS").onclick = ()=>{
+    if(warmI<WARM.length-1){ warmI++; renderWarm(); }
+    else { warmI=0; warmScore=0; go(2); }
+  };
+}
+function chooseWarm(i){
+  if(warmDone) return;
+  warmDone = true;
+  const okSide = WARM_SIDE[warmI];
+  const cards = main.querySelectorAll(".pair");
+  const right = i===okSide;
+  cards[okSide].classList.add("right");
+  cards[okSide].querySelector(".verdict").textContent="✓";
+  cards[1-okSide].classList.add("wrong");
+  cards[1-okSide].querySelector(".verdict").textContent="✗";
+  if(!right) cards[i].classList.add("shake");
+  document.getElementById("pairs").classList.add("done");
+  if(right) warmScore++;
+  document.getElementById("wScore").textContent = `Class score: ${warmScore}`;
+  document.getElementById("whyTxt").innerHTML = `<b>${right?"Yes!":"Not this time."}</b> ${WARM[warmI].why}`;
+  document.getElementById("why").classList.add("show");
+  document.getElementById("nextS").disabled = false;
+  if(right){ const r=cards[okSide].getBoundingClientRect(); burst(r.left+r.width/2, r.top+r.height/2, 34); }
+}
+
+/* ================= RULES ================= */
+const RULES = [
+  {c:"c1", emo:"🔊", q:"When does a turn into an?", body:`<h3>Sound, not spelling</h3><ul>
+    <li><em>a</em> university, <em>a</em> European, <em>a</em> one-way ticket</li>
+    <li><em>an</em> hour, <em>an</em> honest mistake, <em>an</em> MP</li>
+    <li>Jobs: She's <em>a</em> nurse. He's <em>an</em> architect.</li></ul>
+    <div class="watch">Say it out loud. Your ear decides.</div>`},
+  {c:"c2", emo:"👀", q:"New, or do we both know which one?", body:`<h3>First mention vs known</h3><ul>
+    <li>I bought <em>a</em> jacket. <em>The</em> jacket was a bargain.</li>
+    <li>Only one exists: <em>the</em> sun, <em>the</em> town hall, <em>the</em> internet</li>
+    <li>Clear from context: Close <em>the</em> door, please.</li></ul>
+    <div class="watch">a = one of many. the = that one.</div>`},
+  {c:"c3", emo:"🌍", q:"All of them, or these ones?", body:`<h3>General vs particular</h3><ul>
+    <li>Coffee keeps me awake. <small>(all coffee)</small></li>
+    <li><em>The</em> coffee in this café is awful. <small>(this coffee)</small></li>
+    <li>I love dogs. / <em>The</em> dogs next door never stop barking.</li></ul>
+    <div class="watch">Catalan says el cafè for both. English doesn't.</div>`},
+  {c:"c4", emo:"🏫", q:"Are you a patient, or a visitor?", body:`<h3>Institutions</h3><ul>
+    <li>in hospital, in prison, at school, at university, at church</li>
+    <li>Also: at home, at work, go to bed, next week, last year</li>
+    <li>Just the building: I went to <em>the</em> school to collect my son.</li></ul>
+    <div class="watch">Purpose = no article. Building = a / the. (Americans differ: see card 6.)</div>`},
+  {c:"c5", emo:"🗺️", q:"Spain, but the Netherlands?", body:`<h3>Places: the quick version</h3><ul>
+    <li>No article: Spain, Europe, Tarragona, Oxford Street, Lake Como, Aneto</li>
+    <li>With <em>the</em>: <em>the</em> UK, <em>the</em> USA, <em>the</em> Ebro, <em>the</em> Mediterranean, <em>the</em> Pyrenees, <em>the</em> Sahara</li>
+    <li>And: <em>the</em> Prado, <em>the</em> Liceu, <em>the</em> Ritz</li></ul>
+    <div class="watch">Plurals and "unions" take the.</div>`},
+  {c:"c6", emo:"🇬🇧🇺🇸", q:"In hospital, or in the hospital?", body:`<h3>UK and US: both correct</h3><ul>
+    <li>UK: He's in hospital. / US: He's in <em>the</em> hospital.</li>
+    <li>UK: She's at university. / US: She's in college.</li>
+    <li>UK: I've got flu. / US: I've got <em>the</em> flu.</li>
+    <li>UK: She plays <em>the</em> guitar. / US: She plays guitar.</li>
+    <li>UK: <em>a</em> herb / US: <em>an</em> herb (silent h!)</li>
+    <li>UK: at <em>the</em> weekend / US: on <em>the</em> weekend</li></ul>
+    <div class="watch">Choose one variety and stay consistent.</div>`}
+];
+function renderRules(){
+  shell(`
+    <div><h2>Six rules, six flips</h2><p class="lede">Read the question, let the class guess, then flip the card.</p></div>
+    <div class="cards">${RULES.map((r,i)=>`
+      <button class="card ${r.c}" data-i="${i}" aria-label="Rule card: ${r.q}">
+        <div class="card-in">
+          <div class="face front"><span class="emo" aria-hidden="true">${r.emo}</span><span class="q">${r.q}</span><span class="tap">Tap to flip</span></div>
+          <div class="face back">${r.body}</div>
+        </div>
+      </button>`).join("")}</div>
+    <div class="row"><button class="btn" id="toPractice">Try it out</button><span class="hint">Tap a flipped card to flip it back.</span></div>
+  `);
+  let flippedAll = new Set();
+  main.querySelectorAll(".card").forEach(c=>c.onclick=()=>{
+    c.classList.toggle("flipped"); flippedAll.add(c.dataset.i);
+    if(flippedAll.size===RULES.length && !c._done){ c._done=true; const r=c.getBoundingClientRect(); burst(r.left+r.width/2,r.top+40,30); }
+  });
+  document.getElementById("toPractice").onclick=()=>go(3);
+}
+
+/* ================= PRACTICE ================= */
+const STREAK_MSG = {3:"Three in a row. The class is warming up ☕", 5:"Five! Someone's been reading the Grammar Bank.", 8:"Eight in a row. That's genuinely rare.", 13:"A perfect round. Ø is quietly impressed."};
+function renderPractice(){
+  if(pI>=PRACTICE.length) return renderPracticeDone();
+  const it = PRACTICE[pI];
+  pAnswered=false; pFirstTry=true;
+  const sent = it.s.replace("___",'<span class="gap" id="gap">___</span>');
+  shell(`
+    <div class="row"><span class="counter">Question ${pI+1} of ${PRACTICE.length}</span><span class="spacer"></span>
+      <div class="score"><span class="pill">First-try score: ${pScore}</span></div></div>
+    <div class="sentence" style="border-style:solid">${sent}</div>
+    <div class="choices" id="choices">${CYCLE.map(v=>`<button class="choice" data-v="${v}" aria-label="${v==='Ø'?'No article':v}">${v}</button>`).join("")}</div>
+    <div class="feedback" id="fb"><span class="hint">Let the class vote, then tap their answer.</span></div>
+    <div class="row"><button class="btn" id="nextQ" disabled>${pI<PRACTICE.length-1?'Next question':'See the score'}</button></div>
+    <div class="streak" id="streak"></div>
+  `,"the");
+  main.querySelectorAll(".choice").forEach(b=>b.onclick=()=>pick(b,it));
+  document.getElementById("nextQ").onclick=()=>{pI++; renderPractice();};
+}
+function pick(btn,it){
+  if(pAnswered) return;
+  const v = btn.dataset.v;
+  const ok = it.a.some(x=>x.toLowerCase()===v.toLowerCase());
+  const fb = document.getElementById("fb");
+  if(ok){
+    pAnswered=true;
+    btn.classList.add("yes"); document.getElementById("choices").classList.add("locked");
+    const g=document.getElementById("gap");
+    const cap = it.s.startsWith("___");
+    g.textContent = v==="Ø" ? "Ø" : (cap? v.charAt(0).toUpperCase()+v.slice(1) : v);
+    g.classList.add("filled");
+    if(pFirstTry){ pScore++; pStreak++; } else pStreak=0;
+    fb.innerHTML = `<b>${pFirstTry?"Yes!":"Got there."}</b> ${it.why}`;
+    const r = btn.getBoundingClientRect(); burst(r.left+r.width/2, r.top+r.height/2, pFirstTry?40:14);
+    document.getElementById("nextQ").disabled=false;
+    main.querySelector(".pill").textContent = `First-try score: ${pScore}`;
+    if(pFirstTry && STREAK_MSG[pStreak]){ const s=document.getElementById("streak"); s.textContent=STREAK_MSG[pStreak]; requestAnimationFrame(()=>s.classList.add("show")); }
+  } else {
+    pFirstTry=false; pStreak=0;
+    btn.classList.add("nope");
+    fb.innerHTML = `<b>Not ${v==="Ø"?"no article":v}.</b> Have another think. Which rule card is this?`;
+  }
+}
+function renderPracticeDone(){
+  const pct = pScore/PRACTICE.length;
+  const msg = pct===1?"Every single one, first time. Flawless.":pct>=.75?"Really solid. A couple of sneaky ones.":pct>=.5?"Good. The rule cards are worth another look.":"Tricky round! Flip the cards again before the challenge.";
+  shell(`
+    <h2>${pScore} out of ${PRACTICE.length} on the first try</h2>
+    <p class="lede">${msg}</p>
+    <div class="spacer"></div>
+    <div class="row"><button class="btn" id="toStory">Take the challenge</button><button class="btn ghost" id="again">Play the round again</button></div>
+  `,pScore);
+  if(pct>=.75) setTimeout(()=>rain(),250);
+  document.getElementById("toStory").onclick=()=>go(4);
+  document.getElementById("again").onclick=()=>{pI=0;pScore=0;pStreak=0;renderPractice();};
+}
+
+/* ================= STORY ================= */
+function renderStory(){
+  let k=0;
+  const html = STORY.text.replace(/\[(.*?)\]/g,(m,ans)=>`<button class="slot" data-k="${k++}" data-ans="${ans}" data-v="" aria-label="Gap ${k}">?</button>`);
+  shell(`
+    <div><h2>The challenge</h2><p class="lede">Tap each gap to cycle through a, an, the and Ø. When the class agrees, check the lot.</p></div>
+    <div class="story"><h3>${STORY.title}</h3>${html}</div>
+    <div class="row"><button class="btn" id="check">Check the story</button><button class="btn ghost" id="reset">Clear it</button><span class="result" id="res" aria-live="polite"></span></div>
+  `,"Ø");
+  const slots=[...main.querySelectorAll(".slot")];
+  slots.forEach(s=>s.onclick=()=>{
+    if(s.dataset.locked) return;
+    const cur = CYCLE.indexOf(s.dataset.v);
+    const nv = CYCLE[(cur+1)%CYCLE.length];
+    s.dataset.v=nv; s.textContent=nv; s.classList.remove("wrong");
+    const fx=s.querySelector(".fix"); if(fx) fx.remove();
+  });
+  document.getElementById("check").onclick=()=>{
+    let right=0;
+    slots.forEach(s=>{
+      s.classList.remove("right","wrong");
+      const ok = s.dataset.v.toLowerCase()===s.dataset.ans.toLowerCase();
+      if(ok){ right++; s.classList.add("right"); s.dataset.locked="1"; }
+      else { s.classList.add("wrong"); }
+    });
+    const res=document.getElementById("res");
+    const total=slots.length;
+    res.textContent = right===total ? `${right}/${total}. Not a single slip. Take a bow.` : `${right}/${total}. The red ones are still open.`;
+    if(right===total) rain(); else if(right>=total-3){ const r=res.getBoundingClientRect(); burst(r.left+40,r.top,24); }
+  };
+  document.getElementById("reset").onclick=()=>renderStory();
+}
+
+/* ================= CONFETTI ================= */
+const cv=document.getElementById("fx"), cx=cv.getContext("2d");
+let parts=[], running=false;
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function size(){cv.width=innerWidth*devicePixelRatio; cv.height=innerHeight*devicePixelRatio; cx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}
+addEventListener("resize",size); size();
+function colours(){const cs=getComputedStyle(document.documentElement); return ["--a","--an","--the","--line"].map(v=>cs.getPropertyValue(v).trim())}
+const GLYPHS=["a","an","the","Ø"];
+function burst(x,y,n){
+  if(reduce) return;
+  const col=colours();
+  for(let i=0;i<n;i++){
+    const ang=Math.random()*Math.PI*2, sp=4+Math.random()*7;
+    parts.push({x,y,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp-4,life:1,c:col[i%4],r:Math.random()*6.28,vr:(Math.random()-.5)*.3,
+      g: Math.random()<.35?GLYPHS[i%4]:null, s:6+Math.random()*6});
+  }
+  if(!running){running=true; requestAnimationFrame(tick);}
+}
+function rain(){
+  if(reduce) return;
+  for(let j=0;j<6;j++) setTimeout(()=>burst(Math.random()*innerWidth, innerHeight*0.2, 40), j*160);
+}
+function tick(){
+  cx.clearRect(0,0,innerWidth,innerHeight);
+  parts=parts.filter(p=>p.life>0);
+  for(const p of parts){
+    p.vy+=.28; p.vx*=.985; p.x+=p.vx; p.y+=p.vy; p.r+=p.vr; p.life-=.012;
+    cx.save(); cx.globalAlpha=Math.max(p.life,0); cx.translate(p.x,p.y); cx.rotate(p.r); cx.fillStyle=p.c;
+    if(p.g){ cx.font="800 20px 'Bricolage Grotesque', sans-serif"; cx.fillText(p.g,-8,6); }
+    else cx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);
+    cx.restore();
+  }
+  if(parts.length) requestAnimationFrame(tick); else {running=false; cx.clearRect(0,0,innerWidth,innerHeight);}
+}
+
+/* ================= KEYS + THEME ================= */
+addEventListener("keydown",e=>{
+  if(e.target.closest && e.target.closest("button") && (e.key===" "||e.key==="Enter")) return;
+  if(STAGES[stage].id==="warm" && /^[ab12]$/i.test(e.key)){ chooseWarm(/^[a1]$/i.test(e.key)?0:1); return; }
+  if(e.key==="ArrowRight"||e.key==="PageDown") go(stage+1);
+  if(e.key==="ArrowLeft"||e.key==="PageUp") go(stage-1);
+  if(e.key===" "){
+    e.preventDefault();
+    const id=STAGES[stage].id;
+    if(id==="warm"){ const n=document.getElementById("nextS"); if(n && !n.disabled) n.click(); }
+    if(id==="practice"){ const n=document.getElementById("nextQ"); if(n && !n.disabled) n.click(); }
+  }
+});
+document.getElementById("theme").onclick=()=>{
+  const r=document.documentElement;
+  const dark = r.dataset.theme ? r.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme = dark ? "light" : "dark";
+  try{ localStorage.setItem("coc-theme", r.dataset.theme); }catch(e){}
+};
+try{ const t=localStorage.getItem("coc-theme"); if(t) document.documentElement.dataset.theme=t; }catch(e){}
+
+render();
+</script>
+</body>
+</html>
