@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ask me a question – 1A question formation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F5FA; --ink:#1C1B3A; --muted:#5E5C7E; --line:#DCDCEB; --tray:#1C1B3A;
+  --c:#FF6B4A; --on:#1C1B3A; --soft:#FFE1D9;
+  --display:"Bricolage Grotesque","Trebuchet MS","Segoe UI",sans-serif;
+  --text:"Atkinson Hyperlegible",Verdana,"Segoe UI",sans-serif;
+  --fs:clamp(16px, min(2.05vw, 3.75vh), 42px);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:var(--paper);color:var(--ink);font-family:var(--text);font-size:var(--fs);overflow:hidden;
+  background-image:radial-gradient(rgba(28,27,58,.08) 1.3px, transparent 1.4px);background-size:24px 24px;
+}
+button{font:inherit;color:inherit;cursor:pointer}
+button:active:not(:disabled){transform:scale(.96)}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+kbd{font-family:var(--text);font-size:.7em;font-weight:700;border:1.5px solid currentColor;border-radius:.3em;padding:0 .35em;opacity:.8;margin-left:.3em}
+
+#app{height:100vh;display:grid;grid-template-rows:auto 1fr auto}
+main{min-height:0}
+
+/* ---------- header & footer ---------- */
+.bar{display:flex;align-items:center;gap:.8em;padding:.55em 1.4em .35em;font-size:.58em}
+.brand{background:none;border:0;padding:0;font-family:var(--display);font-weight:800;font-size:1.35em;letter-spacing:-.01em}
+.brand span{display:inline-grid;place-items:center;width:1.3em;height:1.3em;border-radius:50%;background:var(--ink);color:#fff;margin-right:.35em;font-size:.9em}
+.spacer{flex:1}
+#stats{display:flex;gap:.5em}
+.stat{background:#fff;border-radius:99px;padding:.3em .9em;box-shadow:inset 0 0 0 2px var(--line)}
+.stat b{font-family:var(--display);font-weight:800;font-size:1.2em;margin-right:.15em}
+.ghost{background:#fff;border:2px solid var(--ink);border-radius:99px;padding:.3em .9em;font-weight:700}
+.credit{display:flex;justify-content:space-between;align-items:center;gap:1em;font-size:.44em;color:var(--muted);padding:.3em 1.8em .6em}
+.credit strong{color:var(--ink)}
+#hint{font-weight:700;color:var(--ink);white-space:pre}
+
+/* ---------- home ---------- */
+.home{height:100%;display:grid;grid-template-rows:1fr auto auto;gap:.7em;padding:.4em 2em .3em;overflow:auto}
+.hero{display:grid;grid-template-columns:1fr auto;align-items:center;gap:1em;min-height:0}
+.hero h1{font-family:var(--display);font-weight:800;font-size:3.7em;line-height:.88;letter-spacing:-.04em;margin:0}
+.sub{font-size:.8em;color:var(--muted);margin:.55em 0 .7em}
+.steps{list-style:none;counter-reset:s;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.5em 1.4em;font-size:.68em;font-weight:700}
+.steps li{counter-increment:s;display:flex;align-items:center;gap:.45em}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--ink);color:#fff;font-family:var(--display)}
+.heroq{font-family:var(--display);font-weight:800;font-size:min(44vh,28vw);line-height:.8;color:var(--ink);margin-right:.2em;
+  text-shadow:.035em .035em 0 #FFC21A,.07em .07em 0 #FF6B4A,.105em .105em 0 #E4428F,.14em .14em 0 #2F6BFF;
+  animation:rock 6s ease-in-out infinite;transform-origin:50% 85%;user-select:none;cursor:default}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:.55em}
+.tile{position:relative;text-align:left;background:#fff;border:0;border-top:.42em solid var(--c);border-radius:.6em;padding:.55em .75em .6em;
+  display:grid;grid-template-columns:auto 1fr;column-gap:.55em;align-items:center;box-shadow:0 .25em 0 var(--line);
+  transition:transform .25s var(--spring),box-shadow .25s;animation:rise .55s var(--spring) both;animation-delay:calc(var(--i)*60ms + 150ms)}
+.tile:hover{transform:translateY(-4px) rotate(-.5deg);box-shadow:0 .5em 1em color-mix(in srgb,var(--c) 30%,transparent)}
+.tile .te{font-size:1.45em;grid-row:span 2}
+.tile .tt{font-family:var(--display);font-weight:600;font-size:.82em;line-height:1.1}
+.tile .tp{font-size:.56em;color:var(--muted);margin-top:.2em}
+.tile kbd{position:absolute;top:.5em;right:.6em;font-size:.45em}
+.tile.complete{background:var(--c);color:var(--on)}
+.tile.complete .tp{color:inherit;font-weight:700}
+.homeactions{display:flex;justify-content:flex-end}
+.homeactions .ghost{font-size:.55em}
+
+/* ---------- topic view ---------- */
+.topic{display:grid;grid-template-columns:minmax(8.5em,13vw) 1fr;height:100%;min-height:0}
+.rail{display:flex;flex-direction:column;gap:.28em;padding:.35em .2em .5em 1.2em;min-height:0}
+.tab{flex:1;display:grid;grid-template-columns:1.5em 1fr auto;align-items:center;gap:.35em;font-size:.58em;text-align:left;background:#fff;border:0;
+  border-left:.55em solid var(--tc);border-radius:.5em;padding:.25em .55em;box-shadow:0 2px 0 var(--line);transition:transform .2s var(--spring)}
+.tab:hover{transform:translateX(3px)}
+.tab .te{font-size:1.25em}
+.tab .tn{font-family:var(--display);font-weight:600;line-height:1.05}
+.tab .tp{font-size:.85em;opacity:.75}
+.tab.complete .tp{opacity:1;display:grid;place-items:center;width:1.5em;height:1.5em;border-radius:50%;background:var(--tc);color:var(--ton);font-family:var(--display);font-weight:800}
+.tab.on{background:var(--tc);color:var(--ton);box-shadow:0 .3em .8em color-mix(in srgb,var(--tc) 40%,transparent)}
+.tab.on.complete .tp{background:var(--ton);color:var(--tc)}
+
+.stage{position:relative;display:grid;grid-template-rows:auto 1fr auto;padding:.3em 1.4em .7em 1em;min-height:0;overflow:hidden}
+.bigmark{position:absolute;right:.02em;bottom:15vh;font-family:var(--display);font-weight:800;font-size:56vh;line-height:.85;color:var(--c);opacity:.2;
+  pointer-events:none;z-index:0;animation:rock 7s ease-in-out infinite;transform-origin:50% 80%}
+.bigmark.flip{animation:flip .55s ease-in-out}
+.thead{position:relative;z-index:1;display:flex;align-items:center;gap:.45em;animation:rise .5s var(--spring) both}
+.temoji{font-size:1.5em}
+.thead h2{font-family:var(--display);font-weight:800;font-size:1.85em;letter-spacing:-.03em;line-height:1;margin:0}
+.pron{display:flex;background:#fff;border-radius:99px;padding:.15em;box-shadow:inset 0 0 0 2px var(--line);font-size:.62em;margin-left:.4em}
+.pron button{border:0;background:none;border-radius:99px;padding:.2em .8em;font-weight:700}
+.pron button.on{background:var(--ink);color:#fff}
+.meter{margin-left:auto;width:7em;height:.5em;background:#fff;border-radius:99px;overflow:hidden;box-shadow:inset 0 0 0 2px var(--line)}
+.meter span{display:block;height:100%;background:var(--c);transition:width .5s var(--spring)}
+
+.qs{position:relative;z-index:1;list-style:none;margin:.3em 0;padding:0;overflow:auto;display:flex;flex-direction:column;justify-content:center;gap:.15em}
+.q{display:grid;grid-template-columns:1.6em 1fr;align-items:center;column-gap:.25em;padding:.05em .45em;border-radius:.5em;
+  transition:background .25s;animation:rise .5s var(--spring) both;animation-delay:calc(var(--i)*70ms + 100ms)}
+.q.cur{background:rgba(255,255,255,.85);box-shadow:0 .2em .6em rgba(28,27,58,.08)}
+.qn{display:grid;place-items:center;width:1.3em;height:1.3em;border-radius:50%;background:var(--c);color:var(--on);font-family:var(--display);font-weight:800;font-size:.75em}
+.qt{line-height:2.05}
+.note{grid-column:2;font-size:.6em;line-height:1.4;background:#fff;border-left:.35em solid var(--c);border-radius:.3em;padding:.35em .7em;margin:0 0 .35em}
+.uk{font-size:.48em;font-weight:700;vertical-align:.25em;margin-left:.7em;border:2px solid var(--ink);background:#fff;border-radius:99px;padding:.1em .65em}
+.uk[aria-expanded="true"]{background:var(--ink);color:#fff}
+
+.slot{display:inline-flex;align-items:center;gap:.16em;vertical-align:middle;min-height:1.45em;padding:.08em .3em;margin:0 .08em;
+  border:2.5px dashed #AFAEC8;border-radius:.3em;background:#fff;line-height:1.2}
+.slot .ph{display:inline-block;width:1.75em;height:.6em;border-radius:.12em;background:#C6C5DA}
+.slot.active{border:3px solid var(--c);animation:pulse 1.8s ease-in-out infinite}
+.slot.active .ph{background:color-mix(in srgb,var(--c) 45%,#C6C5DA)}
+.slot.done{border:0;border-bottom:.14em solid var(--c);border-radius:.25em .25em 0 0;background:var(--soft);font-weight:700;padding:0 .25em;cursor:default}
+.slot.tight{margin-left:-.25em}
+.slot.pop{animation:pop .45s var(--spring)}
+.shake{animation:shake .32s ease-in-out}
+
+.tray{position:relative;z-index:1;background:var(--tray);color:#fff;border-radius:.7em;border-top:.3em solid var(--c);padding:.5em .8em .55em;
+  box-shadow:0 .6em 1.6em color-mix(in srgb,var(--c) 38%,transparent);animation:rise .5s var(--spring) both;animation-delay:.45s}
+.tray :focus-visible{outline-color:#fff}
+.tq{font-size:.6em;opacity:.8;margin-bottom:.4em}
+.opts{display:flex;flex-wrap:wrap;gap:.5em}
+.opt{display:flex;align-items:center;gap:.5em;background:#fff;color:var(--ink);border:0;border-radius:99px;padding:.3em 1em .3em .3em;font-weight:700;
+  box-shadow:0 .22em 0 rgba(0,0,0,.45);transition:transform .2s var(--spring),opacity .2s}
+.opt:hover:not(:disabled){transform:translateY(-3px)}
+.opt .k{display:grid;place-items:center;width:1.55em;height:1.55em;border-radius:50%;background:var(--c);color:var(--on);font-family:var(--display);font-weight:800;font-size:.9em}
+.opt i{font-weight:400;opacity:.7}
+.opt.wrong{opacity:.38;text-decoration:line-through;text-decoration-thickness:.1em;cursor:not-allowed;box-shadow:none}
+.opt.right{background:var(--c);color:var(--on);transform:scale(1.06)}
+.opt.right .k{background:var(--on);color:var(--c)}
+.opt:disabled{cursor:default}
+.fb{font-size:.66em;line-height:1.4;min-height:1.45em;margin-top:.45em}
+.fb b{background:var(--c);color:var(--on);border-radius:.25em;padding:0 .35em;margin-right:.3em}
+.tray.complete{display:flex;align-items:center;justify-content:space-between;gap:1em;font-size:.95em}
+.go{border:0;border-radius:99px;background:var(--c);color:var(--on);font-family:var(--display);font-weight:800;padding:.45em 1.1em;
+  box-shadow:0 .22em 0 rgba(0,0,0,.45);transition:transform .2s var(--spring)}
+.go:hover{transform:translateY(-3px)}
+
+/* ---------- interview ---------- */
+#interview{position:fixed;inset:0;z-index:40;background:var(--c);color:var(--on);padding:1em 2.2em;opacity:0;transform:scale(.985);transition:opacity .3s,transform .35s var(--spring);overflow:hidden}
+#interview.open{opacity:1;transform:none}
+#interview::after{content:"!";position:absolute;right:.05em;bottom:-.18em;font-family:var(--display);font-weight:800;font-size:78vh;line-height:1;opacity:.14;pointer-events:none;animation:rock 7s ease-in-out infinite;transform-origin:50% 80%}
+#interview :focus-visible{outline-color:currentColor}
+.ivin{position:relative;z-index:1;height:100%;display:grid;grid-template-rows:auto 1fr auto;gap:.5em;max-width:64em}
+.ivhead{display:flex;align-items:center;gap:.6em}
+.ivhead .te{font-size:2em}
+.ivhead h2{font-family:var(--display);font-weight:800;font-size:1.9em;letter-spacing:-.03em;line-height:1;margin:0}
+.ivhead p{margin:.25em 0 0;font-size:.72em;font-weight:700}
+.x{margin-left:auto;border:2.5px solid currentColor;background:none;border-radius:50%;width:2em;height:2em;font-weight:700}
+.ivqs{list-style:none;margin:0;padding:0;counter-reset:q;display:flex;flex-direction:column;justify-content:center;gap:.25em;font-size:1.2em;font-weight:700}
+.ivqs li{counter-increment:q;display:flex;gap:.6em;align-items:baseline;padding:.15em .5em;border-radius:.45em;transition:background .12s,color .12s,transform .3s var(--spring);
+  animation:rise .5s var(--spring) both;animation-delay:calc(var(--i)*80ms + 150ms)}
+.ivqs li::before{content:counter(q);font-family:var(--display);font-weight:800;opacity:.55;min-width:.9em}
+.ivqs li.hl,.ivqs li.chosen{background:var(--on);color:var(--c)}
+.ivqs li.chosen{transform:scale(1.035) rotate(-.4deg)}
+.follow{display:flex;flex-wrap:wrap;align-items:center;gap:.4em;font-size:.68em}
+.follow .fl{font-weight:700;margin-right:.2em}
+.chip{border:2.5px solid currentColor;border-radius:99px;padding:.15em .75em;font-weight:700}
+.ivctl{display:flex;flex-wrap:wrap;align-items:center;gap:.7em;margin-top:.55em;font-size:.72em}
+#interview .go{background:var(--on);color:var(--c)}
+#interview .go.alt{background:transparent;color:var(--on);box-shadow:inset 0 0 0 2.5px currentColor}
+.timer{margin-left:auto;display:flex;align-items:center;gap:.35em;background:var(--on);color:var(--c);border-radius:99px;padding:.2em .25em .2em 1em}
+#clock{font-family:var(--display);font-weight:800;font-size:1.45em;font-variant-numeric:tabular-nums;min-width:3.1ch}
+.timer button{border:0;border-radius:99px;background:var(--c);color:var(--on);font-weight:700;padding:.35em .9em}
+.timer.ding{animation:ding .45s ease-in-out 4}
+
+/* ---------- confetti ---------- */
+.confetti{position:fixed;left:56%;top:48%;width:0;height:0;pointer-events:none;z-index:60}
+.confetti i{position:absolute;border-radius:2px;animation:conf 1.5s cubic-bezier(.15,.7,.3,1) forwards}
+
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes rock{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@keyframes flip{0%{transform:rotateY(0)}50%{transform:rotateY(90deg)}100%{transform:rotateY(0)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 .08em color-mix(in srgb,var(--c) 25%,transparent)}50%{box-shadow:0 0 0 .28em color-mix(in srgb,var(--c) 35%,transparent)}}
+@keyframes pop{0%{transform:scale(.55)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+@keyframes conf{0%{transform:translate(0,0) rotate(0);opacity:1}75%{opacity:1}100%{transform:translate(var(--x),calc(var(--y) + 280px)) rotate(var(--r));opacity:0}}
+@keyframes ding{50%{transform:scale(1.12)}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:760px){
+  body{overflow:auto}
+  #app{height:auto;min-height:100vh}
+  .topic{grid-template-columns:1fr}
+  .rail{flex-direction:row;overflow-x:auto;padding:.3em .8em}
+  .tab{min-width:8em}
+  .tiles{grid-template-columns:repeat(2,1fr)}
+  .hero{grid-template-columns:1fr}
+  .heroq{display:none}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="bar">
+    <button class="brand" id="homeBtn" title="All topics (Esc)"><span>?</span>Ask me a question</button>
+    <div class="spacer"></div>
+    <div id="stats"></div>
+  </header>
+  <main id="view"></main>
+  <footer class="credit">
+    <strong>Class of Coffee – with AI assistance</strong>
+    <span id="hint"></span>
+    <span>Adapted from English File 4th edition Upper-intermediate, 1A Communicative, © Oxford University Press</span>
+  </footer>
+</div>
+<div id="interview" hidden role="dialog" aria-modal="true" aria-label="Interview your partner"></div>
+
+<script>
+/* ============ content ============ */
+const ORDER = "Word order: the auxiliary goes before the subject.";
+const S = (...o) => ({ slot: o.map(x => typeof x === "string" ? { t: x, ok: true } : { t: x[0], ok: false, why: x[1] }) });
+const Q = (...parts) => ({ parts });
+const N = (note, ...parts) => ({ parts, note });
+
+const TOPICS = [
+{ title:"Your home", short:"Your home", emoji:"🏠", c:"#FF6B4A", on:"#1C1B3A",
+  follow:["What's it like?","Would you change anything about it?","Why did you choose it?"],
+  qs:[
+  Q("Where ", S("do you",["you do",ORDER],["are you","Live is a normal verb, so the present simple question uses do."]), " live?"),
+  Q("How long ", S("have you",["do you","Lived is a past participle. With how long + lived, use the present perfect: have you lived."],["are you","Are doesn't go with lived. Use the present perfect: How long have you lived…?"]), " lived there?"),
+  Q("Who ", S("do you",["you do",ORDER],["does you","With you, the auxiliary is do, not does."]), " live ", S("with",["by","We live with people, not by them: Who do you live with?"],["to","We live with people, not to them."]), "?"),
+  Q("What ", S("do you",["you do",ORDER],["are you","Careful: What are you like? asks about personality. Here: What do you like…?"]), " like most about your home?"),
+  N("Neighbourhood is the British spelling. In American English it's neighborhood.",
+    "Is ", S("there",["it","To say something exists, use there is: Is there anything…?"],["this","The fixed pattern is Is there anything…?"]), " anything you ", S("don't",["not","Normal verbs make the negative with don't: you don't like."],["doesn't","With you, the negative is don't."]), " like about your neighbourhood? Why not?")
+  ]},
+{ title:"Getting around", short:"Getting around", emoji:"🚲", c:"#2F6BFF", on:"#FFFFFF",
+  follow:["How long have you been doing that?","What's the worst part of the journey?","Would you like to change it?"],
+  qs:[
+  Q("How ", S("do you",["you do",ORDER],["are you","Get is a normal verb, so the question uses do: How do you get…?"]), " usually get ", S("to",["in","Get in means enter (a car, a building). For arriving somewhere, use get to: get to work."],["at","For arriving somewhere, use get to: get to work."]), " work (or school / university)?"),
+  Q("How long ", S("does it",["it does",ORDER],["is it","Take is a normal verb, so use does: How long does it take?"]), " take?"),
+  N("Have you got is typical of British English. Do you have is correct everywhere and is the usual form in American English.",
+    S("Can you",["You can","With modal verbs, swap the order: Can you drive?"],["Are you","Drive is the main verb. To ask about ability, use the modal can: Can you drive?"]), " drive? ", S("What",["How","How car doesn't work. Use What car…?"],["Who","Who asks about people. For a thing, use What car…?"]), " car ", S("do you have","have you got",["do you got","Got goes with have: have you got? or do you have? Not do you got."],["you have got",ORDER]), "?"),
+  N("Public transport is British English. In American English it's public transportation or mass transit.",
+    S("How",["What","The question phrase for frequency is How often."],["Which","The question phrase for frequency is How often."]), " often ", S("do",["are","Use is a normal verb, so the auxiliary is do."],["does","With you, the auxiliary is do."]), " you ", S("use",["using","After do you, use the base form of the verb: use."],["uses","After do you, use the base form of the verb: use."]), " public transport?"),
+  Q(S("What's",["What","This question needs a verb: What's (What is) the best way…?"],["How's","How's asks how something is. For the best way, ask What's…?"]), " the best way ", S("to",["for","After the best way, use the to-infinitive: the best way to get…"],["of","After the best way, use the to-infinitive: the best way to get…"]), " get ", S("around",["into","Get into means enter. To travel from place to place, you get around."],["on","You get on a bus, but you get around a town."]), " your town / city?")
+  ]},
+{ title:"Free time", short:"Free time", emoji:"🎧", c:"#FFC21A", on:"#1C1B3A",
+  follow:["How did you get into that?","Who do you do it with?","How often?"],
+  qs:[
+  Q("What ", S("do you",["you do",ORDER],["are you","Enjoy is a normal verb, so the question uses do."]), " enjoy doing in your free time?"),
+  Q(S("What kind",["How much","Music here is a type, not an amount: What kind of music…?"],["Which of","Which of needs the or your (which of your songs). Here: What kind of music…?"]), " of music ", S("do you",["you do",ORDER],["are you","Listen is a normal verb, so the question uses do."]), " listen ", S("to",["on","We listen to music, not on it. To stays at the end of the question."],["at","We listen to something, not at it."]), "?"),
+  Q("How ", S("often do you",["do you often","How often is one question phrase, so keep it together at the start."],["often are you","Go out is a normal verb, so use do: How often do you go out?"]), " go out during the week?"),
+  Q(S("What",["How","How sport(s) doesn't work. Use What sport(s)…?"],["Who","Who asks about people. For sports, use What sport(s)…?"]), " sport(s) ", S("do you",["you do",ORDER],["are you","Like is a normal verb, so the question uses do."]), " like doing?"),
+  Q(S("How much",["How many","Time is uncountable here, so use How much."],["How long","How long already means how much time, so we can't add time after it."]), " time do you spend on social media every day?")
+  ]},
+{ title:"Lifestyle", short:"Lifestyle", emoji:"☕", c:"#20B37A", on:"#1C1B3A",
+  follow:["Has it always been like that?","Would you like to change that?","Why?"],
+  qs:[
+  Q("How ", S("much",["many","Tea and coffee are uncountable, so use How much."],["often","How often tea or coffee doesn't work. Use How much tea or coffee…?"]), " tea or coffee ", S("do you",["you do",ORDER],["are you","Drink is a normal verb, so the question uses do."]), " drink ", S("a",["the","For frequency, say a day (three cups a day)."],["in","For frequency, say a day, not in day."]), " day?"),
+  Q(S("How many",["How much","Hours are countable, so use How many."],["How long","Either How long do you sleep? or How many hours do you sleep? Not How long hours."]), " hours ", S("do you",["are you","Sleep is a normal verb here, so the question uses do."],["you do",ORDER]), " sleep at night?"),
+  Q("What ", S("do you",["are you","The main verb is do, so the auxiliary is also do: What do you do…?"],["you do",ORDER]), " do ", S("to",["for","To say why, use to + verb: to relax."],["by","By + -ing says how (by relaxing). To say why, use to + verb: to relax."]), " relax?"),
+  Q("What do ", S("you",["your","Your is a possessive. The subject is you."],["you're","You're means you are. The subject here is just you."]), " do ", S("to",["for","To say why, use to + verb: to keep healthy."],["by","By + -ing says how (by keeping). To say why, use to + verb: to keep healthy."]), " keep healthy?"),
+  Q("What ", S("was",["did","The main verb here is be: What was the last event…?"],["were","Event is singular, so use was."]), " the last live event you went ", S("to",["in","You go to an event, so to stays at the end of the question."],["at","You're at an event, but you go to it."]), "?")
+  ]},
+{ title:"Travel", short:"Travel", emoji:"🧳", c:"#12A9C9", on:"#1C1B3A",
+  follow:["What was it like?","Who did you go with?","Would you go back?"],
+  qs:[
+  Q("What's ", S("the most",["the best","Best is the superlative of good. For beautiful, use the most."],["the more","That's a comparative. For one place out of all of them, use the superlative: the most."]), " beautiful place you ", S("have ever","'ve ever",["ever have","Ever goes between have and the past participle: have ever been."],["has ever","With you, use have."]), " been to?"),
+  N("Holiday is British English. In American English it's vacation.",
+    "Where ", S("are",["do","You going is a continuous form, so the auxiliary is are."],["have","For plans, use be going to: Where are you going to go…?"]), " you going ", S("to go",["for go","Going to is followed by the to-infinitive: going to go."],["to going","After going to, use the base form: to go."]), " for your next holiday?"),
+  Q(S("Do you",["Are you","Think (for opinions) is a state verb, so use do: Do you think…?"],["Does you","With you, the auxiliary is do: Do you think…?"]), " think it's better ", S("to",["for","After it's better, use the to-infinitive: it's better to travel."],["of","After it's better, use the to-infinitive: it's better to travel."]), " travel alone ", S("or",["and","It's a choice between two options, so use or."],["but","It's a choice between two options, so use or."]), " with other people?"),
+  N("Holidays is British English. In American English it's vacations.",
+    S("Do you",["Are you","Prefer is a state verb, so use do: Do you prefer…?"],["Have you","Have you would need a past participle (preferred). Here: Do you prefer…?"]), " prefer having holidays ", S("in",["at","We use in with countries: in your country."],["on","We use in with countries: in your country."]), " your country or abroad?"),
+  Q("Have ", S("you ever",["ever you","The subject comes first, then ever: Have you ever…?"],["you never","In questions, use ever, not never."]), " been ", S("to",["in","Have you ever been to…? means have you ever visited. Use to."],["at","We don't use at with countries. Use to."]), " an English-speaking country?")
+  ]},
+{ title:"Family", short:"Family", emoji:"🫶", c:"#E4428F", on:"#FFFFFF",
+  follow:["Why?","Are you similar?","What did you do?"],
+  qs:[
+  Q(S("How many",["How much","People is plural and countable, so use How many."],["What many","The question phrase for a number is How many."]), " people ", S("are",["is","People is plural, so use are there."],["do","With there, use be: Are there…?"]), " there in your immediate family?"),
+  Q(S("Who",["Which","Use Who to ask about people: Who in your family…?"],["Whose","Whose asks about possession. Here: Who in your family…?"]), " in your family ", S("do you",["you do",ORDER],["are you","Like is a normal verb, so the question uses do."]), " most like talking ", S("to",["for","You talk to someone, so to stays at the end of the question."],["at","Talking at someone means talking without letting them reply! Here: talking to."]), "?"),
+  Q(S("Who do you",["Who you do",ORDER],["Who are you","Prefer is a state verb, so use do: Who do you prefer…?"]), " prefer spending time ", S("with",["for","You spend time with people, so with stays in the question."],["to","You spend time with people, not to them."]), ", family ", S("or",["and","It's a choice between two options, so use or."],["nor","Nor goes with neither. For a choice, use or."]), " friends?"),
+  Q("How much ", S("do you",["you do",ORDER],["are you","Know is a state verb, so the question uses do."]), " know ", S("about",["for","Know about + topic: know about your family tree."],["on","We know about a topic, not on it."]), " your family tree?"),
+  Q("When ", S("was the",["is the","Did is past, so the question is past too: When was the last time…?"],["were the","Time is singular, so use was."]), " last time all ", S("your",["you","Before a noun, use the possessive your."],["yours","Yours stands alone (it's yours). Before a noun, use your."]), " family did something together?")
+  ]},
+{ title:"Childhood and school", short:"Childhood & school", emoji:"🎒", c:"#7A4CFF", on:"#FFFFFF",
+  follow:["How did you feel about that?","Why?","Do you still feel the same?"],
+  qs:[
+  Q("Where ", S("were you",["did you","Be born is passive, so use was / were: Where were you born?"],["you were",ORDER]), " born?"),
+  N("Secondary school is British English. In American English it's middle school and high school.",
+    "Which secondary school ", S("did you",["you did",ORDER],["were you","Go is a normal verb, so the past simple question uses did."]), " go ", S("to",["in","You go to a school, so to stays at the end of the question."],["at","You were at a school, but you went to it."]), "?"),
+  N("Subject is used in both varieties, but American students often say class: What was your favorite class?",
+    "What ", S("was your",["were your","Subject is singular, so use was."],["was you","Before a noun, use the possessive your."]), " best / worst subject?"),
+  N("British English says cheat in an exam. American English usually says cheat on a test (or on an exam).",
+    S("Have you",["Did you","Did needs the base form (cheat). With cheated, use Have you ever…?"],["Were you","Were you cheated? means someone cheated you! Here: Have you ever cheated…?"]), " ever cheated in an exam? ", S("Did you",["Were you","Get caught works like a normal verb in the past simple: Did you get caught?"],["Have you","Have you get isn't possible. For a finished past event, use Did you get caught?"]), " get caught?"),
+  Q("When you were a child, what ", S("did you",["you did",ORDER],["were you","Want is a normal verb, so the past simple question uses did."]), " want ", S("to",["that","Want is followed by the to-infinitive: want to be."],["for","Want is followed by the to-infinitive: want to be."]), " be when you grew up?")
+  ]},
+{ title:"A male or female relative", short:"A relative", emoji:"👵", c:"#FF8A1F", on:"#1C1B3A", pron:true,
+  follow:["Do you get on well?","Are you similar?","How often do you see {obj}?"],
+  qs:[
+  Q(S("What's {pos}",["What {pos}","This question needs a verb: What's (What is) {pos} name?"],["Who's {pos}","For names, ask What: What's {pos} name?"]), " name?"),
+  Q("How old ", S("is {p}",["{p} is",ORDER],["does {p}","For age, use be: How old is {p}?"]), "?"),
+  Q(S("What does {p}",["What {p} does","The auxiliary comes before the subject: What does {p} do?"],["What is {p}","Do is a normal verb, so use does: What does {p} do? (= What's {pos} job?)"]), " do?"),
+  Q(S("What does {p}",["What {p} does","The auxiliary comes before the subject: What does {p} look like?"],["How does {p}","Choose one: What does {p} look like? or How does {p} look? Not both."]), " look ", S("like",["likes","Like is a preposition here, so it never takes -s: What does {p} look like?"],["as","To ask about appearance, use look like."]), "? (appearance)"),
+  Q(S("What is {p}",["What does {p}","What does {p} like? asks about {pos} likes (food, hobbies). For personality: What is {p} like?"],["How is {p}","How is {p}? asks about health or mood. For personality: What is {p} like?"]), " like? (personality)")
+  ]}
+];
+
+/* ============ helpers & state ============ */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let pron = "she";
+const fill = s => s.replace(/\{p\}/g, pron).replace(/\{pos\}/g, pron === "she" ? "her" : "his").replace(/\{obj\}/g, pron === "she" ? "her" : "him");
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const vars = t => `--c:${t.c};--on:${t.on};--soft:color-mix(in srgb, ${t.c} 24%, white)`;
+const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let TOTAL = 0;
+function prepare() {
+  TOTAL = 0;
+  TOPICS.forEach((t, ti) => {
+    t.slots = [];
+    t.qs.forEach((q, qi) => q.parts.forEach((p, pi) => {
+      if (p && p.slot) { p.key = `${ti}-${qi}-${pi}`; p.qi = qi; p.order = shuffle(p.slot.map((_, i) => i)); t.slots.push(p); TOTAL++; }
+    }));
+  });
+}
+prepare();
+
+const st = { view:"home", ti:0, active:0, res:{}, first:0, solved:0, streak:0, token:0 };
+const R = k => st.res[k] || (st.res[k] = { tries:0, wrong:[], done:false, pick:null });
+const solvedIn = t => t.slots.filter(p => st.res[p.key] && st.res[p.key].done).length;
+const isDone = t => solvedIn(t) === t.slots.length;
+const nextOpen = (t, from) => { for (let k = 1; k <= t.slots.length; k++) { const i = (from + k + t.slots.length) % t.slots.length; if (!R(t.slots[i].key).done) return i; } return -1; };
+
+const YES = ["Spot on.","That's it.","Exactly.","Yes!","Nicely done."];
+const AGAIN = ["Got there.","Yes, that's the one.","That's it this time."];
+const NOPE = ["Not quite.","Close, but no.","Try again.","Almost."];
+const STREAK = {3:"Three in a row.",5:"Five in a row. This class knows its auxiliaries.",8:"Eight in a row. Show-offs.",12:"Twelve in a row. Frankly, impressive.",20:"Twenty in a row. Are you sure this isn't C1?"};
+
+function stats() {
+  $("#stats").innerHTML = `<span class="stat"><b>${st.solved}</b> of ${TOTAL} gaps</span><span class="stat"><b>${st.first}</b> right first time</span>`;
+}
+
+/* ============ home ============ */
+function home() {
+  st.view = "home"; st.token++;
+  const all = TOPICS.every(isDone);
+  $("#view").innerHTML = `<section class="home">
+    <div class="hero">
+      <div>
+        <h1>Ask me<br>a question</h1>
+        <p class="sub">${all ? "All eight topics solved. Everyone in the room has something to talk about now." : "Question formation for pair interviews. English File Upper-intermediate, 1A."}</p>
+        <ol class="steps"><li>Choose a topic</li><li>As a class, choose the missing words</li><li>Interview your partner and ask for more</li></ol>
+      </div>
+      <div class="heroq" aria-hidden="true">${all ? "!" : "?"}</div>
+    </div>
+    <div class="tiles">${TOPICS.map((t, i) => `<button class="tile${isDone(t) ? " complete" : ""}" data-topic="${i}" style="${vars(t)};--i:${i}">
+        <span class="te">${t.emoji}</span><span class="tt">${esc(t.title)}</span>
+        <span class="tp">${isDone(t) ? "Ready to interview!" : `${solvedIn(t)} of ${t.slots.length} gaps`}</span><kbd>${i + 1}</kbd></button>`).join("")}</div>
+    <div class="homeactions"><button class="ghost" id="reset">Start again</button></div>
+  </section>`;
+  const hq = $(".heroq");
+  if (!all) { hq.addEventListener("mouseenter", () => hq.textContent = "!"); hq.addEventListener("mouseleave", () => hq.textContent = "?"); }
+  $("#hint").textContent = "Press 1–8 to open a topic";
+  stats();
+}
+
+/* ============ topic ============ */
+function slotHTML(t, p) {
+  const r = R(p.key), idx = t.slots.indexOf(p);
+  if (r.done) {
+    const txt = fill(p.slot[r.pick].t);
+    return `<button class="slot done${txt.startsWith("'") ? " tight" : ""}" data-slot="${idx}" tabindex="-1">${esc(txt)}</button>`;
+  }
+  const n = fill(p.slot.find(o => o.ok).t).split(" ").length;
+  return `<button class="slot${idx === st.active ? " active" : ""}" data-slot="${idx}" aria-label="Gap, ${n} word${n > 1 ? "s" : ""}">${'<span class="ph"></span>'.repeat(n)}</button>`;
+}
+function qHTML(t, q, qi) {
+  const body = q.parts.map(p => typeof p === "string" ? esc(fill(p)) : slotHTML(t, p)).join("");
+  const cur = !isDone(t) && t.slots[st.active] && t.slots[st.active].qi === qi;
+  return `<li class="q${cur ? " cur" : ""}" data-q="${qi}" style="--i:${qi}"><span class="qn">${qi + 1}</span>
+    <span class="qt">${body}${q.note ? `<button class="uk" data-note="${qi}" aria-expanded="false" title="British / American English">UK / US</button>` : ""}</span>
+    ${q.note ? `<span class="note" hidden>${esc(fill(q.note))}</span>` : ""}</li>`;
+}
+function openTopic(i, keep) {
+  st.view = "topic"; st.ti = i; st.token++;
+  const t = TOPICS[i];
+  if (!keep || R(t.slots[st.active].key).done) st.active = Math.max(0, nextOpen(t, -1));
+  const done = isDone(t);
+  $("#view").innerHTML = `<section class="topic" style="${vars(t)}">
+    <nav class="rail" aria-label="Topics">${TOPICS.map((x, j) => `<button class="tab${j === i ? " on" : ""}${isDone(x) ? " complete" : ""}" data-topic="${j}" style="--tc:${x.c};--ton:${x.on}">
+      <span class="te">${x.emoji}</span><span class="tn">${esc(x.short)}</span><span class="tp">${isDone(x) ? "!" : solvedIn(x) + "/" + x.slots.length}</span></button>`).join("")}</nav>
+    <div class="stage">
+      <div class="bigmark" aria-hidden="true">${done ? "!" : "?"}</div>
+      <div class="thead"><span class="temoji">${t.emoji}</span><h2>${esc(t.title)}</h2>
+        ${t.pron ? `<div class="pron" role="group" aria-label="Relative"><button data-pron="she" class="${pron === "she" ? "on" : ""}">she</button><button data-pron="he" class="${pron === "he" ? "on" : ""}">he</button></div>` : ""}
+        <div class="meter" aria-hidden="true"><span style="width:${solvedIn(t) / t.slots.length * 100}%"></span></div></div>
+      <ol class="qs">${t.qs.map((q, qi) => qHTML(t, q, qi)).join("")}</ol>
+      <div class="tray" id="tray" aria-live="polite"></div>
+    </div></section>`;
+  tray();
+  $("#hint").textContent = done ? "Enter  interview    ← →  topics    Esc  all topics" : "1–4  choose    ← →  topics    Esc  all topics";
+  stats();
+}
+function tray(msg) {
+  const t = TOPICS[st.ti], el = $("#tray");
+  if (isDone(t)) {
+    el.className = "tray complete";
+    el.innerHTML = `<div><b>Topic complete.</b> Now it's time to talk.</div><button class="go" id="startInt">Start the interview<kbd>Enter</kbd></button>`;
+    return;
+  }
+  const p = t.slots[st.active], r = R(p.key);
+  const n = fill(p.slot.find(o => o.ok).t).split(" ").length;
+  el.className = "tray";
+  el.innerHTML = `<div class="tq">Question ${p.qi + 1}: choose the missing ${n > 1 ? "words" : "word"}</div>
+    <div class="opts">${p.order.map((oi, pos) => { const o = p.slot[oi], w = r.wrong.includes(oi);
+      return `<button class="opt${w ? " wrong" : ""}" data-opt="${oi}"${w ? " disabled" : ""}><span class="k">${"ABCD"[pos]}</span><span>${o.t ? esc(fill(o.t)) : "<i>no word</i>"}</span></button>`; }).join("")}</div>
+    <div class="fb">${msg || ""}</div>`;
+}
+function setActive(i) {
+  const t = TOPICS[st.ti];
+  st.active = i;
+  document.querySelectorAll(".slot.active").forEach(s => s.classList.remove("active"));
+  const s = document.querySelector(`.slot[data-slot="${i}"]`);
+  if (s) { s.classList.add("active"); s.scrollIntoView({ block:"nearest", behavior: reduced() ? "auto" : "smooth" }); }
+  document.querySelectorAll(".q").forEach(li => li.classList.toggle("cur", +li.dataset.q === t.slots[i].qi));
+  tray();
+}
+function shake(el) { if (!el) return; el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake"); }
+function progress(t) {
+  $(".meter span").style.width = solvedIn(t) / t.slots.length * 100 + "%";
+  const tab = $(".tab.on .tp"); if (tab) tab.textContent = isDone(t) ? "!" : solvedIn(t) + "/" + t.slots.length;
+}
+function choose(oi) {
+  const t = TOPICS[st.ti]; if (isDone(t)) return;
+  const p = t.slots[st.active], r = R(p.key);
+  if (r.done || r.wrong.includes(oi)) return;
+  const o = p.slot[oi]; r.tries++;
+  const slotEl = document.querySelector(`.slot[data-slot="${st.active}"]`);
+  const btn = document.querySelector(`.opt[data-opt="${oi}"]`);
+  const fb = $("#tray .fb");
+  if (o.ok) {
+    r.done = true; r.pick = oi; st.solved++;
+    if (r.tries === 1) { st.first++; st.streak++; } else st.streak = 0;
+    slotEl.outerHTML = slotHTML(t, p);
+    const ns = document.querySelector(`.slot[data-slot="${st.active}"]`); ns.classList.add("pop");
+    btn.classList.add("right");
+    document.querySelectorAll(".opt").forEach(b => b.disabled = true);
+    fb.innerHTML = `<b>${r.tries === 1 ? (STREAK[st.streak] || pick(YES)) : pick(AGAIN)}</b>`;
+    stats(); progress(t);
+    const tok = st.token;
+    setTimeout(() => {
+      if (tok !== st.token) return;
+      const nx = nextOpen(t, st.active);
+      if (nx < 0) complete(t); else setActive(nx);
+    }, 850);
+  } else {
+    r.wrong.push(oi); st.streak = 0;
+    shake(slotEl); shake(btn);
+    btn.classList.add("wrong"); btn.disabled = true;
+    fb.innerHTML = `<b>${pick(NOPE)}</b>${esc(fill(o.why))}`;
+  }
+}
+function complete(t) {
+  const bm = $(".bigmark");
+  bm.classList.add("flip");
+  setTimeout(() => { bm.textContent = "!"; }, 270);
+  setTimeout(() => bm.classList.remove("flip"), 600);
+  document.querySelectorAll(".q.cur").forEach(li => li.classList.remove("cur"));
+  const tab = $(".tab.on"); if (tab) tab.classList.add("complete");
+  burst(t.c);
+  tray();
+  $("#hint").textContent = "Enter  interview    ← →  topics    Esc  all topics";
+}
+function burst(color) {
+  if (reduced()) return;
+  const box = document.createElement("div"); box.className = "confetti";
+  const cols = [color, "#1C1B3A", color, "#FFFFFF", "#FFC21A"];
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement("i"), a = Math.random() * Math.PI * 2, d = 100 + Math.random() * 360;
+    s.style.cssText = `--x:${Math.cos(a) * d}px;--y:${Math.sin(a) * d - 140}px;--r:${Math.random() * 900 - 450}deg;background:${cols[i % cols.length]};width:${6 + Math.random() * 8}px;height:${9 + Math.random() * 12}px;animation-delay:${Math.random() * 90}ms;box-shadow:0 0 0 1px rgba(28,27,58,.12)`;
+    box.appendChild(s);
+  }
+  document.body.appendChild(box); setTimeout(() => box.remove(), 1800);
+}
+
+/* ============ interview ============ */
+let tsec = 180, tint = null;
+const fmt = s => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+function full(q) {
+  return q.parts.map(p => typeof p === "string" ? fill(p) : fill((R(p.key).done ? p.slot[R(p.key).pick] : p.slot.find(o => o.ok)).t)).join("").replace(/ '/g, "'");
+}
+function interview() {
+  const t = TOPICS[st.ti], ov = $("#interview");
+  stopTimer(); tsec = 180;
+  ov.style.cssText = vars(t);
+  ov.innerHTML = `<div class="ivin">
+    <div class="ivhead"><span class="te">${t.emoji}</span><div><h2>${esc(t.title)}</h2><p>Interview your partner. Ask for more information.</p></div>
+      <button class="x" id="ivClose" aria-label="Close interview">✕</button></div>
+    <ol class="ivqs">${t.qs.map((q, qi) => `<li style="--i:${qi}">${esc(full(q))}</li>`).join("")}</ol>
+    <div>
+      <div class="follow"><span class="fl">Follow up:</span>${t.follow.map(f => `<span class="chip">${esc(fill(f))}</span>`).join("")}<span class="chip">Tell me more about…</span></div>
+      <div class="ivctl">
+        <button class="go alt" id="rand">Pick a question<kbd>R</kbd></button>
+        <button class="go" id="ivNext">${st.ti < TOPICS.length - 1 ? "Next topic" : "All topics"}<kbd>→</kbd></button>
+        <div class="timer"><span id="clock">${fmt(tsec)}</span><button id="tgo">Start</button><button id="treset" aria-label="Reset timer">↺</button></div>
+      </div>
+    </div></div>`;
+  ov.hidden = false;
+  requestAnimationFrame(() => requestAnimationFrame(() => ov.classList.add("open")));
+  setTimeout(() => $("#ivClose").focus(), 50);
+}
+function closeIv() { stopTimer(); const ov = $("#interview"); ov.classList.remove("open"); ov.hidden = true; }
+function nextFromIv() { closeIv(); if (st.ti < TOPICS.length - 1) openTopic(st.ti + 1); else home(); }
+let spinning = false;
+function randomQ() {
+  if (spinning) return;
+  const items = [...document.querySelectorAll(".ivqs li")]; if (!items.length) return;
+  items.forEach(li => li.classList.remove("chosen", "hl"));
+  const target = Math.floor(Math.random() * items.length);
+  if (reduced()) { items[target].classList.add("chosen"); return; }
+  const steps = items.length * 2 + target + 1; let n = 0; spinning = true;
+  const tick = () => {
+    items.forEach(li => li.classList.remove("hl"));
+    const cur = n % items.length;
+    if (n >= steps - 1) { items[cur].classList.add("chosen"); spinning = false; return; }
+    items[cur].classList.add("hl"); n++;
+    setTimeout(tick, 55 + n * n * 1.6);
+  };
+  tick();
+}
+function stopTimer() { clearInterval(tint); tint = null; const b = $("#tgo"); if (b) b.textContent = "Start"; }
+function toggleTimer() {
+  const b = $("#tgo"); if (!b) return;
+  if (tint) { stopTimer(); return; }
+  if (tsec <= 0) tsec = 180;
+  b.textContent = "Pause";
+  $(".timer").classList.remove("ding");
+  tint = setInterval(() => {
+    tsec--; $("#clock").textContent = fmt(tsec);
+    if (tsec <= 0) { stopTimer(); $(".timer").classList.add("ding"); $("#tgo").textContent = "Again"; }
+  }, 1000);
+}
+$("#interview").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.id === "ivClose") closeIv();
+  else if (b.id === "rand") randomQ();
+  else if (b.id === "ivNext") nextFromIv();
+  else if (b.id === "tgo") toggleTimer();
+  else if (b.id === "treset") { stopTimer(); tsec = 180; $("#clock").textContent = fmt(tsec); $(".timer").classList.remove("ding"); }
+});
+
+/* ============ events ============ */
+$("#homeBtn").addEventListener("click", () => { closeIv(); home(); });
+$("#view").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.topic !== undefined) return openTopic(+b.dataset.topic);
+  if (b.dataset.slot !== undefined) { if (!b.classList.contains("done")) { st.token++; setActive(+b.dataset.slot); } return; }
+  if (b.dataset.opt !== undefined) return choose(+b.dataset.opt);
+  if (b.dataset.note !== undefined) {
+    const note = b.closest(".q").querySelector(".note"), open = note.hidden;
+    note.hidden = !open; b.setAttribute("aria-expanded", String(open)); return;
+  }
+  if (b.dataset.pron) { pron = b.dataset.pron; openTopic(st.ti, true); return; }
+  if (b.id === "startInt") return interview();
+  if (b.id === "reset") {
+    if (confirm("Clear all answers and start again?")) {
+      st.res = {}; st.first = 0; st.solved = 0; st.streak = 0; prepare(); home();
+    }
+  }
+});
+document.addEventListener("keydown", e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const k = e.key, onBtn = e.target.closest && e.target.closest("button");
+  if (!$("#interview").hidden) {
+    if (k === "Escape") closeIv();
+    else if (k === "r" || k === "R") randomQ();
+    else if (k === "t" || k === "T") toggleTimer();
+    else if (k === "ArrowRight") nextFromIv();
+    return;
+  }
+  if (st.view === "home") {
+    if (/^[1-8]$/.test(k)) openTopic(+k - 1);
+    else if (k === "Enter" && !onBtn) { e.preventDefault(); openTopic(0); }
+    return;
+  }
+  const t = TOPICS[st.ti], map = { "1":0, "2":1, "3":2, "4":3, a:0, b:1, c:2, d:3 }, kk = k.toLowerCase();
+  if (kk in map) {
+    if (!isDone(t)) { const p = t.slots[st.active], oi = p.order[map[kk]]; if (oi !== undefined) choose(oi); }
+    e.preventDefault();
+  }
+  else if (k === "ArrowRight") openTopic((st.ti + 1) % TOPICS.length);
+  else if (k === "ArrowLeft") openTopic((st.ti + TOPICS.length - 1) % TOPICS.length);
+  else if (k === "Escape") home();
+  else if (k === "Enter" && isDone(t) && !onBtn) { e.preventDefault(); interview(); }
+});
+
+home();
+</script>
+</body>
+</html>
