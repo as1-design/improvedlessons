@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SHIFT — what do they do all day?</title>
+<meta name="description" content="A two-round vocabulary game about jobs, for B2 learners of English.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --ink:#1B1526;
+  --ink-soft:#4A4056;
+  --ink-faint:#8A7F97;
+  --paper:#FFF6EC;
+  --paper-2:#FFFCF8;
+  --line:#1B1526;
+
+  --coral:#FF5A3C;
+  --teal:#0E9C92;
+  --amber:#FFC12E;
+  --violet:#7B4BE0;
+  --pink:#FF3D8B;
+  --blue:#2F6BFF;
+
+  --r-sm:10px; --r-md:18px; --r-lg:28px; --r-xl:40px;
+  --s1:4px; --s2:8px; --s3:12px; --s4:20px; --s5:32px; --s6:52px;
+
+  --ease-out:cubic-bezier(.25,.46,.45,.94);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --shadow-mid:0 6px 0 var(--line);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Outfit',ui-sans-serif,'Helvetica Neue',sans-serif;
+  background:var(--paper);color:var(--ink);min-height:100vh;line-height:1.5;
+  overflow-x:hidden;position:relative;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(var(--ink) 1px, transparent 1px);
+  background-size:22px 22px;opacity:.055;
+}
+.blob{position:fixed;z-index:0;border-radius:50%;filter:blur(60px);pointer-events:none}
+.blob-a{width:48vw;height:48vw;max-width:560px;max-height:560px;top:-16vw;right:-14vw;background:rgba(255,193,46,.55);animation:drift 14s ease-in-out infinite}
+.blob-b{width:40vw;height:40vw;max-width:460px;max-height:460px;bottom:-16vw;left:-12vw;background:rgba(123,75,224,.3);animation:drift 18s ease-in-out infinite reverse}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(-24px,26px)}}
+
+.wrap{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:var(--s4) var(--s4) 140px}
+
+/* ============ TYPE ============ */
+h1,h2,h3{font-family:'Fraunces','Georgia',serif;font-weight:900;line-height:1.02;letter-spacing:-.02em}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
+
+/* ============ MASTHEAD ============ */
+header.mast{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s4);padding:var(--s4) 0 var(--s5);flex-wrap:wrap}
+.logo{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.logo .wordmark{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(2.4rem,9vw,4rem);letter-spacing:-.045em;white-space:nowrap}
+.logo .wordmark span{color:var(--coral)}
+.logo .tag{font-size:.78rem;font-weight:600;color:var(--ink-soft);max-width:190px;line-height:1.25}
+.steps{display:flex;gap:6px}
+.step{width:34px;height:8px;border-radius:99px;background:rgba(27,21,38,.14);transition:.4s var(--ease-spring)}
+.step.on{background:var(--coral);width:52px}
+.step.done{background:var(--ink)}
+
+/* ============ CARDS ============ */
+.card{background:var(--paper-2);border:3px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-mid);padding:var(--s5);position:relative}
+.card.tint-coral{box-shadow:0 8px 0 var(--coral),0 18px 36px rgba(255,90,60,.2)}
+.card.tint-teal{box-shadow:0 8px 0 var(--teal),0 18px 36px rgba(14,156,146,.2)}
+.card.tint-violet{box-shadow:0 8px 0 var(--violet),0 18px 36px rgba(123,75,224,.2)}
+
+/* ============ BUTTONS ============ */
+.btn{
+  font-family:'Outfit',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;
+  border:3px solid var(--line);border-radius:99px;padding:13px 24px;background:var(--paper-2);color:var(--ink);
+  box-shadow:0 4px 0 var(--line);transition:transform .15s var(--ease-spring),box-shadow .15s var(--ease-out),background .2s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--line)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+.btn-primary{background:var(--coral);color:#fff}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-ghost{box-shadow:none;border-color:rgba(27,21,38,.25);background:transparent;font-weight:500}
+.btn-ghost:hover{box-shadow:none;border-color:var(--ink);background:rgba(27,21,38,.04)}
+.btn-sm{font-size:.84rem;padding:9px 16px;border-width:2px;box-shadow:0 3px 0 var(--line)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.btn-row{display:flex;gap:var(--s3);flex-wrap:wrap}
+
+/* ============ ANIMATION ============ */
+@keyframes enterUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes enterSpring{from{opacity:0;transform:translateY(30px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.e{animation:enterUp .5s var(--ease-out) both}
+.es{animation:enterSpring .55s var(--ease-spring) both}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.42s}
+.shake{animation:shake .4s var(--ease-out)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ============ SETUP ============ */
+.hero-num{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(7rem,26vw,15rem);line-height:.78;color:var(--ink);opacity:.07;position:absolute;right:-10px;top:-34px;pointer-events:none;letter-spacing:-.06em}
+.lede{font-size:clamp(1.5rem,4.6vw,2.3rem);font-family:'Fraunces',serif;font-weight:600;line-height:1.14;max-width:24ch;margin-bottom:var(--s4)}
+.lede em{font-style:normal;background:linear-gradient(transparent 62%, var(--amber) 62%)}
+.sub{color:var(--ink-soft);max-width:54ch;margin-bottom:var(--s5);font-size:1.02rem}
+.opt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:var(--s3);margin:var(--s3) 0 var(--s5)}
+.opt{border:3px solid var(--line);border-radius:var(--r-md);padding:16px;background:var(--paper-2);cursor:pointer;text-align:center;transition:.2s var(--ease-spring);box-shadow:0 4px 0 var(--line)}
+.opt:hover{transform:translateY(-3px)}
+.opt.sel{background:var(--ink);color:var(--paper)}
+.opt b{display:block;font-family:'Fraunces',serif;font-size:1.5rem}
+.opt small{font-size:.74rem;opacity:.72}
+
+/* ============ ROUND 1 ============ */
+.bar{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);margin-bottom:var(--s4);flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:7px;border:2px solid var(--line);border-radius:99px;padding:5px 14px;font-size:.78rem;font-weight:600;background:var(--paper-2)}
+.pill.score{background:var(--ink);color:var(--paper);font-size:.9rem;padding:7px 18px}
+.sector{display:inline-block;border-radius:99px;padding:5px 13px;font-size:.68rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#fff}
+
+.clue-stack{display:grid;gap:var(--s3);margin:var(--s4) 0 var(--s5)}
+.clue{
+  border:3px solid var(--line);border-radius:var(--r-md);padding:20px 22px;background:var(--paper-2);
+  font-family:'Fraunces',serif;font-size:clamp(1.1rem,3.4vw,1.42rem);font-weight:600;line-height:1.3;
+  position:relative;animation:enterSpring .5s var(--ease-spring) both;
+}
+.clue::before{content:attr(data-n);position:absolute;top:-14px;left:18px;background:var(--ink);color:var(--paper);width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:'Outfit';font-size:.76rem;font-weight:700}
+.clue.fresh{border-color:var(--coral);box-shadow:0 6px 0 var(--coral)}
+.quote-mark{font-family:'Fraunces',serif;font-size:7rem;line-height:0;color:var(--coral);opacity:.9;position:absolute;right:16px;bottom:-6px;pointer-events:none}
+
+.guess-row{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:stretch}
+.guess-input{flex:1 1 150px;font-family:'Outfit';font-size:1.05rem;font-weight:500;padding:14px 20px;border:3px solid var(--line);border-radius:99px;background:var(--paper-2);color:var(--ink);min-width:0}
+.guess-input:focus{outline:none;border-color:var(--coral);box-shadow:0 0 0 4px rgba(255,90,60,.18)}
+.guess-input::placeholder{color:var(--ink-faint);font-weight:400}
+
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:var(--s4)}
+.choice{border:3px solid var(--line);border-radius:var(--r-md);padding:14px 16px;background:var(--paper-2);cursor:pointer;font-weight:600;font-size:.98rem;text-align:left;box-shadow:0 4px 0 var(--line);transition:.15s var(--ease-spring)}
+.choice:hover{transform:translateY(-3px)}
+.choice:active{transform:translateY(2px);box-shadow:0 2px 0 var(--line)}
+.choice.wrong{background:rgba(255,90,60,.14);opacity:.5}
+
+.feedback{font-weight:600;margin-top:var(--s3);font-size:.97rem;min-height:1.4em}
+.feedback.bad{color:var(--coral)}
+
+.reveal{display:grid;gap:var(--s4)}
+.reveal-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.reveal-job{font-family:'Fraunces',serif;font-size:clamp(2rem,7vw,3.3rem);font-weight:900;letter-spacing:-.03em;line-height:1}
+.ipa{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.95rem;color:var(--teal);font-weight:600;overflow-wrap:anywhere}
+.def-row{display:grid;gap:var(--s3)}
+.fact-box{border-left:6px solid var(--amber);padding:12px 0 12px 16px;background:rgba(255,193,46,.16);border-radius:0 var(--r-sm) var(--r-sm) 0}
+.fact-box .eyebrow{color:var(--ink-soft);margin-bottom:3px}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--s3)}
+.meta{border:2px dashed rgba(27,21,38,.3);border-radius:var(--r-md);padding:14px 16px}
+.meta .eyebrow{margin-bottom:5px}
+.adj-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.adj-chip{border:2px solid var(--line);border-radius:99px;padding:5px 13px;font-size:.84rem;font-weight:600;background:var(--amber);cursor:pointer;transition:.15s var(--ease-spring)}
+.adj-chip:hover{transform:translateY(-2px) scale(1.04)}
+
+/* ============ ROUND 2 ============ */
+.axis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:var(--s3)}
+.axis{border:3px solid var(--line);border-radius:var(--r-md);padding:20px;cursor:pointer;background:var(--paper-2);box-shadow:0 5px 0 var(--line);transition:.2s var(--ease-spring);text-align:left;position:relative;overflow:hidden}
+.axis:hover{transform:translateY(-4px);box-shadow:0 9px 0 var(--line)}
+.axis b{font-family:'Fraunces',serif;font-size:1.22rem;font-weight:900;display:block;line-height:1.1;margin-bottom:5px}
+.axis small{color:var(--ink-soft);font-size:.82rem;line-height:1.35;display:block}
+.axis .glyph{position:absolute;right:-6px;top:-18px;font-size:4.2rem;opacity:.18;pointer-events:none}
+
+.rank-wrap{display:grid;grid-template-columns:1fr;gap:var(--s4)}
+@media(min-width:720px){.rank-wrap{grid-template-columns:1fr 1fr}}
+.slot-list{display:grid;gap:9px}
+.slot{display:flex;align-items:center;gap:12px;border:3px solid var(--line);border-radius:var(--r-md);padding:11px 14px;background:var(--paper-2);min-height:58px;transition:.2s var(--ease-spring)}
+.slot.empty{border-style:dashed;border-color:rgba(27,21,38,.3);background:transparent}
+.slot .pos{flex:0 0 32px;height:32px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:900;font-size:.95rem}
+.slot.filled{cursor:pointer;box-shadow:0 4px 0 var(--line)}
+.slot.filled:hover{transform:translateX(3px)}
+.slot .name{font-weight:600}
+.slot .x{margin-left:auto;font-size:.78rem;color:var(--ink-faint)}
+.pool{display:flex;flex-wrap:wrap;gap:9px;align-content:flex-start}
+.pool-item{border:3px solid var(--line);border-radius:99px;padding:10px 17px;font-weight:600;background:var(--paper-2);cursor:pointer;box-shadow:0 4px 0 var(--line);transition:.15s var(--ease-spring);font-size:.94rem}
+.pool-item:hover{transform:translateY(-3px)}
+.pool-item:active{transform:translateY(2px);box-shadow:0 2px 0 var(--line)}
+
+.counter{border:3px solid var(--line);border-radius:var(--r-md);padding:20px;background:var(--ink);color:var(--paper);position:relative}
+.counter .eyebrow{color:var(--amber)}
+.counter p{font-family:'Fraunces',serif;font-size:1.1rem;line-height:1.35;margin-top:6px}
+.counter .who{font-size:.8rem;color:rgba(255,246,236,.6);margin-top:10px;font-family:'Outfit'}
+
+/* ============ WORD BANK ============ */
+.bank-btn{
+  position:fixed;right:18px;bottom:18px;z-index:50;border:3px solid var(--line);border-radius:99px;
+  background:var(--teal);color:#fff;font-weight:700;font-size:.98rem;padding:15px 24px;cursor:pointer;
+  box-shadow:0 6px 0 var(--line),0 16px 34px rgba(14,156,146,.35);
+  display:flex;align-items:center;gap:9px;transition:.2s var(--ease-spring);font-family:'Outfit';
+}
+.bank-btn:hover{transform:translateY(-3px)}
+.bank-btn:active{transform:translateY(3px);box-shadow:0 2px 0 var(--line)}
+.bank-btn .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);animation:floaty 3s ease-in-out infinite}
+
+.sheet{position:fixed;inset:0;z-index:60;display:none}
+.sheet.open{display:block}
+.sheet-bg{position:absolute;inset:0;background:rgba(27,21,38,.5);backdrop-filter:blur(4px)}
+.sheet-panel{position:absolute;left:0;right:0;bottom:0;max-height:88vh;background:var(--paper);border-top:4px solid var(--line);border-radius:var(--r-xl) var(--r-xl) 0 0;display:flex;flex-direction:column;animation:sheetUp .36s var(--ease-spring) both}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.sheet-head{padding:18px var(--s4) 10px;border-bottom:3px solid var(--line);flex:0 0 auto}
+.sheet-grab{width:46px;height:5px;border-radius:99px;background:rgba(27,21,38,.25);margin:0 auto 12px}
+.tabs{display:flex;gap:7px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border:2px solid var(--line);border-radius:99px;padding:7px 15px;font-size:.84rem;font-weight:600;background:transparent;cursor:pointer;white-space:nowrap;font-family:'Outfit';color:var(--ink)}
+.tab.on{background:var(--ink);color:var(--paper)}
+.sheet-body{overflow-y:auto;padding:var(--s4) var(--s4) var(--s6);-webkit-overflow-scrolling:touch}
+.bank-search{width:100%;border:3px solid var(--line);border-radius:99px;padding:11px 18px;font-family:'Outfit';font-size:.96rem;background:var(--paper-2);margin-bottom:var(--s4);color:var(--ink)}
+.bank-search:focus{outline:none;border-color:var(--teal)}
+
+.entry{border-bottom:2px dotted rgba(27,21,38,.2);padding:13px 0;display:grid;gap:3px}
+.entry-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.entry-top b{font-family:'Fraunces',serif;font-size:1.14rem;font-weight:900}
+.entry-top .ipa{font-size:.84rem}
+.entry-top .lvl{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:2px solid var(--line);border-radius:99px;padding:2px 8px}
+.entry-top .lvl.core{background:var(--amber)}
+.entry-top .lvl.stretch{background:var(--pink);color:#fff}
+.entry .mean{font-size:.95rem;color:var(--ink-soft)}
+.entry .eg{font-size:.9rem;font-style:italic;color:var(--ink);opacity:.85}
+.entry .eg b{font-style:normal;background:linear-gradient(transparent 60%,rgba(14,156,146,.3) 60%)}
+
+.frames{display:grid;gap:12px}
+.frame-card{border:3px solid var(--line);border-radius:var(--r-md);padding:15px 17px;background:var(--paper-2)}
+.frame-card .pat{font-family:'Fraunces',serif;font-weight:900;font-size:1.02rem;margin-bottom:4px}
+.frame-card .ex{font-size:.92rem;color:var(--ink-soft)}
+.frame-card.warn{background:rgba(255,90,60,.1);border-color:var(--coral)}
+.frame-card.warn .pat{color:var(--coral)}
+
+table.uk{width:100%;border-collapse:collapse;font-size:.92rem}
+table.uk th{text-align:left;font-family:'Outfit';font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);padding-bottom:8px;border-bottom:3px solid var(--line)}
+table.uk td{padding:10px 8px 10px 0;border-bottom:1px dotted rgba(27,21,38,.25);vertical-align:top}
+table.uk td:first-child{font-weight:600}
+table.uk td:last-child{color:var(--ink-soft)}
+
+.credit{text-align:center;font-size:.78rem;color:var(--ink-faint);padding:var(--s6) 0 var(--s4);letter-spacing:.04em}
+.credit b{color:var(--ink-soft);font-weight:600}
+
+.hidden{display:none!important}
+.mt4{margin-top:var(--s4)}.mb3{margin-bottom:var(--s3)}.mb4{margin-bottom:var(--s4)}
+.flex-between{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="blob blob-a"></div>
+<div class="blob blob-b"></div>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="logo">
+      <div class="wordmark">SHIF<span>T</span></div>
+      <div class="tag">What do they actually do all day?</div>
+    </div>
+    <div class="steps" id="steps">
+      <div class="step on"></div><div class="step"></div>
+    </div>
+  </header>
+
+  <!-- ============ SETUP ============ -->
+  <section id="screen-setup">
+    <div class="card tint-coral e" style="overflow:hidden">
+      <div class="hero-num">01</div>
+      <div class="eyebrow mb3">Two rounds · work in pairs</div>
+      <h2 class="lede">Nine jobs were on the screen. <em>Twenty</em> are in here.</h2>
+      <p class="sub">Everything you need is in the Word Bank at the bottom of the screen. The adjectives, the pronunciation and the grammar are all in there.</p>
+      <div class="eyebrow">How many jobs would you like in round 1?</div>
+      <div class="opt-grid" id="lenOpts">
+        <div class="opt" data-n="6"><b>6</b><small>a short game</small></div>
+        <div class="opt sel" data-n="10"><b>10</b><small>the usual game</small></div>
+        <div class="opt" data-n="20"><b>20</b><small>the whole deck</small></div>
+      </div>
+      <button class="btn btn-primary" id="startBtn" style="font-size:1.1rem;padding:16px 34px">Start round 1 →</button>
+    </div>
+  </section>
+
+  <!-- ============ ROUND 1 ============ -->
+  <section id="screen-r1" class="hidden">
+    <div class="bar">
+      <span class="pill" id="r1Progress">Job 1 of 10</span>
+      <div class="pill score">Score <b id="r1Score" style="margin-left:6px">0</b></div>
+    </div>
+
+    <div class="card e" id="playCard" style="overflow:hidden">
+      <div class="flex-between mb4">
+        <span class="sector" id="sectorTag">Health</span>
+        <span class="pill" id="worthPill">Worth 10</span>
+      </div>
+      <div class="clue-stack" id="clueStack"></div>
+      <div class="quote-mark">&rdquo;</div>
+
+      <div class="guess-row">
+        <input class="guess-input" id="guessInput" placeholder="It is a…" autocomplete="off" autocorrect="off" spellcheck="false">
+        <button class="btn btn-ink" id="guessBtn">Guess</button>
+      </div>
+      <div class="feedback" id="fb"></div>
+
+      <div class="btn-row mt4">
+        <button class="btn btn-ghost btn-sm" id="moreClue">Give me another clue <b style="color:var(--coral)">−2</b></button>
+        <button class="btn btn-ghost btn-sm" id="showOpts">Show me four options <b style="color:var(--coral)">−2</b></button>
+      </div>
+      <div class="choices hidden" id="choices"></div>
+    </div>
+
+    <div class="card tint-teal es hidden" id="revealCard"></div>
+  </section>
+
+  <!-- ============ ROUND 2 ============ -->
+  <section id="screen-r2" class="hidden">
+    <div id="r2Pick">
+      <div class="card e" style="overflow:hidden">
+        <div class="hero-num">02</div>
+        <div class="eyebrow mb3">Round two</div>
+        <h2 class="lede">Now you have to <em>decide</em>.</h2>
+        <p class="sub">Choose one question and put six jobs in order. When you have finished, you will see the argument against your answer.</p>
+      </div>
+      <div class="axis-grid mt4" id="axisGrid"></div>
+    </div>
+
+    <div id="r2Rank" class="hidden">
+      <div class="card e">
+        <div class="eyebrow mb3">Number 1 is the most. Number 6 is the least.</div>
+        <h3 id="axisTitle" style="font-size:clamp(1.4rem,5vw,2rem);margin-bottom:6px"></h3>
+        <p class="sub" id="axisHint" style="margin-bottom:var(--s4)"></p>
+        <div class="rank-wrap">
+          <div class="slot-list" id="slots"></div>
+          <div>
+            <div class="eyebrow mb3">Tap a job to place it</div>
+            <div class="pool" id="pool"></div>
+          </div>
+        </div>
+        <div class="btn-row mt4">
+          <button class="btn btn-primary hidden" id="submitRank">Show me the other side →</button>
+        </div>
+      </div>
+      <div id="r2Result" class="hidden"></div>
+    </div>
+  </section>
+
+  <!-- ============ DONE ============ -->
+  <section id="screen-done" class="hidden"></section>
+
+  <div class="credit"><b>Class of Coffee</b> – with AI assistance</div>
+</div>
+
+<!-- ============ WORD BANK ============ -->
+<button class="bank-btn" id="bankBtn"><span class="dot"></span> Word Bank</button>
+<div class="sheet" id="sheet">
+  <div class="sheet-bg" id="sheetBg"></div>
+  <div class="sheet-panel">
+    <div class="sheet-head">
+      <div class="sheet-grab"></div>
+      <div class="tabs" id="tabs">
+        <button class="tab on" data-tab="adj">Adjectives</button>
+        <button class="tab" data-tab="frames">Describing a job</button>
+        <button class="tab" data-tab="argue">Agreeing and disagreeing</button>
+        <button class="tab" data-tab="ukus">British and American</button>
+        <button class="tab" data-tab="jobs">Jobs you have met</button>
+      </div>
+    </div>
+    <div class="sheet-body" id="sheetBody"></div>
+  </div>
+</div>
+
+<script>
+/* =======================================================================
+   SHIFT — jobs vocabulary game
+   Class of Coffee – with AI assistance
+   ======================================================================= */
+
+const SECTORS = {
+  health:{label:'Health', c:'var(--coral)'},
+  law:   {label:'Law and order', c:'var(--violet)'},
+  people:{label:'Working with people', c:'var(--teal)'},
+  hands: {label:'Practical work', c:'var(--amber)'},
+  media: {label:'Media and art', c:'var(--pink)'},
+  move:  {label:'On the move', c:'var(--blue)'}
+};
+
+const JOBS = [
+{ id:'surgeon', job:'surgeon', alts:['a surgeon','surgen','sergeon'], us:null, ipa:'/ˈsɜːdʒən/', sector:'health',
+  clues:[
+    "Most of the people I work on have never seen my face.",
+    "I wash my hands for five minutes before I start work.",
+    "Another doctor sends the patient to sleep before I begin.",
+    "I operate on people in a hospital."],
+  def:'a doctor who operates on people',
+  involves:'operating on patients, often for many hours at a time',
+  related:'anaesthetist /əˈniːsθətɪst/, theatre nurse',
+  adj:['meticulous','high-pressure','rewarding'],
+  fact:'In Britain, surgeons work in an operating theatre. In the United States, the same room is called an operating room.',
+  counter:'Many surgeons do the same five operations every week for thirty years. Is that varied work, or is it a production line in a nicer room?' },
+
+{ id:'coach', job:'sports coach', alts:['coach','a coach','trainer','football manager','manager'], us:'coach, and in British football the manager', ipa:'/ˈspɔːts kəʊtʃ/', sector:'people',
+  clues:[
+    "I am at every match, but I never score a goal.",
+    "I spend hours watching videos of games that have already finished.",
+    "If the team loses too many matches, I am the person who loses their job.",
+    "I train professional players and decide the tactics."],
+  def:'a person who trains a sports team or an individual athlete',
+  involves:'training the players, planning the tactics and choosing the team',
+  related:'professional players, physiotherapist, scout',
+  adj:['high-pressure','varied','precarious'],
+  fact:'In British football, the person who chooses the team is called the manager. In American sport, the same person is the head coach.',
+  counter:'You are judged on results that you do not control. Eleven other people decide whether you keep your job.' },
+
+{ id:'socialworker', job:'social worker', alts:['social worker','a social worker','socialworker'], us:null, ipa:'/ˈsəʊʃəl ˈwɜːkə/', sector:'people',
+  clues:[
+    "I knock on doors that people do not want to open.",
+    "I write reports about the worst weeks of other people’s lives.",
+    "I have to decide whether a child is safe at home.",
+    "I am paid to help families who have serious problems."],
+  def:'a person whose job is to help families and individuals with serious problems',
+  involves:'visiting families, deciding what help they need and writing reports',
+  related:'family lawyer, support worker, housing officer',
+  adj:['emotionally draining','thankless','fulfilling'],
+  fact:'Be careful with the adjective. A social worker works with problems in society. A sociable person simply enjoys the company of other people.',
+  counter:'Nobody writes a newspaper article about the child who was fine. You only appear in the news when something goes wrong.' },
+
+{ id:'judge', job:'judge', alts:['a judge','the judge','jugde'], us:null, ipa:'/dʒʌdʒ/', sector:'law',
+  clues:[
+    "Everyone in the room stands up when I come in.",
+    "I do not argue with anyone. Other people argue in front of me.",
+    "I decide what will happen to someone for the next fifteen years.",
+    "I decide how criminals should be punished."],
+  def:'the person in a court who controls the trial and decides the punishment',
+  involves:'listening to both sides, applying the law and deciding the sentence',
+  related:'barrister, solicitor, court clerk',
+  adj:['prestigious','solitary','demanding'],
+  fact:'In England there are two kinds of lawyer. A barrister argues the case in court and a solicitor prepares it. In the United States, both of them are called attorneys or lawyers.',
+  counter:'You sit alone, you cannot discuss your work with anybody, and half of the people in the room resent you.' },
+
+{ id:'midwife', job:'midwife', alts:['a midwife','midwive','mid wife','midwives'], us:null, ipa:'/ˈmɪdwaɪf/', sector:'health',
+  clues:[
+    "I meet a lot of new people, and none of them can speak yet.",
+    "People shout at me and then hug me ten minutes later.",
+    "There are two patients in the room, and I look after both of them.",
+    "I help women to give birth."],
+  def:'a nurse who is trained to look after women during pregnancy and birth',
+  involves:'looking after women before, during and after the birth',
+  related:'obstetrician, health visitor, neonatal nurse',
+  adj:['exhilarating','unpredictable','emotionally draining'],
+  fact:'The word comes from Old English. Mid meant "with" and wif meant "woman", so a midwife is a person who is with the woman. It has nothing to do with being a wife.',
+  counter:'It is the most rewarding job in the world on the days when it goes well. Nobody talks very much about the other days.' },
+
+{ id:'detective', job:'private detective', alts:['private detective','detective','private investigator','investigator','pi','a private detective'], us:'private investigator, or PI', ipa:'/ˌpraɪvət dɪˈtektɪv/', sector:'law',
+  clues:[
+    "I have eleven coats and not one of them is memorable.",
+    "People pay me to sit in a car for nine hours without being noticed.",
+    "Most of my clients want proof of something they already believe.",
+    "I am not a police officer, but people pay me to follow someone."],
+  def:'a person who is paid by private clients to find information about somebody',
+  involves:'watching people, searching for information and reporting back to the client',
+  related:'lawyer, insurance investigator, security consultant',
+  adj:['tedious','solitary','unpredictable'],
+  fact:'In American English this job is usually called a private investigator, which is often shortened to PI.',
+  counter:'You spend nine hours in a cold car with a camera and a flask of coffee. There is very little glamour in that.' },
+
+{ id:'influencer', job:'influencer', alts:['influencer','an influencer','youtuber','content creator','blogger'], us:null, ipa:'/ˈɪnfluənsə/', sector:'media',
+  clues:[
+    "This job did not exist when my parents were my age.",
+    "I have filmed the same ten seconds forty times this morning.",
+    "The light in my bathroom is better than the light in my kitchen.",
+    "Companies pay me to recommend their products online."],
+  def:'a person who is paid to recommend products to their followers on social media',
+  involves:'filming, editing and making agreements with companies',
+  related:'brand manager, photographer, talent agent',
+  adj:['precarious','relentless','lucrative'],
+  fact:'Be careful with the verb and the noun. You influence a person, but you have an influence on them.',
+  counter:'There is no holiday pay and no sick pay, and a change to the algorithm can end your income in a single morning.' },
+
+{ id:'factory', job:'factory worker', alts:['factory worker','a factory worker','assembly line worker','production worker','line worker'], us:null, ipa:'/ˈfæktəri ˌwɜːkə/', sector:'hands',
+  clues:[
+    "I know exactly what I will be doing at twenty to eleven tomorrow.",
+    "My hands do the work without me. My mind is somewhere else.",
+    "If I stop, forty people behind me stop as well.",
+    "I do the same task again and again on a production line."],
+  def:'a person who works in a factory, usually on a production line',
+  involves:'repeating the same task while the products move past',
+  related:'shift supervisor, quality controller, forklift driver',
+  adj:['monotonous','physically demanding','secure'],
+  fact:'The line that the products travel along is called the production line, or the assembly line. The people who work on it are often called line workers.',
+  counter:'The work is monotonous, but you finish at five and nobody telephones you at midnight. Who really has the better life?' },
+
+{ id:'conductor', job:'conductor', alts:['conductor','a conductor','orchestra conductor'], us:null, ipa:'/kənˈdʌktə/', sector:'media',
+  clues:[
+    "I am the only person on the stage who makes no sound.",
+    "I spend the whole concert with my back to the audience.",
+    "Ninety people are watching my hands.",
+    "I stand in front of an orchestra and direct the musicians."],
+  def:'the person who stands in front of an orchestra and directs the musicians',
+  involves:'studying the music, rehearsing the orchestra and directing the concert',
+  related:'professional musicians, soloist, orchestra manager',
+  adj:['prestigious','demanding','exhilarating'],
+  fact:'In British English, a bus conductor is the person who sells the tickets on a bus. It is the same word for a completely different job.',
+  counter:'You make no sound at all. Many musicians say the orchestra could manage without you, until something goes wrong.' },
+
+{ id:'paramedic', job:'paramedic', alts:['paramedic','a paramedic','emt','ambulance driver'], us:'paramedic, or EMT', ipa:'/ˌpærəˈmedɪk/', sector:'health',
+  clues:[
+    "I have eaten a lot of cold dinners.",
+    "I make decisions in forty seconds that a hospital would take an hour to make.",
+    "My workplace has a blue light on the roof.",
+    "I treat patients before they arrive at hospital."],
+  def:'a person who is trained to give emergency medical treatment outside a hospital',
+  involves:'answering emergency calls, treating patients and taking them to hospital',
+  related:'emergency call handler, A&E nurse, air ambulance crew',
+  adj:['high-pressure','unpredictable','rewarding'],
+  fact:'In Britain the emergency department of a hospital is called A&E, which stands for accident and emergency. In the United States it is called the ER, or emergency room.',
+  counter:'You save a life, then you fill in a form about it, and then you do it again after four hours of sleep.' },
+
+{ id:'atc', job:'air traffic controller', alts:['air traffic controller','air traffic control','atc','controller'], us:null, ipa:'/ˈeə ˌtræfɪk kənˈtrəʊlə/', sector:'move',
+  clues:[
+    "I take a lot of short breaks, because being tired is dangerous in my job.",
+    "I have never met any of the people whose lives depend on me.",
+    "I keep thirty vehicles apart using only my voice.",
+    "I tell pilots when they can take off and land."],
+  def:'a person who tells pilots where and when to fly, from a control tower',
+  involves:'watching aircraft on a radar screen and giving pilots instructions by radio',
+  related:'pilot, ground crew, airport operations manager',
+  adj:['high-pressure','meticulous','well-paid'],
+  fact:'Pilots and controllers all over the world communicate in English, whatever their own first language is.',
+  counter:'The pay is good and the breaks are generous, but one bad minute can become a disaster.' },
+
+{ id:'estateagent', job:'estate agent', alts:['estate agent','an estate agent','realtor','real estate agent','property agent'], us:'real estate agent, or realtor', ipa:'/ɪˈsteɪt ˌeɪdʒənt/', sector:'people',
+  clues:[
+    "I say ‘cosy’ when I mean ‘small’.",
+    "I earn nothing unless other people sign a contract.",
+    "I have the keys to forty homes that I will never live in.",
+    "I sell and rent houses for other people."],
+  def:'a person whose job is to sell and rent houses for other people',
+  involves:'valuing houses, showing people round them and negotiating the price',
+  related:'surveyor, mortgage adviser, conveyancing solicitor',
+  adj:['cut-throat','sociable','precarious'],
+  fact:'Americans often say realtor, but Realtor is a registered trademark and only members of the National Association of Realtors may use it. Real estate agent is the safe general term.',
+  counter:'People enjoy complaining about estate agents, but they work at weekends and earn nothing if the sale fails.' },
+
+{ id:'funeral', job:'funeral director', alts:['funeral director','undertaker','mortician','a funeral director'], us:'mortician, or funeral director', ipa:'/ˈfjuːnərəl dəˈrektə/', sector:'people',
+  clues:[
+    "I am very good at knowing when not to speak.",
+    "People think my job is strange, but somebody has to stay calm that day.",
+    "I organise everything for a family during a terrible week.",
+    "I arrange funerals."],
+  def:'a person whose job is to organise funerals',
+  involves:'arranging the ceremony, dealing with the paperwork and looking after the family',
+  related:'celebrant, florist, crematorium staff',
+  adj:['meticulous','emotionally draining','rewarding'],
+  fact:'In British English this person is called a funeral director or an undertaker. In American English they are usually called a mortician.',
+  counter:'It sounds depressing. It is also the one job where doing it well really helps people on the worst day of their lives.' },
+
+{ id:'interpreter', job:'interpreter', alts:['interpreter','an interpreter','translator'], us:null, ipa:'/ɪnˈtɜːprətə/', sector:'media',
+  clues:[
+    "I speak all day, but I never say my own words.",
+    "If I stop for three seconds, everybody looks at me.",
+    "I listen in one language and speak in another at the same time.",
+    "I translate what people say while they are saying it."],
+  def:'a person who translates what somebody is saying into another language',
+  involves:'listening in one language and speaking in another at the same time',
+  related:'translator, conference organiser, diplomat',
+  adj:['demanding','meticulous','varied'],
+  fact:'An interpreter works with speech and a translator works with writing. In English the two words are not interchangeable.',
+  counter:'Nobody notices you when you are excellent, and everybody notices you when you make a mistake.' },
+
+{ id:'vet', job:'vet', alts:['vet','a vet','veterinarian','veterinary surgeon','animal doctor'], us:'veterinarian, usually shortened to vet', ipa:'/vet/', sector:'health',
+  clues:[
+    "None of my patients can tell me where it hurts.",
+    "Half of my job is talking to the owner, not to the patient.",
+    "I have been bitten at work many times.",
+    "I am a doctor for animals."],
+  def:'a doctor who treats animals',
+  involves:'examining animals, operating on them and explaining things to their owners',
+  related:'veterinary nurse, animal physiotherapist, farmer',
+  adj:['hands-on','emotionally draining','rewarding'],
+  fact:'The full British term is veterinary surgeon and the American term is veterinarian. The short form vet is used in both countries.',
+  counter:'You train for five years because you love animals. Part of the job is then helping owners to say goodbye to them.' },
+
+{ id:'firefighter', job:'firefighter', alts:['firefighter','fire fighter','fireman','a firefighter'], us:null, ipa:'/ˈfaɪəfaɪtə/', sector:'hands',
+  clues:[
+    "Most of my shift is cleaning, checking and waiting.",
+    "I run towards the thing that everyone else is running away from.",
+    "More of my calls are road accidents than burning buildings.",
+    "I put out fires and rescue people."],
+  def:'a person whose job is to put out fires and rescue people',
+  involves:'putting out fires, rescuing people and checking the equipment',
+  related:'fire control operator, paramedic, fire safety officer',
+  adj:['physically demanding','dangerous','respected'],
+  fact:'Fireman is the older word and people still understand it, but firefighter is now the standard term in both British and American English.',
+  counter:'The job is heroic for about five per cent of the shift. The rest of it is checking equipment and waiting.' },
+
+{ id:'chef', job:'chef', alts:['chef','a chef','cook','head chef'], us:null, ipa:'/ʃef/', sector:'hands',
+  clues:[
+    "I work when everyone else is enjoying themselves.",
+    "I have small burns and cuts on both of my hands.",
+    "Seventy people want to eat at exactly the same time.",
+    "I run a kitchen and create the menu."],
+  def:'a cook who has been professionally trained, usually the person in charge of a kitchen',
+  involves:'planning the menu, ordering the food and running the kitchen during service',
+  related:'kitchen porter, sous chef, waiter',
+  adj:['gruelling','creative','high-pressure'],
+  fact:'A cook is anybody who prepares food. A chef has been trained and normally runs the kitchen. The two words do not mean the same thing.',
+  counter:'You will cook the same menu four hundred times before anybody lets you change it.' },
+
+{ id:'lorry', job:'lorry driver', alts:['lorry driver','truck driver','trucker','a lorry driver','hgv driver'], us:'truck driver, or trucker', ipa:'/ˈlɒri ˌdraɪvə/', sector:'move',
+  clues:[
+    "I have seen more of this country than anyone I know.",
+    "My office has one seat and a very good radio.",
+    "The law says how many hours I can work before I have to stop.",
+    "I take goods across the country in a very large vehicle."],
+  def:'a person whose job is to drive a lorry and deliver goods',
+  involves:'driving long distances, loading and unloading, and taking legal rest breaks',
+  related:'warehouse worker, logistics planner, mechanic',
+  adj:['solitary','monotonous','secure'],
+  fact:'The British word is lorry and the American word is truck. In British English a truck is usually something smaller, or a railway wagon.',
+  counter:'The work is lonely and repetitive. It is also six hours a day when nobody asks you anything, which some people would love.' },
+
+{ id:'archaeologist', job:'archaeologist', alts:['archaeologist','archeologist','an archaeologist','archaeology'], us:'archaeologist, also spelt archeologist', ipa:'/ˌɑːkiˈɒlədʒɪst/', sector:'hands',
+  clues:[
+    "Almost everything I find is broken, and that is completely normal.",
+    "I spend more time writing notes about objects than digging for them.",
+    "They cannot build the new car park until I have looked at the ground.",
+    "I study the past by digging things up."],
+  def:'a person who studies the past by digging up objects and buildings',
+  involves:'digging carefully, recording everything you find and writing it up afterwards',
+  related:'museum curator, conservator, construction site manager',
+  adj:['painstaking','poorly paid','varied'],
+  fact:'The British spelling is archaeology. American English accepts both archaeology and archeology.',
+  counter:'In films, archaeologists find treasure. In real life, they spend most of the week filling in forms in a wet field.' },
+
+{ id:'tattoo', job:'tattoo artist', alts:['tattoo artist','tattooist','a tattoo artist','tatoo artist'], us:null, ipa:'/təˈtuː ˌɑːtɪst/', sector:'media',
+  clues:[
+    "My work leaves the studio and never comes back.",
+    "People cry in front of me and then thank me.",
+    "I cannot delete a mistake.",
+    "I draw permanent designs on people’s skin."],
+  def:'a person whose job is to draw permanent designs on people’s skin',
+  involves:'designing the image, drawing it on the skin and working for hours without stopping',
+  related:'body piercer, illustrator, studio manager',
+  adj:['meticulous','creative','physically demanding'],
+  fact:'In Britain it is illegal to tattoo anyone under the age of eighteen. A parent cannot give permission.',
+  counter:'You have creative freedom, but half of your week is spent drawing other people’s bad ideas exactly as they asked for them.' }
+];
+
+const ADJECTIVES = [
+ {w:'challenging', ipa:'/ˈtʃælɪndʒɪŋ/', lvl:'core', mean:'It is difficult, but in a good way, because it tests what you can do.', eg:'It is a <b>challenging</b> job, but I have learnt a great deal.'},
+ {w:'repetitive', ipa:'/rɪˈpetətɪv/', lvl:'core', mean:'You do the same thing again and again, until it becomes boring.', eg:'The work is <b>repetitive</b>, but the people are very nice.'},
+ {w:'rewarding', ipa:'/rɪˈwɔːdɪŋ/', lvl:'core', mean:'The work is hard, but it gives you a good feeling afterwards.', eg:'It is exhausting, and it is also incredibly <b>rewarding</b>.'},
+ {w:'demanding', ipa:'/dɪˈmɑːndɪŋ/', lvl:'core', mean:'It takes a lot of your time and your energy.', eg:'It is a <b>demanding</b> job for anyone with young children.'},
+ {w:'stressful', ipa:'/ˈstresfl/', lvl:'core', mean:'It makes you feel worried and under pressure.', eg:'The last two hours of the shift are the most <b>stressful</b>.'},
+ {w:'varied', ipa:'/ˈveərid/', lvl:'core', mean:'No two days are the same.', eg:'I enjoy it because the work is so <b>varied</b>.'},
+ {w:'secure', ipa:'/sɪˈkjʊə/', lvl:'core', mean:'You are unlikely to lose this job.', eg:'The job is not exciting, but it is <b>secure</b>.'},
+ {w:'well-paid', ipa:'/ˌwel ˈpeɪd/', lvl:'core', mean:'You earn a good salary.', eg:'It is <b>well-paid</b> work, and so it should be.'},
+ {w:'poorly paid', ipa:'/ˌpɔːli ˈpeɪd/', lvl:'core', mean:'You earn very little money.', eg:'The work is fascinating but <b>poorly paid</b>.'},
+ {w:'hands-on', ipa:'/ˌhændz ˈɒn/', lvl:'core', mean:'You do the work physically, instead of sitting at a desk.', eg:'I wanted something <b>hands-on</b>, not an office job.'},
+ {w:'creative', ipa:'/kriˈeɪtɪv/', lvl:'core', mean:'You design or make new things.', eg:'It is more <b>creative</b> than most people imagine.'},
+ {w:'dangerous', ipa:'/ˈdeɪndʒərəs/', lvl:'core', mean:'There is a real risk of being hurt.', eg:'It is <b>dangerous</b> work, and the training reflects that.'},
+ {w:'sociable', ipa:'/ˈsəʊʃəbl/', lvl:'core', mean:'You spend the day talking to people.', eg:'You have to be <b>sociable</b> to enjoy this job.'},
+ {w:'respected', ipa:'/rɪˈspektɪd/', lvl:'core', mean:'Other people think the job is valuable and important.', eg:'It is a <b>respected</b> profession in almost every country.'},
+ {w:'monotonous', ipa:'/məˈnɒtənəs/', lvl:'stretch', mean:'It is so repetitive that it becomes dull. This word is stronger than repetitive.', eg:'Eight hours of the same movement is <b>monotonous</b>.'},
+ {w:'gruelling', ipa:'/ˈɡruːəlɪŋ/', lvl:'stretch', mean:'It is extremely tiring and difficult, and it continues for a long time.', eg:'It was a <b>gruelling</b> twelve-hour shift.'},
+ {w:'exhilarating', ipa:'/ɪɡˈzɪləreɪtɪŋ/', lvl:'stretch', mean:'It is so exciting that it makes you feel very alive.', eg:'The first time I did it, the feeling was <b>exhilarating</b>.'},
+ {w:'high-pressure', ipa:'/ˌhaɪ ˈpreʃə/', lvl:'stretch', mean:'Mistakes are serious and there is no time to make them.', eg:'It is a <b>high-pressure</b> environment and it suits very few people.'},
+ {w:'thankless', ipa:'/ˈθæŋkləs/', lvl:'stretch', mean:'The work is important, but nobody ever thanks you for it.', eg:'It is a <b>thankless</b> job, if I am honest.'},
+ {w:'glamorous', ipa:'/ˈɡlæmərəs/', lvl:'stretch', mean:'It looks exciting and attractive from the outside.', eg:'It sounds <b>glamorous</b>, but it really is not.'},
+ {w:'lucrative', ipa:'/ˈluːkrətɪv/', lvl:'stretch', mean:'It makes a lot of money.', eg:'It is extremely <b>lucrative</b> if you reach the top.'},
+ {w:'precarious', ipa:'/prɪˈkeəriəs/', lvl:'stretch', mean:'It is not safe or certain, and you could lose it at any moment.', eg:'The income is <b>precarious</b> from one month to the next.'},
+ {w:'fulfilling', ipa:'/fʊlˈfɪlɪŋ/', lvl:'stretch', mean:'It gives you a sense of meaning.', eg:'The job is badly paid and deeply <b>fulfilling</b>.'},
+ {w:'mundane', ipa:'/mʌnˈdeɪn/', lvl:'stretch', mean:'It is ordinary and dull.', eg:'Most of the work is surprisingly <b>mundane</b>.'},
+ {w:'cut-throat', ipa:'/ˈkʌt θrəʊt/', lvl:'stretch', mean:'It is extremely competitive, and people will harm each other in order to win.', eg:'It is a <b>cut-throat</b> industry.'},
+ {w:'physically demanding', ipa:'/ˈfɪzɪkli dɪˈmɑːndɪŋ/', lvl:'stretch', mean:'The work is hard on your body.', eg:'It is <b>physically demanding</b>, so most people stop before they are fifty.'},
+ {w:'emotionally draining', ipa:'/ɪˈməʊʃənəli ˈdreɪnɪŋ/', lvl:'stretch', mean:'It uses up your emotional energy.', eg:'The job is <b>emotionally draining</b> in a way that people do not expect.'},
+ {w:'meticulous', ipa:'/məˈtɪkjələs/', lvl:'stretch', mean:'You have to be extremely careful with small details.', eg:'You have to be <b>meticulous</b>, because there is no second attempt.'},
+ {w:'unpredictable', ipa:'/ˌʌnprɪˈdɪktəbl/', lvl:'stretch', mean:'You never know what is going to happen.', eg:'The work is completely <b>unpredictable</b>, and that is the attraction.'},
+ {w:'solitary', ipa:'/ˈsɒlətri/', lvl:'stretch', mean:'You work alone for most of the time.', eg:'It is a <b>solitary</b> job, so you have to enjoy your own company.'},
+ {w:'sedentary', ipa:'/ˈsedntri/', lvl:'stretch', mean:'You sit down for most of the day.', eg:'It is a <b>sedentary</b> job with a very good chair.'},
+ {w:'prestigious', ipa:'/preˈstɪdʒəs/', lvl:'stretch', mean:'The job has a high social status.', eg:'It is a <b>prestigious</b> position and everybody knows it.'},
+ {w:'relentless', ipa:'/rɪˈlentləs/', lvl:'stretch', mean:'It never stops and it never becomes easier.', eg:'The pace of the work is <b>relentless</b>.'},
+ {w:'painstaking', ipa:'/ˈpeɪnzteɪkɪŋ/', lvl:'stretch', mean:'The work is slow and it needs great care.', eg:'It is <b>painstaking</b> work, and they move one centimetre a day.'},
+ {w:'tedious', ipa:'/ˈtiːdiəs/', lvl:'stretch', mean:'It is boring because it continues for a very long time.', eg:'There are long, <b>tedious</b> hours of waiting.'}
+];
+
+const FRAMES = [
+ {pat:'It involves + verb + -ing', ex:'It involves <b>working</b> nights and <b>dealing</b> with difficult people.'},
+ {pat:'Do not say: it involves to work', ex:'This is the most common mistake with this verb. After involve you always use the -ing form.', warn:true},
+ {pat:'You have to be able to + infinitive', ex:'You have to be able to <b>stay</b> calm when nobody else is calm.'},
+ {pat:'You need to be good at + verb + -ing', ex:'You need to be good at <b>listening</b> without interrupting.'},
+ {pat:'It is the kind of job where…', ex:'It is the kind of job <b>where</b> one small mistake really matters.'},
+ {pat:'I would find it + adjective', ex:'I would find it <b>exhausting</b>, personally.'},
+ {pat:'What would put me off is + verb + -ing', ex:'What would put me off is <b>working</b> every single weekend.'},
+ {pat:'The worst thing about it would be + verb + -ing', ex:'The worst thing about it would be <b>telling</b> the family.'},
+ {pat:'I could never do it, because…', ex:'I could never do it, <b>because</b> I am not a patient person.'},
+ {pat:'It is not as + adjective + as it looks', ex:'It is <b>not as glamorous as</b> it looks on television.'}
+];
+
+const ARGUE = [
+ {pat:'I would put X first, because…', ex:'I would put the midwife first, because the work changes people’s lives.'},
+ {pat:'Surely X is more … than Y?', ex:'<b>Surely</b> a paramedic is more stressful than a judge?'},
+ {pat:'I see what you mean, but…', ex:'<b>I see what you mean, but</b> you are forgetting the hours.'},
+ {pat:'That depends on what you mean by…', ex:'<b>That depends on what you mean by</b> rewarding.'},
+ {pat:'I would go the other way, actually.', ex:'<b>I would go the other way, actually.</b> For me it is the opposite.'},
+ {pat:'You cannot really compare them.', ex:'<b>You cannot really compare them.</b> One job is physical and the other one is emotional.'},
+ {pat:'Fair enough, but what about…?', ex:'<b>Fair enough, but what about</b> the people who are never promoted?'},
+ {pat:'I will give you that one.', ex:'<b>I will give you that one.</b> But I am not changing my mind about the other.'},
+ {pat:'Wait a moment. Are we saying…?', ex:'<b>Wait a moment. Are we saying</b> that money does not matter at all?'},
+ {pat:'Let us agree to differ.', ex:'<b>Let us agree to differ</b> and move on to the next one.'}
+];
+
+const UKUS = [
+ ['estate agent','real estate agent, or realtor'],
+ ['lorry driver','truck driver, or trucker'],
+ ['barrister and solicitor','attorney, or lawyer'],
+ ['A&E, or accident and emergency','the ER, or emergency room'],
+ ['anaesthetist','anesthesiologist'],
+ ['caretaker','janitor'],
+ ['undertaker, or funeral director','mortician'],
+ ['football manager','head coach'],
+ ['shop assistant','sales clerk, or sales associate'],
+ ['postman, or postwoman','mail carrier'],
+ ['refuse collector','garbage collector'],
+ ['chemist, meaning the shop','drugstore'],
+ ['CV','résumé'],
+ ['to be made redundant','to be laid off'],
+ ['a pay rise','a raise'],
+ ['holiday','vacation'],
+ ['a fortnight','two weeks'],
+ ['labour, programme, practise','labor, program, practice']
+];
+
+const AXES = [
+ {id:'rewarding', t:'The most rewarding', hint:'Which job would make you feel that the day had been worth it?', glyph:'💛'},
+ {id:'repetitive', t:'The most repetitive', hint:'Think carefully. The obvious answer is not always the right one.', glyph:'🔁'},
+ {id:'stressful', t:'The most stressful', hint:'Is stress about danger, about responsibility, or about never switching off?', glyph:'⚡'},
+ {id:'physical', t:'The hardest on your body', hint:'Which of these jobs would your body notice first?', glyph:'💪'},
+ {id:'gone', t:'The most likely to disappear', hint:'Which one will machines or new habits replace in the next twenty years?', glyph:'🫥'},
+ {id:'undervalued', t:'The most undervalued', hint:'Which job do we need the most and respect the least?', glyph:'🙈'}
+];
+
+/* =================== STATE =================== */
+const S = { deck:[], i:0, score:0, clueCount:1, worth:10, usedOpts:false, wrongs:0, met:[], axis:null, ranking:[], pool:[] };
+
+const $ = s=>document.querySelector(s);
+const $$ = s=>[...document.querySelectorAll(s)];
+const shuffle = a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(v=>v[1]);
+
+/* =================== HELPERS =================== */
+function norm(s){return (s||'').toLowerCase().replace(/[^a-z ]/g,'').replace(/^(a|an|the)\s+/,'').replace(/\s+/g,' ').trim();}
+function lev(a,b){
+  const m=a.length,n=b.length;const d=Array.from({length:m+1},(_,i)=>[i,...Array(n).fill(0)]);
+  for(let j=0;j<=n;j++)d[0][j]=j;
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)
+    d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  return d[m][n];
+}
+function matches(guess,job){
+  const g=norm(guess); if(!g) return false;
+  const pool=[job.job,...(job.alts||[])].map(norm);
+  if(pool.includes(g)) return true;
+  return pool.some(p=>{const tol=p.length>10?3:p.length>6?2:1;return lev(g,p)<=tol;});
+}
+function confetti(cx,cy){
+  const cols=['#FF5A3C','#FFC12E','#0E9C92','#7B4BE0','#FF3D8B'];
+  for(let i=0;i<34;i++) setTimeout(()=>{
+    const el=document.createElement('div');const sz=6+Math.random()*8;
+    el.style.cssText=`position:fixed;width:${sz}px;height:${sz}px;background:${cols[i%cols.length]};border-radius:${Math.random()>.4?'50%':'2px'};left:${cx}px;top:${cy}px;pointer-events:none;z-index:9999`;
+    document.body.appendChild(el);
+    const a=Math.random()*Math.PI*2,v=100+Math.random()*160;
+    let vx=Math.cos(a)*v,vy=Math.sin(a)*v-130,px=cx,py=cy,f=0;
+    const run=()=>{vy+=4.4;px+=vx*.016;py+=vy*.016;el.style.left=px+'px';el.style.top=py+'px';el.style.opacity=Math.max(0,1-f/62);el.style.transform=`rotate(${f*8}deg)`;if(++f<62)requestAnimationFrame(run);else el.remove();};
+    requestAnimationFrame(run);
+  }, i*14);
+}
+function countUp(el,to){
+  const from=parseInt(el.textContent)||0,t0=performance.now();
+  const tick=n=>{const p=Math.min((n-t0)/700,1);const e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(from+(to-from)*e);if(p<1)requestAnimationFrame(tick);else el.textContent=to;};
+  requestAnimationFrame(tick);
+}
+function setSteps(n){$$('#steps .step').forEach((s,i)=>{s.className='step'+(i<n-1?' done':i===n-1?' on':'');});}
+function show(id){['setup','r1','r2','done'].forEach(s=>$('#screen-'+s).classList.toggle('hidden',s!==id));window.scrollTo({top:0,behavior:'smooth'});}
+
+/* =================== SETUP =================== */
+$$('#lenOpts .opt').forEach(o=>o.onclick=()=>{$$('#lenOpts .opt').forEach(x=>x.classList.remove('sel'));o.classList.add('sel');});
+$('#startBtn').onclick=()=>{
+  const n=+$('#lenOpts .opt.sel').dataset.n;
+  S.deck=shuffle([...JOBS]).slice(0,n); S.i=0; S.score=0; S.met=[];
+  setSteps(1); show('r1'); renderJob();
+};
+
+/* =================== ROUND 1 =================== */
+function renderJob(){
+  const j=S.deck[S.i];
+  S.clueCount=1; S.worth=10; S.usedOpts=false; S.wrongs=0;
+  $('#revealCard').classList.add('hidden');
+  $('#playCard').classList.remove('hidden');
+  $('#choices').classList.add('hidden'); $('#choices').innerHTML='';
+  $('#fb').textContent=''; $('#fb').className='feedback'; $('#fb').style.color='';
+  $('#guessInput').value=''; $('#guessInput').disabled=false;
+  $('#guessBtn').disabled=false; $('#showOpts').disabled=false;
+  $('#r1Progress').textContent=`Job ${S.i+1} of ${S.deck.length}`;
+  const sec=SECTORS[j.sector];
+  $('#sectorTag').textContent=sec.label; $('#sectorTag').style.background=sec.c;
+  $('#playCard').style.boxShadow=`0 8px 0 ${sec.c}, 0 18px 36px rgba(27,21,38,.14)`;
+  document.querySelector('.quote-mark').style.color=sec.c;
+  drawClues(); updateWorth();
+}
+function drawClues(){
+  const j=S.deck[S.i];
+  $('#clueStack').innerHTML=j.clues.slice(0,S.clueCount).map((c,i)=>
+    `<div class="clue ${i===S.clueCount-1?'fresh':''}" data-n="${i+1}" style="animation-delay:${i*60}ms">“${c}”</div>`).join('');
+  const none = S.clueCount>=j.clues.length;
+  $('#moreClue').disabled = none;
+  $('#moreClue').innerHTML = none ? 'There are no more clues' : 'Give me another clue <b style="color:var(--coral)">−2</b>';
+}
+function updateWorth(){ $('#worthPill').textContent='Worth '+Math.max(2,S.worth); }
+
+$('#moreClue').onclick=()=>{ S.clueCount++; S.worth-=2; drawClues(); updateWorth(); };
+
+$('#showOpts').onclick=()=>{
+  if(S.usedOpts) return;
+  S.usedOpts=true; S.worth-=2; updateWorth(); $('#showOpts').disabled=true;
+  const j=S.deck[S.i];
+  const same=JOBS.filter(x=>x.id!==j.id && x.sector===j.sector);
+  const other=JOBS.filter(x=>x.id!==j.id && x.sector!==j.sector);
+  const distract=shuffle(same).slice(0,2).concat(shuffle(other)).slice(0,3);
+  const opts=shuffle([j,...distract]);
+  const box=$('#choices'); box.classList.remove('hidden');
+  box.innerHTML=opts.map(o=>`<button class="choice es" data-id="${o.id}">${o.job}</button>`).join('');
+  box.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{
+    if(b.dataset.id===j.id){ win(b); }
+    else { b.classList.add('wrong'); b.disabled=true; penalise('That is not the right one. Read the first clue again.'); }
+  });
+};
+
+$('#guessBtn').onclick=submitGuess;
+$('#guessInput').addEventListener('keydown',e=>{if(e.key==='Enter')submitGuess();});
+function submitGuess(){
+  const v=$('#guessInput').value;
+  if(!norm(v)) return;
+  if(matches(v,S.deck[S.i])) win($('#guessBtn'));
+  else {
+    $('#playCard').classList.add('shake'); setTimeout(()=>$('#playCard').classList.remove('shake'),420);
+    penalise(wrongLine()); $('#guessInput').select();
+  }
+}
+const WRONG_LINES=[
+  'That is not the answer, but it is a reasonable guess.',
+  'That is not it either. Say your next idea to your partner in English first.',
+  'That is still not right. Take another clue if you need one.',
+  'No. The Word Bank will not give you the job, but it will give you the words.',
+  'That is not the one. Try the four options.'
+];
+function wrongLine(){ return WRONG_LINES[Math.min(S.wrongs,WRONG_LINES.length-1)]; }
+function penalise(msg){
+  S.wrongs++; S.worth-=1; updateWorth();
+  const fb=$('#fb'); fb.className='feedback bad'; fb.style.color=''; fb.textContent=msg;
+}
+
+function win(btn){
+  const j=S.deck[S.i];
+  const pts=Math.max(2,S.worth);
+  S.score+=pts; S.met.push(j);
+  countUp($('#r1Score'),S.score);
+  const r=btn.getBoundingClientRect();
+  confetti(r.left+r.width/2,r.top);
+  $('#guessInput').disabled=true;$('#guessBtn').disabled=true;$('#moreClue').disabled=true;$('#showOpts').disabled=true;
+  $('#choices').querySelectorAll('.choice').forEach(b=>b.disabled=true);
+  let praise = `That is correct. You have won ${pts} points.`;
+  if(pts>=10) praise = 'That is correct, and you got it from the first clue. You have won 10 points.';
+  else if(S.met.length===5) praise = `That is correct. You have won ${pts} points, and you have now learnt five new jobs.`;
+  const fb=$('#fb'); fb.className='feedback'; fb.style.color='var(--teal)'; fb.textContent=praise;
+  setTimeout(()=>reveal(j),520);
+}
+
+function reveal(j){
+  const sec=SECTORS[j.sector];
+  const last = S.i>=S.deck.length-1;
+  $('#revealCard').innerHTML=`
+    <div class="reveal">
+      <div class="reveal-head e">
+        <div class="reveal-job">${j.job}</div>
+        <div class="ipa">${j.ipa}</div>
+      </div>
+      ${j.us?`<div class="pill e d1" style="width:fit-content">In American English: <b style="margin-left:5px">${j.us}</b></div>`:''}
+      <div class="def-row e d1">
+        <div><span class="eyebrow">What the job is</span><div style="font-size:1.05rem">A ${j.job} is ${j.def}.</div></div>
+        <div><span class="eyebrow">How to describe it</span>
+          <div style="font-size:1.08rem;font-family:'Fraunces',serif;font-weight:600">It involves <u>${j.involves}</u>.</div></div>
+      </div>
+      <div class="fact-box e d2"><div class="eyebrow">Worth knowing</div>${j.fact}</div>
+      <div class="meta-grid e d3">
+        <div class="meta"><div class="eyebrow">Three adjectives that fit</div>
+          <div class="adj-chips">${j.adj.map(a=>`<span class="adj-chip" onclick="openBank('adj','${a}')">${a}</span>`).join('')}</div>
+          <div style="font-size:.8rem;color:var(--ink-faint);margin-top:9px">Tap a word to see what it means.</div></div>
+        <div class="meta"><div class="eyebrow">Other jobs in the same room</div><div style="font-size:.95rem">${j.related}</div></div>
+      </div>
+      <div class="btn-row e d4" style="margin-top:6px">
+        <button class="btn btn-primary" id="nextJob">${last?'Go to round 2 →':'Next job →'}</button>
+        <button class="btn btn-ghost btn-sm" onclick="openBank('adj')">Open the Word Bank</button>
+      </div>
+    </div>`;
+  $('#revealCard').style.boxShadow=`0 8px 0 ${sec.c}, 0 18px 36px rgba(27,21,38,.14)`;
+  $('#revealCard').classList.remove('hidden');
+  $('#playCard').classList.add('hidden');
+  $('#nextJob').onclick=()=>{
+    if(last){ startR2(); }
+    else { S.i++; renderJob(); window.scrollTo({top:0,behavior:'smooth'}); }
+  };
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* =================== ROUND 2 =================== */
+function startR2(){
+  setSteps(2); show('r2');
+  $('#r2Pick').classList.remove('hidden'); $('#r2Rank').classList.add('hidden');
+  $('#axisGrid').innerHTML=AXES.map((a,i)=>`
+    <button class="axis es" data-id="${a.id}" style="animation-delay:${i*70}ms">
+      <span class="glyph">${a.glyph}</span><b>${a.t}</b><small>${a.hint}</small>
+    </button>`).join('');
+  $$('#axisGrid .axis').forEach(b=>b.onclick=()=>pickAxis(b.dataset.id));
+}
+function pickAxis(id){
+  S.axis=AXES.find(a=>a.id===id);
+  const source = S.met.length>=6 ? S.met : JOBS;
+  S.pool = shuffle([...source]).slice(0,6);
+  S.ranking = Array(6).fill(null);
+  $('#r2Pick').classList.add('hidden'); $('#r2Rank').classList.remove('hidden');
+  $('#axisTitle').textContent=S.axis.t;
+  $('#axisHint').textContent=S.axis.hint;
+  $('#r2Result').classList.add('hidden'); $('#r2Result').innerHTML='';
+  drawRank(); window.scrollTo({top:0,behavior:'smooth'});
+}
+function drawRank(){
+  $('#slots').innerHTML=S.ranking.map((j,i)=>
+    j ? `<div class="slot filled" data-pos="${i}"><span class="pos">${i+1}</span><span class="name">${j.job}</span><span class="x">tap to remove</span></div>`
+      : `<div class="slot empty"><span class="pos">${i+1}</span><span style="color:var(--ink-faint);font-size:.9rem">—</span></div>`).join('');
+  $$('#slots .slot.filled').forEach(s=>s.onclick=()=>{
+    const p=+s.dataset.pos; S.pool.push(S.ranking[p]); S.ranking[p]=null; drawRank();
+  });
+  $('#pool').innerHTML=S.pool.map(j=>`<button class="pool-item" data-id="${j.id}">${j.job}</button>`).join('')
+    || '<div style="color:var(--ink-faint);font-size:.9rem">You have placed them all. If you want to change your mind, tap a job on the left.</div>';
+  $$('#pool .pool-item').forEach(b=>b.onclick=()=>{
+    const idx=S.ranking.indexOf(null); if(idx<0) return;
+    const j=S.pool.find(x=>x.id===b.dataset.id);
+    S.ranking[idx]=j; S.pool=S.pool.filter(x=>x.id!==j.id); drawRank();
+  });
+  $('#submitRank').classList.toggle('hidden', !S.ranking.every(Boolean));
+}
+$('#submitRank').onclick=()=>{
+  const top=S.ranking[0], bot=S.ranking[5];
+  $('#r2Result').innerHTML=`
+    <div class="counter es mt4">
+      <div class="eyebrow">The argument against your number 1</div>
+      <p>${top.counter}</p>
+      <div class="who">This is about the ${top.job}.</div>
+    </div>
+    <div class="counter es d1 mt4" style="background:var(--amber);color:var(--ink)">
+      <div class="eyebrow" style="color:var(--ink);opacity:.6">The argument against your number 6</div>
+      <p>${bot.counter}</p>
+      <div class="who" style="color:rgba(27,21,38,.6)">This is about the ${bot.job}.</div>
+    </div>
+    <div class="card es d2 mt4">
+      <h3 style="font-size:1.2rem;margin-bottom:8px">Do you want to change your order?</h3>
+      <p class="sub" style="margin-bottom:16px">Tell your partner whether these arguments have changed your mind, and explain why.</p>
+      <div class="btn-row">
+        <button class="btn btn-ghost btn-sm" id="anotherAxis">Try another question</button>
+        <button class="btn btn-primary" id="toEnd">Finish →</button>
+      </div>
+    </div>`;
+  $('#r2Result').classList.remove('hidden');
+  $('#anotherAxis').onclick=startR2;
+  $('#toEnd').onclick=finish;
+  const r=$('#submitRank').getBoundingClientRect(); confetti(r.left+r.width/2,r.top);
+  setTimeout(()=>$('#r2Result').scrollIntoView({behavior:'smooth',block:'start'}),120);
+};
+
+/* =================== DONE =================== */
+function finish(){
+  show('done'); setSteps(3);
+  const words=[...new Set(S.met.flatMap(j=>j.adj))];
+  $('#screen-done').innerHTML=`
+    <div class="card tint-violet es" style="overflow:hidden">
+      <div class="hero-num">✔</div>
+      <div class="eyebrow mb3">The end</div>
+      <h2 class="lede">You have learnt <em>${S.met.length} jobs</em> today.</h2>
+      <div class="meta-grid mt4">
+        <div class="meta"><div class="eyebrow">Your score in round 1</div>
+          <div style="font-family:'Fraunces',serif;font-size:2rem;font-weight:900">${S.score}</div></div>
+        <div class="meta"><div class="eyebrow">The adjectives you met</div>
+          <div style="font-size:.9rem;line-height:1.6">${words.join(' · ')||'—'}</div></div>
+      </div>
+      <h3 style="font-size:1.25rem;margin:var(--s5) 0 8px">One last thing</h3>
+      <p class="sub" style="margin-bottom:var(--s4)">Which of these jobs would you really do, and which one would you refuse to do for any salary? Tell your partner, and give one reason for each.</p>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="location.reload()">Play again</button>
+        <button class="btn btn-ghost btn-sm" onclick="openBank('jobs')">Look at all the jobs again</button>
+      </div>
+    </div>`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* =================== WORD BANK =================== */
+let bankTab='adj', bankFilter='';
+function openBank(tab,filter){
+  if(tab) bankTab=tab;
+  bankFilter=filter||'';
+  $('#sheet').classList.add('open');
+  $$('#tabs .tab').forEach(t=>t.classList.toggle('on',t.dataset.tab===bankTab));
+  renderBank();
+}
+function closeBank(){ $('#sheet').classList.remove('open'); }
+$('#bankBtn').onclick=()=>openBank();
+$('#sheetBg').onclick=closeBank;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBank();});
+$$('#tabs .tab').forEach(t=>t.onclick=()=>{bankTab=t.dataset.tab;bankFilter='';openBank();});
+
+function renderBank(){
+  const b=$('#sheetBody');
+  if(bankTab==='adj'){
+    const f=bankFilter.toLowerCase();
+    const list=ADJECTIVES.filter(a=>!f||a.w.includes(f)||a.mean.toLowerCase().includes(f));
+    b.innerHTML=`<input class="bank-search" id="bankSearch" placeholder="Search for a word" value="${bankFilter}">
+      <p style="font-size:.88rem;color:var(--ink-soft);margin-bottom:var(--s4)">
+        The <b style="color:var(--ink)">core</b> words are the safe ones that everybody should be able to use. The <b style="color:var(--ink)">stretch</b> words are more advanced. Try to use at least two stretch words today.</p>`
+      + (list.length?list.map(a=>`
+      <div class="entry">
+        <div class="entry-top"><b>${a.w}</b><span class="ipa">${a.ipa}</span><span class="lvl ${a.lvl}">${a.lvl}</span></div>
+        <div class="mean">${a.mean}</div>
+        <div class="eg">${a.eg}</div>
+      </div>`).join('')
+      : `<div style="padding:30px 0;text-align:center;color:var(--ink-faint)">
+           <div style="font-size:2.4rem">🫙</div>
+           <p style="margin-top:8px">There is no word with that spelling. Try typing fewer letters.</p>
+         </div>`);
+    const si=$('#bankSearch');
+    si.oninput=()=>{bankFilter=si.value;const pos=si.selectionStart;renderBank();const n=$('#bankSearch');n.focus();n.setSelectionRange(pos,pos);};
+  }
+  else if(bankTab==='frames'){
+    b.innerHTML=`<p style="font-size:.88rem;color:var(--ink-soft);margin-bottom:var(--s4)">Copy these patterns exactly. The grammar is the difficult part, not the vocabulary.</p>
+      <div class="frames">${FRAMES.map(f=>`<div class="frame-card ${f.warn?'warn':''}"><div class="pat">${f.pat}</div><div class="ex">${f.ex}</div></div>`).join('')}</div>`;
+  }
+  else if(bankTab==='argue'){
+    b.innerHTML=`<p style="font-size:.88rem;color:var(--ink-soft);margin-bottom:var(--s4)">You will need these in round 2. Disagreeing politely is a skill in every language, and these are the phrases that English uses.</p>
+      <div class="frames">${ARGUE.map(f=>`<div class="frame-card"><div class="pat">${f.pat}</div><div class="ex">${f.ex}</div></div>`).join('')}</div>`;
+  }
+  else if(bankTab==='ukus'){
+    b.innerHTML=`<p style="font-size:.88rem;color:var(--ink-soft);margin-bottom:var(--s4)">Both columns are correct English. Your coursebook uses the words on the left, and most of the films and series you watch use the words on the right.</p>
+      <table class="uk"><thead><tr><th>British English</th><th>American English</th></tr></thead><tbody>
+      ${UKUS.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</tbody></table>`;
+  }
+  else if(bankTab==='jobs'){
+    const met=S.met;
+    b.innerHTML = met.length
+      ? met.map(j=>`<div class="entry">
+          <div class="entry-top"><b>${j.job}</b><span class="ipa">${j.ipa}</span></div>
+          <div class="mean">A ${j.job} is ${j.def}.</div>
+          <div class="eg">It involves <b>${j.involves}</b>.</div>
+          ${j.us?`<div style="font-size:.84rem;color:var(--ink-faint);margin-top:3px">In American English: ${j.us}.</div>`:''}
+        </div>`).join('')
+      : `<div style="padding:34px 0;text-align:center;color:var(--ink-faint)">
+           <div style="font-size:2.6rem">🗂️</div>
+           <p style="margin-top:10px;max-width:32ch;margin-inline:auto">This list is empty at the moment. Every job that you guess correctly will appear here, with its definition and its pronunciation.</p>
+         </div>`;
+  }
+}
+renderBank();
+</script>
+</body>
+</html>
