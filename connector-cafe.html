@@ -1,0 +1,1516 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Connector Café — discourse markers 1B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;700;800;900&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   THE CONNECTOR CAFÉ
+   Every linker is served with three facts: what follows it,
+   how strong it is, and where the punctuation goes.
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --result:#F0831E;
+  --reason:#E0435C;
+  --purpose:#0FA37F;
+  --contrast:#7B5CF5;
+
+  --ink:#2A1A14;
+  --ink-soft:#7A6457;
+  --cream:#FFF7EC;
+  --paper:#FFFFFF;
+  --line:#EADBC8;
+  --sand:#FBEEDD;
+  --gold:#FFC531;
+  --edge:rgba(42,26,20,.17);
+  --good:#0E9F57;
+  --bad:#D93A3A;
+
+  --s1:8px; --s2:16px; --s3:24px; --s4:32px; --s5:44px;
+  --r-sm:12px; --r:20px; --r-lg:30px;
+
+  --f-display:'Lilita One','Trebuchet MS',sans-serif;
+  --f-body:'Nunito','Trebuchet MS',sans-serif;
+  --f-ui:'Fredoka','Nunito','Trebuchet MS',sans-serif;
+  --pop:cubic-bezier(.34,1.56,.64,1);
+
+  --fs:16px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:var(--f-body);font-size:var(--fs);line-height:1.5;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+button{font:inherit;color:inherit;cursor:pointer;border:none;background:none}
+input,textarea{font:inherit;color:inherit}
+h1,h2,h3{margin:0}
+
+/* ── warm backdrop ── */
+.backdrop{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.backdrop::before{content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(70% 55% at 12% -8%, rgba(255,197,49,.30), transparent 60%),
+    radial-gradient(60% 50% at 100% 8%, rgba(123,92,245,.14), transparent 60%),
+    radial-gradient(80% 60% at 50% 115%, rgba(224,67,92,.10), transparent 60%);}
+.steam{position:absolute;bottom:-40px;width:140px;opacity:.5;animation:rise linear infinite}
+.steam svg{width:100%;height:auto;display:block}
+.st1{left:6%;animation-duration:26s;animation-delay:-4s}
+.st2{left:48%;animation-duration:34s;animation-delay:-18s;width:100px}
+.st3{left:82%;animation-duration:30s;animation-delay:-11s;width:170px}
+@keyframes rise{from{transform:translateY(0) rotate(-2deg);opacity:0}
+  15%{opacity:.5}85%{opacity:.25}to{transform:translateY(-115vh) rotate(4deg);opacity:0}}
+
+.shell{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 var(--s3) var(--s5)}
+
+/* ── masthead ── */
+header.mast{display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap;padding:var(--s4) 0 var(--s3)}
+.logo{display:flex;align-items:center;gap:12px}
+.cupmark{width:46px;height:46px;flex:none}
+.mast-title{font-family:var(--f-display);font-weight:400;
+  font-size:clamp(1.8rem,4vw,3.1rem);line-height:1;letter-spacing:.01em}
+.mast-sub{font-family:var(--f-ui);font-weight:500;font-size:.9rem;
+  background:var(--gold);color:var(--ink);padding:6px 15px;border-radius:999px;
+  box-shadow:0 4px 0 #C99400;transform:rotate(-2deg);white-space:nowrap}
+.mast-spacer{flex:1}
+
+.tabs{display:flex;gap:10px;flex-wrap:wrap}
+.tab{font-family:var(--f-ui);font-weight:500;font-size:1.02rem;padding:11px 22px;
+  border-radius:999px;background:var(--paper);box-shadow:0 5px 0 var(--edge);
+  transition:transform .14s var(--pop),box-shadow .14s}
+.tab:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--edge)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--cream);box-shadow:0 5px 0 #0E0705}
+.ghost{font-family:var(--f-ui);font-weight:500;font-size:.92rem;padding:9px 16px;
+  border-radius:999px;border:2px solid var(--line);background:var(--paper);color:var(--ink-soft)}
+.ghost[aria-pressed="true"]{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+/* ── the two families panel ── */
+.families{display:grid;grid-template-columns:1fr 1fr;gap:var(--s2);margin-bottom:var(--s4)}
+.fam{background:var(--paper);border-radius:var(--r-lg);padding:var(--s3);
+  box-shadow:0 8px 0 var(--edge);position:relative;overflow:hidden}
+.fam h3{font-family:var(--f-display);font-weight:400;font-size:1.5rem;line-height:1.1;margin-bottom:6px}
+.fam .tagline{font-family:var(--f-ui);font-size:.95rem;color:var(--ink-soft);margin-bottom:var(--s2)}
+.fam .rule{background:var(--sand);border-radius:var(--r-sm);padding:12px 14px;font-size:.95rem;margin-bottom:10px}
+.fam .rule b{font-family:var(--f-ui);font-weight:600}
+.fam .wordlist{font-family:var(--f-ui);font-weight:500;font-size:.92rem;color:var(--ink-soft);line-height:1.8}
+.fam .wordlist span{background:var(--sand);padding:3px 10px;border-radius:999px;white-space:nowrap;display:inline-block;margin:0 4px 4px 0}
+.fam::after{content:'';position:absolute;top:0;left:0;right:0;height:7px}
+.fam.joiners::after{background:linear-gradient(90deg,var(--result),var(--reason),var(--purpose),var(--contrast))}
+.fam.signposts::after{background:var(--ink)}
+
+/* ── filters ── */
+.filterbar{background:var(--paper);border-radius:var(--r-lg);padding:var(--s2) var(--s3);
+  box-shadow:0 7px 0 var(--edge);margin-bottom:var(--s3);
+  display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center}
+.fgroup{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.flabel{font-family:var(--f-ui);font-weight:600;font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.chip{font-family:var(--f-ui);font-weight:500;font-size:.9rem;padding:7px 14px;border-radius:999px;
+  background:var(--sand);transition:transform .12s var(--pop)}
+.chip:hover{transform:translateY(-1px)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+.chip.c-result[aria-pressed="true"]{background:var(--result)}
+.chip.c-reason[aria-pressed="true"]{background:var(--reason)}
+.chip.c-purpose[aria-pressed="true"]{background:var(--purpose)}
+.chip.c-contrast[aria-pressed="true"]{background:var(--contrast)}
+.counthint{font-family:var(--f-ui);font-size:.88rem;color:var(--ink-soft);margin-left:auto}
+
+/* ── boards ── */
+.board{margin-bottom:var(--s4)}
+.board-head{display:flex;align-items:baseline;gap:12px;margin-bottom:var(--s2);flex-wrap:wrap}
+.board-name{font-family:var(--f-display);font-weight:400;font-size:1.8rem;line-height:1;
+  padding:.18em .55em .22em;border-radius:999px;color:#fff}
+.board-q{font-family:var(--f-ui);font-size:1rem;color:var(--ink-soft)}
+.b-result .board-name{background:var(--result)}
+.b-reason .board-name{background:var(--reason)}
+.b-purpose .board-name{background:var(--purpose)}
+.b-contrast .board-name{background:var(--contrast)}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:var(--s2)}
+.card{background:var(--paper);border-radius:var(--r);padding:16px 16px 14px;text-align:left;
+  box-shadow:0 6px 0 var(--edge);position:relative;overflow:hidden;
+  transition:transform .15s var(--pop),box-shadow .15s;display:flex;flex-direction:column;gap:9px}
+.card:hover,.card:focus-visible{transform:translateY(-4px);box-shadow:0 10px 0 var(--edge);outline:none}
+.card:focus-visible{box-shadow:0 10px 0 var(--edge),0 0 0 4px var(--gold)}
+.card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:7px}
+.m-result::before{background:var(--result)}
+.m-reason::before{background:var(--reason)}
+.m-purpose::before{background:var(--purpose)}
+.m-contrast::before{background:var(--contrast)}
+.card .word{font-family:var(--f-display);font-weight:400;font-size:1.42rem;line-height:1.1;padding-left:9px}
+.card .meta{display:flex;flex-wrap:wrap;gap:6px;padding-left:9px;align-items:center}
+.pill{font-family:var(--f-ui);font-weight:500;font-size:.76rem;padding:4px 10px;border-radius:999px;
+  background:var(--sand);white-space:nowrap}
+.pill.struct{background:var(--ink);color:var(--cream)}
+.pill.posn{border:2px solid var(--line);background:transparent;color:var(--ink-soft)}
+.beans{display:inline-flex;gap:3px;align-items:center}
+.bean{width:11px;height:11px;border-radius:50%;border:2px solid var(--ink)}
+.bean.on{background:var(--ink)}
+.regword{font-family:var(--f-ui);font-size:.76rem;color:var(--ink-soft);margin-left:4px}
+.card .teaser{font-size:.9rem;color:var(--ink-soft);padding-left:9px;line-height:1.4}
+.card .teaser em{font-style:normal;font-weight:800;color:var(--ink)}
+.card .flag{position:absolute;top:10px;right:10px;font-size:.68rem;font-family:var(--f-ui);
+  font-weight:600;background:var(--gold);padding:3px 8px;border-radius:999px;letter-spacing:.04em}
+
+.extra-note{background:var(--paper);border-radius:var(--r);padding:14px 18px;margin-top:var(--s2);
+  box-shadow:0 5px 0 var(--edge);font-size:.95rem;border-left:7px solid var(--gold)}
+.extra-note b{font-family:var(--f-ui);font-weight:600}
+.empty{background:var(--paper);border-radius:var(--r);padding:var(--s3);text-align:center;
+  box-shadow:0 6px 0 var(--edge);color:var(--ink-soft);font-family:var(--f-ui)}
+
+/* ── pattern diagram ── */
+.pattern{display:flex;flex-wrap:wrap;align-items:center;gap:6px;
+  background:var(--sand);border-radius:var(--r-sm);padding:14px;font-family:var(--f-ui);font-size:1rem}
+.slot{border-radius:8px;padding:5px 12px;font-weight:500;font-size:.88rem;white-space:nowrap}
+.slot.clause{background:#fff;border:2px dashed var(--ink-soft);color:var(--ink-soft)}
+.slot.noun{background:#fff;border:2px dashed var(--purpose);color:#0a7a5e}
+.slot.inf{background:#fff;border:2px dashed var(--result);color:#9c5204}
+.slot.modal{background:#fff;border:2px dashed var(--contrast);color:#5b3fc4}
+.slot.sent{background:#fff;border:2px dashed var(--ink-soft);color:var(--ink-soft)}
+.slot.word{background:var(--ink);color:var(--cream);font-weight:600}
+.punc{font-family:var(--f-display);font-size:1.25rem;line-height:1;padding:0 1px}
+.punc.hl{color:var(--bad)}
+.punc.pmopt{color:var(--bad);border:2px dashed rgba(217,58,58,.55);border-radius:8px;padding:0 7px 2px;opacity:.8}
+
+/* ── detail sheet ── */
+.sheet-wrap{position:fixed;inset:0;z-index:40;display:none;align-items:center;justify-content:center;
+  padding:var(--s3);background:rgba(42,26,20,.55);backdrop-filter:blur(3px)}
+.sheet-wrap.open{display:flex}
+.sheet{background:var(--paper);border-radius:var(--r-lg);max-width:720px;width:100%;
+  max-height:88vh;overflow:auto;box-shadow:0 16px 0 rgba(0,0,0,.2);position:relative;
+  animation:sheetin .25s var(--pop)}
+@keyframes sheetin{from{transform:scale(.9) translateY(14px);opacity:0}}
+.sheet-top{padding:var(--s3) var(--s3) var(--s2);position:relative}
+.sheet-top::before{content:'';position:absolute;top:0;left:0;right:0;height:9px;
+  border-radius:var(--r-lg) var(--r-lg) 0 0}
+.sheet.m-result .sheet-top::before{background:var(--result)}
+.sheet.m-reason .sheet-top::before{background:var(--reason)}
+.sheet.m-purpose .sheet-top::before{background:var(--purpose)}
+.sheet.m-contrast .sheet-top::before{background:var(--contrast)}
+.sheet h2{font-family:var(--f-display);font-weight:400;font-size:2.3rem;line-height:1.05;margin:10px 0 10px}
+.sheet-body{padding:0 var(--s3) var(--s3);display:flex;flex-direction:column;gap:var(--s2)}
+.row-title{font-family:var(--f-ui);font-weight:600;font-size:.74rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px}
+.ex{font-size:1.12rem;line-height:1.55;background:var(--sand);border-radius:var(--r-sm);padding:14px 16px}
+.ex b{background:var(--gold);padding:1px 7px;border-radius:6px;font-weight:800}
+.note{font-size:.98rem;line-height:1.5}
+.watch{background:#FFF0F0;border-left:7px solid var(--bad);border-radius:var(--r-sm);
+  padding:13px 15px;font-size:.98rem;line-height:1.5}
+.watch .x{color:var(--bad);font-weight:800}
+.ukus{background:#EFF6FF;border-left:7px solid #2F80ED;border-radius:var(--r-sm);
+  padding:13px 15px;font-size:.95rem;line-height:1.5}
+.swaps{display:flex;gap:8px;flex-wrap:wrap}
+.swap{font-family:var(--f-ui);font-weight:500;font-size:.9rem;padding:8px 14px;border-radius:999px;
+  background:var(--sand);box-shadow:0 3px 0 var(--edge)}
+.swap:hover{transform:translateY(-2px)}
+.closex{position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;
+  background:var(--paper);box-shadow:0 4px 0 var(--edge);font-size:1.2rem;line-height:1;z-index:2}
+
+/* ── the bench ── */
+.bench-pick{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:var(--s3)}
+.clauses{display:grid;grid-template-columns:1fr auto 1fr;gap:var(--s2);align-items:center;margin-bottom:var(--s3)}
+.clause-card{background:var(--paper);border-radius:var(--r);padding:var(--s2) var(--s3);
+  box-shadow:0 6px 0 var(--edge);font-size:1.05rem;position:relative}
+.clause-card .tag{font-family:var(--f-ui);font-weight:600;font-size:.7rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:5px}
+.plus{font-family:var(--f-display);font-size:2rem;color:var(--ink-soft)}
+.bench-out{background:var(--paper);border-radius:var(--r-lg);padding:var(--s3);
+  box-shadow:0 9px 0 var(--edge);margin-bottom:var(--s3);min-height:150px}
+.bench-sentence{font-size:clamp(1.15rem,2.4vw,1.7rem);line-height:1.5;font-weight:700;margin-bottom:var(--s2)}
+.bench-sentence .lk{background:var(--gold);padding:1px 8px;border-radius:7px}
+.bench-sentence .pm{color:var(--bad);font-family:var(--f-display);font-size:1.15em;
+  display:inline-block;animation:drop .35s var(--pop)}
+@keyframes drop{from{transform:translateY(-14px) scale(1.6);opacity:0}}
+.bench-why{font-size:1rem;color:var(--ink-soft);line-height:1.5;border-top:2px dashed var(--line);padding-top:var(--s2)}
+.bench-why b{color:var(--ink);font-family:var(--f-ui);font-weight:600}
+.lkrow{display:flex;gap:9px;flex-wrap:wrap}
+.lkbtn{font-family:var(--f-ui);font-weight:500;font-size:1rem;padding:11px 18px;border-radius:999px;
+  background:var(--paper);box-shadow:0 5px 0 var(--edge);transition:transform .13s var(--pop)}
+.lkbtn:hover{transform:translateY(-3px)}
+.lkbtn[aria-pressed="true"]{background:var(--ink);color:var(--cream);box-shadow:0 5px 0 #0E0705}
+
+/* ── practice ── */
+.subtabs{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:var(--s3)}
+.q{background:var(--paper);border-radius:var(--r-lg);padding:var(--s3);box-shadow:0 8px 0 var(--edge);
+  margin-bottom:var(--s2)}
+.qnum{font-family:var(--f-ui);font-weight:600;font-size:.72rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+.qsrc{font-size:1.08rem;line-height:1.6;margin-bottom:var(--s2)}
+.qsrc span{display:block}
+.given{display:inline-block;font-family:var(--f-ui);font-weight:600;background:var(--ink);color:var(--cream);
+  padding:5px 14px;border-radius:999px;margin-bottom:var(--s2);font-size:.95rem}
+.answer{width:100%;padding:13px 15px;border-radius:var(--r-sm);border:2px solid var(--line);
+  background:var(--sand);font-size:1.05rem;line-height:1.5;resize:vertical;min-height:62px}
+.answer:focus{outline:none;border-color:var(--gold);background:#fff}
+.qactions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.btn{font-family:var(--f-ui);font-weight:500;font-size:.98rem;padding:11px 20px;border-radius:999px;
+  background:var(--ink);color:var(--cream);box-shadow:0 5px 0 #0E0705;transition:transform .13s var(--pop)}
+.btn:hover{transform:translateY(-2px)}
+.btn.sec{background:var(--paper);color:var(--ink);box-shadow:0 5px 0 var(--edge)}
+.verdict{margin-top:14px;border-radius:var(--r-sm);padding:14px 16px;font-size:1rem;line-height:1.55;
+  animation:drop .3s var(--pop)}
+.verdict.ok{background:#EAF8F0;border-left:7px solid var(--good)}
+.verdict.no{background:#FFF0F0;border-left:7px solid var(--bad)}
+.verdict.hmm{background:#FFF8E6;border-left:7px solid var(--gold)}
+.verdict .head{font-family:var(--f-ui);font-weight:600;display:block;margin-bottom:5px}
+.model{margin-top:9px;background:#fff;border-radius:10px;padding:11px 13px;font-size:1rem}
+.model b{background:var(--gold);padding:1px 6px;border-radius:5px}
+.alt{font-size:.9rem;color:var(--ink-soft);margin-top:7px}
+
+.tokens{font-size:1.15rem;line-height:2.1}
+.tok{padding:4px 3px;border-radius:7px;transition:background .12s;cursor:pointer}
+.tok:hover{background:var(--gold)}
+.tok.picked{background:var(--bad);color:#fff}
+.tok.right{background:var(--good);color:#fff}
+.tok.dead{cursor:default}
+.tok.dead:hover{background:none}
+.opts{display:flex;flex-direction:column;gap:9px;margin-top:var(--s2)}
+.opt{text-align:left;font-size:1.03rem;padding:13px 16px;border-radius:var(--r-sm);
+  background:var(--sand);box-shadow:0 4px 0 var(--edge);transition:transform .12s var(--pop)}
+.opt:hover{transform:translateY(-2px)}
+.opt.ok{background:#DFF5E8;box-shadow:0 4px 0 #9ad9b7}
+.opt.no{background:#FFE2E2;box-shadow:0 4px 0 #f0b1b1}
+.opt.dim{opacity:.5}
+.ctx{display:grid;grid-template-columns:1fr 1fr;gap:var(--s2)}
+.ctxcard{background:var(--sand);border-radius:var(--r);padding:var(--s2);position:relative}
+.ctxcard .who{font-family:var(--f-ui);font-weight:600;font-size:.74rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-soft);margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.ctxcard .txt{font-size:1.04rem;line-height:1.65;margin-bottom:12px}
+.gap{display:inline-block;min-width:92px;border-bottom:3px solid var(--ink);margin:0 4px;text-align:center;
+  font-family:var(--f-ui);font-weight:600}
+.gap.filled{border-bottom-color:var(--good)}
+.score{font-family:var(--f-ui);font-weight:600;font-size:.95rem;background:var(--paper);
+  padding:9px 18px;border-radius:999px;box-shadow:0 4px 0 var(--edge);display:inline-block}
+/* ── build the sentence · made for tapping ── */
+.halfA{font-family:var(--f-ui);font-weight:600;font-size:clamp(1.05rem,2.2vw,1.45rem);
+  background:var(--ink);color:var(--cream);border-radius:var(--r);padding:16px 22px;
+  display:inline-block;margin-bottom:var(--s2);box-shadow:0 6px 0 #0E0705}
+.tray{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 var(--s3)}
+.tile{font-family:var(--f-ui);font-weight:500;font-size:clamp(1rem,2vw,1.25rem);
+  padding:18px 24px;min-height:64px;border-radius:var(--r);background:var(--paper);
+  box-shadow:0 6px 0 var(--edge);text-align:left;max-width:100%;
+  transition:transform .13s var(--pop),box-shadow .13s}
+.tile:hover{transform:translateY(-3px);box-shadow:0 9px 0 var(--edge)}
+.tile:active{transform:translateY(3px);box-shadow:0 3px 0 var(--edge)}
+.tile[aria-pressed="true"]{background:var(--gold);box-shadow:0 6px 0 #C99400}
+.tile:focus-visible{outline:4px solid var(--contrast);outline-offset:3px}
+.assembled{font-family:var(--f-ui);font-weight:500;color:var(--ink-soft);
+  font-size:clamp(1.15rem,2.9vw,2rem);line-height:1.5;
+  background:var(--sand);border-radius:var(--r-lg);padding:var(--s3);min-height:96px;
+  display:flex;align-items:center;transition:background .25s}
+.assembled > .line{display:block}
+.assembled.live{font-family:var(--f-body);font-weight:700;color:var(--ink)}
+.assembled .lk{background:var(--gold);padding:1px 10px;border-radius:8px}
+.assembled .pm{color:var(--bad);font-family:var(--f-display);font-size:1.2em;
+  display:inline-block;animation:drop .3s var(--pop)}
+.assembled[data-v="ok"]{background:#EAF8F0}
+.assembled[data-v="structure"]{background:#FFF0F0}
+.assembled[data-v="meaning"]{background:#FFF8E6}
+.fchip{font-size:1rem;background:#EAF8F0;border-left:6px solid var(--good);
+  border-radius:10px;padding:10px 14px;margin-bottom:7px}
+.found{font-family:var(--f-ui);font-weight:600;color:var(--ink)}
+.opt{min-height:56px;display:flex;align-items:center}
+.others{margin-top:14px;padding-top:12px;border-top:2px dashed rgba(42,26,20,.15)}
+.oth{background:#fff;border-radius:10px;padding:10px 14px;margin-bottom:8px;border-left:6px solid;font-size:.97rem;line-height:1.5}
+.oth.no{border-color:var(--bad)}
+.oth.close{border-color:var(--gold)}
+.oth.ok{border-color:var(--good)}
+.othw{font-family:var(--f-ui);font-weight:600}
+.othl{font-family:var(--f-ui);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-left:6px}
+.tok{padding:8px 5px}
+
+.intro{background:var(--paper);border-radius:var(--r-lg);padding:var(--s3);box-shadow:0 8px 0 var(--edge);
+  margin-bottom:var(--s3);border-left:9px solid var(--gold)}
+.intro h3{font-family:var(--f-display);font-weight:400;font-size:1.5rem;margin-bottom:7px}
+.intro p{margin:0;font-size:1rem;line-height:1.55;color:var(--ink-soft)}
+
+/* ── route · self-study ── */
+.route{position:sticky;top:0;z-index:30;display:grid;grid-template-columns:repeat(4,1fr) auto;gap:10px;
+  padding:10px 0 14px;margin:0 0 var(--s3);background:linear-gradient(var(--cream) 80%, rgba(255,247,236,0))}
+.step{display:flex;align-items:center;gap:10px;text-align:left;background:var(--paper);border-radius:999px;
+  padding:7px 16px 7px 7px;box-shadow:0 4px 0 var(--edge);min-height:54px;min-width:0;transition:transform .13s var(--pop)}
+.step:hover{transform:translateY(-2px)}
+.step:focus-visible{outline:4px solid var(--gold);outline-offset:2px}
+.step .num{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--sand);
+  font-family:var(--f-display);font-size:1.1rem;line-height:1}
+.step .txt{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.step .lbl{font-family:var(--f-ui);font-weight:600;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.step .sub{font-family:var(--f-ui);font-size:.76rem;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.step.done .num{background:var(--good);color:#fff}
+.step.res .num{background:var(--gold)}
+.step[aria-current="step"]{background:var(--ink);color:var(--cream);box-shadow:0 4px 0 #0E0705}
+.step[aria-current="step"] .sub{color:#D9C9B8}
+.step[aria-current="step"] .num{background:var(--cream);color:var(--ink)}
+.step[aria-current="step"].done .num{background:var(--good);color:#fff}
+.tok .was{text-decoration:line-through;opacity:.7;font-size:.85em;margin-right:6px}
+.lbl-short{display:none}
+.welcome{display:flex;gap:var(--s3);align-items:center;justify-content:space-between;flex-wrap:wrap;
+  background:var(--ink);color:var(--cream);border-radius:var(--r-lg);padding:var(--s3);margin-bottom:var(--s3);box-shadow:0 8px 0 #0E0705}
+.welcome h3{font-family:var(--f-display);font-weight:400;font-size:1.55rem;margin-bottom:6px}
+.welcome p{margin:0;max-width:62ch;color:#EADBC8;line-height:1.55}
+.welcome b{color:var(--gold)}
+.wactions{display:flex;gap:10px;flex-wrap:wrap}
+.welcome .btn{background:var(--gold);color:var(--ink);box-shadow:0 5px 0 #C99400}
+.welcome .btn.sec{background:transparent;color:var(--cream);box-shadow:none;border:2px solid rgba(255,255,255,.25)}
+.stepintro{font-size:1rem;color:var(--ink-soft);margin:0 0 var(--s2);scroll-margin-top:96px;line-height:1.5}
+.stepno{display:inline-block;font-family:var(--f-ui);font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--ink);color:var(--cream);padding:4px 11px;border-radius:999px;margin-right:6px;vertical-align:2px}
+.nextblock{display:flex;align-items:center;justify-content:space-between;gap:var(--s2);flex-wrap:wrap;
+  background:var(--paper);border-radius:var(--r-lg);padding:var(--s2) var(--s3);box-shadow:0 7px 0 var(--edge);
+  margin:var(--s3) 0 var(--s4);border-left:9px solid var(--good)}
+.nb-text{font-size:1rem;line-height:1.5;flex:1 1 280px}
+.nb-text b{font-family:var(--f-ui);font-weight:600}
+.ticks{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.tick{font-family:var(--f-ui);font-weight:500;font-size:.84rem;padding:5px 12px;border-radius:999px;background:var(--sand);color:var(--ink-soft)}
+.tick.on{background:var(--good);color:#fff}
+.tick.c-result.on{background:var(--result)} .tick.c-reason.on{background:var(--reason)}
+.tick.c-purpose.on{background:var(--purpose)} .tick.c-contrast.on{background:var(--contrast)}
+.subtabs .cnt{font-size:.8em;opacity:.7;margin-left:4px}
+.lookup{display:inline-flex;gap:8px;flex-wrap:wrap;align-items:center}
+.lookchips{display:inline-flex;gap:8px;flex-wrap:wrap}
+.lookchips[hidden]{display:none}
+.ctxcard .lookup{margin-top:10px}
+.inlink{font:inherit;color:var(--ink);text-decoration:underline;text-underline-offset:3px;padding:0}
+.namein{width:100%;max-width:420px;padding:13px 15px;border-radius:var(--r-sm);border:2px solid var(--line);background:var(--sand);font-size:1.05rem}
+.namein:focus{outline:none;border-color:var(--gold);background:#fff}
+.restiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:var(--s2);margin-bottom:var(--s2)}
+.rtile{background:var(--paper);border-radius:var(--r);padding:var(--s2) var(--s3);box-shadow:0 6px 0 var(--edge);border-top:7px solid var(--line)}
+.rtile.full{border-top-color:var(--good)}
+.rn{font-family:var(--f-display);font-size:2.3rem;line-height:1}
+.rn span{font-size:.5em;color:var(--ink-soft);margin-left:2px}
+.rl{font-family:var(--f-ui);font-weight:600;margin-top:4px}
+.rx{font-size:.88rem;color:var(--ink-soft)}
+#resText{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92rem;min-height:190px}
+.btn.armed{background:var(--bad);color:#fff;box-shadow:0 5px 0 #942727}
+.btn:disabled,.opt:disabled{cursor:default}
+.tok{font:inherit;color:inherit;background:none;border:none;text-align:left;display:inline;padding:6px 4px;border-radius:7px;line-height:1.6}
+.tok:disabled{cursor:default}
+.tok:focus-visible{outline:3px solid var(--contrast);outline-offset:2px}
+.grp{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+@media (max-width:860px){
+  .route{grid-template-columns:repeat(5,1fr);gap:6px;padding:8px 0 12px}
+  .step{flex-direction:column;justify-content:center;gap:4px;padding:7px 2px 6px;border-radius:16px;text-align:center;min-height:0}
+  .step .num{width:30px;height:30px;font-size:.95rem}
+  .step .sub{display:none}
+  .step .lbl{font-size:.72rem}
+  .lbl-long{display:none} .lbl-short{display:inline}
+  .mast-sub{display:none}
+  header.mast{padding:var(--s3) 0 var(--s1)}
+  .cupmark{width:38px;height:38px}
+  .welcome{padding:var(--s2) var(--s3)}
+}
+/* ── glossary · gates · to-do ── */
+.glossary{background:var(--paper);border-radius:var(--r-lg);padding:var(--s3);box-shadow:0 7px 0 var(--edge);margin-bottom:var(--s3);border-left:9px solid var(--contrast)}
+.glossary h3{font-family:var(--f-display);font-weight:400;font-size:1.35rem;margin-bottom:12px}
+.glossary dl{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px 24px}
+.glossary dl div{background:var(--sand);border-radius:var(--r-sm);padding:10px 14px}
+.glossary dt{font-family:var(--f-ui);font-weight:600;margin-bottom:2px}
+.glossary dd{margin:0;font-size:.95rem;line-height:1.45}
+.gate{flex:1 1 100%;background:#FFF8E6;border-left:7px solid var(--gold);border-radius:var(--r-sm);padding:14px 18px;font-size:.98rem;line-height:1.5;animation:drop .3s var(--pop)}
+.gate p{margin:0 0 8px}
+.gate ul{margin:0 0 10px;padding-left:22px}
+.gate li{margin-bottom:4px}
+.gate-head{font-family:var(--f-ui);font-weight:600;font-size:1.05rem}
+.gate-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.todo{display:flex;gap:var(--s2);align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--sand);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:10px}
+.todo ul{margin:6px 0 0;padding-left:20px;font-size:.95rem}
+.flash{animation:flashring 1.8s ease}
+@keyframes flashring{0%,60%{box-shadow:0 0 0 5px var(--gold),0 6px 0 var(--edge)}100%{box-shadow:0 6px 0 var(--edge)}}
+.placeholder{font-family:var(--f-ui);font-weight:500;color:var(--ink-soft);font-size:.8em}
+.lkbtn.tried{background:#EAF8F0}
+.lkbtn.tried[aria-pressed="true"]{background:var(--ink)}
+.lkbtn .cnt{font-size:.8em;opacity:.7;margin-left:4px}
+footer.foot{text-align:center;padding:var(--s4) 0 var(--s2);font-family:var(--f-ui);
+  font-size:.88rem;color:var(--ink-soft)}
+[hidden]{display:none !important}
+@media (max-width:860px){
+  .families,.ctx{grid-template-columns:1fr}
+  .clauses{grid-template-columns:1fr}
+  .plus{text-align:center}
+  .shell{padding:0 var(--s2) var(--s4)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+</head>
+<body>
+<div class="backdrop" aria-hidden="true">
+  <div class="steam st1"><svg viewBox="0 0 100 300"><path d="M50 300 C20 240 80 210 50 150 C20 90 80 60 50 0" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" opacity=".7"/></svg></div>
+  <div class="steam st2"><svg viewBox="0 0 100 300"><path d="M50 300 C80 240 20 210 50 150 C80 90 20 60 50 0" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" opacity=".6"/></svg></div>
+  <div class="steam st3"><svg viewBox="0 0 100 300"><path d="M50 300 C25 230 75 200 50 140 C25 80 75 50 50 0" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round" opacity=".5"/></svg></div>
+</div>
+
+<div class="shell">
+  <header class="mast">
+    <div class="logo">
+      <svg class="cupmark" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M10 24h36v16a14 14 0 0 1-14 14H24a14 14 0 0 1-14-14V24z" fill="#2A1A14"/>
+        <path d="M46 28h5a7 7 0 0 1 0 14h-5" fill="none" stroke="#2A1A14" stroke-width="5"/>
+        <path d="M20 16c0-4 4-4 4-8M30 16c0-4 4-4 4-8M40 16c0-4 4-4 4-8" fill="none" stroke="#F0831E" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <h1 class="mast-title">The Connector Café</h1>
+    </div>
+    <span class="mast-sub">discourse markers · linkers</span>
+  </header>
+
+  <nav class="route" id="route" aria-label="Your route through the café">
+    <button class="step" data-step="1"><span class="num">1</span><span class="txt"><span class="lbl"><span class="lbl-long">The two families</span><span class="lbl-short">Families</span></span><span class="sub"></span></span></button>
+    <button class="step" data-step="2"><span class="num">2</span><span class="txt"><span class="lbl"><span class="lbl-long">The Menu</span><span class="lbl-short">Menu</span></span><span class="sub"></span></span></button>
+    <button class="step" data-step="3"><span class="num">3</span><span class="txt"><span class="lbl"><span class="lbl-long">The Bench</span><span class="lbl-short">Bench</span></span><span class="sub"></span></span></button>
+    <button class="step" data-step="4"><span class="num">4</span><span class="txt"><span class="lbl"><span class="lbl-long">Practice</span><span class="lbl-short">Practice</span></span><span class="sub"></span></span></button>
+    <button class="step res" data-step="r"><span class="num">★</span><span class="txt"><span class="lbl"><span class="lbl-long">My results</span><span class="lbl-short">Results</span></span><span class="sub"></span></span></button>
+  </nav>
+
+  <!-- ══ STEP 1 + STEP 2 · MENU ══ -->
+  <main id="view-menu">
+    <div class="welcome" id="welcome" hidden>
+      <div>
+        <h3>Working on your own?</h3>
+        <p>This page is organised in four steps, which you can see in the bar at the top. Please do them in order: first, read about the two families of linkers; second, explore the linkers on the Menu; third, try them out on the Bench; and fourth, practise with three short activities. Your progress is saved automatically on this device, so you can stop at any point and continue later. In the practice activities, if you are not sure about an answer, tap <b>Check the menu</b> to open the explanation of the linkers involved.</p>
+      </div>
+      <div class="wactions"><button class="btn" id="startHere">Start with step 1</button><button class="btn sec" id="hideWelcome">Hide this message</button></div>
+    </div>
+
+    <div class="stepintro" id="families"><span class="stepno">Step 1</span> Linkers connect ideas and show how they are related: one idea can be the <b>result</b>, the <b>reason</b>, the <b>purpose</b> or a <b>contrast</b> with another. Every linker on this page also belongs to one of two families, and the family decides where the linker goes in the sentence and how the sentence is punctuated. Read the key words below, then read about both families before you continue.</div>
+
+    <section class="glossary" aria-labelledby="glossTitle">
+      <h3 id="glossTitle">Words used on this page</h3>
+      <dl>
+        <div><dt>clause</dt><dd>A group of words with a subject and a verb: <em>the traffic was heavy</em>, <em>she is eighty-five</em>.</dd></div>
+        <div><dt>noun phrase</dt><dd>A noun together with the words around it, but without a verb: <em>the heavy traffic</em>, <em>a water leak</em>.</dd></div>
+        <div><dt>-ing form</dt><dd>A verb ending in <em>-ing</em> and used like a noun: <em>being tired</em>, <em>the traffic being so heavy</em>.</dd></div>
+        <div><dt>infinitive</dt><dd>The base form of a verb: <em>improve</em>, <em>catch</em>, as in <em>to improve</em>, <em>to catch</em>.</dd></div>
+        <div><dt>modal verb</dt><dd>A verb such as <em>can, could, will, would, may, might</em>, used before another verb.</dd></div>
+        <div><dt>register</dt><dd>How formal or informal a piece of language is. A message to a friend and an official notice use different registers.</dd></div>
+      </dl>
+    </section>
+
+    <section class="families">
+      <div class="fam joiners">
+        <h3>Family 1 · Joiners</h3>
+        <p class="tagline">Joiners link two parts of the same sentence. Most of them are followed by a clause, but some are followed by a noun phrase or an -ing form, and some by an infinitive.</p>
+        <div class="rule">When the sentence <b>starts with the linker</b>, put a comma at the end of the first part: <em>Although it was late, we stayed.</em> / <em>Because of the rain, we stayed in.</em></div>
+        <div class="rule">Before <b>but</b>, <b>so</b> and <b>yet</b> there is usually a comma: <em>The meeting was OK, but the journey home was a nightmare.</em> The comma can be left out when both parts of the sentence are short.</div>
+        <div class="rule">Before <b>although</b> and <b>even though</b> in the middle of a sentence, the comma is optional. Your book uses both forms.</div>
+        <div class="rule">Before <b>because</b>, <b>so that</b>, <b>in case</b> and <b>to</b> in the middle of a sentence, there is normally no comma.</div>
+        <div class="wordlist">
+          <span>so</span><span>because</span><span>as</span><span>since</span><span>because of</span><span>due to</span><span>owing to</span><span>to</span><span>in order to</span><span>so as to</span><span>so that</span><span>in case</span><span>but</span><span>yet</span><span>although</span><span>even though</span><span>though</span><span>despite</span><span>in spite of</span>
+        </div>
+      </div>
+      <div class="fam signposts">
+        <h3>Family 2 · Signposts</h3>
+        <p class="tagline">Signposts connect a new sentence to the sentence before it. They cannot join two clauses on their own.</p>
+        <div class="rule">Before a signpost, use a <b>full stop or a semicolon</b>, never only a comma. This is why <b>however</b> cannot replace <b>but</b>: <em>It was expensive, but we bought it.</em> / <em>It was expensive. However, we bought it.</em></div>
+        <div class="rule">When a signpost <b>starts a sentence</b>, put a comma after it: <em>However, it may be too expensive.</em> / <em>Therefore, we have decided to close.</em></div>
+        <div class="rule"><b>Therefore</b> and <b>consequently</b> can also go before the main verb. In that position they take no commas: <em>…and therefore we are unable to offer you the job.</em></div>
+        <div class="wordlist">
+          <span>however</span><span>therefore</span><span>consequently</span><span>as a result</span><span>nevertheless</span><span>nonetheless</span>
+        </div>
+      </div>
+    </section>
+    <div class="nextblock"><div class="nb-text">When you have read the key words and both families, continue to step 2.</div><button class="btn" id="famDone">I have read this — go to step 2</button></div>
+
+    <div class="stepintro" id="menuStart"><span class="stepno">Step 2</span> Each card on the Menu shows one linker. Open a card to see what must follow the linker, where it goes in the sentence and how it is punctuated, how formal it is, an example, and the most common mistakes. You can use the filters to group the linkers in different ways: for example, choose <b>What follows: + noun / -ing</b> to see only the linkers that cannot be followed by a clause. <b>To complete this step, open at least one card of each colour.</b></div>
+    <div class="filterbar">
+      <div class="fgroup">
+        <span class="flabel">Meaning</span>
+        <div id="f-meaning"></div>
+      </div>
+      <div class="fgroup">
+        <span class="flabel">What follows</span>
+        <div id="f-follows"></div>
+      </div>
+      <div class="fgroup">
+        <span class="flabel">Formality</span>
+        <div id="f-register"></div>
+      </div>
+      <span class="counthint" id="countHint"></span>
+    </div>
+
+    <div id="boards"></div>
+    <div class="nextblock" data-gate="2"><div class="nb-text">To complete this step, open at least one card of each colour.<div class="ticks" id="menuProg"></div></div><button class="btn" data-go="step:3">Go to step 3: the Bench</button><div class="gate" hidden></div></div>
+  </main>
+
+  <!-- ══ STEP 3 · BENCH ══ -->
+  <main id="view-bench" hidden>
+    <div class="intro">
+      <h3><span class="stepno">Step 3</span> The Bench</h3>
+      <p>On each bench you will see the two halves of a sentence. Tap a linker to join them. The facts stay the same, but each linker changes something: the order of the two halves, the punctuation, the formality, or the form of the second half. Before each tap, try to predict the result. Will there be a comma or a full stop? Will the second half need to change? Then read the explanation under the sentence. <b>To complete this step, try at least three linkers on each of the three benches.</b></p>
+    </div>
+    <div class="bench-pick" id="benchPick"></div>
+    <div class="clauses">
+      <div class="clause-card"><span class="tag">First half</span><span id="clauseA"></span></div>
+      <div class="plus">+</div>
+      <div class="clause-card"><span class="tag">Second half</span><span id="clauseB"></span></div>
+    </div>
+    <div class="bench-out">
+      <div class="bench-sentence" id="benchSentence"></div>
+      <div class="bench-why" id="benchWhy"></div>
+    </div>
+    <div class="lkrow" id="benchLinkers"></div>
+    <div class="nextblock" data-gate="3"><div class="nb-text">To complete this step, try at least three linkers on each bench.<div class="ticks" id="benchProg"></div></div><button class="btn" data-go="step:4">Go to step 4: Practice</button><div class="gate" hidden></div></div>
+  </main>
+
+  <!-- ══ STEP 4 · PRACTICE ══ -->
+  <main id="view-practice" hidden>
+    <div class="stepintro"><span class="stepno">Step 4</span> There are three short activities. Please do them in order: each one ends with a button that takes you to the next. Your answers are saved as you go.</div>
+    <div class="subtabs" role="tablist" aria-label="Practice activities">
+      <button class="tab" role="tab" aria-selected="true" data-sub="join">1 · Build the sentence <span class="cnt"></span></button>
+      <button class="tab" role="tab" aria-selected="false" data-sub="spot">2 · Spot the error <span class="cnt"></span></button>
+      <button class="tab" role="tab" aria-selected="false" data-sub="swap">3 · Register swap <span class="cnt"></span></button>
+    </div>
+    <div id="sub-join"></div>
+    <div id="sub-spot" hidden></div>
+    <div id="sub-swap" hidden></div>
+  </main>
+
+  <!-- ══ RESULTS ══ -->
+  <main id="view-results" hidden>
+    <div class="intro"><h3>My results</h3><p>This page summarises the work you have done on this device. Write your name, copy your results, and paste them where your teacher has asked you to — for example, in a forum post, an email or a message.</p></div>
+    <div class="q">
+      <label class="row-title" for="nameIn">Your name</label>
+      <input id="nameIn" class="namein" type="text" autocomplete="name" maxlength="80" placeholder="Write your name so that your teacher knows who you are">
+    </div>
+    <div class="restiles" id="resTiles"></div>
+    <div class="q" id="resTodoBox"><div class="row-title">Still to do</div><div id="resTodo"></div></div>
+    <div class="q"><div class="row-title">Linkers to review</div><div id="resReview"></div></div>
+    <div class="q">
+      <label class="row-title" for="resText">Your results, ready to paste</label>
+      <textarea id="resText" class="answer" rows="8" readonly></textarea>
+      <div class="qactions"><button class="btn" id="copyBtn">Copy my results</button><span class="alt" id="copyMsg" aria-live="polite"></span></div>
+    </div>
+    <div class="q">
+      <div class="row-title">Start again from the beginning</div>
+      <p class="note" style="margin:0 0 12px">This deletes everything saved on this device: your progress, your answers and your name. Use it if you share this computer with other people, or if you want to do all the activities again.</p>
+      <button class="btn sec" id="resetBtn">Start fresh</button>
+    </div>
+  </main>
+
+  <footer class="foot">Class of Coffee – with AI assistance</footer>
+</div>
+
+<div class="sheet-wrap" id="sheetWrap" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<script>
+/* ═══════════════ DATA ═══════════════
+   follows:  clause | noun | inf | modal
+   reg:      1 informal · 2 neutral · 3 formal
+   pattern:  {C} clause  {S} sentence  {N} noun/-ing  {I} infinitive  {M} modal clause
+             *word* = the linker itself · "?," = optional comma
+   ════════════════════════════════════ */
+const FOLLOWS = {
+  clause: {label:'+ subject + verb', text:'a clause (a subject and a verb)'},
+  noun:   {label:'+ noun / -ing',    text:'a noun phrase, an <em>-ing</em> form, or <em>the fact that</em> + a clause'},
+  inf:    {label:'+ to + verb',      text:'an infinitive'},
+  modal:  {label:'+ can / could / will / would', text:'a clause with a modal verb (<em>can, could, will, would</em>)'}
+};
+const REG = {1:'informal · conversation and messages', 2:'neutral · suitable for most situations', 3:'formal · notices, reports and essays'};
+const MEANINGS = [
+  {id:'result',   name:'Result',   q:'What happened because of it?'},
+  {id:'reason',   name:'Reason',   q:'Why did it happen?'},
+  {id:'purpose',  name:'Purpose',  q:'What was the aim?'},
+  {id:'contrast', name:'Contrast', q:'What is different or surprising?'}
+];
+
+const DATA = [
+/* ── RESULT ── */
+{id:'so', word:'so', m:'result', follows:'clause', reg:2, posn:'joiner',
+ pattern:'{C}, *so* {C}.',
+ teaser:'The most common way to introduce a result. It joins two clauses in one sentence.',
+ ex:'We had run out of oat milk, <b>so</b> I had my coffee black.',
+ note:'<b>So</b> introduces the result of what you have just said. It joins two clauses inside one sentence, and in writing there is normally a comma before it. It is neutral, so you can use it in conversation and in most kinds of writing; in very formal texts, <em>therefore</em> or <em>consequently</em> are more usual.',
+ watch:'Do not confuse <b>so</b> (result) with <b>so that</b> (purpose). <em>I got up early, so I caught the train</em> means that catching the train was the result. <em>I got up early so that I could catch the train</em> means that catching the train was my aim. The comma before <b>so</b> helps the reader to see that you mean a result.'},
+{id:'as-a-result', word:'as a result', m:'result', follows:'clause', reg:2, posn:'signpost',
+ pattern:'{S}. *As a result*, {S}.',
+ teaser:'A signpost for results. It normally starts a new sentence and is followed by a comma.',
+ ex:'The grinder broke on Monday. <b>As a result</b>, we served filter coffee all week.',
+ note:'<b>As a result</b> refers back to the previous sentence and introduces its consequence. It normally starts a new sentence and is followed by a comma. It can also come after a semicolon: <em>The grinder broke on Monday; as a result, we served filter coffee all week.</em> It is neutral to formal.'},
+{id:'therefore', word:'therefore', m:'result', follows:'clause', reg:3, posn:'signpost',
+ pattern:'{S}. *Therefore*, {S}.',
+ teaser:'A formal signpost for results. It can start a sentence or go before the main verb.',
+ ex:'The lease ends in June. We have <b>therefore</b> started looking for a new café.',
+ note:'<b>Therefore</b> is formal and is typical of reports, essays and official letters. It can go in two positions. At the start of a sentence, it is followed by a comma: <em>Therefore, we have started looking…</em> Before the main verb, or after an auxiliary verb, it takes no commas: <em>We have therefore started looking…</em> / <em>…and therefore we are unable to offer you the job.</em>',
+ watch:'<b>Therefore</b> cannot join two clauses on its own. <span class="x">✗</span> <em>It was raining therefore we stayed in.</em> You need a full stop or a semicolon before it: <em>It was raining. Therefore, we stayed in.</em> Alternatively, use <em>so</em>: <em>It was raining, so we stayed in.</em>'},
+{id:'consequently', word:'consequently', m:'result', follows:'clause', reg:3, posn:'signpost',
+ pattern:'{S}. *Consequently*, {S}.',
+ teaser:'A formal signpost for results. It is used in the same positions as therefore.',
+ ex:'Two members of staff were ill. <b>Consequently</b>, we opened an hour late.',
+ note:'<b>Consequently</b> means the same as <em>therefore</em> and is used in the same positions, with the same punctuation. Both are formal, so they sound unnatural in conversation or in a message to a friend.'},
+
+/* ── REASON ── */
+{id:'because', word:'because', m:'reason', follows:'clause', reg:2, posn:'joiner',
+ pattern:'{C} *because* {C}.',
+ teaser:'The most common way to give a reason. It is followed by a clause.',
+ ex:'I have stopped emailing her <b>because</b> she never answers.',
+ note:'<b>Because</b> is neutral and can be used in any situation. It is followed by a clause. It is also the only reason linker that can answer a question on its own: — <em>Why did you leave?</em> — <em>Because I was tired.</em> You cannot answer with <em>as</em> or <em>since</em> in this way.',
+ watch:'In the middle of a sentence, there is normally no comma before <b>because</b>. If the <b>because</b> clause comes first, put a comma at the end of it: <em>Because she never answers, I have stopped emailing her.</em>'},
+{id:'as', word:'as', m:'reason', follows:'clause', reg:2, posn:'joiner',
+ pattern:'*As* {C}, {C}.',
+ teaser:'Gives a reason, usually at the start of the sentence. It is slightly more formal than because.',
+ ex:'<b>As</b> it has not stopped raining, we have decided to stay in.',
+ note:'<b>As</b> gives a reason and is followed by a clause. It often comes at the start of the sentence, with a comma at the end of the first clause. It is slightly more formal than <em>because</em> and is more common in writing than in speech.',
+ watch:'<b>As</b> can also mean <em>while</em> or <em>at the same time as</em>: <em>As I was eating, the phone rang</em> refers to time, not to a reason. If your sentence could be understood in both ways, use <b>because</b>.'},
+{id:'since', word:'since', m:'reason', follows:'clause', reg:3, posn:'joiner',
+ pattern:'*Since* {C}, {C}.',
+ teaser:'Gives a reason, often at the start of the sentence. It is more formal than because.',
+ ex:'<b>Since</b> the café was empty, we closed early.',
+ note:'<b>Since</b> gives a reason and is followed by a clause. Like <em>as</em>, it often starts the sentence, with a comma at the end of the first clause. It is more formal than <em>because</em>.',
+ watch:'<b>Since</b> can also refer to time: <em>I have known her since 2019.</em> If there is any risk of confusion, use <b>because</b>.'},
+{id:'seeing-as', word:'seeing as / seeing that', m:'reason', follows:'clause', reg:1, posn:'joiner',
+ pattern:'*Seeing as* {C}, {C}.',
+ teaser:'An informal way of giving a reason, used mainly in conversation.',
+ ex:'<b>Seeing as</b> you are up, could you put the kettle on?',
+ note:'<b>Seeing as</b> and <b>seeing that</b> are informal and are used mainly in conversation. They are followed by a clause. They often give the reason for a suggestion or a request, as in the example.',
+ ukus:'<b>Seeing as</b> is common in informal British English. American speakers more often say <em>since</em>, or, in very informal speech, <em>seeing as how</em>.'},
+{id:'because-of', word:'because of', m:'reason', follows:'noun', reg:2, posn:'joiner',
+ pattern:'{C} *because of* {N}.',
+ teaser:'Gives a reason. It is followed by a noun phrase or an -ing form, not by a clause.',
+ ex:'It took us twenty minutes longer <b>because of</b> the traffic.',
+ note:'<b>Because of</b> is neutral. It is followed by a noun phrase (<em>the traffic</em>), an <em>-ing</em> form (<em>the traffic being so heavy</em>), or <em>the fact that</em> + a clause.',
+ watch:'Do not put a clause directly after <b>because of</b>. <span class="x">✗</span> <em>because of the traffic was heavy</em> → <em>because of the heavy traffic</em>, or use <em>because</em>: <em>because the traffic was heavy</em>.'},
+{id:'due-to', word:'due to', m:'reason', follows:'noun', reg:3, posn:'joiner',
+ pattern:'{C} *due to* {N}.',
+ teaser:'A formal way of giving a reason. It is followed by a noun phrase.',
+ ex:'The upstairs room is closed <b>due to</b> a water leak.',
+ note:'<b>Due to</b> has the same grammar as <em>because of</em>: it is followed by a noun phrase, an <em>-ing</em> form or <em>the fact that</em> + a clause. It is more formal, so it is common in announcements, notices and reports.',
+ watch:'<span class="x">✗</span> <em>due to the staff are on strike</em> → <em>due to a strike</em>, or <em>due to the fact that the staff are on strike</em>.'},
+{id:'owing-to', word:'owing to', m:'reason', follows:'noun', reg:3, posn:'joiner',
+ pattern:'*Owing to* {N}, {C}.',
+ teaser:'The most formal way of giving a reason. It is followed by a noun phrase.',
+ ex:'<b>Owing to</b> adverse weather conditions, flight 341 has been delayed.',
+ note:'<b>Owing to</b> has the same grammar as <em>due to</em> and <em>because of</em>. It is the most formal of the three and is typical of official announcements and formal writing.',
+ ukus:'<b>Owing to</b> is more frequent in British English, particularly in formal writing and public announcements. American English more often uses <em>due to</em>.'},
+
+/* ── PURPOSE ── */
+{id:'to', word:'to', m:'purpose', follows:'inf', reg:2, posn:'joiner',
+ pattern:'{C} *to* {I}.',
+ teaser:'The most common way to express purpose. It is followed by an infinitive.',
+ ex:'I went up to the counter <b>to</b> order.',
+ note:'<b>To</b> + infinitive is the simplest and most common way to say why someone does something. Use it when the subject of both parts of the sentence is the same: <em>I</em> went up to the counter, and <em>I</em> wanted to order.',
+ watch:'Do not use <em>for</em> before a verb to express purpose. <span class="x">✗</span> <em>I came here for to improve my English.</em> <span class="x">✗</span> <em>I came here for improve my English.</em> → <em>I came here to improve my English.</em>'},
+{id:'in-order-to', word:'in order to', m:'purpose', follows:'inf', reg:3, posn:'joiner',
+ pattern:'{C} *in order to* {I}.',
+ teaser:'A more formal way of expressing purpose. It is followed by an infinitive.',
+ ex:'Please arrive by 09:45 <b>in order to</b> allow time for registration.',
+ note:'<b>In order to</b> means the same as <em>to</em>, but it is more formal. It is common in instructions, formal writing and official notices. The negative form is <em>in order not to</em>: <em>I left early in order not to miss the train.</em>'},
+{id:'so-as-to', word:'so as to', m:'purpose', follows:'inf', reg:3, posn:'joiner',
+ pattern:'{C} *so as to* {I}.',
+ teaser:'A formal way of expressing purpose, most often used in the negative.',
+ ex:'He closed the door quietly <b>so as not to</b> wake the baby.',
+ note:'<b>So as to</b> is followed by an infinitive and is formal. It is used much more often in the negative form, <em>so as not to</em>, than in the positive.'},
+{id:'so-that', word:'so (that)', m:'purpose', follows:'modal', reg:2, posn:'joiner',
+ pattern:'{C} *so that* {M}.',
+ teaser:'Expresses purpose with a full clause. You need it when the subject changes.',
+ ex:'They moved to London <b>so that</b> they could see their grandchildren more often.',
+ note:'<b>So that</b> is followed by a clause, usually with a modal verb: <em>can</em> or <em>will</em> when you are talking about the present or the future, and <em>could</em> or <em>would</em> when you are talking about the past. In informal speech, <em>that</em> is often left out: <em>I left early so I could catch the train.</em>',
+ watch:'When the two parts of the sentence have different subjects, you must use <b>so that</b>, not <em>to</em>: <em>She put a blanket over the baby so that he would not be cold.</em>'},
+{id:'in-case', word:'in case', m:'purpose', follows:'clause', reg:2, posn:'joiner',
+ pattern:'{C} *in case* {C}.',
+ teaser:'Explains that you do something now because something might happen later.',
+ ex:'Keep the receipt <b>in case</b> your dad does not like the jumper.',
+ note:'We use <b>in case</b> to explain why we do something in advance, as a precaution against a possible problem in the future. It is followed by a clause, and the verb is in the present simple even though it refers to the future.',
+ watch:'<b>In case</b> and <b>if</b> do not mean the same. <em>Take an umbrella in case it rains</em> means: take it now, because it might rain later. <em>Take an umbrella if it rains</em> means: take it only if it is already raining. Also, do not use <em>will</em> after <b>in case</b>: <span class="x">✗</span> <em>in case it will rain</em> → <em>in case it rains</em>.'},
+
+/* ── CONTRAST ── */
+{id:'but', word:'but', m:'contrast', follows:'clause', reg:2, posn:'joiner',
+ pattern:'{C}?, *but* {C}.',
+ teaser:'The most common way to join two contrasting ideas in one sentence.',
+ ex:'The meeting was fine, <b>but</b> the journey home was a nightmare.',
+ note:'<b>But</b> joins two contrasting clauses in one sentence. It is the most common and the most informal contrast linker. In writing there is usually a comma before it, although the comma can be left out when both clauses are short: <em>It was cheap but it worked.</em>'},
+{id:'yet', word:'yet', m:'contrast', follows:'clause', reg:3, posn:'joiner',
+ pattern:'{C}?, *yet* {C}.',
+ teaser:'Joins two contrasting ideas, like but, in more formal or literary writing.',
+ ex:'The café is tiny, <b>yet</b> it seats forty people.',
+ note:'<b>Yet</b> is used in the same position as <em>but</em>, usually with a comma before it. It is more formal or literary, and it often suggests that the second idea is surprising.'},
+{id:'however', word:'however', m:'contrast', follows:'clause', reg:2, posn:'signpost',
+ pattern:'{S}. *However*, {S}.',
+ teaser:'A signpost for contrast. It starts a new sentence and is always followed by a comma.',
+ ex:'The coffee here is excellent. <b>However</b>, you will have to queue for it.',
+ note:'<b>However</b> refers back to the previous sentence. It normally starts a new sentence, or comes after a semicolon, and it is followed by a comma. It can also go in the middle of a sentence, between two commas: <em>You will, however, have to queue for it.</em> The comma after <b>however</b> is important: without it, <em>However you look at it…</em> means <em>in whatever way you look at it</em>.',
+ watch:'<b>However</b> cannot join two clauses in the way that <em>but</em> or <em>although</em> do. <span class="x">✗</span> <em>However it was expensive, we bought it.</em> → <em>Although it was expensive, we bought it.</em> or <em>It was expensive. However, we bought it.</em>'},
+{id:'nevertheless', word:'nevertheless', m:'contrast', follows:'clause', reg:3, posn:'signpost',
+ pattern:'{S}. *Nevertheless*, {S}.',
+ teaser:'A formal signpost for contrast. It is used in the same way as however.',
+ ex:'Sales have fallen for three quarters. <b>Nevertheless</b>, nobody has lost their job.',
+ note:'<b>Nevertheless</b> is used in the same positions as <em>however</em>, with the same punctuation, but it is more formal. <em>Nonetheless</em> has the same meaning.'},
+{id:'although', word:'although', m:'contrast', follows:'clause', reg:2, posn:'joiner',
+ pattern:'*Although* {C}, {C}.',
+ teaser:'Introduces a contrasting clause. It can go at the start or in the middle of the sentence.',
+ ex:'<b>Although</b> she is working very hard, she will not catch up.',
+ note:'<b>Although</b> is followed by a clause. When the <b>although</b> clause comes first, put a comma at the end of it: <em>Although it was late, we stayed.</em> When it comes second, the comma before it is optional: <em>We stayed although it was late.</em> / <em>We stayed, although it was late.</em> Your book uses both forms.',
+ watch:'Do not put a comma directly after <b>although</b>: <span class="x">✗</span> <em>Although, it was late…</em> And do not use <em>but</em> in the same sentence: <span class="x">✗</span> <em>Although it was expensive, but we bought it.</em> One contrast linker is enough.'},
+{id:'even-though', word:'even though', m:'contrast', follows:'clause', reg:2, posn:'joiner',
+ pattern:'*Even though* {C}, {C}.',
+ teaser:'Used like although, but stronger. It shows that the contrast is surprising.',
+ ex:'<b>Even though</b> I was offered a better salary, I turned the job down.',
+ note:'<b>Even though</b> has the same grammar and punctuation as <em>although</em>, but it is more emphatic. Use it when the contrast is surprising or unexpected.'},
+{id:'though', word:'though', m:'contrast', follows:'clause', reg:1, posn:'joiner/end',
+ pattern:'{S}, *though*.',
+ teaser:'Used like although. In spoken English it can also go at the end of a sentence.',
+ ex:'The coffee is good. It is four euros a cup, <b>though</b>.',
+ note:'<b>Though</b> can be used like <em>although</em>, at the start or in the middle of a sentence. In spoken English it can also go at the end of a sentence, after a comma, to add a contrasting comment. None of the other linkers on this page can be used in that position.',
+ ukus:'<b>Though</b> at the end of a sentence is common in both British and American English. In both varieties it is informal and is avoided in formal writing.'},
+{id:'in-spite-of', word:'in spite of', m:'contrast', follows:'noun', reg:2, posn:'joiner',
+ pattern:'{C} *in spite of* {N}.',
+ teaser:'Introduces a contrast. It is followed by a noun phrase or an -ing form, not by a clause.',
+ ex:'She still travels all over the world <b>in spite of</b> being eighty-five.',
+ note:'<b>In spite of</b> is followed by a noun phrase (<em>in spite of the rain</em>), an <em>-ing</em> form (<em>in spite of being tired</em>) or <em>the fact that</em> + a clause (<em>in spite of the fact that she was tired</em>).',
+ watch:'<b>In spite of</b> is always three separate words. Do not put a clause directly after it: <span class="x">✗</span> <em>In spite of she was tired…</em> → <em>In spite of being tired…</em>'},
+{id:'despite', word:'despite', m:'contrast', follows:'noun', reg:2, posn:'joiner',
+ pattern:'*Despite* {N}, {C}.',
+ teaser:'Means the same as in spite of and has the same grammar, but there is no "of".',
+ ex:'<b>Despite</b> the long queue outside, we waited.',
+ note:'<b>Despite</b> has the same meaning and grammar as <em>in spite of</em>. It is followed by a noun phrase, an <em>-ing</em> form or <em>the fact that</em> + a clause.',
+ watch:'<span class="x">✗</span> <em>despite of</em> does not exist. Use either <b>despite</b> or <b>in spite of</b>.'}
+];
+
+/* ═══════════════ STEP 3 · THE BENCH ═══════════════ */
+const SCENARIOS = [
+{id:'late', name:'Why we opened late', a:'We opened an hour late.', b:'The delivery van broke down.',
+ versions:[
+  {id:'because', t:'We opened an hour late *because* the delivery van broke down.',
+   why:'With <b>because</b>, both halves stay in one sentence and there is no comma. The reason comes in the second half.'},
+  {id:'since', t:'*Since* the delivery van broke down~,~ we opened an hour late.',
+   why:'When the reason comes first, as it does here with <b>since</b>, a comma separates the two halves. <b>Since</b> is more formal than <em>because</em>.'},
+  {id:'because-of', t:'We opened an hour late *because of* a breakdown.',
+   why:'<b>Because of</b> cannot be followed by a clause, so <em>the delivery van broke down</em> has to become a noun phrase: <em>a breakdown</em>.'},
+  {id:'due-to', t:'We opened an hour late *due to* a breakdown.',
+   why:'<b>Due to</b> has the same grammar as <em>because of</em>, but it is more formal. This is the kind of sentence you might read on a notice.'},
+  {id:'owing-to', t:'*Owing to* a breakdown~,~ we opened an hour late.',
+   why:'<b>Owing to</b> is the most formal option. Because it starts the sentence, there is a comma at the end of the first half.'},
+  {id:'so', t:'The delivery van broke down~,~ *so* we opened an hour late.',
+   why:'With a result linker, the order of the halves changes: the cause comes first and the result second. There is a comma before <b>so</b>.'},
+  {id:'as-a-result', t:'The delivery van broke down~.~ *As a result*~,~ we opened an hour late.',
+   why:'<b>As a result</b> is a signpost, so it starts a new sentence. There is a full stop before it and a comma after it.'},
+  {id:'therefore', t:'The delivery van broke down~.~ We *therefore* opened an hour late.',
+   why:'<b>Therefore</b> can go before the main verb. In this position it does not need any commas.'}
+ ]},
+{id:'tiny', name:'The tiny café', a:'The café is tiny.', b:'It seats forty people.',
+ versions:[
+  {id:'but', t:'The café is tiny~,~ *but* it seats forty people.', why:'The two halves stay in one sentence, with a comma before <b>but</b>. Because both halves are short, the comma could also be left out.'},
+  {id:'yet', t:'The café is tiny~,~ *yet* it seats forty people.', why:'<b>Yet</b> goes in the same position as <em>but</em>, with a comma before it. It sounds more formal or literary.'},
+  {id:'however', t:'The café is tiny~.~ *However*~,~ it seats forty people.', why:'<b>However</b> is a signpost, so the sentence divides in two. There is a full stop before it and a comma after it.'},
+  {id:'nevertheless', t:'The café is tiny~.~ *Nevertheless*~,~ it seats forty people.', why:'<b>Nevertheless</b> has the same position and punctuation as <em>however</em>, but it is more formal.'},
+  {id:'although', t:'*Although* the café is tiny~,~ it seats forty people.', why:'The <b>although</b> clause comes first, so there is a comma at the end of it. There is no comma directly after <b>although</b>.'},
+  {id:'even-though', t:'*Even though* the café is tiny~,~ it seats forty people.', why:'<b>Even though</b> has the same punctuation as <em>although</em>, but it gives the contrast more emphasis.'},
+  {id:'though', t:'The café is tiny~.~ It seats forty people~,~ *though*.', why:'Only <b>though</b> can go at the end of a sentence, after a comma. This use is informal and typical of spoken English.'},
+  {id:'despite', t:'*Despite* its size~,~ it seats forty people.', why:'<b>Despite</b> must be followed by a noun phrase, so the clause <em>the café is tiny</em> becomes <em>its size</em>.'},
+  {id:'in-spite-of', t:'*In spite of* being tiny~,~ it seats forty people.', why:'<b>In spite of</b> is followed here by an <em>-ing</em> form, <em>being tiny</em>. The subject is not repeated in the first half, because it is the same as the subject of the second half (<em>it</em>, the café).'}
+ ]},
+{id:'window', name:'The window table', a:'I get to the café at seven.', b:'I want the table by the window.',
+ versions:[
+  {id:'to', t:'I get to the café at seven *to* get the table by the window.',
+   why:'The subject is the same in both halves (<em>I</em>), so <b>to</b> + infinitive is enough. There is no comma.'},
+  {id:'in-order-to', t:'I get to the café at seven *in order to* get the table by the window.',
+   why:'<b>In order to</b> means the same as <em>to</em>, but it is more formal. Nothing else in the sentence changes.'},
+  {id:'so-as-to', t:'I get to the café at seven *so as to* get the table by the window.',
+   why:'<b>So as to</b> is also formal. It is more common in the negative form, <em>so as not to</em>.'},
+  {id:'so-that', t:'I get to the café at seven *so that* I can get the table by the window.',
+   why:'<b>So that</b> is followed by a full clause with a modal verb: <em>I can get</em>. It is the only option here that would still work if the subject changed: <em>…so that my friend can have the window table.</em>'},
+  {id:'in-case', t:'I get to the café at seven *in case* the window table goes early.',
+   why:'<b>In case</b> changes the meaning. Arriving at seven is now a precaution, because somebody else might take the window table early.'}
+ ]}
+];
+const BENCH_MIN = 3;
+
+/* ═══════════════ PRACTICE 1 · BUILD THE SENTENCE ═══════════════
+   Three sentences, each testing a different change:
+   a clause becomes a noun phrase · a clause becomes an -ing form ·
+   a joiner becomes a signpost.                                      */
+const TYPES = {clause:'a clause (a subject and a verb)',
+               noun:'a noun phrase or an <em>-ing</em> form',
+               inf:'an infinitive',
+               modal:'a clause with a modal verb'};
+const BUILD = [
+{a:'It took us ages to get there',
+ linkers:[{w:'because', takes:'clause', join:'mid'},
+          {w:'because of', takes:'noun', join:'mid'},
+          {w:'however', takes:'clause', join:'signpost'}],
+ parts:[{t:'the traffic was heavy', type:'clause'},
+        {t:'the heavy traffic', type:'noun'},
+        {t:'the traffic being so heavy', type:'noun'}],
+ combos:{
+  '0-0':{v:'ok', why:'<b>Because</b> is followed by a clause (<em>the traffic was heavy</em>), and there is no comma before it.'},
+  '1-1':{v:'ok', why:'<b>Because of</b> must be followed by a noun phrase, and <em>the heavy traffic</em> is one. Notice how the clause <em>the traffic was heavy</em> has changed: the adjective <em>heavy</em> now goes before the noun, and there is no verb.'},
+  '1-2':{v:'ok', why:'Here <b>because of</b> is followed by an <em>-ing</em> form: <em>the traffic being so heavy</em>. This keeps most of the original words but changes the verb <em>was</em> into <em>being</em>.'},
+  '2-0':{v:'meaning', why:'This sentence is grammatically possible, but the meaning is wrong. <b>However</b> introduces a contrast, so it suggests that the heavy traffic should have made the journey quicker.'}}},
+
+{a:'We enjoyed the meal',
+ linkers:[{w:'in spite of', takes:'noun', join:'mid'},
+          {w:'even though', takes:'clause', join:'mid'},
+          {w:'because of', takes:'noun', join:'mid'}],
+ parts:[{t:'our table was right by the door', type:'clause'},
+        {t:'our table being right by the door', type:'noun'},
+        {t:'the noise from the kitchen', type:'noun'}],
+ combos:{
+  '0-1':{v:'ok', why:'<b>In spite of</b> is followed by an <em>-ing</em> form. The clause <em>our table was right by the door</em> becomes <em>our table being right by the door</em>.'},
+  '0-2':{v:'ok', why:'<b>In spite of</b> is followed by a noun phrase, <em>the noise from the kitchen</em>. This is the shortest correct version.'},
+  '1-0':{v:'ok', why:'<b>Even though</b> is followed by a clause, so the second half does not need to change. A comma before <em>even though</em> would also be correct.'},
+  '2-1':{v:'meaning', why:'This is grammatically correct, but the meaning is wrong. <b>Because of</b> gives a reason, so the sentence now says that we enjoyed the meal because our table was by the door.'},
+  '2-2':{v:'meaning', why:'This is grammatically correct, but the meaning is wrong. The sentence now says that the noise from the kitchen was the reason why we enjoyed the meal.'}}},
+
+{a:'It seats forty people',
+ linkers:[{w:'but', takes:'clause', join:'midcomma'},
+          {w:'however', takes:'clause', join:'signpost'},
+          {w:'despite', takes:'noun', join:'mid'}],
+ parts:[{t:'the café is tiny', type:'clause'},
+        {t:'its size', type:'noun'},
+        {t:'being so small', type:'noun'}],
+ combos:{
+  '0-0':{v:'ok', why:'<b>But</b> joins the two halves in one sentence, with a comma before it. Because both halves are short, the comma could also be left out.'},
+  '1-0':{v:'ok', why:'The halves and the meaning are the same as in the <em>but</em> version, but <b>however</b> is a signpost, so the sentence divides in two: there is a full stop, a capital letter, and a comma after <em>However</em>. Build the <em>but</em> version as well and compare the two.'},
+  '2-1':{v:'ok', why:'<b>Despite</b> is followed by a noun phrase. The clause <em>the café is tiny</em> has become <em>its size</em>.'},
+  '2-2':{v:'ok', why:'<b>Despite</b> is followed by an <em>-ing</em> form, <em>being so small</em>.'}}}
+];
+
+/* ═══════ PRACTICE 2 · SPOT THE ERROR — errors Spanish and Catalan speakers often make ═══════ */
+const SPOT = [
+{chunks:['I came to Barcelona','for to improve','my English.'], bad:1,
+ opts:[{t:'to improve', ok:true, why:'To express purpose, use <b>to</b> + infinitive. <em>For</em> is not used before a verb in this way in English, even though a similar word is used in Spanish and Catalan.'},
+       {t:'for improving', ok:false, why:'<em>For</em> + <em>-ing</em> describes what an object is generally used for (<em>a knife for cutting bread</em>). It does not explain why a person did something.'},
+       {t:'for improve', ok:false, why:'<em>For</em> cannot be followed by an infinitive.'}]},
+{chunks:['Although it was expensive,','but we bought it.'], bad:1,
+ opts:[{t:'we bought it.', ok:true, why:'One contrast linker is enough. <em>Although</em> already expresses the contrast, so <em>but</em> must be removed.'},
+       {t:'but we bought it anyway.', ok:false, why:'This still has two contrast linkers in one sentence: <em>although</em> and <em>but</em>.'},
+       {t:'we bought it, though.', ok:false, why:'This also has two contrast linkers: <em>although</em> at the start and <em>though</em> at the end.'}]},
+{chunks:['Despite of the queue,','we waited.'], bad:0,
+ opts:[{t:'Despite the queue,', ok:true, why:'<b>Despite</b> is never followed by <em>of</em>. The expression with <em>of</em> is <em>in spite of</em>, which has the same meaning.'},
+       {t:'In spite the queue,', ok:false, why:'<em>In spite</em> needs <em>of</em>: <em>in spite of the queue</em>.'},
+       {t:'Despite that the queue,', ok:false, why:'<em>Despite that</em> cannot introduce a noun phrase like this. If you want to use a clause after <em>despite</em>, you need <em>despite the fact that</em>.'}]},
+{chunks:['We were late','because of the bus didn’t come.'], bad:1,
+ opts:[{t:'because the bus didn’t come.', ok:true, why:'A clause (<em>the bus didn’t come</em>) must follow <b>because</b>, not <em>because of</em>. Use <em>because of</em> before a noun phrase: <em>because of the bus</em>.'},
+       {t:'because of the bus didn’t arrive.', ok:false, why:'Changing the verb does not solve the problem: <em>because of</em> still cannot be followed by a clause.'},
+       {t:'due to the bus didn’t come.', ok:false, why:'<em>Due to</em> has the same grammar as <em>because of</em>, so it cannot be followed by a clause either.'}]},
+{chunks:['Take your coat','in case it will rain.'], bad:1,
+ opts:[{t:'in case it rains.', ok:true, why:'After <b>in case</b>, use the present simple, even when you are talking about the future.'},
+       {t:'in case it is going to rain.', ok:false, why:'<em>Going to</em> is also a future form. After <em>in case</em>, use the present simple.'},
+       {t:'if it will rain.', ok:false, why:'This has two problems. <em>If</em> changes the meaning (take your coat only when it is raining), and <em>will</em> is not used in this kind of <em>if</em> clause.'}]},
+{chunks:['However it was late,','we carried on.'], bad:0,
+ opts:[{t:'Although it was late,', ok:true, why:'This sentence needs a linker that can join two clauses, such as <b>although</b>. <em>However</em> is a signpost and cannot do this.'},
+       {t:'However, it was late,', ok:false, why:'Adding a comma does not help. The sentence would have two clauses joined only by a comma, which is not correct in English.'},
+       {t:'Nevertheless it was late,', ok:false, why:'<em>Nevertheless</em> is also a signpost, so it cannot join two clauses either.'}]},
+{chunks:['Owing to a water leak,','the upstairs room is closed.'], bad:-1, correct:true,
+ opts:[], why:'<b>Owing to</b> is followed by a noun phrase (<em>a water leak</em>), it comes at the start of the sentence, and there is a comma at the end of the first part. This is a typical sentence for a formal notice.'}
+];
+
+/* ═══════════════ PRACTICE 3 · REGISTER SWAP ═══════════════ */
+const SWAP = [
+{topic:'The late delivery', meaning:'reason',
+ a:{who:'Message to colleagues', pre:'We’re opening late tomorrow', post:'the delivery’s running behind.',
+    opts:[{w:'because', v:'ok', why:'<b>Because</b> is neutral and sounds natural in a message to colleagues.'},
+          {w:'as', v:'close', why:'This is grammatically correct, but <em>as</em> is more typical of written English and sounds rather formal in a message to colleagues.'},
+          {w:'since', v:'close', why:'This is grammatically correct, but <em>since</em> is more formal than <em>because</em> and sounds unnatural in a quick message.'}]},
+ b:{who:'Notice on the café door', pre:'The café will open at 10:00 tomorrow', post:'a delayed delivery.',
+    opts:[{w:'owing to', v:'ok', why:'<b>Owing to</b> is formal, which suits a public notice, and it is followed by a noun phrase (<em>a delayed delivery</em>).'},
+          {w:'because of', v:'close', why:'This is grammatically correct and has the right meaning, but it is less formal than the language normally used on a printed notice.'},
+          {w:'in spite of', v:'no', why:'The meaning is wrong. <em>In spite of</em> expresses contrast, so the sentence would say that the café opens late although the delivery is delayed.'}]}},
+{topic:'Two people off sick', meaning:'result',
+ a:{who:'Message to colleagues', pre:'Two people called in sick.', post:'we opened an hour late.',
+    opts:[{w:'So', v:'ok', why:'Starting a sentence with <b>So</b> is normal in conversation and in informal messages.'},
+          {w:'Consequently,', v:'close', why:'This is correct, but <em>consequently</em> is formal and belongs in reports rather than in a message to colleagues.'},
+          {w:'Nevertheless,', v:'no', why:'The meaning is wrong. <em>Nevertheless</em> expresses contrast, as if opening late were surprising after two people called in sick.'}]},
+ b:{who:'Monthly report', pre:'Two members of staff were absent.', post:'the café opened an hour late.',
+    opts:[{w:'Consequently,', v:'ok', why:'<b>Consequently</b> is formal and introduces a result. It starts a new sentence and is followed by a comma, which is what a report requires.'},
+          {w:'As a result,', v:'close', why:'This is also correct and acceptable in a report. It is slightly less formal than <em>consequently</em>.'},
+          {w:'However,', v:'no', why:'The meaning is wrong. <em>However</em> expresses contrast, so it would present the late opening as something unexpected, not as a result of the absences.'}]}},
+{topic:'The huge order', meaning:'contrast',
+ a:{who:'Message to a colleague', pre:'It was a huge order,', post:'we got it out on time.',
+    opts:[{w:'but', v:'ok', why:'<b>But</b> is the normal contrast linker in informal writing, and the comma before it is already in place.'},
+          {w:'yet', v:'close', why:'This is grammatically correct, but <em>yet</em> sounds formal or literary in a message to a colleague.'},
+          {w:'however', v:'no', why:'This is not correct. <em>However</em> is a signpost, so it cannot join two clauses after a comma. It would need a full stop before it and a comma after it.'}]},
+ b:{who:'Report to the manager', pre:'The order was unusually large.', post:'it was dispatched on schedule.',
+    opts:[{w:'Nevertheless,', v:'ok', why:'<b>Nevertheless</b> is a formal contrast signpost, which suits a report to a manager.'},
+          {w:'However,', v:'close', why:'This is also correct and common in reports. It is slightly less formal than <em>nevertheless</em>.'},
+          {w:'Therefore,', v:'no', why:'The meaning is wrong. <em>Therefore</em> introduces a result, which reverses the logic of the two sentences.'}]}}
+];
+
+/* ═══════════════ APP ═══════════════ */
+const $ = (s,r)=> (r||document).querySelector(s);
+const $$ = (s,r)=> Array.from((r||document).querySelectorAll(s));
+const byId = id => DATA.find(d=>d.id===id);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const shuffle = a => a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(p=>p[1]);
+const listWords = a => a.length<=1? a.join('') : a.slice(0,-1).join(', ')+' and '+a[a.length-1];
+
+/* the options that were not chosen, each with its reason */
+const OTHER_LABEL={ok:'Best choice', close:'Correct, but not the best choice', no:'Not correct here'};
+function othersBlock(list){
+  return '<div class="others"><div class="row-title">Why not the other options?</div>'+
+    list.map(x=>'<div class="oth '+x.v+'"><span class="othw">'+esc(x.w)+'</span> <span class="othl">'+(x.label||OTHER_LABEL[x.v])+'</span><br>'+x.why+'</div>').join('')+'</div>';
+}
+
+/* ── pattern diagram ── */
+const SLOTS = {C:['clause','clause'],S:['sent','sentence'],N:['noun','noun / -ing'],
+                I:['inf','to + verb'],M:['modal','can / could + verb']};
+function renderPattern(tpl){
+  const parts=[];   /* {h: html, p: is punctuation} */
+  const toks = tpl.match(/\{[CSNIM]\}|\*[^*]+\*|[^{*]+/g) || [];
+  toks.forEach(t=>{
+    if(/^\{[CSNIM]\}$/.test(t)){ const sl=SLOTS[t[1]]; parts.push({h:'<span class="slot '+sl[0]+'">'+sl[1]+'</span>',p:false}); }
+    else if(/^\*.+\*$/.test(t)){ parts.push({h:'<span class="slot word">'+esc(t.slice(1,-1))+'</span>',p:false}); }
+    else { const cs=t.split('');
+      for(let k=0;k<cs.length;k++){ const ch=cs[k];
+        if(ch==='?' && /[.,;]/.test(cs[k+1]||'')){ parts.push({h:'<span class="punc pmopt" title="optional">'+cs[k+1]+'</span>',p:true}); k++; continue; }
+        if(/[.,;]/.test(ch)) parts.push({h:'<span class="punc hl">'+ch+'</span>',p:true});
+        else if(ch.trim()) parts.push({h:'<span class="punc">'+esc(ch)+'</span>',p:false}); } }
+  });
+  /* keep each punctuation mark with the piece before it, so it never wraps onto a line of its own */
+  let out='';
+  for(let i=0;i<parts.length;i++){ let h=parts[i].h; while(i+1<parts.length && parts[i+1].p) h+=parts[++i].h; out+='<span class="grp">'+h+'</span>'; }
+  return '<div class="pattern">'+out+'</div>';
+}
+function beans(n){ let h='<span class="beans" aria-hidden="true">';
+  for(let i=1;i<=3;i++) h+='<span class="bean'+(i<=n?' on':'')+'"></span>';
+  return h+'</span><span class="regword">'+REG[n].split(' · ')[0]+'</span>'; }
+
+/* ═══════════════ SAVED PROGRESS · this device only ═══════════════ */
+const KEY='connectorCafe.v2';
+function freshState(){ return {v:2, welcomed:false, fam:false, opened:[], bench:{}, step:'1', sub:'join',
+  build:BUILD.map(()=>[]), spot:SPOT.map(()=>({done:false,slip:false})),
+  swap:SWAP.map(()=>({a:{done:false,slip:false},b:{done:false,slip:false}})), review:[], name:''}; }
+function loadState(){
+  try{
+    const s=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(s && s.v===2 && s.build.length===BUILD.length && s.spot.length===SPOT.length && s.swap.length===SWAP.length) return s;
+  }catch(e){}
+  return freshState();
+}
+let ST=loadState();
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(ST)); }catch(e){} refreshProgress(); }
+const addUnique=(arr,x)=>{ if(x && arr.indexOf(x)<0) arr.push(x); };
+function flag(ids){ (ids||[]).forEach(id=>addUnique(ST.review,id)); }
+try{ localStorage.removeItem('connectorCafe.v1'); }catch(e){}   /* tidy up the old format */
+
+/* linker word → Menu card id */
+const ALIAS={'so as not to':'so-as-to','seeing that':'seeing-as','so (that)':'so-that','nonetheless':'nevertheless'};
+function idOf(w){
+  const k=String(w).toLowerCase().replace(/[,.]/g,'').trim();
+  if(ALIAS[k]) return ALIAS[k];
+  const id=k.replace(/\s+/g,'-');
+  return byId(id)? id : null;
+}
+
+/* ── "Check the menu" ── */
+function lookBtn(ids){
+  ids=[...new Set((ids||[]).filter(Boolean))];
+  if(!ids.length) return '';
+  return '<div class="lookup"><button class="btn sec lookbtn" data-ids="'+ids.join(',')+'" aria-expanded="false">Check the menu</button>'+
+    (ids.length>1? '<span class="lookchips" hidden>'+ids.map(id=>'<button class="swap lookchip" data-id="'+id+'">'+esc(byId(id).word)+'</button>').join('')+'</span>' : '')+
+    '</div>';
+}
+function wireLook(root){
+  $$('.lookbtn',root).forEach(b=>b.onclick=()=>{
+    const ids=b.dataset.ids.split(',');
+    if(ids.length===1){ openSheet(ids[0]); return; }
+    const ch=b.nextElementSibling; ch.hidden=!ch.hidden; b.setAttribute('aria-expanded', String(!ch.hidden));
+  });
+  $$('.lookchip',root).forEach(c=>c.onclick=()=>openSheet(c.dataset.id));
+}
+
+/* ═══════════════ STEP 2 · MENU ═══════════════ */
+const filters = {m:'all', f:'all', r:'all'};
+function buildFilters(){
+  const mk=(host,items,key)=>{
+    host.innerHTML = items.map(i=>'<button class="chip '+(key==='m'?'c-'+i.v:'')+'" data-k="'+key+'" data-v="'+i.v+'" aria-pressed="'+(filters[key]===i.v)+'">'+i.t+'</button>').join('');
+  };
+  mk($('#f-meaning'), [{v:'all',t:'All'}].concat(MEANINGS.map(m=>({v:m.id,t:m.name}))),'m');
+  mk($('#f-follows'), [{v:'all',t:'All'},{v:'clause',t:'+ subject + verb'},{v:'noun',t:'+ noun / -ing'},
+      {v:'inf',t:'+ to + verb'},{v:'modal',t:'+ can / could'}],'f');
+  mk($('#f-register'), [{v:'all',t:'All'},{v:'1',t:'Informal'},{v:'2',t:'Neutral'},{v:'3',t:'Formal'}],'r');
+  $$('.filterbar .chip').forEach(c=>c.onclick=()=>{ filters[c.dataset.k]=c.dataset.v; buildFilters(); renderBoards(); });
+}
+function passes(d){
+  return (filters.m==='all'||d.m===filters.m) && (filters.f==='all'||d.follows===filters.f) && (filters.r==='all'||String(d.reg)===filters.r);
+}
+function renderBoards(){
+  const host=$('#boards'); let html=''; let shown=0;
+  MEANINGS.forEach(mn=>{
+    const list=DATA.filter(d=>d.m===mn.id && passes(d));
+    if(!list.length) return;
+    shown+=list.length;
+    html+='<section class="board b-'+mn.id+'" data-m="'+mn.id+'"><div class="board-head">'+
+      '<h2 class="board-name">'+mn.name+'</h2><span class="board-q">'+mn.q+'</span></div><div class="cards">';
+    list.forEach(d=>{
+      html+='<button class="card m-'+d.m+'" data-id="'+d.id+'">'+
+        (d.posn==='signpost'?'<span class="flag">signpost</span>':'')+
+        (d.posn==='joiner/end'?'<span class="flag">can end a sentence</span>':'')+
+        '<span class="word">'+esc(d.word)+'</span>'+
+        '<span class="meta"><span class="pill struct">'+FOLLOWS[d.follows].label+'</span>'+beans(d.reg)+'</span>'+
+        '<span class="teaser">'+d.teaser+'</span></button>';
+    });
+    html+='</div>';
+    if(mn.id==='contrast' && filters.f==='all' && filters.r==='all')
+      html+='<div class="extra-note"><b>You may also hear <em>mind you</em>.</b> In conversation, <em>mind you</em> introduces a contrasting comment, like <em>though</em> at the end of a sentence, but it goes at the start: <em>The queue is very long. Mind you, the cake is worth it.</em> It is informal and is only used in speech.</div>';
+    html+='</section>';
+  });
+  host.innerHTML = html || '<div class="empty">No linker matches all three filters. Change one of the filters to see more linkers. For example, only purpose linkers are followed by an infinitive.</div>';
+  $$('.card',host).forEach(c=>c.onclick=()=>openSheet(c.dataset.id));
+  $('#countHint').textContent = shown+' of '+DATA.length+' linkers shown';
+}
+
+/* ── card detail ── */
+function openSheet(id){
+  const d=byId(id); if(!d) return;
+  if(ST.opened.indexOf(d.m)<0){ ST.opened.push(d.m); save(); }
+  const sibs=DATA.filter(x=>x.m===d.m && x.id!==d.id);
+  const posn = d.posn==='signpost'?'signpost: starts a new sentence':d.posn==='joiner/end'?'joiner: can also end a sentence':'joiner: links two parts of one sentence';
+  $('#sheet').className='sheet m-'+d.m;
+  $('#sheet').innerHTML =
+   '<button class="closex" id="closeSheet" aria-label="Close">✕</button>'+
+   '<div class="sheet-top"><h2 id="sheetTitle">'+esc(d.word)+'</h2>'+
+     '<div class="meta"><span class="pill struct">'+FOLLOWS[d.follows].label+'</span><span class="pill posn">'+posn+'</span>'+beans(d.reg)+'</div></div>'+
+   '<div class="sheet-body">'+
+     '<div><div class="row-title">Structure and punctuation</div>'+renderPattern(d.pattern)+
+       (d.pattern.indexOf('?')>-1?'<div class="alt">The comma in the dashed box is optional. It is usual in writing, but it can be left out when both parts of the sentence are short.</div>':'')+
+       '<div class="alt">What follows: '+FOLLOWS[d.follows].text+'. Formality: '+REG[d.reg].replace(' · ',' (')+').</div></div>'+
+     '<div><div class="row-title">Example</div><div class="ex">'+d.ex+'</div></div>'+
+     '<div><div class="row-title">Explanation</div><div class="note">'+d.note+'</div></div>'+
+     (d.watch?'<div class="watch"><b>Common mistakes</b><br>'+d.watch+'</div>':'')+
+     (d.ukus?'<div class="ukus"><b>British and American English</b><br>'+d.ukus+'</div>':'')+
+     '<div><div class="row-title">Other linkers with the same meaning</div><div class="swaps">'+
+       sibs.map(s=>'<button class="swap sib" data-id="'+s.id+'">'+esc(s.word)+'</button>').join('')+
+     '</div></div></div>';
+  $('#sheetWrap').classList.add('open');
+  $('#closeSheet').onclick=closeSheet;
+  $$('#sheet .sib').forEach(b=>b.onclick=()=>openSheet(b.dataset.id));
+  $('#sheet').scrollTop=0;
+}
+function closeSheet(){ $('#sheetWrap').classList.remove('open'); }
+$('#sheetWrap').addEventListener('click',e=>{ if(e.target.id==='sheetWrap') closeSheet(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeSheet(); });
+
+/* ═══════════════ STEP 3 · BENCH ═══════════════ */
+let scen=SCENARIOS[0], chosen=null;
+const benchTried = id => (ST.bench[id]||[]);
+function renderBench(){
+  $('#benchPick').innerHTML = SCENARIOS.map(s=>{
+    const n=Math.min(benchTried(s.id).length,BENCH_MIN);
+    return '<button class="lkbtn" data-s="'+s.id+'" aria-pressed="'+(s.id===scen.id)+'">'+esc(s.name)+
+      ' <span class="cnt">'+(n>=BENCH_MIN?'✓':n+'/'+BENCH_MIN)+'</span></button>';
+  }).join('');
+  $$('#benchPick .lkbtn').forEach(b=>b.onclick=()=>{ scen=SCENARIOS.find(x=>x.id===b.dataset.s); chosen=null; renderBench(); });
+  $('#clauseA').textContent=scen.a; $('#clauseB').textContent=scen.b;
+  $('#benchLinkers').innerHTML = scen.versions.map(v=>{
+    const d=byId(v.id), tried=benchTried(scen.id).includes(v.id);
+    return '<button class="lkbtn'+(tried?' tried':'')+'" data-v="'+v.id+'" aria-pressed="'+(chosen===v.id)+'">'+esc(d?d.word:v.id)+'</button>';
+  }).join('');
+  $$('#benchLinkers .lkbtn').forEach(b=>b.onclick=()=>{
+    chosen=b.dataset.v;
+    const arr=ST.bench[scen.id]=benchTried(scen.id);
+    if(arr.indexOf(chosen)<0){ arr.push(chosen); save(); }
+    renderBench();
+  });
+  const v = chosen && scen.versions.find(x=>x.id===chosen);
+  if(!v){ $('#benchSentence').innerHTML='<span class="placeholder">Choose a linker below to join the two halves.</span>'; $('#benchWhy').innerHTML=''; return; }
+  const d=byId(v.id);
+  $('#benchSentence').innerHTML = v.t.replace(/\*([^*]+)\*/g,'<span class="lk">$1</span>').replace(/~([^~]+)~/g,'<span class="pm">$1</span>');
+  $('#benchWhy').innerHTML = v.why + (d?' <br><span class="alt">'+FOLLOWS[d.follows].label+' · '+REG[d.reg]+
+    ' · <button class="inlink" data-id="'+d.id+'">open the card for this linker</button></span>':'');
+  $$('#benchWhy .inlink').forEach(b=>b.onclick=()=>openSheet(b.dataset.id));
+}
+
+/* ═══════════════ STEP 4 · PRACTICE 1 · BUILD ═══════════════ */
+let buildState=[];
+function syncBuildState(){
+  buildState = BUILD.map((it,i)=>{ const f={}; ST.build[i].forEach(k=>{ if(it.combos[k] && it.combos[k].v==='ok') f[k]=true; }); return {l:null,p:null,found:f}; });
+}
+const cap = s => s.charAt(0).toUpperCase()+s.slice(1);
+const pm = c => '<span class="pm">'+c+'</span>';
+const lkSpan = w => '<span class="lk">'+esc(w)+'</span>';
+function assemble(it,li,pi,plain){
+  const L=it.linkers[li], P=it.parts[pi];
+  const w = plain? (s=>s) : lkSpan, p = plain? (s=>s) : pm;
+  if(L.join==='signpost') return esc(it.a)+p('.')+' '+w(cap(L.w))+p(',')+' '+esc(P.t)+p('.');
+  if(L.join==='midcomma') return esc(it.a)+p(',')+' '+w(L.w)+' '+esc(P.t)+p('.');
+  return esc(it.a)+' '+w(L.w)+' '+esc(P.t)+p('.');
+}
+function judge(it,li,pi){
+  const c=it.combos[li+'-'+pi]; if(c) return c;
+  const L=it.linkers[li], P=it.parts[pi];
+  if(L.takes===P.type) return {v:'ok', why:'<b>'+esc(L.w)+'</b> is followed by '+TYPES[L.takes]+', which is exactly what this second half is.'};
+  return {v:'structure', why:'<b>'+esc(cap(L.w))+'</b> must be followed by '+TYPES[L.takes]+'. <em>'+esc(P.t)+'</em> is '+TYPES[P.type]+
+    ', so these two parts cannot be joined in this way, whatever punctuation you use.'};
+}
+const okCount = it => Object.values(it.combos).filter(c=>c.v==='ok').length;
+const BUILD_TOTAL = BUILD.reduce((s,it)=>s+okCount(it),0);
+
+function renderBuild(){
+  $('#sub-join').innerHTML =
+    '<div class="intro"><h3>Build the sentence</h3><p>Each sentence has a fixed first half. Choose one linker and one second half, and the complete sentence appears below with its punctuation. Then read the feedback. Each sentence has more than one correct version: the counter shows how many there are and how many you have found. Some combinations are impossible, and some are grammatically correct but do not say what was intended. If you are not sure what a linker needs after it, tap <b>Check the menu</b>. <b>To complete this activity, find all the correct versions of all three sentences.</b></p></div>'+
+    BUILD.map((it,i)=>
+      '<div class="q" data-i="'+i+'">'+
+      '<div class="qnum">Sentence '+(i+1)+' · <span class="found"></span></div>'+
+      '<div class="halfA">'+esc(it.a)+'</div>'+
+      '<div class="row-title">Choose a linker</div>'+
+      '<div class="tray">'+shuffle(it.linkers.map((l,k)=>({l:l,k:k}))).map(x=>
+        '<button class="tile" data-t="l" data-k="'+x.k+'" aria-pressed="false">'+esc(x.l.w)+'</button>').join('')+'</div>'+
+      '<div class="row-title">Choose a second half</div>'+
+      '<div class="tray">'+shuffle(it.parts.map((p,k)=>({p:p,k:k}))).map(x=>
+        '<button class="tile" data-t="p" data-k="'+x.k+'" aria-pressed="false">'+esc(x.p.t)+'</button>').join('')+'</div>'+
+      '<div class="assembled" aria-live="polite"></div>'+
+      '<div class="verdictslot"></div>'+
+      '<div class="foundlist"></div>'+
+      '<div class="qactions">'+lookBtn(it.linkers.map(l=>idOf(l.w)))+'<button class="btn sec" data-act="clear">Clear this sentence</button></div>'+
+      '</div>').join('')+
+    '<div class="qactions"><span class="score" id="buildScore"></span><button class="btn sec" id="buildReset">Start this activity again</button></div>'+
+    nextBlock('join','When you have found all the correct versions, go to the next activity.','Go to Spot the error','sub:spot');
+
+  $$('#sub-join .q').forEach(q=>{
+    const i=+q.dataset.i, st=buildState[i];
+    $$('.tile',q).forEach(b=>b.onclick=()=>{ st[b.dataset.t==='l'?'l':'p']=+b.dataset.k; paintBuild(q,i); });
+    $('[data-act="clear"]',q).onclick=()=>{ st.l=null; st.p=null; st.found={}; ST.build[i]=[]; save(); paintBuild(q,i); };
+    paintBuild(q,i);
+  });
+  wireLook($('#sub-join')); wireNext($('#sub-join'));
+  $('#buildReset').onclick=()=>{ ST.build=BUILD.map(()=>[]); save(); syncBuildState(); renderBuild(); };
+}
+function paintBuild(q,i){
+  const it=BUILD[i], st=buildState[i];
+  $$('.tile',q).forEach(b=>{ b.setAttribute('aria-pressed', String((b.dataset.t==='l'? st.l : st.p)===+b.dataset.k)); });
+  const box=$('.assembled',q), vs=$('.verdictslot',q);
+  if(st.l===null || st.p===null){
+    box.innerHTML='<span class="line">'+(st.l===null && st.p===null? 'Choose one linker and one second half.' : st.l===null? 'Now choose a linker.' : 'Now choose a second half.')+'</span>';
+    box.removeAttribute('data-v'); box.classList.remove('live'); vs.innerHTML='';
+  } else {
+    const r=judge(it,st.l,st.p);
+    box.innerHTML='<span class="line">'+assemble(it,st.l,st.p,false)+'</span>';
+    box.classList.add('live'); box.dataset.v=r.v;
+    vs.innerHTML='<div class="verdict '+(r.v==='ok'?'ok':r.v==='meaning'?'hmm':'no')+'"><span class="head">'+
+      (r.v==='ok'?'Correct':r.v==='meaning'?'Grammatically possible, but the meaning is wrong':'These two parts cannot be joined')+'</span>'+r.why+'</div>';
+    if(r.v==='ok'){ const key=st.l+'-'+st.p; st.found[key]=true; if(ST.build[i].indexOf(key)<0){ ST.build[i].push(key); save(); } }
+  }
+  const n=Object.keys(st.found).length, tot=okCount(it);
+  $('.found',q).textContent = n+' of '+tot+' correct versions found'+(n===tot?' ✓':'');
+  $('.foundlist',q).innerHTML = n? '<div class="row-title" style="margin-top:14px">Correct versions you have found</div>'+
+    Object.keys(st.found).map(k=>{const [a,b]=k.split('-'); return '<div class="fchip">'+assemble(it,+a,+b,true)+'</div>';}).join('') : '';
+  const el=$('#buildScore'); if(el) el.textContent=ST.build.reduce((s,a)=>s+a.length,0)+' of '+BUILD_TOTAL+' correct versions found';
+}
+
+/* ═══════════════ PRACTICE 2 · SPOT THE ERROR ═══════════════ */
+const SPOT_LOOK=[['to','in-order-to'],['although','but'],['despite','in-spite-of'],['because','because-of'],['in-case'],['however','although'],['owing-to']];
+function slipSpot(i){ const s=ST.spot[i]; if(!s.done && !s.slip){ s.slip=true; flag(SPOT_LOOK[i]); save(); } }
+function renderSpot(){
+  $('#sub-spot').innerHTML =
+    '<div class="intro"><h3>Spot the error</h3><p>Each sentence below contains a mistake that Spanish and Catalan speakers often make in English — except one sentence, which is correct. First, tap the part of the sentence that is wrong. Then choose the correct version from the options that appear. If you think a sentence is correct, tap <b>Nothing wrong here</b>. If you are not sure which rule applies, tap <b>Check the menu</b>. <b>To complete this activity, correct all seven sentences.</b></p></div>'+
+    SPOT.map((it,i)=>
+      '<div class="q" data-i="'+i+'"><div class="qnum">Sentence '+(i+1)+'</div>'+
+      '<div class="tokens">'+it.chunks.map((c,j)=>'<button class="tok" data-j="'+j+'">'+esc(c)+'</button>').join(' ')+'</div>'+
+      '<div class="qactions"><button class="btn sec" data-act="none">Nothing wrong here</button>'+lookBtn(SPOT_LOOK[i])+'</div>'+
+      '<div class="optslot"></div><div class="verdictslot"></div></div>').join('')+
+    '<div class="qactions"><span class="score" id="spotScore"></span><button class="btn sec" id="spotReset">Start this activity again</button></div>'+
+    nextBlock('spot','When you have corrected all seven sentences, go to the last activity.','Go to Register swap','sub:swap');
+
+  $$('#sub-spot .q').forEach(q=>{
+    const i=+q.dataset.i, it=SPOT[i];
+    const say=(cls,head,body)=>{ $('.verdictslot',q).innerHTML='<div class="verdict '+cls+'"><span class="head">'+head+'</span>'+body+'</div>'; };
+    $$('.tok',q).forEach(t=>t.onclick=()=>{
+      if(q.dataset.done) return;
+      const j=+t.dataset.j;
+      if(it.correct || j!==it.bad){
+        slipSpot(i);
+        t.classList.add('picked'); setTimeout(()=>t.classList.remove('picked'),900);
+        say('no','That part is correct', it.correct? 'Read the whole sentence again carefully. If you think there is no mistake, tap <b>Nothing wrong here</b>.' : 'The mistake is in another part of the sentence. Read it again and tap the part that is wrong.');
+        return;
+      }
+      t.classList.add('picked');
+      if($('.opts',q)) return;
+      $('.optslot',q).innerHTML='<div class="row-title" style="margin-top:14px">Now choose the correct version</div><div class="opts">'+
+        shuffle(it.opts.map((o,k)=>({o:o,k:k}))).map(x=>'<button class="opt" data-k="'+x.k+'">'+esc(x.o.t)+'</button>').join('')+'</div>';
+      $('.verdictslot',q).innerHTML='';
+      $$('.opt',q).forEach(ob=>ob.onclick=()=>{
+        if(q.dataset.done) return;
+        const o=it.opts[+ob.dataset.k];
+        if(!o.ok){ slipSpot(i); ob.classList.add('no'); say('no','This is not the correct version', o.why+'<div class="alt">Try one of the other options.</div>'); return; }
+        ob.classList.add('ok'); solveSpot(q,i,true);
+      });
+    });
+    $('[data-act="none"]',q).onclick=()=>{
+      if(q.dataset.done) return;
+      if(it.correct) solveSpot(q,i,true);
+      else { slipSpot(i); say('no','There is a mistake in this sentence','Tap the part of the sentence that you think is wrong.'); }
+    };
+    if(ST.spot[i].done) solveSpot(q,i,false);
+  });
+  wireLook($('#sub-spot')); wireNext($('#sub-spot'));
+  updateSpotScore();
+  $('#spotReset').onclick=()=>{ ST.spot=SPOT.map(()=>({done:false,slip:false})); save(); renderSpot(); };
+}
+function solveSpot(q,i,live){
+  const it=SPOT[i], first=!ST.spot[i].slip;
+  q.dataset.done='1';
+  $$('.tok',q).forEach(t=>{ t.disabled=true; t.classList.remove('picked'); });
+  $('[data-act="none"]',q).disabled=true;
+  let html;
+  if(it.correct){
+    $$('.tok',q).forEach(t=>t.classList.add('right'));
+    html='<div class="verdict ok"><span class="head">Correct — there is no mistake in this sentence'+(first?' · first attempt':'')+'</span>'+it.why+'</div>';
+  } else {
+    const ok=it.opts.find(o=>o.ok), bt=$$('.tok',q)[it.bad];
+    bt.classList.add('right');
+    bt.innerHTML='<span class="was">'+esc(it.chunks[it.bad])+'</span>'+esc(ok.t);
+    if(live) $$('.opt',q).forEach(x=>{ x.disabled=true; if(!x.classList.contains('ok')) x.classList.add('dim'); });
+    else $('.optslot',q).innerHTML='<div class="row-title" style="margin-top:14px">The correct version</div><div class="opts"><button class="opt ok" disabled>'+esc(ok.t)+'</button></div>';
+    html='<div class="verdict ok"><span class="head">Correct'+(first?' · first attempt':'')+'</span>'+ok.why+
+      othersBlock(it.opts.filter(x=>!x.ok).map(x=>({w:x.t, v:'no', label:'Not correct', why:x.why})))+'</div>';
+  }
+  $('.verdictslot',q).innerHTML=html;
+  if(live){ ST.spot[i].done=true; save(); }
+  updateSpotScore();
+}
+function updateSpotScore(){
+  const n=ST.spot.filter(s=>s.done).length, f=ST.spot.filter(s=>s.done&&!s.slip).length;
+  const el=$('#spotScore'); if(el) el.textContent=n+' of '+SPOT.length+' sentences corrected'+(n? ' ('+f+' at the first attempt)':'');
+}
+
+/* ═══════════════ PRACTICE 3 · REGISTER SWAP ═══════════════ */
+const SIDES=['a','b'];
+function slipSwap(i,side){ const s=ST.swap[i][side]; if(s.done||s.slip) return; s.slip=true; flag([idOf(SWAP[i][side].opts.find(o=>o.v==='ok').w)]); save(); }
+function renderSwap(){
+  const card=(ii,side,g)=>
+    '<div class="ctxcard" data-g="'+ii+'-'+side+'"><div class="who">'+esc(g.who)+'</div>'+
+    '<div class="txt">'+esc(g.pre)+' <span class="gap">?</span> '+esc(g.post)+'</div>'+
+    '<div class="opts">'+shuffle(g.opts.map((o,k)=>({o:o,k:k}))).map(x=>'<button class="opt" data-k="'+x.k+'">'+esc(x.o.w)+'</button>').join('')+'</div>'+
+    '<div class="verdictslot"></div>'+lookBtn(g.opts.map(o=>idOf(o.w)))+'</div>';
+  $('#sub-swap').innerHTML =
+    '<div class="intro"><h3>Register swap</h3><p>Each topic is written twice: once in an informal message and once in a formal text. Choose the linker that fits each context best. All the options are grammatically possible in the gap, so think about two things: does the linker have the right meaning, and is it as formal or as informal as the context requires? Some options are marked <b>Correct, but not the best choice</b>: they are grammatical, but less appropriate for that context. <b>To complete this activity, find the best choice for all six texts.</b></p></div>'+
+    SWAP.map((it,i)=>'<div class="q"><div class="qnum">'+esc(it.topic)+' · '+it.meaning+'</div><div class="ctx">'+card(i,'a',it.a)+card(i,'b',it.b)+'</div></div>').join('')+
+    '<div class="qactions"><span class="score" id="swapScore"></span><button class="btn sec" id="swapReset">Start this activity again</button></div>'+
+    nextBlock('swap','This is the last activity. When you have finished, look at your results.','See my results','step:r');
+  $$('#sub-swap .ctxcard').forEach(c=>{
+    const [i,side]=c.dataset.g.split('-'); const g=SWAP[+i][side];
+    $$('.opt',c).forEach(b=>b.onclick=()=>{
+      if(c.dataset.done) return;
+      const o=g.opts[+b.dataset.k];
+      if(o.v==='ok'){ b.classList.add('ok'); solveSwap(c,+i,side,true); return; }
+      slipSwap(+i,side);
+      $('.gap',c).textContent=o.w; $('.gap',c).classList.add('filled');
+      b.classList.add(o.v==='no'?'no':'ok');
+      $('.verdictslot',c).innerHTML='<div class="verdict '+(o.v==='close'?'hmm':'no')+'"><span class="head">'+
+        (o.v==='close'?'Correct, but not the best choice':'Not correct here')+'</span>'+o.why+'<div class="alt">Try one of the other options.</div></div>';
+    });
+    if(ST.swap[+i][side].done) solveSwap(c,+i,side,false);
+  });
+  wireLook($('#sub-swap')); wireNext($('#sub-swap'));
+  updateSwapScore();
+  $('#swapReset').onclick=()=>{ ST.swap=SWAP.map(()=>({a:{done:false,slip:false},b:{done:false,slip:false}})); save(); renderSwap(); };
+}
+function solveSwap(c,i,side,live){
+  const g=SWAP[i][side], o=g.opts.find(x=>x.v==='ok'), first=!ST.swap[i][side].slip;
+  c.dataset.done='1';
+  $('.gap',c).textContent=o.w; $('.gap',c).classList.add('filled');   /* keeps its own comma */
+  $$('.opt',c).forEach(x=>{ x.disabled=true; if(g.opts[+x.dataset.k]===o) x.classList.add('ok'); else if(!live||!x.classList.contains('no')) x.classList.add('dim'); });
+  $('.verdictslot',c).innerHTML='<div class="verdict ok"><span class="head">The best choice'+(first?' · first attempt':'')+'</span>'+o.why+othersBlock(g.opts.filter(x=>x!==o))+'</div>';
+  if(live){ ST.swap[i][side].done=true; save(); }
+  updateSwapScore();
+}
+const swapCells = () => { const a=[]; ST.swap.forEach((x,i)=>SIDES.forEach(s=>a.push({i:i,side:s,st:x[s]}))); return a; };
+const SWAP_TOTAL = SWAP.length*2;
+function updateSwapScore(){
+  const all=swapCells(), n=all.filter(x=>x.st.done).length, f=all.filter(x=>x.st.done&&!x.st.slip).length;
+  const el=$('#swapScore'); if(el) el.textContent=n+' of '+SWAP_TOTAL+' best choices found'+(n? ' ('+f+' at the first attempt)':'');
+}
+
+/* ═══════════════ WHAT IS LEFT · used by the Next buttons and My results ═══════════════ */
+const NUMWORD=['','one','two','three','four','five','six','seven'];
+function remaining(key){
+  if(key==='1') return ST.fam? null : {items:['Read the key words and the two families, then tap <b>I have read this</b>.'],
+      why:'The rest of the page uses these terms and punctuation rules.', show:()=>go('1')};
+  if(key==='2'){
+    const miss=MEANINGS.filter(m=>!ST.opened.includes(m.id));
+    return miss.length? {items:['Open at least one card from '+(miss.length===1?'this colour':'each of these colours')+': '+listWords(miss.map(m=>'<b>'+m.name+'</b>'))+'.'],
+      why:'The practice activities assume that you have seen what each type of linker needs after it.',
+      show:()=>{ go('2',true); filters.m='all';filters.f='all';filters.r='all'; buildFilters(); renderBoards();
+        const el=$('#boards .board[data-m="'+miss[0].id+'"]'); scrollFlash(el); }} : null;
+  }
+  if(key==='3'){
+    const miss=SCENARIOS.filter(s=>benchTried(s.id).length<BENCH_MIN);
+    return miss.length? {items:miss.map(s=>{ const k=BENCH_MIN-benchTried(s.id).length; return '<b>'+esc(s.name)+'</b>: try '+NUMWORD[k]+' more linker'+(k===1?'':'s')+'.'; }),
+      why:'The Bench shows how the punctuation and the form of the sentence change, and you will need this in the practice activities.',
+      show:()=>{ go('3',true); scen=miss[0]; chosen=null; renderBench(); scrollFlash($('#benchLinkers')); }} : null;
+  }
+  if(key==='join'){
+    const miss=BUILD.map((it,i)=>({i:i,k:okCount(it)-ST.build[i].length})).filter(x=>x.k>0);
+    return miss.length? {items:miss.map(x=>'<b>Sentence '+(x.i+1)+'</b>: '+NUMWORD[x.k]+' more correct version'+(x.k===1?'':'s')+' to find.'),
+      why:'Each sentence practises a different change in the structure, so it is worth finding all the correct versions.',
+      show:()=>{ go('4',true); setSub('join'); scrollFlash($$('#sub-join .q')[miss[0].i]); }} : null;
+  }
+  if(key==='spot'){
+    const miss=ST.spot.map((s,i)=>({i:i,s:s})).filter(x=>!x.s.done);
+    return miss.length? {items:['Sentence'+(miss.length===1?' ':'s ')+listWords(miss.map(x=>String(x.i+1)))+(miss.length===1?' is':' are')+' not corrected yet.'],
+      why:'Each sentence shows a different common mistake.',
+      show:()=>{ go('4',true); setSub('spot'); scrollFlash($$('#sub-spot .q')[miss[0].i]); }} : null;
+  }
+  if(key==='swap'){
+    const miss=swapCells().filter(x=>!x.st.done);
+    return miss.length? {items:miss.map(x=>'<b>'+esc(SWAP[x.i].topic)+'</b>: '+esc(SWAP[x.i][x.side].who.toLowerCase())+'.'),
+      why:'Your results will show which activities you have not completed.',
+      show:()=>{ go('4',true); setSub('swap'); scrollFlash($('#sub-swap .ctxcard[data-g="'+miss[0].i+'-'+miss[0].side+'"]')); }} : null;
+  }
+  return null;
+}
+function scrollFlash(el){
+  if(!el) return;
+  setTimeout(()=>{ el.scrollIntoView({behavior:'smooth',block:'center'}); el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); },60);
+}
+
+/* ═══════════════ NEXT BUTTONS · with a message when something is left ═══════════════ */
+function nextBlock(gate,text,label,target){
+  return '<div class="nextblock" data-gate="'+gate+'"><div class="nb-text">'+text+'</div><button class="btn" data-go="'+target+'">'+label+'</button><div class="gate" hidden></div></div>';
+}
+function proceed(target){
+  if(target.indexOf('sub:')===0){ setSub(target.slice(4)); window.scrollTo({top:0,behavior:'smooth'}); }
+  else go(target.replace('step:',''));
+}
+function wireNext(root){
+  $$('[data-go]',root).forEach(b=>b.onclick=()=>{
+    const box=b.closest('.nextblock'), key=box && box.dataset.gate, left=key? remaining(key) : null;
+    if(!left){ proceed(b.dataset.go); return; }
+    const g=$('.gate',box);
+    g.innerHTML='<p class="gate-head">You have not finished this '+(key==='2'||key==='3'?'step':'activity')+' yet.</p>'+
+      '<p>Still to do:</p><ul>'+left.items.map(x=>'<li>'+x+'</li>').join('')+'</ul>'+
+      '<p>We recommend that you finish it before you continue. '+left.why+'</p>'+
+      '<div class="gate-actions"><button class="btn" data-act="show">Show me what is left</button><button class="btn sec" data-act="anyway">Continue anyway</button></div>';
+    g.hidden=false;
+    $('[data-act="show"]',g).onclick=()=>{ g.hidden=true; left.show(); };
+    $('[data-act="anyway"]',g).onclick=()=>{ g.hidden=true; proceed(b.dataset.go); };
+  });
+}
+
+/* ═══════════════ PROGRESS · ROUTE · RESULTS ═══════════════ */
+function facts(){
+  const spotN=ST.spot.filter(x=>x.done).length, spotF=ST.spot.filter(x=>x.done&&!x.slip).length;
+  const sw=swapCells(), swapN=sw.filter(x=>x.st.done).length, swapF=sw.filter(x=>x.st.done&&!x.st.slip).length;
+  const buildN=ST.build.reduce((n,a)=>n+a.length,0);
+  const colours=MEANINGS.filter(m=>ST.opened.includes(m.id)).length;
+  const benches=SCENARIOS.filter(s=>benchTried(s.id).length>=BENCH_MIN).length;
+  const s1=ST.fam, s2=colours===4, s3=benches===SCENARIOS.length;
+  const s4=buildN===BUILD_TOTAL && spotN===SPOT.length && swapN===SWAP_TOTAL;
+  return {s1,s2,s3,s4,spotN,spotF,swapN,swapF,buildN,colours,benches,
+          tasks:buildN+spotN+swapN, taskTot:BUILD_TOTAL+SPOT.length+SWAP_TOTAL, steps:[s1,s2,s3,s4].filter(Boolean).length};
+}
+function refreshProgress(){
+  const P=facts();
+  const subs={'1':P.s1?'completed':'start here','2':P.colours+' of 4 colours','3':P.benches+' of 3 benches','4':P.tasks+' of '+P.taskTot+' tasks','r':P.steps+' of 4 steps'};
+  const done={'1':P.s1,'2':P.s2,'3':P.s3,'4':P.s4,'r':P.steps===4};
+  $$('.step').forEach(b=>{
+    const s=b.dataset.step; b.classList.toggle('done',!!done[s]);
+    $('.sub',b).textContent=subs[s];
+    $('.num',b).textContent = s==='r'? '★' : done[s]? '✓' : s;
+  });
+  const mp=$('#menuProg');
+  if(mp) mp.innerHTML=MEANINGS.map(m=>{ const on=ST.opened.includes(m.id); return '<span class="tick c-'+m.id+(on?' on':'')+'">'+(on?'✓ ':'')+m.name+'</span>'; }).join('');
+  const bp=$('#benchProg');
+  if(bp) bp.innerHTML=SCENARIOS.map(s=>{ const n=Math.min(benchTried(s.id).length,BENCH_MIN), on=n>=BENCH_MIN;
+    return '<span class="tick'+(on?' on':'')+'">'+(on?'✓ ':'')+esc(s.name)+(on?'':' · '+n+'/'+BENCH_MIN)+'</span>'; }).join('');
+  const cnt={join:P.buildN+'/'+BUILD_TOTAL, spot:P.spotN+'/'+SPOT.length, swap:P.swapN+'/'+SWAP_TOTAL};
+  $$('.subtabs [data-sub]').forEach(t=>{ $('.cnt',t).textContent=cnt[t.dataset.sub]; });
+  /* hide any "not finished" message whose step is now complete */
+  $$('.nextblock[data-gate]').forEach(nb=>{ if(!remaining(nb.dataset.gate)){ const g=$('.gate',nb); if(g) g.hidden=true; } });
+  $('#welcome').hidden=!!ST.welcomed;
+  renderResults(P);
+}
+const SECTION_NAMES={'1':'Step 1 · The two families','2':'Step 2 · The Menu','3':'Step 3 · The Bench',
+  join:'Step 4 · Build the sentence',spot:'Step 4 · Spot the error',swap:'Step 4 · Register swap'};
+function resultsText(P){
+  const d=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const rev=ST.review.map(byId).filter(Boolean).map(x=>x.word);
+  return ['The Connector Café — my results',
+    'Name: '+(ST.name.trim()||'(not given)'),
+    'Date: '+d,
+    'Route: '+P.steps+' of 4 steps completed',
+    'Build the sentence: '+P.buildN+' of '+BUILD_TOTAL+' correct versions found',
+    'Spot the error: '+P.spotN+' of '+SPOT.length+' sentences corrected ('+P.spotF+' at the first attempt)',
+    'Register swap: '+P.swapN+' of '+SWAP_TOTAL+' best choices found ('+P.swapF+' at the first attempt)',
+    'Linkers to review: '+(rev.length? rev.join(', ') : 'none')].join('\n');
+}
+function renderResults(P){
+  const tile=(n,tot,l,extra)=>'<div class="rtile'+(n===tot?' full':'')+'"><div class="rn">'+n+'<span>/'+tot+'</span></div><div class="rl">'+l+'</div>'+(extra?'<div class="rx">'+extra+'</div>':'')+'</div>';
+  $('#resTiles').innerHTML = tile(P.steps,4,'Steps completed')+
+    tile(P.buildN,BUILD_TOTAL,'Build the sentence','correct versions found')+
+    tile(P.spotN,SPOT.length,'Spot the error',P.spotN? P.spotF+' at the first attempt':'sentences corrected')+
+    tile(P.swapN,SWAP_TOTAL,'Register swap',P.swapN? P.swapF+' at the first attempt':'best choices found');
+  const keys=['1','2','3','join','spot','swap'], todo=keys.map(k=>({k:k,left:remaining(k)})).filter(x=>x.left);
+  $('#resTodo').innerHTML = todo.length
+    ? '<p class="note" style="margin:0 0 10px">You have not completed everything yet. We recommend finishing these parts before you send your results:</p>'+
+      todo.map(x=>'<div class="todo"><div><b>'+SECTION_NAMES[x.k]+'</b><ul>'+x.left.items.map(t=>'<li>'+t+'</li>').join('')+'</ul></div>'+
+        '<button class="btn sec" data-todo="'+x.k+'">Go there</button></div>').join('')
+    : '<p class="note" style="margin:0">You have completed every step. Well done.</p>';
+  $$('#resTodo [data-todo]').forEach(b=>b.onclick=()=>{ const l=remaining(b.dataset.todo); if(l) l.show(); });
+  const rv=$('#resReview');
+  rv.innerHTML = ST.review.length
+    ? '<p class="note" style="margin:0 0 10px">You made a mistake with these linkers in Spot the error or Register swap. Tap a linker to open its card and read the explanation again.</p><div class="swaps">'+
+      ST.review.filter(byId).map(id=>'<button class="swap" data-id="'+id+'">'+esc(byId(id).word)+'</button>').join('')+'</div>'
+    : '<p class="note" style="margin:0">There are no linkers to review yet. If you make a mistake in Spot the error or Register swap, the linkers involved will appear here, so that you can revise them.</p>';
+  $$('.swap',rv).forEach(b=>b.onclick=()=>openSheet(b.dataset.id));
+  $('#resText').value=resultsText(P);
+  if(document.activeElement!==$('#nameIn')) $('#nameIn').value=ST.name;
+}
+
+/* ═══════════════ NAVIGATION ═══════════════ */
+const VIEW_OF={'1':'menu','2':'menu','3':'bench','4':'practice','r':'results'};
+function go(step,quiet){
+  ST.step=step;
+  const view=VIEW_OF[step]||'menu';
+  ['menu','bench','practice','results'].forEach(v=>{ $('#view-'+v).hidden=(v!==view); });
+  $$('.step').forEach(b=>{ if(b.dataset.step===step) b.setAttribute('aria-current','step'); else b.removeAttribute('aria-current'); });
+  save();
+  if(quiet) return;
+  if(step==='1') $('#families').scrollIntoView({behavior:'smooth',block:'start'});
+  else if(step==='2') $('#menuStart').scrollIntoView({behavior:'smooth',block:'start'});
+  else window.scrollTo({top:0,behavior:'smooth'});
+}
+function setSub(sub){
+  ST.sub=sub;
+  $$('.subtabs [data-sub]').forEach(x=>x.setAttribute('aria-selected', String(x.dataset.sub===sub)));
+  ['join','spot','swap'].forEach(v=>{ $('#sub-'+v).hidden=(v!==sub); });
+  save();
+}
+$$('.step').forEach(b=>b.onclick=()=>go(b.dataset.step));
+$$('.subtabs [data-sub]').forEach(t=>t.onclick=()=>setSub(t.dataset.sub));
+$('#startHere').onclick=()=>{ ST.welcomed=true; go('1'); };
+$('#hideWelcome').onclick=()=>{ ST.welcomed=true; save(); };
+$('#famDone').onclick=()=>{ ST.fam=true; ST.welcomed=true; go('2'); };
+wireNext($('#view-menu')); wireNext($('#view-bench'));
+$('#nameIn').addEventListener('input',e=>{ ST.name=e.target.value.slice(0,80); save(); });
+
+$('#copyBtn').onclick=()=>{
+  const txt=$('#resText').value, msg=$('#copyMsg');
+  const ok=()=>{ msg.textContent='Your results have been copied. Paste them where your teacher has asked you to.'; };
+  const fallback=()=>{
+    const ta=$('#resText'); ta.focus(); ta.select();
+    let done=false; try{ done=document.execCommand('copy'); }catch(e){}
+    msg.textContent = done? 'Your results have been copied. Paste them where your teacher has asked you to.' : 'Your browser did not allow automatic copying. Select the text above and copy it yourself.';
+  };
+  if(navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(ok,fallback); else fallback();
+};
+
+let resetArmed=null;
+$('#resetBtn').onclick=()=>{
+  const b=$('#resetBtn');
+  if(!resetArmed){
+    b.textContent='Tap again to delete everything'; b.classList.add('armed');
+    resetArmed=setTimeout(()=>{ resetArmed=null; b.textContent='Start fresh'; b.classList.remove('armed'); },4000);
+    return;
+  }
+  clearTimeout(resetArmed); resetArmed=null; b.textContent='Start fresh'; b.classList.remove('armed');
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  ST=freshState(); syncBuildState(); scen=SCENARIOS[0]; chosen=null;
+  renderBench(); renderBuild(); renderSpot(); renderSwap(); setSub('join');
+  $('#copyMsg').textContent='';
+  go('1');
+};
+
+syncBuildState();
+buildFilters(); renderBoards(); renderBench(); renderBuild(); renderSpot(); renderSwap();
+setSub(ST.sub||'join');
+go(ST.step||'1', true);
+refreshProgress();
+</script>
+</body>
+</html>
