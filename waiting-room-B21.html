@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Waiting Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FBF4E9; --paper:#FFFDF8; --espresso:#3B2416; --mocha:#7A5240; --latte:#E9D8C2;
+  --yellow:#FFC93C; --yellow-soft:#FFF1C7; --mint:#2F8F6B; --mint-soft:#D7F0E4;
+  --coral:#F25F4C; --coral-soft:#FDE1DC; --sky:#4A90C8; --plum:#8E5BA8;
+  --shadow:0 6px 0 rgba(59,36,22,.12), 0 14px 30px rgba(59,36,22,.10);
+  --r:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--cream);color:var(--espresso)}
+body{font-family:Outfit,system-ui,sans-serif;font-size:18px;line-height:1.45;min-height:100vh;
+  background-image:radial-gradient(circle at 12% 8%,#FFE7A8 0,transparent 28%),radial-gradient(circle at 92% 90%,#D7F0E4 0,transparent 30%);}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:800;letter-spacing:-.01em;line-height:1.1}
+button{font:inherit;color:inherit;cursor:pointer;border:none;background:none;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:1100px;margin:0 auto;padding:16px 16px 40px}
+
+/* Top bar */
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:10px;font-family:Fraunces,serif;font-weight:800;font-size:22px}
+.cross{width:36px;height:36px;border-radius:10px;background:var(--coral);position:relative;box-shadow:0 3px 0 rgba(0,0,0,.15);flex:none}
+.cross::before,.cross::after{content:"";position:absolute;background:#fff;border-radius:2px}
+.cross::before{width:18px;height:6px;left:9px;top:15px}.cross::after{width:6px;height:18px;left:15px;top:9px}
+.round-tag{margin-left:auto;background:var(--espresso);color:var(--yellow);font-weight:700;padding:8px 14px;border-radius:999px;font-size:15px}
+.skip{font-size:14px;font-weight:600;color:var(--mocha);text-decoration:underline;padding:8px}
+
+/* Scoreboard */
+.scores{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.score{flex:1 1 150px;background:var(--paper);border-radius:16px;padding:10px 14px;display:flex;align-items:center;gap:10px;border:3px solid transparent;transition:.25s}
+.score .dot{width:16px;height:16px;border-radius:50%}
+.score .nm{font-weight:600;font-size:16px}
+.score .pts{margin-left:auto;font-family:Fraunces,serif;font-size:28px;font-weight:800}
+.score.active{border-color:var(--espresso);transform:translateY(-3px);box-shadow:var(--shadow)}
+.score.bump .pts{animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.5)}}
+
+/* Cards */
+.card{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:22px}
+.screen{animation:rise .45s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}}
+
+/* Setup */
+.hero{text-align:center;padding:30px 20px}
+.hero h1{font-size:clamp(40px,7vw,72px)}
+.hero h1 span{background:linear-gradient(transparent 62%,var(--yellow) 62%)}
+.hero p{max-width:640px;margin:12px auto 0;color:var(--mocha)}
+.setup{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:22px}
+.setup h3{font-size:20px;margin-bottom:10px}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{flex:1;min-height:56px;padding:10px 14px;border-radius:14px;background:var(--cream);font-weight:600;border:3px solid var(--latte)}
+.seg button.on{background:var(--yellow);border-color:var(--espresso)}
+.go{display:block;margin:26px auto 0;background:var(--coral);color:#fff;font-weight:700;font-size:22px;padding:18px 40px;border-radius:999px;box-shadow:0 6px 0 #B83A2B}
+.go:active{transform:translateY(4px);box-shadow:0 2px 0 #B83A2B}
+.rounds-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:20px}
+.rl{background:var(--paper);border-radius:16px;padding:14px 16px;border-left:8px solid var(--yellow)}
+.rl b{font-family:Fraunces,serif;font-size:18px}
+.rl small{display:block;color:var(--mocha);font-size:15px}
+
+/* Waiting room strip */
+.queue{display:flex;align-items:center;gap:8px;overflow:hidden;margin-bottom:14px;padding:10px 14px;background:var(--latte);border-radius:16px}
+.queue .lbl{font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--mocha);margin-right:6px;white-space:nowrap}
+.chair{width:34px;height:34px;border-radius:50%;flex:none;display:grid;place-items:center;font-size:13px;font-weight:700;color:#fff;opacity:.9;transition:.3s}
+.chair.done{opacity:.25;transform:scale(.8)}
+.chair.now{transform:scale(1.25);box-shadow:0 0 0 3px var(--paper),0 0 0 6px var(--espresso)}
+
+/* Patient */
+.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:18px}
+@media (max-width:820px){.stage{grid-template-columns:1fr}}
+.patient{display:flex;flex-direction:column;gap:14px}
+.ticket{display:flex;align-items:center;gap:14px}
+.avatar{width:84px;height:84px;border-radius:26px;display:grid;place-items:center;font-family:Fraunces,serif;font-size:34px;font-weight:800;color:#fff;flex:none;box-shadow:0 5px 0 rgba(0,0,0,.15);animation:wobble 2.6s ease-in-out infinite}
+@keyframes wobble{50%{transform:rotate(-4deg) translateY(-3px)}}
+.who b{font-family:Fraunces,serif;font-size:26px;display:block}
+.who small{color:var(--mocha);font-size:15px}
+.num{margin-left:auto;text-align:center;background:var(--espresso);color:var(--yellow);border-radius:14px;padding:8px 12px;font-family:Fraunces,serif}
+.num small{display:block;font-family:Outfit;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#fff}
+.num span{font-size:28px;font-weight:800}
+.bubble{position:relative;background:var(--yellow-soft);border:3px solid var(--espresso);border-radius:24px;padding:18px 20px;font-size:21px;font-weight:500}
+.bubble::before{content:"";position:absolute;top:-16px;left:34px;border:14px solid transparent;border-bottom-color:var(--espresso);border-top:0}
+.bubble::after{content:"";position:absolute;top:-10px;left:37px;border:11px solid transparent;border-bottom-color:var(--yellow-soft);border-top:0}
+.bubble .spk{display:block;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--mocha);margin-bottom:4px}
+.turn{font-weight:700;font-size:16px;display:flex;align-items:center;gap:8px}
+.turn .dot{width:14px;height:14px;border-radius:50%}
+
+.q h2{font-size:26px;margin-bottom:4px}
+.q .hint{color:var(--mocha);font-size:15px;margin-bottom:14px}
+.opts{display:grid;gap:10px}
+.opt{min-height:60px;text-align:left;padding:14px 18px;border-radius:16px;background:var(--cream);border:3px solid var(--latte);font-size:19px;font-weight:500;transition:transform .12s,background .2s}
+.opt:active{transform:scale(.98)}
+.opt.right{background:var(--mint-soft);border-color:var(--mint);font-weight:700}
+.opt.wrong{background:var(--coral-soft);border-color:var(--coral);opacity:.6;animation:shake .4s}
+.opt.shown{background:var(--mint-soft);border-color:var(--mint);border-style:dashed}
+.opt:disabled{cursor:default}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+.reveal{margin-top:16px;border-radius:18px;background:var(--espresso);color:#fff;padding:18px 20px;animation:rise .4s}
+.reveal .w{font-family:Fraunces,serif;font-size:26px;color:var(--yellow)}
+.reveal .ipa{font-size:18px;opacity:.85;margin-left:6px}
+.note{margin-top:12px;background:rgba(255,255,255,.1);border-radius:12px;padding:10px 14px;font-size:17px}
+.note .flag{display:inline-block;background:var(--yellow);color:var(--espresso);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:6px;margin-right:6px}
+.pts-pop{display:inline-block;margin-left:10px;background:var(--mint);color:#fff;font-weight:700;border-radius:999px;padding:3px 12px;font-size:15px}
+.pts-pop.zero{background:var(--mocha)}
+.next{margin-top:14px;background:var(--yellow);color:var(--espresso);font-weight:700;font-size:19px;padding:14px 28px;border-radius:999px;box-shadow:0 5px 0 #C99512}
+.next:active{transform:translateY(3px);box-shadow:0 2px 0 #C99512}
+
+/* Sentence (phrasal round) */
+.sentence{font-size:26px;font-weight:500;line-height:1.5;margin:6px 0 18px}
+.gap{display:inline-block;min-width:150px;border-bottom:4px solid var(--espresso);text-align:center;color:var(--mint);font-weight:700}
+.opts.row{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.opts.row .opt{text-align:center}
+
+/* UK/US round */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pair .opt{min-height:120px;text-align:center;font-family:Fraunces,serif;font-size:28px;font-weight:600}
+
+/* Interstitial & end */
+.inter{text-align:center;padding:40px 20px}
+.inter .big{font-size:clamp(36px,6vw,60px)}
+.inter p{max-width:620px;margin:12px auto;color:var(--mocha);font-size:20px}
+.podium{display:grid;gap:12px;max-width:620px;margin:20px auto}
+.pod{display:flex;align-items:center;gap:14px;background:var(--paper);border-radius:18px;padding:14px 18px;box-shadow:var(--shadow);text-align:left}
+.pod .rank{font-family:Fraunces,serif;font-size:30px;font-weight:800;width:40px}
+.pod .pts{margin-left:auto;font-family:Fraunces,serif;font-size:30px;font-weight:800}
+.pod:first-child{background:var(--yellow)}
+.review{max-width:760px;margin:24px auto 0;text-align:left}
+.review h3{margin-bottom:10px}
+.review li{list-style:none;background:var(--paper);border-radius:14px;padding:10px 14px;margin-bottom:8px;border-left:6px solid var(--coral)}
+.review li small{display:block;color:var(--mocha);font-size:15px}
+.stars{font-size:44px;color:var(--yellow);letter-spacing:6px;-webkit-text-stroke:2px var(--espresso)}
+
+
+/* Round tabs */
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.tab{display:flex;align-items:center;gap:10px;text-align:left;background:var(--paper);border:3px solid var(--latte);border-radius:16px;padding:10px 12px;min-height:64px;transition:.2s}
+.tab .tn{width:36px;height:36px;border-radius:50%;flex:none;display:grid;place-items:center;font-family:Fraunces,serif;font-weight:800;background:var(--latte)}
+.tab b{display:block;font-family:Fraunces,serif;font-size:17px;line-height:1.1}
+.tab small{color:var(--mocha);font-size:13px}
+.tab.done .tn{background:var(--mint);color:#fff}
+.tab.now .tn{background:var(--yellow)}
+.tab.sel{border-color:var(--espresso);box-shadow:var(--shadow)}
+.tab.new{opacity:.85}
+@media (max-width:620px){.tab small{display:none}.tab b{font-size:14px}.tab{padding:8px}}
+.nav{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.navb{background:var(--espresso);color:#fff;font-weight:600;padding:12px 18px;border-radius:999px;min-height:48px}
+.navb:disabled{opacity:.25;cursor:default}
+.pos{flex:1;text-align:center;font-weight:600;color:var(--mocha);font-size:15px}
+.banner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--sky);color:#fff;border-radius:16px;padding:12px 16px;margin-bottom:14px;font-weight:600}
+.banner button{margin-left:auto;background:#fff;color:var(--espresso);font-weight:700;padding:10px 18px;border-radius:999px}
+#past .snap{pointer-events:none}
+footer{text-align:center;color:var(--mocha);font-size:14px;margin-top:30px}
+
+/* confetti */
+.cf{position:fixed;width:10px;height:14px;top:-20px;z-index:50;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<footer>Class of Coffee – with AI assistance</footer>
+
+<script>
+/* ---------- DATA ---------- */
+const DX = {
+  cough:{t:"{S} has a cough.",w:"a cough",ipa:"/kɒf/"},
+  headache:{t:"{S} has a headache.",w:"a headache",ipa:"/ˈhedeɪk/"},
+  toothache:{t:"{S} has toothache.",w:"toothache",ipa:"/ˈtuːθeɪk/"},
+  rash:{t:"{S} has a rash.",w:"a rash",ipa:"/ræʃ/"},
+  temperature:{t:"{S} has a temperature.",w:"a temperature",ipa:"/ˈtemprətʃə/"},
+  sunburn:{t:"{S} has sunburn.",w:"sunburn",ipa:"/ˈsʌnbɜːn/"},
+  vomiting:{t:"{Ss} being sick.",w:"be sick / vomit",ipa:"/ˈvɒmɪt/"},
+  sneezing:{t:"{Ss} sneezing.",w:"sneeze",ipa:"/sniːz/"},
+  backhurts:{t:"{P} back hurts.",w:"my back hurts / aches",ipa:"/hɜːts/ /eɪks/"},
+  sorethroat:{t:"{S} has a sore throat.",w:"a sore throat",ipa:"/sɔː θrəʊt/"},
+  diarrhoea:{t:"{S} has diarrhoea.",w:"diarrhoea",ipa:"/ˌdaɪəˈrɪə/"},
+  feelssick:{t:"{S} feels sick.",w:"feel sick",ipa:"/fiːl sɪk/"},
+  fainted:{t:"{Ss} fainted.",w:"faint",ipa:"/feɪnt/"},
+  blister:{t:"{S} has a blister.",w:"a blister",ipa:"/ˈblɪstə/"},
+  cold:{t:"{S} has a cold.",w:"a cold",ipa:"/kəʊld/"},
+  flu:{t:"{S} has flu.",w:"flu",ipa:"/fluː/"},
+  dizzy:{t:"{S} feels dizzy.",w:"dizzy",ipa:"/ˈdɪzi/"},
+  cut:{t:"{Ss} cut {X}.",w:"cut yourself",ipa:"/kʌt/"},
+  infected:{t:"{P} cut is infected.",w:"infected / an infection",ipa:"/ɪnˈfektɪd/ /ɪnˈfekʃn/"},
+  unconscious:{t:"{Ss} unconscious.",w:"unconscious",ipa:"/ʌnˈkɒnʃəs/"},
+  allergic:{t:"{Ss} had an allergic reaction.",w:"an allergic reaction",ipa:"/əˈlɜːdʒɪk riˈækʃn/"},
+  sprained:{t:"{Ss} sprained {P2} ankle.",w:"sprain your ankle",ipa:"/spreɪn/"},
+  bp:{t:"{S} has high blood pressure.",w:"high blood pressure",ipa:"/ˈblʌd ˌpreʃə/"},
+  foodpoisoning:{t:"{S} has food poisoning.",w:"food poisoning",ipa:"/ˈfuːd ˌpɔɪzənɪŋ/"},
+  choking:{t:"{Ss} choking.",w:"choke",ipa:"/tʃəʊk/"},
+  burnt:{t:"{Ss} burnt {X}.",w:"burn yourself",ipa:"/bɜːn/"}
+};
+const TX = {
+  plaster:"Put a plaster on it and use antiseptic cream.",
+  stitches:"Go to hospital and have stitches.",
+  painkillers:"Take some painkillers.",
+  antibiotics:"Take antibiotics.",
+  ice:"Put ice on it and bandage it.",
+  antihistamine:"Take antihistamine tablets or use cream."
+};
+// g: m/f ; spk: 'self' or companion label ; tx: treatment key
+const CASES = [
+ {n:"Oliver",g:"m",c:"#4A90C8",say:"I've had this noisy, dry chest problem for days. Every time I laugh it starts again — I sound like an old car engine!",dx:"cough",d:["sneezing","blister","dizzy"]},
+ {n:"Priya",g:"f",c:"#8E5BA8",say:"There's a terrible pain right here, behind my eyes. Bright lights make it much worse.",dx:"headache",d:["backhurts","rash","blister"],tx:"painkillers",note:"In Britain people often take <b>paracetamol</b>. Americans usually call it <b>acetaminophen</b> or use the brand name <b>Tylenol</b>."},
+ {n:"Marcus",g:"m",c:"#2F8F6B",say:"I can't eat anything sweet. There's a horrible pain in one of my back teeth.",dx:"toothache",d:["sorethroat","cough","sunburn"],note:"British English: <b>I've got toothache</b> (no <i>a</i>). American English: <b>I have a toothache</b>. The same goes for <i>stomach ache</i> (UK) and <i>a stomachache</i> (US)."},
+ {n:"Lucía",g:"f",c:"#F25F4C",say:"I've got little red spots all over my arm, and they're really itchy.",dx:"rash",d:["cough","swollen_x","diarrhoea"]},
+ {n:"Tom",g:"m",c:"#C99512",say:"I'm boiling hot one minute and shivering the next. The thermometer says 39 degrees.",dx:"temperature",d:["blister","sneezing","backhurts"],note:"Americans more often say <b>I have a fever</b>, and they use Fahrenheit: 39°C is about <b>102°F</b>."},
+ {n:"Grace",g:"f",c:"#4A90C8",say:"I fell asleep on the beach without any cream. Now my shoulders are bright red and they sting.",dx:"sunburn",d:["cough","dizzy","choking"],note:"<b>Sun cream</b> is mainly British. <b>Sunscreen</b> is used in both countries."},
+ {n:"Aisha",g:"f",c:"#8E5BA8",spk:"Her flatmate",say:"She's been in the bathroom for twenty minutes, and I can hear everything she ate last night coming back up.",dx:"vomiting",d:["sneezing","sorethroat","blister"],note:"Careful! In British English, <b>be sick</b> means vomit. In American English, <b>be sick</b> usually means be ill, so Americans say <b>throw up</b> or <b>vomit</b>."},
+ {n:"Kenji",g:"m",c:"#2F8F6B",say:"Atchoo! Sorry — it's the flowers in here. Atchoo! I can't stop! Atchoo!",dx:"sneezing",d:["cough","choking","blister"]},
+ {n:"Frank",g:"m",c:"#C99512",say:"I spent all weekend moving furniture, and now I can't bend down to put my shoes on.",dx:"backhurts",d:["blister","cough","sorethroat"]},
+ {n:"Sofia",g:"f",c:"#F25F4C",say:"It hurts every time I swallow, even when I drink water.",dx:"sorethroat",d:["blister","backhurts","dizzy"]},
+ {n:"Dev",g:"m",c:"#4A90C8",say:"I've been to the toilet five times this morning — and it isn't because I drink too much coffee.",dx:"diarrhoea",d:["sneezing","blister","sorethroat"],note:"Spelling: <b>diarrhoea</b> (UK), <b>diarrhea</b> (US). And the room: <b>toilet</b> (UK), <b>bathroom</b> or <b>restroom</b> (US)."},
+ {n:"Rosa",g:"f",c:"#8E5BA8",say:"My stomach is turning over. Nothing has come up yet, but I think it's about to.",dx:"feelssick",d:["sneezing","blister","backhurts"],note:"In British English, <b>I feel sick</b> means you want to vomit. Americans more often say <b>I feel nauseous</b>, because <i>sick</i> in American English usually just means ill."},
+ {n:"Ahmed",g:"m",c:"#2F8F6B",spk:"His colleague",say:"It was so hot in the meeting room that he just went down — standing one second, on the floor the next. He's awake again now, though.",dx:"fainted",d:["blister","sorethroat","rash"],note:"Informal: <b>he passed out</b>. When he woke up, <b>he came round</b> (UK). Americans usually say <b>he came to</b> or <b>came around</b>."},
+ {n:"Ruth",g:"f",c:"#C99512",say:"I walked twenty kilometres in my new boots. Now there's a painful bubble of skin on my heel.",dx:"blister",d:["sunburn","cough","dizzy"]},
+ {n:"Leo",g:"m",c:"#F25F4C",say:"I keep sneezing, my nose is completely blocked and I've got a bit of a cough.",dx:"cold",d:["blister","burnt","backhurts"]},
+ {n:"Nadia",g:"f",c:"#4A90C8",say:"I've got a high temperature and I ache all over — even my hair hurts! I can't get out of bed.",dx:"flu",d:["blister","sunburn","cut"],note:"British English: <b>I've got flu</b>. American English: <b>I have the flu</b>. (<i>The flu</i> is common in Britain too.)"},
+ {n:"Ben",g:"m",c:"#8E5BA8",say:"Every time I stand up, the whole room starts spinning round.",dx:"dizzy",d:["rash","blister","cough"]},
+ {n:"Chloe",g:"f",c:"#2F8F6B",say:"I was chopping onions and the knife slipped. It's only a small one, but there's blood on the chopping board.",dx:"cut",d:["burnt","blister","rash"],tx:"plaster",note:"<b>Plaster</b> (UK) / <b>Band-Aid</b> (US). Band-Aid is a brand name, but Americans use it for any plaster."},
+ {n:"Gareth",g:"m",c:"#C99512",say:"I fell through a glass door. The cut on my leg is long and deep, and it won't stop bleeding.",dx:"cut",d:["burnt","sprained","blister"],tx:"stitches",note:"For something serious you go to <b>A&E</b> (UK). Americans go to <b>the ER</b> (emergency room)."},
+ {n:"Maya",g:"f",c:"#F25F4C",say:"The cut on my finger from last week is red, hot and full of yellow stuff.",dx:"infected",d:["sneezing","flu","dizzy"],tx:"antibiotics",note:"You get antibiotics from the <b>chemist's</b> or <b>pharmacy</b> (UK). Americans say <b>pharmacy</b> or <b>drugstore</b>."},
+ {n:"Victor",g:"m",c:"#4A90C8",spk:"His friend",say:"He's breathing, but his eyes are closed and he doesn't react when I say his name.",dx:"unconscious",d:["blister","sunburn","sorethroat"]},
+ {n:"Elena",g:"f",c:"#8E5BA8",spk:"Her brother",say:"A wasp stung her, and now she's got a rash and she's having trouble breathing.",dx:"allergic",d:["sprained","blister","cold"],tx:"antihistamine"},
+ {n:"Jamal",g:"m",c:"#2F8F6B",say:"I fell badly playing basketball. Now my ankle is huge and I can't walk on it.",dx:"sprained",d:["burnt","sorethroat","cold"],tx:"ice",note:"In the US, a stretchy bandage for a sprain is often called an <b>Ace bandage</b> (a brand name)."},
+ {n:"Margaret",g:"f",c:"#C99512",say:"The nurse just checked me with the machine on my arm. She said one-eighty over one-forty.",dx:"bp",d:["cold","blister","rash"]},
+ {n:"Pablo",g:"m",c:"#F25F4C",say:"I had some prawns at a beach bar last night. I think they were off. I've been ill all night.",dx:"foodpoisoning",d:["sunburn","sprained","cough"],note:"<b>Prawns</b> (UK) / <b>shrimp</b> (US)."},
+ {n:"Sam",g:"m",c:"#4A90C8",spk:"His partner",say:"He was eating a steak and a piece got stuck in his throat. He can't speak!",dx:"choking",d:["blister","sunburn","backhurts"]},
+ {n:"Irene",g:"f",c:"#8E5BA8",say:"I spilt boiling water from the kettle all over my hand.",dx:"burnt",d:["cut","sneezing","dizzy"],note:"<b>Burnt</b> and <b>burned</b> are both used in Britain. Americans almost always say <b>burned</b>."}
+];
+DX.swollen_x={t:"{P} ankle's swollen.",w:"swollen",ipa:"/ˈswəʊlən/"};
+
+const PHRASAL = [
+ {s:"The doctor asked me to ___ on the bed so she could examine my stomach.",a:"lie down",o:["come round","get over"],m:"lie down = put your body in a horizontal position"},
+ {s:"It was so hot on the underground that a man ___ and fell to the floor.",a:"passed out",o:["came round","got over"],m:"pass out = faint"},
+ {s:"When she ___, she didn't know where she was or how long she had been unconscious.",a:"came round",o:["threw up","lay down"],m:"come round = become conscious again"},
+ {s:"It took me nearly three weeks to ___ the flu.",a:"get over",o:["come round","pass out"],m:"get over something = recover from it"},
+ {s:"The sea was so rough that half the passengers ___ over the side of the boat.",a:"threw up",o:["came round","got over"],m:"throw up = vomit, be sick"},
+ {s:"She's ___ her cold now, and she's back at work.",a:"got over",o:["passed out","lain down"],m:"get over something = recover from it"},
+ {s:"If you feel like you're going to faint, ___ and put your feet up.",a:"lie down",o:["come round","throw up"],m:"lie down = put your body in a horizontal position"},
+ {s:"Don't eat so fast or you'll ___!",a:"throw up",o:["come round","lie down"],m:"throw up = vomit, be sick"},
+ {s:"I felt terrible yesterday, so I ___ on the sofa all afternoon.",a:"lay down",o:["came round","got over"],m:"lie – lay – lain. Careful: <i>lay</i> is also the past of <i>lie</i>!"},
+ {s:"Give him some water when he ___ — he'll be confused for a few minutes.",a:"comes round",o:["throws up","gets over"],m:"come round = become conscious again"}
+];
+
+const UKUS = [
+ {us:"a Band-Aid",uk:"a plaster"},
+ {us:"the ER",uk:"A&E"},
+ {us:"I have a toothache.",uk:"I've got toothache."},
+ {us:"a drugstore",uk:"a chemist's"},
+ {us:"acetaminophen",uk:"paracetamol"},
+ {us:"stand in line",uk:"queue"},
+ {us:"the restroom",uk:"the toilet"},
+ {us:"shrimp",uk:"prawns"},
+ {us:"I feel nauseous.",uk:"I feel sick."}
+];
+
+const TEAMS = [
+ {name:"Paramedics",c:"#F25F4C"},{name:"Nurses",c:"#2F8F6B"},
+ {name:"Surgeons",c:"#4A90C8"},{name:"Pharmacists",c:"#8E5BA8"}
+];
+
+/* ---------- STATE ---------- */
+const S = {mode:"teams",nTeams:2,length:12,teams:[],turn:0,round:0,i:0,queue:[],missed:[],max:0,hist:[],view:-1,cur:-1,label:""};
+// hist: answered questions [{round,label,html}] ; view: -1 = the game, otherwise an index into hist ; cur: hist index of the current question once answered
+const app = document.getElementById("app");
+const shuffle = a => {a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const pro = g => g==="m"?{S:"He",Ss:"He's",P:"His",P2:"his",X:"himself",o:"him"}:{S:"She",Ss:"She's",P:"Her",P2:"her",X:"herself",o:"her"};
+const fill = (t,g) => {const p=pro(g);return t.replace("{S}",p.S).replace("{Ss}",p.Ss).replace("{P}",p.P).replace("{P2}",p.P2).replace("{X}",p.X)};
+const initials = n => n[0];
+
+/* ---------- SETUP ---------- */
+function setup(){
+  S.round=0;
+  app.innerHTML = `
+  <div class="screen">
+    <div class="hero">
+      <div class="brand" style="justify-content:center"><div class="cross"></div>Class of Coffee Clinic</div>
+      <h1 style="margin-top:14px">The <span>Waiting Room</span></h1>
+      <p>Patients are arriving with all kinds of problems. Listen to what they say, decide what's wrong with them, and choose the right treatment.</p>
+    </div>
+    <div class="setup">
+      <div class="card"><h3>Who's playing?</h3>
+        <div class="seg" id="mode">
+          <button data-v="teams">Teams</button><button data-v="solo">Just me</button>
+        </div>
+        <div id="nt" style="margin-top:12px"><div class="seg" id="teams">
+          <button data-v="2">2 teams</button><button data-v="3">3 teams</button><button data-v="4">4 teams</button>
+        </div></div>
+      </div>
+      <div class="card"><h3>How many patients?</h3>
+        <div class="seg" id="len">
+          <button data-v="8">8</button><button data-v="12">12</button><button data-v="${CASES.length}">All ${CASES.length}</button>
+        </div>
+      </div>
+    </div>
+    <div class="rounds-list">
+      <div class="rl"><b>1 · The Waiting Room</b><small>Diagnose each patient. 3 points first time, 1 point second time, plus 2 for the right treatment.</small></div>
+      <div class="rl" style="border-color:var(--mint)"><b>2 · On the Ward</b><small>Complete the sentences with phrasal verbs. 2 points each.</small></div>
+      <div class="rl" style="border-color:var(--sky)"><b>3 · Across the Pond</b><small>British or American? 1 point each.</small></div>
+    </div>
+    <button class="go" id="go">Open the doors</button>
+  </div>`;
+  const mark=(id,v)=>document.querySelectorAll(`#${id} button`).forEach(b=>b.classList.toggle("on",b.dataset.v===v));
+  const sync=()=>{
+    mark("mode",S.mode);mark("teams",String(S.nTeams));mark("len",String(S.length));
+    document.getElementById("nt").style.display=S.mode==="teams"?"":"none";
+  };
+  document.querySelectorAll("#mode button").forEach(b=>b.onclick=()=>{S.mode=b.dataset.v;sync()});
+  document.querySelectorAll("#teams button").forEach(b=>b.onclick=()=>{S.nTeams=+b.dataset.v;sync()});
+  document.querySelectorAll("#len button").forEach(b=>b.onclick=()=>{S.length=+b.dataset.v;sync()});
+  sync();
+  document.getElementById("go").onclick=start;
+}
+
+function start(){
+  S.teams = S.mode==="solo" ? [{name:"Your score",c:"#3B2416",score:0}] : TEAMS.slice(0,S.nTeams).map(t=>({...t,score:0}));
+  S.turn=0;S.missed=[];S.max=0;S.view=-1;S.sel=1;S.results=false;
+  S.R={
+    1:{items:shuffle(CASES).slice(0,S.length),i:0,hist:[],started:false,label:""},
+    2:{items:shuffle(PHRASAL).slice(0,8),i:0,hist:[],started:false,label:""},
+    3:{items:shuffle(UKUS).slice(0,8),i:0,hist:[],started:false,label:""}
+  };
+  app.innerHTML=`<div id="chrome"></div>
+    <div id="r1"></div><div id="r2" hidden></div><div id="r3" hidden></div>
+    <div id="res" hidden></div><div id="past" hidden></div>`;
+  [1,2,3].forEach(intro);
+  refresh();
+}
+
+/* ---------- FRAME: rounds, scores, back/forward ---------- */
+const ROUNDS = {
+ 1:{title:"The Waiting Room",txt:"Read what each patient says. What's wrong with them? Then choose the best treatment when there is one.",unit:"Patient"},
+ 2:{title:"On the Ward",txt:"Complete each sentence with the phrasal verb that fits. Watch the form: past, present or infinitive?",unit:"Sentence"},
+ 3:{title:"Across the Pond",txt:"Your coursebook uses British English. Which word or phrase would you hear in the US?",unit:"Pair"}
+};
+const box=r=>document.getElementById("r"+r);
+const $=id=>document.getElementById(id);
+function status(r){const R=S.R[r];return R.i>=R.items.length?"done":R.started?"now":"new"}
+function allDone(){return [1,2,3].every(r=>status(r)==="done")}
+
+function refresh(scroll=true){
+  const live=S.view<0;
+  [1,2,3].forEach(r=>box(r).hidden=!(live&&!S.results&&S.sel===r));
+  $("res").hidden=!(live&&S.results);
+  $("past").hidden=live;
+  if(live)$("past").innerHTML="";
+  drawChrome();
+  if(scroll)window.scrollTo({top:0,behavior:"smooth"});
+}
+function drawChrome(){
+  const solo=S.mode==="solo",live=S.view<0,R=S.R[S.sel];
+  const prev=S.results?-1:(live?R.i-1:S.view-1);
+  const pos=S.results?"Results":live?R.label:`${ROUNDS[S.sel].unit} ${S.view+1} · answered`;
+  $("chrome").innerHTML=`
+  <div class="top"><div class="brand"><div class="cross"></div>The Waiting Room</div>
+    <button class="navb" id="resb" style="margin-left:auto">See the results</button></div>
+  <div class="tabs">${[1,2,3].map(r=>{const st=status(r),Rr=S.R[r];
+    const sub=st==="done"?"Finished":st==="now"?`In progress · ${Rr.hist.length} of ${Rr.items.length} answered`:"Not started";
+    return `<button class="tab ${st} ${!S.results&&r===S.sel?"sel":""}" data-r="${r}">
+    <span class="tn">${st==="done"?"✓":r}</span><span><b>${ROUNDS[r].title}</b><small>${sub}</small></span></button>`}).join("")}</div>
+  <div class="scores">${S.teams.map((t,k)=>`<div class="score ${!solo&&live&&!S.results&&k===S.turn?"active":""}" id="sc${k}"><span class="dot" style="background:${t.c}"></span><span class="nm">${t.name}</span><span class="pts">${t.score}</span></div>`).join("")}</div>
+  ${S.results?"":`<div class="nav">
+    <button class="navb" id="prev" ${prev<0?"disabled":""}>◀ Previous</button>
+    <span class="pos">${pos}</span>
+    <button class="navb" id="fwd" ${live?"disabled":""}>Next ▶</button>
+  </div>`}`;
+  $("resb").onclick=results;
+  document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{S.sel=+b.dataset.r;S.view=-1;S.results=false;refresh()});
+  if(!S.results){
+    $("prev").onclick=()=>{S.view=prev;showPast()};
+    $("fwd").onclick=()=>{const n=S.view+1;S.view=n<S.R[S.sel].i?n:-1;S.view<0?refresh():showPast()};
+  }
+}
+function showPast(){
+  $("past").innerHTML=`<div class="banner">You're checking an answered question.<button id="back">Back to the game</button></div><div class="snap">${S.R[S.sel].hist[S.view]}</div>`;
+  $("back").onclick=()=>{S.view=-1;refresh()};
+  refresh();
+}
+function snap(r,maxPts){
+  const R=S.R[r],c=box(r).cloneNode(true);
+  c.querySelectorAll(".next,.turn").forEach(e=>e.remove());
+  R.hist[R.i]=c.innerHTML;
+  S.max+=maxPts;
+  drawChrome();
+}
+function turnLine(){
+  if(S.mode==="solo")return "";
+  const t=S.teams[S.turn];
+  return `<div class="turn"><span class="dot" style="background:${t.c}"></span>${t.name}, it's your turn</div>`;
+}
+function award(p){
+  const t=S.teams[S.turn];t.score+=p;
+  const el=document.querySelector(`#sc${S.turn}`);
+  if(el){el.querySelector(".pts").textContent=t.score;el.classList.remove("bump");void el.offsetWidth;el.classList.add("bump")}
+}
+function advanceTurn(){S.turn=(S.turn+1)%S.teams.length}
+function confetti(n=26){
+  const cols=["#FFC93C","#F25F4C","#2F8F6B","#4A90C8","#8E5BA8"];
+  for(let k=0;k<n;k++){const d=document.createElement("div");d.className="cf";
+    d.style.left=Math.random()*100+"vw";d.style.background=cols[k%5];
+    d.style.animationDuration=(1.4+Math.random()*1.4)+"s";d.style.borderRadius=Math.random()>.5?"50%":"2px";
+    document.body.appendChild(d);setTimeout(()=>d.remove(),3000)}
+}
+function intro(r){
+  const R=S.R[r];R.label="Introduction";
+  box(r).innerHTML=`<div class="card inter screen"><h2 class="big">${ROUNDS[r].title}</h2><p>${ROUNDS[r].txt}</p><button class="go startb">Let's go</button></div>`;
+  box(r).querySelector(".startb").onclick=()=>{R.started=true;render(r);refresh()};
+}
+function render(r){
+  const R=S.R[r];
+  if(R.i>=R.items.length)return finished(r);
+  R.label=`${ROUNDS[r].unit} ${R.i+1} of ${R.items.length}`;
+  ({1:patient,2:phrasal,3:ukus})[r](r);
+}
+function goNext(r){S.R[r].i++;advanceTurn();render(r);refresh()}
+function finished(r){
+  const R=S.R[r];R.label="Round finished";
+  const left=[1,2,3].filter(k=>status(k)!=="done");
+  box(r).innerHTML=`<div class="card inter screen"><h2 class="big">Round finished!</h2>
+    <p>${left.length?"Use <b>Previous</b> to check your answers, or carry on with another round.":"That was the last round. Use <b>Previous</b> to check your answers, or see the results."}</p>
+    ${left.map(k=>`<button class="go" data-go="${k}" style="margin-top:12px">${status(k)==="now"?"Back to":"Go to"} Round ${k}: ${ROUNDS[k].title}</button>`).join("")}
+    ${left.length?"":`<button class="go" data-res="1">See the results</button>`}</div>`;
+  box(r).querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{S.sel=+b.dataset.go;refresh()});
+  const rb=box(r).querySelector("[data-res]");if(rb)rb.onclick=results;
+}
+
+/* ---------- ROUND 1 ---------- */
+function patient(r){
+  const R=S.R[r],B=box(r),c=R.items[R.i],p=pro(c.g);
+  const opts=shuffle([c.dx,...c.d]);
+  B.innerHTML=`
+  <div class="queue"><span class="lbl">Waiting</span>${R.items.map((q,k)=>`<span class="chair ${k<R.i?"done":""} ${k===R.i?"now":""}" style="background:${q.c}">${initials(q.n)}</span>`).join("")}</div>
+  <div class="stage screen">
+    <div class="patient card">
+      <div class="ticket">
+        <div class="avatar" style="background:${c.c}">${initials(c.n)}</div>
+        <div class="who"><b>${c.n}</b><small>Patient ${R.i+1} of ${R.items.length}</small></div>
+        <div class="num"><small>Now seeing</small><span>${String(R.i+1).padStart(2,"0")}</span></div>
+      </div>
+      <div class="bubble"><span class="spk">${c.spk||c.n}</span>“${c.say}”</div>
+      ${turnLine()}
+    </div>
+    <div class="card q">
+      <h2>What's wrong with ${p.o}?</h2>
+      <p class="hint">Tap the best answer.</p>
+      <div class="opts dx">${opts.map(k=>`<button class="opt" data-k="${k}">${fill(DX[k].t,c.g)}</button>`).join("")}</div>
+      <div class="txbox"></div><div class="rv"></div>
+    </div>
+  </div>`;
+  let tries=0,earned=0;
+  const btns=[...B.querySelectorAll(".dx .opt")];
+  btns.forEach(b=>b.onclick=()=>{
+    if(b.dataset.k===c.dx){
+      b.classList.add("right");btns.forEach(x=>x.disabled=true);
+      earned=tries===0?3:1;award(earned);confetti(tries===0?30:12);
+      afterDx();
+    }else{
+      b.classList.add("wrong");b.disabled=true;tries++;
+      if(tries>=2){
+        btns.forEach(x=>{x.disabled=true;if(x.dataset.k===c.dx)x.classList.add("shown")});
+        S.missed.push({q:c.say,a:fill(DX[c.dx].t,c.g)});afterDx();
+      }
+    }
+  });
+  function afterDx(){
+    if(c.tx){
+      const to=shuffle([c.tx,...shuffle(Object.keys(TX).filter(k=>k!==c.tx)).slice(0,3)]);
+      const tb0=B.querySelector(".txbox");
+      tb0.innerHTML=`<h2 style="margin-top:20px">What should ${p.o==="him"?"he":"she"} do?</h2><p class="hint">Bonus: 2 points.</p>
+        <div class="opts">${to.map(k=>`<button class="opt" data-k="${k}">${TX[k]}</button>`).join("")}</div>`;
+      tb0.scrollIntoView({behavior:"smooth",block:"nearest"});
+      const tb=[...tb0.querySelectorAll(".opt")];
+      tb.forEach(b=>b.onclick=()=>{
+        tb.forEach(x=>x.disabled=true);
+        if(b.dataset.k===c.tx){b.classList.add("right");award(2);earned+=2;confetti(14)}
+        else{b.classList.add("wrong");tb.find(x=>x.dataset.k===c.tx).classList.add("shown");S.missed.push({q:"Treatment for: "+c.say,a:TX[c.tx]})}
+        reveal();
+      });
+    }else reveal();
+  }
+  function reveal(){
+    const d=DX[c.dx],rv=B.querySelector(".rv");
+    rv.innerHTML=`<div class="reveal"><span class="w">${d.w}</span><span class="ipa">${d.ipa}</span>
+      <span class="pts-pop ${earned?"":"zero"}">+${earned} ${earned===1?"point":"points"}</span>
+      ${c.note?`<div class="note"><span class="flag">UK / US</span>${c.note}</div>`:""}
+      <div><button class="next">${R.i+1<R.items.length?"Next patient, please!":"Finish the round"}</button></div></div>`;
+    snap(r,3+(c.tx?2:0));
+    rv.scrollIntoView({behavior:"smooth",block:"nearest"});
+    rv.querySelector(".next").onclick=()=>goNext(r);
+  }
+}
+
+/* ---------- ROUND 2 ---------- */
+function phrasal(r){
+  const R=S.R[r],B=box(r),it=R.items[R.i];
+  const opts=shuffle([it.a,...it.o]);
+  const parts=it.s.split("___");
+  B.innerHTML=`<div class="card screen q">
+    ${turnLine()}
+    <p class="hint" style="margin-top:8px">Sentence ${R.i+1} of ${R.items.length}</p>
+    <p class="sentence">${parts[0]}<span class="gap">&nbsp;</span>${parts[1]}</p>
+    <div class="opts row">${opts.map(o=>`<button class="opt" data-k="${o}">${o}</button>`).join("")}</div>
+    <div class="rv"></div>
+  </div>`;
+  const btns=[...B.querySelectorAll(".opts .opt")];
+  btns.forEach(b=>b.onclick=()=>{
+    btns.forEach(x=>x.disabled=true);
+    let earned=0;
+    if(b.dataset.k===it.a){b.classList.add("right");earned=2;award(2);confetti(16)}
+    else{b.classList.add("wrong");btns.find(x=>x.dataset.k===it.a).classList.add("shown");S.missed.push({q:it.s,a:it.a})}
+    B.querySelector(".gap").textContent=it.a;
+    B.querySelector(".rv").innerHTML=`<div class="reveal"><span class="w">${it.a}</span>
+      <span class="pts-pop ${earned?"":"zero"}">+${earned} points</span>
+      <div class="note">${it.m}</div>
+      ${/throw|threw/.test(it.a)?`<div class="note"><span class="flag">UK / US</span><b>Throw up</b> is used in both countries. In British English you can also say <b>be sick</b>, but in American English that usually means be ill.</div>`:""}
+      ${/come round|came round|comes round/.test(it.a)?`<div class="note"><span class="flag">UK / US</span>Americans usually say <b>come to</b> or <b>come around</b>.</div>`:""}
+      <div><button class="next">${R.i+1<R.items.length?"Next sentence":"Finish the round"}</button></div></div>`;
+    snap(r,2);
+    B.querySelector(".next").onclick=()=>goNext(r);
+  });
+}
+
+/* ---------- ROUND 3 ---------- */
+function ukus(r){
+  const R=S.R[r],B=box(r),it=R.items[R.i];
+  const opts=shuffle([it.us,it.uk]);
+  B.innerHTML=`<div class="card screen q">
+    ${turnLine()}
+    <p class="hint" style="margin-top:8px">Pair ${R.i+1} of ${R.items.length}</p>
+    <h2 style="margin-bottom:16px">Which one would you hear in the US?</h2>
+    <div class="pair">${opts.map(o=>`<button class="opt" data-k="${o}">${o}</button>`).join("")}</div>
+    <div class="rv"></div>
+  </div>`;
+  const btns=[...B.querySelectorAll(".pair .opt")];
+  btns.forEach(b=>b.onclick=()=>{
+    btns.forEach(x=>x.disabled=true);
+    let earned=0;
+    if(b.dataset.k===it.us){b.classList.add("right");earned=1;award(1);confetti(12)}
+    else{b.classList.add("wrong");btns.find(x=>x.dataset.k===it.us).classList.add("shown");S.missed.push({q:"American English for “"+it.uk+"”",a:it.us})}
+    B.querySelector(".rv").innerHTML=`<div class="reveal">
+      <span class="pts-pop ${earned?"":"zero"}" style="margin-left:0">+${earned} ${earned===1?"point":"points"}</span>
+      <div class="note"><span class="flag">UK</span>${it.uk} &nbsp;&nbsp; <span class="flag">US</span>${it.us}</div>
+      <div><button class="next">${R.i+1<R.items.length?"Next pair":"Finish the round"}</button></div></div>`;
+    snap(r,1);
+    B.querySelector(".next").onclick=()=>goNext(r);
+  });
+}
+
+/* ---------- RESULTS ---------- */
+function results(){
+  S.results=true;S.view=-1;
+  if(allDone())confetti(70);
+  const solo=S.mode==="solo";
+  const left=[1,2,3].filter(k=>status(k)!=="done");
+  let body;
+  if(solo){
+    const sc=S.teams[0].score,pct=S.max?sc/S.max:0;
+    const st=pct>=.9?3:pct>=.65?2:pct>=.35?1:0;
+    body=`<div class="stars">${"★".repeat(st)}${"☆".repeat(3-st)}</div>
+      <p>You scored <b>${sc}</b> out of <b>${S.max}</b>.</p>
+      ${S.missed.length?`<div class="review"><h3>Words to review</h3><ul>${S.missed.map(m=>`<li>${m.a}<small>${m.q}</small></li>`).join("")}</ul></div>`:(S.max?"<p>No mistakes so far. Excellent work!</p>":"")}`;
+  }else{
+    const rk=[...S.teams].sort((a,b)=>b.score-a.score);
+    body=`<p>${rk[0].score===(rk[1]||{}).score?"It's a tie at the top!":`${left.length?"In the lead":"Well done"}: <b>${rk[0].name}</b>!`}</p>
+      <div class="podium">${rk.map((t,k)=>`<div class="pod"><span class="rank">${k+1}</span><span class="dot" style="width:18px;height:18px;border-radius:50%;background:${t.c}"></span><b>${t.name}</b><span class="pts">${t.score}</span></div>`).join("")}</div>`;
+  }
+  $("res").innerHTML=`<div class="card inter screen"><h2 class="big">${left.length?"Scores so far":"The clinic is closed"}</h2>${body}
+    <p style="font-size:16px">${left.length?`Still to finish: ${left.map(k=>ROUNDS[k].title).join(", ")}. Tap a round at the top to carry on.`:"Tap a round at the top to check any question again."}</p>
+    <button class="go" id="again">Start a new game</button></div>`;
+  $("again").onclick=setup;
+  refresh();
+}
+
+setup();
+</script>
+</body>
+</html>
