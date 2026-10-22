@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Telling a childhood memory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --blue:#cfe3f4; --blue-deep:#9cc4e6; --blue-ink:#1d4f7a;
+  --peach:#f8d3c0; --peach-deep:#f0ac8a; --peach-ink:#8a3a14;
+  --orange:#b04e16; --orange-hover:#963f10;
+  --ink:#2b2f3a; --ink-soft:#555b69;
+  --paper:#fffdf9; --cream:#fbf3ea;
+  --line:#e7dccf;
+  --ok:#2e7d4f; --ok-bg:#e3f2e8;
+  --bad:#a8322a; --bad-bg:#fbe5e2;
+  --p1:#cfe3f4; --p2:#e5d9f5; --p3:#f8d3c0; --p4:#f6e7a6; --p5:#f4d0da;
+  --display:"Bricolage Grotesque", "Trebuchet MS", Arial, sans-serif;
+  --body:"Atkinson Hyperlegible", Verdana, Arial, sans-serif;
+  --hand:"Caveat", "Comic Sans MS", cursive;
+  --r-lg:28px; --r-md:18px; --r-sm:12px;
+}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;min-height:100%;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:clamp(17px,1.25vw,22px);line-height:1.55;display:flex;flex-direction:column}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:
+   radial-gradient(circle at 92% 12%, rgba(207,227,244,.9) 0 120px, transparent 121px),
+   radial-gradient(circle at 4% 88%, rgba(248,211,192,.85) 0 150px, transparent 151px),
+   radial-gradient(circle at 80% 96%, rgba(207,227,244,.6) 0 70px, transparent 71px);}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--blue-ink);outline-offset:3px}
+
+/* Route bar */
+header.route{position:sticky;top:0;z-index:5;background:rgba(255,253,249,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.route-inner{max-width:1240px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px}
+.route-title{font-family:var(--display);font-weight:800;font-size:1.05em;white-space:nowrap;background:none;border:0;padding:4px 0}
+.pips{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+.pip{width:38px;height:38px;border-radius:50%;border:2px solid transparent;font-family:var(--display);font-weight:700;font-size:15px;display:grid;place-items:center;transition:transform .15s}
+.pip.ex{background:var(--blue)} .pip.ac{background:var(--peach)}
+.pip.here{border-color:var(--ink);transform:scale(1.12)}
+.pip.seen::after{content:"";position:absolute}
+.pip:hover{transform:translateY(-2px)}
+@media (max-width:760px){.pip{width:30px;height:30px;font-size:13px}.route-title{display:none}.pips{margin:0 auto}}
+
+main{flex:1;width:100%;max-width:1240px;margin:0 auto;padding:28px 20px 40px}
+footer{border-top:1px solid var(--line);background:var(--cream);padding:12px 20px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.8em;color:var(--ink-soft)}
+footer .credit{font-family:var(--hand);font-size:1.35em;color:var(--ink)}
+
+h1,h2,h3{font-family:var(--display);line-height:1.12;margin:0 0 .4em;letter-spacing:-.01em}
+h1{font-size:clamp(2.2rem,5vw,4.4rem);font-weight:800}
+h2{font-size:clamp(1.7rem,3vw,2.6rem);font-weight:800}
+h3{font-size:1.2em;font-weight:700}
+p{margin:0 0 .8em;max-width:70ch}
+.kind{display:inline-block;font-size:.78em;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:10px}
+.kind.ex{background:var(--blue);color:var(--blue-ink)} .kind.ac{background:var(--peach);color:var(--peach-ink)}
+.lead{font-size:1.08em;color:var(--ink-soft)}
+.hand{font-family:var(--hand);font-size:1.5em;line-height:1.1}
+
+.screen.enter > *{animation:arrive .45s cubic-bezier(.25,.46,.45,.94) both}
+.screen.enter > *:nth-child(2){animation-delay:.08s}.screen.enter > *:nth-child(3){animation-delay:.16s}.screen.enter > *:nth-child(4){animation-delay:.24s}.screen.enter > *:nth-child(n+5){animation-delay:.32s}
+@keyframes arrive{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* Buttons */
+.btn{border:0;border-radius:999px;padding:12px 26px;font-family:var(--display);font-weight:700;font-size:1em;transition:transform .12s, background .15s}
+.btn:active{transform:scale(.96)}
+.btn.main{background:var(--orange);color:#fff}
+.btn.main:hover{background:var(--orange-hover);transform:translateY(-2px)}
+.btn.quiet{background:transparent;border:2px solid var(--ink);padding:10px 24px}
+.btn.quiet:hover{background:var(--cream)}
+.actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:22px}
+.nav-row{display:flex;justify-content:space-between;gap:12px;margin-top:36px;padding-top:20px;border-top:1px dashed var(--line)}
+
+/* Start screen */
+.start-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:40px;align-items:center}
+@media (max-width:900px){.start-grid{grid-template-columns:1fr}}
+.bubble-map{position:relative;display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center}
+.bub{border:0;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;line-height:1.15;transition:transform .2s cubic-bezier(.34,1.56,.64,1);animation:bob 7s ease-in-out infinite}
+.bub:hover{transform:scale(1.05)}
+.bub .n{font-family:var(--display);font-weight:800;font-size:1.3em}
+.bub .t{font-weight:700;font-size:.82em}
+.bub .k{font-size:.7em;margin-top:3px}
+.bub.ex{background:var(--blue)} .bub.ex .k{color:var(--blue-ink)}
+.bub.ac{background:var(--peach)} .bub.ac .k{color:var(--peach-ink)}
+.bub:nth-child(3n){animation-delay:-2.3s}.bub:nth-child(3n+1){animation-delay:-4.6s}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -6px}}
+.key-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;font-size:.85em}
+.key-legend span{display:inline-flex;align-items:center;gap:8px}
+.dot{width:18px;height:18px;border-radius:50%;display:inline-block}
+
+/* Cards and panels */
+.panel{background:#fff;border:2px solid var(--line);border-radius:var(--r-lg);padding:24px 28px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.grid2,.grid3{grid-template-columns:1fr}}
+.note-card{border-radius:var(--r-md);padding:18px 22px;background:#fff;border:2px solid var(--line)}
+.note-card.blue{background:var(--blue);border-color:var(--blue)}
+.note-card.peach{background:var(--peach);border-color:var(--peach)}
+.note-card h3{margin-bottom:.35em}
+.note-card ul{margin:.3em 0 0;padding-left:1.1em}
+.note-card li{margin-bottom:.3em}
+.eg{font-style:italic}
+.ukus{display:inline-block;font-size:.78em;font-weight:700;background:#fff;border:1.5px solid var(--blue-ink);color:var(--blue-ink);padding:1px 9px;border-radius:999px;margin-right:6px;font-style:normal}
+.warn{display:inline-block;font-size:.78em;font-weight:700;background:#fff;border:1.5px solid var(--peach-ink);color:var(--peach-ink);padding:1px 9px;border-radius:999px;margin-right:6px}
+
+/* Models */
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.tab{border:2px solid var(--ink);background:#fff;border-radius:999px;padding:8px 20px;font-family:var(--display);font-weight:700}
+.tab[aria-selected="true"]{background:var(--ink);color:#fff}
+.model{position:relative;background:#fff;border-radius:var(--r-lg);padding:28px 32px 28px;border:2px solid var(--line)}
+.model .who{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.tagb{border-radius:999px;padding:4px 14px;font-weight:700;font-size:.85em}
+.tagb.f{background:var(--blue);color:var(--blue-ink)} .tagb.e{background:var(--peach);color:var(--peach-ink)}
+.model-text{font-size:1.12em;line-height:1.75;max-width:66ch}
+.seg{border-radius:6px;padding:2px 2px;transition:background .3s;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.seg .badge{display:none}
+.show-parts .seg[data-p="1"]{background:var(--p1)}.show-parts .seg[data-p="2"]{background:var(--p2)}.show-parts .seg[data-p="3"]{background:var(--p3)}.show-parts .seg[data-p="4"]{background:var(--p4)}.show-parts .seg[data-p="5"]{background:var(--p5)}
+.show-parts .seg .badge{display:inline-grid;place-items:center;width:1.45em;height:1.45em;border-radius:50%;background:var(--ink);color:#fff;font-family:var(--display);font-weight:800;font-size:.7em;margin-right:5px;vertical-align:.15em}
+u.key{text-decoration-color:var(--orange);text-decoration-thickness:2.5px;text-underline-offset:4px}
+.parts-key{display:none;flex-wrap:wrap;gap:8px;margin-top:18px;font-size:.85em}
+.show-parts + .parts-key, .parts-key.on{display:flex}
+.parts-key span{border-radius:999px;padding:3px 12px;font-weight:700}
+
+/* Shape screen */
+.shape{display:grid;gap:14px}
+.shape-row{display:grid;grid-template-columns:70px 230px 1fr;gap:16px;align-items:center;border-radius:var(--r-md);padding:14px 20px}
+.shape-row .num{width:54px;height:54px;border-radius:50%;background:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.5em}
+.shape-row h3{margin:0}
+.shape-row .what{font-size:.86em;color:var(--ink-soft);margin:2px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#fff;border-radius:999px;padding:5px 14px;font-size:.92em}
+@media (max-width:900px){.shape-row{grid-template-columns:54px 1fr}.shape-row .chips{grid-column:1/-1}}
+
+/* Tables */
+.table-wrap{overflow-x:auto;border-radius:var(--r-md);border:2px solid var(--line);background:#fff}
+table{border-collapse:collapse;width:100%;min-width:720px}
+th,td{text-align:left;padding:11px 16px;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-family:var(--display);font-weight:700;background:var(--cream);font-size:.92em}
+tr:last-child td{border-bottom:0}
+td.noun{font-weight:700;color:var(--blue-ink)}
+td.ev{font-weight:700;color:var(--peach-ink)}
+td .adj{font-weight:700}
+.watch{font-size:.88em;color:var(--ink-soft)}
+
+/* Quiz */
+.quiz{max-width:900px}
+.qhead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.pos{font-family:var(--display);font-weight:700}
+.progress{display:flex;gap:6px}
+.progress i{width:12px;height:12px;border-radius:50%;background:var(--line);display:block}
+.progress i.done{background:#8a6a52}
+.progress i.now{background:var(--ink)}
+.prompt{font-size:1.15em;font-weight:700;margin-bottom:14px}
+.speaker{background:var(--blue);border-radius:var(--r-md) var(--r-md) var(--r-md) 4px;padding:14px 20px;font-size:1.1em;max-width:640px;margin-bottom:16px}
+.speaker .hand{font-size:1.15em;color:var(--blue-ink);display:block}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;background:#fff;border:2px solid var(--line);border-radius:var(--r-md);padding:14px 18px;font-size:1.05em;transition:transform .12s,border-color .15s}
+.opt:hover:not([disabled]){border-color:var(--ink);transform:translateY(-2px)}
+.opt[disabled]{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-bg)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opt .lab{display:block;font-size:.78em;font-weight:700;margin-bottom:2px}
+.opt.right .lab{color:var(--ok)} .opt.wrong .lab{color:var(--bad)}
+.opt .why{display:block;font-size:.88em;margin-top:4px}
+.shake{animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.finish{background:var(--cream);border-radius:var(--r-lg);padding:24px 28px;margin-top:18px}
+
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="route">
+  <div class="route-inner">
+    <button class="route-title" data-go="0">Telling a childhood memory</button>
+    <nav class="pips" id="pips" aria-label="Lesson steps"></nav>
+  </div>
+</header>
+<main id="app"></main>
+<footer>
+  <span>Speaking preparation for exercise c: talking about childhood memories</span>
+  <span class="credit">Class of Coffee – with AI assistance</span>
+</footer>
+
+<script>
+(function(){
+const $ = (s, r=document) => r.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+
+const PARTS = [
+  {n:1, name:"When and where", what:"Give your age and the place, so that the listener can picture it."},
+  {n:2, name:"The background", what:"Describe the situation before the main event."},
+  {n:3, name:"What happened", what:"Tell the main event in order."},
+  {n:4, name:"How you felt and why", what:"Name the feeling and explain the reason."},
+  {n:5, name:"The ending", what:"Say how it ended or how you see it now."}
+];
+
+const SCREENS = [
+  {id:"start", title:"Start", kind:null},
+  {id:"models", title:"Two memories", kind:"ex"},
+  {id:"shape", title:"The five parts", kind:"ex"},
+  {id:"remember", title:"Remembering", kind:"ex"},
+  {id:"spot", title:"Spot the problem", kind:"ac"},
+  {id:"listen", title:"Responding", kind:"ac"}
+];
+
+/* ---------- Content ---------- */
+const MODELS = [
+  {who:"Oliver’s memory", feeling:"embarrassment", event:"a festival or celebration", segs:[
+    [1,"I think I was about seven, and it was the end-of-term concert at my primary school."],
+    [2,"We were performing a play about the seasons, and I was the sun. My dad had made me a huge yellow costume out of cardboard."],
+    [3,"<u class='key'>I remember standing</u> at the side of the stage and hearing everyone laughing at the scene before mine. When I walked on, my mind went completely blank, and I couldn’t remember a single word. I just stood there in my cardboard sun while my teacher whispered my lines from behind the curtain."],
+    [4,"<u class='key'>I was so embarrassed that</u> I wanted the ground to swallow me up. <u class='key'>What I remember most is</u> the silence."],
+    [5,"Now I think it’s quite funny, but I didn’t act in a play again for years."]
+  ]},
+  {who:"Grace’s memory", feeling:"disappointment", event:"getting a wonderful or disappointing present", segs:[
+    [1,"<u class='key'>I must have been about nine</u>, and it was the morning of my birthday."],
+    [2,"For months I had been asking for a green racing bike that I had seen in a shop window in the town centre."],
+    [3,"When I came downstairs, my mum was standing in the hall next to something big under a blanket. <u class='key'>I’ll never forget pulling</u> the blanket off. It was a bike, but it was a heavy purple one with a basket on the front."],
+    [4,"<u class='key'>I was really disappointed</u>, and it must have shown on my face, because my mum stopped smiling. I felt guilty about that for the rest of the day."],
+    [5,"In the end, I rode that bike everywhere for six years, and I loved it."]
+  ]}
+];
+
+const SHAPE_CHUNKS = [
+  ["I think I was about …","I must have been about …","It was the summer we …","At the time, we were living in …"],
+  ["We were …ing …","It was raining / really hot / dark.","I had never … before.","For weeks I had been …ing …"],
+  ["I remember …ing …","Suddenly, …","Then …","As soon as I …, …","I’ll never forget …ing …"],
+  ["I was so … that …","I felt … because …","What I remember most is …","To my amazement / disappointment, …"],
+  ["In the end, …","Now I think it’s …","I still … to this day.","I didn’t … again for years."]
+];
+
+const SPOT = [
+  {opts:[
+    ["I remember arriving at the house, and it was dark.", true, "This is correct. When we talk about a memory, remember is followed by the -ing form."],
+    ["I remember to arrive at the house, and it was dark.", false, "This is not correct here. Remember + to + infinitive is used for a task you must not forget, for example Remember to lock the door."]
+  ]},
+  {opts:[
+    ["I remember my brother crying in the back of the car.", true, "This is correct. The person you remember comes between remember and the -ing form."],
+    ["I remember my brother to cry in the back of the car.", false, "This is not correct. The structure is remember + person + -ing form, so to cry is not possible here."]
+  ]},
+  {opts:[
+    ["That song reminds me of my grandmother.", true, "This is correct. Remind someone of something means that it makes you think of it. Recordar can mean both remember and remind, but English uses two different verbs."],
+    ["That song remembers me my grandmother.", false, "This is not correct. Remember does not take a person as its object in this way. The verb you need is remind, followed by of."],
+    ["That song reminds me my grandmother.", false, "This is not correct because the preposition is missing. We say remind someone of something."]
+  ]},
+  {opts:[
+    ["I was five when it happened.", true, "This is correct. In English we use be with age."],
+    ["I had five years when it happened.", false, "This is not correct. English does not use have for age."],
+    ["I was five years when it happened.", false, "This is not correct. You can say five or five years old, but not five years on its own."]
+  ]},
+  {opts:[
+    ["I was really embarrassed when everyone started laughing.", true, "This is correct. The -ed adjective describes how a person feels."],
+    ["I was really embarrassing when everyone started laughing.", false, "This is grammatically possible, but the meaning is wrong. It says that you made other people feel embarrassed."],
+    ["I was really embarrassment when everyone started laughing.", false, "This is not correct. Embarrassment is a noun, so it cannot follow I was really."]
+  ]},
+  {opts:[
+    ["I was so excited about the trip that I couldn’t sleep.", true, "This is correct. The structure is so + adjective + that + result."],
+    ["I was so excited about the trip so I couldn’t sleep.", false, "This is not correct. After so + adjective, the result is introduced by that, not by a second so."]
+  ]},
+  {opts:[
+    ["We moved house when I was eight.", true, "This is correct. Move house is the British English collocation. In American English, people usually just say we moved."],
+    ["We changed house when I was eight.", false, "This is not correct. Change house is a translation of cambiar de casa, but English uses move."],
+    ["We moved of house when I was eight.", false, "This is not correct. Move house does not take a preposition."]
+  ]},
+  {opts:[
+    ["My little sister was born when I was six.", true, "This is correct. Be born is always passive in English."],
+    ["My little sister born when I was six.", false, "This is not correct because the verb be is missing. We say was born."],
+    ["My little sister was borned when I was six.", false, "This is not correct. Born is already the past participle, so it does not take -ed."]
+  ]},
+  {opts:[
+    ["Our dog died when I was ten.", true, "This is correct. Died describes the event, which is what you need in a story."],
+    ["Our dog was dead when I was ten.", false, "This is grammatically possible, but the meaning is wrong. Was dead describes a state, so it does not tell the listener when the event happened."]
+  ]},
+  {opts:[
+    ["When I opened the box, I saw that it was the wrong bike.", true, "This is correct. The two actions happen one after the other, so the past simple is enough."],
+    ["When I had opened the box, I had seen that it was the wrong bike.", false, "This is not correct here. The past perfect is for something that happened before another past event. Using it for every action makes the story hard to follow."],
+    ["When I was opening the box, I was seeing that it was the wrong bike.", false, "This is not correct. See is not normally used in the continuous form with this meaning, and the past continuous is for background actions, not the main events."]
+  ]}
+];
+
+const LISTEN = [
+  {say:"I was about seven, and it was my first time on a plane.", opts:[
+    ["Were you? Were you nervous?", true, "This is the best response. The reply question uses the same auxiliary as the speaker (was → were you), and the follow-up question invites the speaker to continue."],
+    ["Did you? Were you nervous?", false, "This is not correct. The speaker used was, so the reply question needs were you, not did you."],
+    ["OK. Who wants to go next?", false, "This is grammatically correct, but it ends the story before the speaker has really started."]
+  ]},
+  {say:"Our dog died the week before my birthday.", opts:[
+    ["Oh no, that’s so sad. How old were you?", true, "This is the best response. It shows sympathy and then asks a gentle question about the speaker."],
+    ["Oh, how interesting. And then what?", false, "This is grammatically correct, but interesting sounds cold after sad news."],
+    ["Did it? My cat died too, when I was twelve, and…", false, "This is not the best choice. Did it is a correct reply question, but the listener then takes over the conversation with their own story."]
+  ]},
+  {say:"I couldn’t remember a single word.", opts:[
+    ["Couldn’t you? What did you do?", true, "This is the best response. The reply question repeats the speaker’s auxiliary, couldn’t, and the question moves the story on."],
+    ["Didn’t you? What did you do?", false, "This is not correct. The speaker used couldn’t, so the reply question must use couldn’t too."],
+    ["Could you? What did you do?", false, "This is not correct. A reply question keeps the speaker’s negative, so it should be couldn’t you."]
+  ]},
+  {say:"I won the swimming race, even though I was the youngest.", opts:[
+    ["Did you? That’s amazing! How did you feel?", true, "This is the best response. Won is in the past simple, so the reply question uses did, and the question asks about feelings, which is part of the task."],
+    ["Were you? That’s amazing! How did you feel?", false, "This is not correct. The main verb is won, so the reply question needs did you."],
+    ["Did you? That’s amazed! How did you feel?", false, "This is not correct. Amazed describes a person’s feeling. To describe the news, we say that’s amazing."]
+  ]},
+  {say:"I’ve never forgotten that day.", opts:[
+    ["Haven’t you? What made it so special?", true, "This is the best response. The speaker used I’ve never, so the reply question is haven’t you."],
+    ["Didn’t you? What made it so special?", false, "This is not correct. The speaker used the present perfect, so the auxiliary is have."],
+    ["Have you? What made it so special?", false, "This is not correct. Never makes the speaker’s sentence negative, so the reply question needs haven’t you."]
+  ]}
+];
+
+/* ---------- State (memory only) ---------- */
+const S = {
+  screen:0, enter:true,
+  model:0, showParts:false,
+  spot:{i:0, items:null, tried:[], solved:false},
+  listen:{i:0, items:null, tried:[], solved:false}
+};
+
+/* ---------- Routing ---------- */
+function renderPips(){
+  $("#pips").innerHTML = SCREENS.map((s,i)=> i===0 ? "" :
+    `<button class="pip ${s.kind} ${i===S.screen?'here':''}" data-go="${i}" aria-label="${i}. ${esc(s.title)} (${s.kind==='ex'?'Explanation':'Activity'})" title="${esc(s.title)}">${i}</button>`).join("");
+}
+function go(i){
+  S.screen = Math.max(0, Math.min(SCREENS.length-1, i));
+  S.enter=true; render(); window.scrollTo(0,0);
+}
+document.addEventListener("click", e => {
+  const g = e.target.closest("[data-go]");
+  if (g) { go(+g.dataset.go); }
+});
+
+function navRow(){
+  const i = S.screen;
+  const prev = i>0 ? `<button class="btn quiet" data-go="${i-1}">Back</button>` : `<span></span>`;
+  const next = i<SCREENS.length-1 ? `<button class="btn main" data-go="${i+1}">Next step: ${esc(SCREENS[i+1].title)}</button>` : `<button class="btn main" data-go="2">Back to the five parts</button>`;
+  return `<div class="nav-row">${prev}${next}</div>`;
+}
+function kindTag(k){ return k==="ex" ? `<span class="kind ex">Explanation</span>` : `<span class="kind ac">Activity</span>`; }
+
+function render(){
+  renderPips();
+  const s = SCREENS[S.screen];
+  const html = ({
+    start:viewStart, models:viewModels, shape:viewShape, remember:viewRemember,
+    spot:()=>viewQuiz("spot"), listen:()=>viewQuiz("listen")
+  })[s.id]();
+  $("#app").innerHTML = `<section class="screen ${S.enter?'enter':''}">${html}</section>`;
+  S.enter=false;
+}
+
+/* ---------- Screens ---------- */
+function viewStart(){
+  const sizes=[160,140,150,150,160];
+  const bubbles = SCREENS.slice(1).map((s,k)=>{
+    const i=k+1, d=sizes[k];
+    return `<button class="bub ${s.kind}" data-go="${i}" style="width:${d}px;height:${d}px">
+      <span class="n">${i}</span><span class="t">${esc(s.title)}</span><span class="k">${s.kind==='ex'?'Explanation':'Activity'}</span></button>`;
+  }).join("");
+  return `
+  <div class="start-grid">
+    <div>
+      <p class="hand" style="color:var(--peach-ink)">Getting ready for exercise c</p>
+      <h1>Telling a childhood memory</h1>
+      <p class="lead">In this lesson you will read two short memories, look at how they are organised, and practise the language you need to describe a past event and your feelings about it.</p>
+      <div class="actions"><button class="btn main" data-go="1">Start with step 1</button></div>
+      <div class="key-legend">
+        <span><i class="dot" style="background:var(--blue)"></i>Blue steps explain the language.</span>
+        <span><i class="dot" style="background:var(--peach)"></i>Peach steps are activities.</span>
+      </div>
+    </div>
+    <div class="bubble-map" aria-label="Contents">${bubbles}</div>
+  </div>`;
+}
+
+function viewModels(){
+  const m = MODELS[S.model];
+  const tabs = MODELS.map((x,i)=>`<button class="tab" role="tab" aria-selected="${i===S.model}" data-act="model" data-i="${i}">${esc(x.who)}</button>`).join("");
+  const text = m.segs.map(([p,t])=>`<span class="seg" data-p="${p}"><span class="badge">${p}</span>${t}</span>`).join(" ");
+  const key = PARTS.map(p=>`<span style="background:var(--p${p.n})">${p.n} ${esc(p.name)}</span>`).join("");
+  return `
+  ${kindTag("ex")}
+  <h2>Two memories</h2>
+  <p class="lead">Each speaker chose one feeling and one event from the page. Read both memories and notice how the speaker starts, how they explain the feeling, and how they finish.</p>
+  <div class="tabs" role="tablist">${tabs}</div>
+  <div class="model ${S.showParts?'show-parts':''}">
+    <div class="who"><span class="tagb f">Feeling: ${esc(m.feeling)}</span><span class="tagb e">Event: ${esc(m.event)}</span></div>
+    <p class="model-text">${text}</p>
+  </div>
+  <div class="parts-key ${S.showParts?'on':''}">${key}</div>
+  <p style="margin-top:14px" class="watch">The underlined phrases appear again in steps 2 and 3.</p>
+  <div class="actions"><button class="btn quiet" data-act="parts">${S.showParts?'Hide the five parts':'Show the five parts'}</button></div>
+  ${navRow()}`;
+}
+
+function viewShape(){
+  const rows = PARTS.map((p,i)=>`
+    <div class="shape-row" style="background:var(--p${p.n})">
+      <div class="num">${p.n}</div>
+      <div><h3>${esc(p.name)}</h3><p class="what">${esc(p.what)}</p></div>
+      <div class="chips">${SHAPE_CHUNKS[i].map(c=>`<span class="chip">${esc(c)}</span>`).join("")}</div>
+    </div>`).join("");
+  return `
+  ${kindTag("ex")}
+  <h2>How a memory is usually organised</h2>
+  <p class="lead">Both memories follow the same five parts. The order helps the listener follow the story, and it also helps you, because you always know what comes next. Each part can be one or two sentences.</p>
+  <div class="shape">${rows}</div>
+  <div class="grid2" style="margin-top:20px">
+    <div class="note-card blue"><h3>Tenses in part 2</h3><p>The background is usually in the past continuous (<span class="eg">we were performing</span>). Use the past perfect only for something that happened earlier (<span class="eg">my mum had made me a costume</span>).</p></div>
+    <div class="note-card blue"><h3>Tenses in part 3</h3><p>The main events are in the past simple and are told in the order they happened (<span class="eg">I walked on, my mind went blank</span>).</p></div>
+  </div>
+  ${navRow()}`;
+}
+
+function viewRemember(){
+  return `
+  ${kindTag("ex")}
+  <h2>Talking about remembering</h2>
+  <p class="lead">These phrases help you introduce a memory, add a detail you remember clearly, and keep going when you are not sure about something.</p>
+  <div class="grid3">
+    <div class="note-card blue"><h3>remember / forget + -ing</h3>
+      <p>Use this structure for a memory of something that happened.</p>
+      <ul><li class="eg">I remember arriving, and it was dark.</li><li class="eg">I’ll never forget seeing the sea for the first time.</li></ul></div>
+    <div class="note-card blue"><h3>remember + person + -ing</h3>
+      <p>Put the person between the verb and the -ing form.</p>
+      <ul><li class="eg">I remember my dad laughing.</li><li class="eg">I can remember my brother hiding under the table.</li></ul></div>
+    <div class="note-card"><h3>remember + to is different</h3>
+      <p>Remember + to + infinitive is for a task you must not forget, not for a memory.</p>
+      <ul><li class="eg">Remember to bring your key.</li></ul></div>
+    <div class="note-card"><h3>remind someone of</h3>
+      <p>Recordar can mean remember and remind. English uses two verbs.</p>
+      <ul><li class="eg">That smell reminds me of my grandmother’s kitchen.</li></ul></div>
+    <div class="note-card peach"><h3>When you are not sure</h3>
+      <p>These phrases let you continue without stopping to apologise.</p>
+      <ul><li class="eg">I must have been about six.</li><li class="eg">As far as I can remember, …</li><li class="eg">I can’t remember exactly, but …</li><li class="eg">If I remember rightly, …</li></ul>
+      <p style="margin-top:8px;font-size:.88em"><span class="ukus">UK / US</span>American speakers usually say <span class="eg">if I remember correctly</span>, which is also common in Britain.</p></div>
+    <div class="note-card peach"><h3>Saying your age</h3>
+      <p>English uses be with age, not have.</p>
+      <ul><li class="eg">I was five. / I was five years old.</li><li class="eg">When I was about five, …</li><li class="eg">At the age of five, …</li></ul></div>
+  </div>
+  ${navRow()}`;
+}
+
+/* Quiz (spot + listen) */
+function viewQuiz(key){
+  const Q = S[key], data = key==="spot" ? SPOT : LISTEN;
+  if (!Q.items) Q.items = data.map(d=>({...d, order:shuffle(d.opts.map((o,k)=>k))}));
+  const it = Q.items[Q.i], n = Q.items.length, last = Q.i===n-1;
+  const pips = Q.items.map((x,k)=>`<i class="${k<Q.i||(k===Q.i&&Q.solved)?'done':''} ${k===Q.i&&!Q.solved?'now':''}"></i>`).join("");
+  const opts = it.order.map(k=>{
+    const [t,ok,why] = it.opts[k];
+    const tried = Q.tried.includes(k);
+    const show = tried || (Q.solved && false);
+    const cls = tried ? (ok?'right':'wrong') : '';
+    const lab = tried ? (ok? (key==="spot"?"Correct":"Best response") : "Not the right choice") : "";
+    return `<button class="opt ${cls}" data-act="answer" data-q="${key}" data-k="${k}" ${Q.solved||tried?'disabled':''}>
+      ${lab?`<span class="lab">${lab}</span>`:""}${esc(t)}${show?`<span class="why">${esc(why)}</span>`:""}</button>`;
+  }).join("");
+  let btns = "";
+  if (Q.solved && !last) btns = `<button class="btn main" data-act="qnext" data-q="${key}">Next</button>`;
+  if (last && Q.solved) btns = `<button class="btn main" data-act="qreset" data-q="${key}">Start again</button>`;
+  else if (Q.i>0 || Q.tried.length) btns += ` <button class="btn quiet" data-act="qreset" data-q="${key}">Start again</button>`;
+  const head = key==="spot"
+    ? `${kindTag("ac")}<h2>Spot the problem</h2><p class="lead">Each set of sentences contains one correct version. Choose the sentence you could use in your story. If you choose a sentence with a problem, the explanation will tell you what is wrong.</p>`
+    : `${kindTag("ac")}<h2>Responding as a listener</h2><p class="lead">A classmate says something about their memory. Choose the response that sounds natural and helps the speaker to continue.</p>`;
+  const prompt = key==="spot"
+    ? `<p class="prompt">Which sentence is correct?</p>`
+    : `<div class="speaker"><span class="hand">Your classmate says:</span>“${esc(it.say)}”</div>`;
+  const finish = (last && Q.solved) ? `<div class="finish"><h3>${key==="spot"?"You have checked all ten sentences.":"You have answered all five."}</h3><p style="margin:0">${key==="spot"?"These are the problems that come up most often in this task. Keep them in mind when you prepare your own memories.":"In your group, try to give each speaker at least one reaction and one question."}</p></div>` : "";
+  return `${head}
+  <div class="quiz">
+    <div class="qhead"><span class="pos">${key==="spot"?"Sentence":"Situation"} ${Q.i+1} of ${n}</span><span class="progress">${pips}</span></div>
+    ${prompt}
+    <div class="opts">${opts}</div>
+    ${finish}
+    <div class="actions">${btns}</div>
+  </div>
+  ${navRow()}`;
+}
+
+/* ---------- Actions ---------- */
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-act]"); if(!b) return;
+  const a = b.dataset.act;
+  if (a==="model"){ S.model=+b.dataset.i; render(); }
+  else if (a==="parts"){ S.showParts=!S.showParts; render(); }
+  else if (a==="answer"){
+    const Q=S[b.dataset.q], k=+b.dataset.k, it=Q.items[Q.i];
+    if (!Q.tried.includes(k)) Q.tried.push(k);
+    if (it.opts[k][1]) Q.solved=true;
+    render();
+    if (!it.opts[k][1]){ const el=document.querySelector(`.opt[data-k="${k}"]`); if(el) el.classList.add("shake"); }
+  }
+  else if (a==="qnext"){ const Q=S[b.dataset.q]; Q.i++; Q.tried=[]; Q.solved=false; render(); }
+  else if (a==="qreset"){ const Q=S[b.dataset.q]; Q.i=0; Q.items=null; Q.tried=[]; Q.solved=false; render(); }
+});
+
+render();
+})();
+</script>
+</body>
+</html>
