@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Stylist · Day one at the studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500;1,6..96,700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f4efe3; --paper-2:#ebe3d2; --card:#fbf8f1;
+  --ink:#241e2a; --ink-soft:#5a5160;
+  --chalk:#b3242c; --chalk-deep:#8e1a22;
+  --tape:#efc233; --tape-deep:#c99a12;
+  --ok:#3e7650; --ok-bg:#dcebdd;
+  --no-bg:#f1dcd8;
+  --g-ink:#2a2230;
+  --serif:"Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --sans:"Instrument Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  --r-lg:18px; --r-md:12px; --r-sm:8px;
+  --ease:cubic-bezier(.25,.46,.45,.94); --spring:cubic-bezier(.34,1.56,.64,1);
+  --tint-1:#e6efe0; --tint-2:#f6e2d9; --tint-3:#e3e8f2; --tint-4:#f5ecd0; --tint-5:#ece3ef;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{
+  font-family:var(--sans); color:var(--ink); background:var(--paper);
+  background-image:radial-gradient(circle, rgba(36,30,42,.13) 1px, transparent 1.2px);
+  background-size:22px 22px;
+  font-size:17px; line-height:1.55;
+  display:flex; flex-direction:column; min-height:100%;
+  padding-top:env(safe-area-inset-top,0px);
+}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--chalk);outline-offset:3px}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:2px solid var(--ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--paper)}
+.brand{display:flex;align-items:baseline;gap:14px;padding:12px 20px 6px;max-width:1180px;margin:0 auto}
+.brand h1{font-family:var(--serif);font-style:italic;font-weight:700;font-size:clamp(26px,4vw,36px);line-height:1;margin:0;letter-spacing:-.01em}
+.brand p{margin:0;color:var(--ink-soft);font-size:15px}
+.tape{position:relative;background:var(--tape);border-top:1px solid var(--tape-deep);overflow-x:auto;scrollbar-width:none}
+.tape::-webkit-scrollbar{display:none}
+.tape-inner{display:flex;min-width:max-content;max-width:1180px;margin:0 auto;position:relative;
+  background-image:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 10px),repeating-linear-gradient(90deg,var(--ink) 0 1.5px,transparent 1.5px 50px);
+  background-size:100% 6px,100% 12px;background-repeat:no-repeat;background-position:0 0,0 0}
+.stop{border:0;background:transparent;padding:16px 16px 9px;text-align:left;display:flex;flex-direction:column;gap:0;min-width:120px;position:relative;transition:transform .15s var(--ease)}
+.stop:active{transform:scale(.96)}
+.stop .n{font-family:var(--serif);font-weight:700;font-size:13px;line-height:1}
+.stop .t{font-weight:600;font-size:14px;white-space:nowrap}
+.stop .k{font-size:12px;color:#4a3b10}
+.stop.act{background:rgba(255,255,255,.18)}
+.stop.on{background:var(--ink);color:var(--tape)}
+.stop.on .k{color:#e8d48c}
+.stop.on::after{content:"";position:absolute;left:50%;bottom:-8px;width:14px;height:14px;background:var(--ink);transform:translateX(-50%) rotate(45deg)}
+
+main{flex:1;width:100%;max-width:1180px;margin:0 auto;padding:28px 20px 40px}
+.screen{display:none}
+.screen.on{display:block}
+.screen.on > *{animation:rise .5s var(--ease) both}
+.screen.on > *:nth-child(2){animation-delay:.08s}
+.screen.on > *:nth-child(3){animation-delay:.16s}
+.screen.on > *:nth-child(n+4){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+h2{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4.6vw,46px);line-height:1.08;margin:0 0 10px;letter-spacing:-.015em;max-width:22ch}
+h3{font-family:var(--serif);font-weight:700;font-size:26px;line-height:1.15;margin:34px 0 6px}
+.lede{font-size:19px;max-width:62ch;margin:0 0 6px}
+.prose{max-width:66ch}
+.prose p{margin:0 0 12px}
+
+/* welcome */
+.welcome{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:start}
+.badge{background:var(--card);border:2px solid var(--ink);border-radius:var(--r-lg);padding:22px;box-shadow:8px 8px 0 var(--chalk);transform:rotate(1.2deg);position:relative;margin-top:22px}
+.badge .clip{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:62px;height:26px;border:3px solid var(--ink-soft);border-bottom:0;border-radius:14px 14px 0 0}
+.badge .photo{width:86px;height:86px;border-radius:50%;background:var(--tint-4);border:2px solid var(--ink);display:grid;place-items:center;overflow:hidden}
+.badge .photo svg{width:76px}
+.badge-row{display:flex;gap:16px;align-items:center}
+.badge h4{font-family:var(--serif);font-size:24px;margin:0;line-height:1.1}
+.badge .role{color:var(--chalk);font-weight:600}
+.badge dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:18px 0 0;font-size:15px}
+.badge dt{color:var(--ink-soft)}
+.badge dd{margin:0;font-weight:600}
+.contents{list-style:none;padding:0;margin:22px 0 0;border:2px solid var(--ink);border-radius:var(--r-md);overflow:hidden;background:var(--card)}
+.contents li{display:flex;gap:12px;align-items:center;padding:10px 14px;border-top:1px solid var(--paper-2)}
+.contents li:first-child{border-top:0}
+.contents li.act{background:var(--tint-4)}
+.contents .kind{font-size:13px;color:var(--ink-soft);margin-left:auto}
+.contents button{border:0;background:none;padding:0;font-weight:600;text-align:left}
+.contents button:hover{text-decoration:underline;text-decoration-color:var(--chalk);text-underline-offset:3px}
+
+/* rails and hanging cards */
+.group-intro{max-width:64ch;margin:0 0 4px;color:var(--ink-soft)}
+.rail{position:relative;margin-top:30px;padding-top:18px}
+.rail::before{content:"";position:absolute;left:-6px;right:-6px;top:0;height:9px;border-radius:9px;
+  background:linear-gradient(#c9ced6,#7f8792 60%,#5b626c);box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:22px 18px}
+.card{position:relative;background:var(--card);border:1.5px solid var(--ink);border-radius:var(--r-md);padding:0 0 14px;
+  box-shadow:0 6px 14px rgba(36,30,42,.1);transform-origin:50% -14px;margin-top:14px}
+.card::before{content:"";position:absolute;top:-16px;left:50%;width:14px;height:16px;border:2.5px solid #6c727c;border-bottom:0;border-radius:10px 10px 0 0;transform:translateX(-50%)}
+.card.sway{animation:sway 1.1s var(--ease)}
+@keyframes sway{0%{transform:rotate(0)}25%{transform:rotate(2.4deg)}55%{transform:rotate(-1.6deg)}80%{transform:rotate(.6deg)}100%{transform:rotate(0)}}
+.card .pic{border-radius:11px 11px 0 0;height:150px;display:grid;place-items:center;border-bottom:1.5px solid var(--ink)}
+.card .pic svg{height:128px;width:auto;overflow:visible}
+.card:nth-child(5n+1) .pic{background:var(--tint-1)}
+.card:nth-child(5n+2) .pic{background:var(--tint-2)}
+.card:nth-child(5n+3) .pic{background:var(--tint-3)}
+.card:nth-child(5n+4) .pic{background:var(--tint-4)}
+.card:nth-child(5n+5) .pic{background:var(--tint-5)}
+.card .body{padding:12px 14px 0}
+.word-row{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.word{font-family:var(--serif);font-weight:700;font-size:25px;line-height:1.1;margin:0}
+.ipa{color:var(--ink-soft);font-size:15px;margin:2px 0 8px}
+.listen{flex:none;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--ink);background:var(--paper);display:grid;place-items:center;transition:transform .12s}
+.listen:active{transform:scale(.92)}
+.listen svg{width:18px;height:18px}
+.tr{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:15px;margin:0 0 8px}
+.tr dt{color:var(--ink-soft)}
+.tr dd{margin:0;font-weight:600}
+.ex{font-size:15px;margin:0 0 8px}
+.feel{display:flex;gap:10px;align-items:flex-start;background:var(--paper);border-radius:var(--r-sm);padding:8px 10px;font-size:14px;margin:0 0 8px}
+.feel svg{width:30px;flex:none}
+.note{font-size:14px;border-left:4px solid var(--chalk);padding:4px 0 4px 10px;margin:0}
+.note b{color:var(--chalk-deep)}
+
+/* panels */
+.panel{background:var(--card);border:2px solid var(--ink);border-radius:var(--r-lg);padding:20px 22px;margin-top:28px;max-width:860px}
+.panel h4{font-family:var(--serif);font-size:22px;margin:0 0 8px;line-height:1.2}
+.panel.chalk{border-color:var(--chalk);box-shadow:6px 6px 0 var(--chalk)}
+.qgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:10px}
+.q{border:1.5px solid var(--ink);border-radius:var(--r-md);padding:12px;background:var(--paper)}
+.q .verb{font-family:var(--serif);font-weight:700;font-size:22px;display:block}
+.q p{margin:4px 0 0;font-size:15px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+.pair > div{background:var(--paper);border-radius:var(--r-md);padding:12px 14px}
+.pair .lab{font-family:var(--serif);font-weight:700;font-size:20px;display:block;margin-bottom:4px}
+.pair ul{margin:6px 0 0;padding-left:18px}
+.pair li{margin:2px 0}
+.mini-tr{font-size:14px;color:var(--ink-soft)}
+
+/* word order */
+.slots{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:18px 0 6px;min-width:640px}
+.slot-wrap{overflow-x:auto;padding-bottom:6px}
+.slot{border:2px solid var(--ink);border-radius:var(--r-sm);background:var(--card);padding:8px 6px;text-align:center;font-weight:700;font-size:14px}
+.slot small{display:block;font-weight:400;color:var(--ink-soft);font-size:12px}
+.slot.noun{background:var(--ink);color:var(--paper)}
+.slot.noun small{color:#d8d0c4}
+.ex-row{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;min-width:640px;margin-top:6px}
+.ex-row span{text-align:center;padding:7px 4px;border-radius:var(--r-sm);font-size:15px;font-weight:600}
+.ex-row span.f{background:#fff;border:1.5px dashed var(--ink-soft)}
+.ex-row span.e{color:transparent}
+.ex-row span.nn{background:var(--paper-2)}
+.mirror{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px}
+.mirror div{background:var(--paper);border-radius:var(--r-md);padding:10px 12px;font-size:15px}
+.mirror b{display:block;font-size:13px;color:var(--ink-soft);font-weight:600}
+
+/* builder & check */
+.task{background:var(--card);border:2px solid var(--ink);border-radius:var(--r-lg);padding:22px;max-width:820px;margin-top:20px;position:relative}
+.pos{font-size:14px;color:var(--ink-soft);font-weight:600;margin:0 0 6px}
+.prompt{font-size:20px;margin:0 0 14px;max-width:56ch}
+.task .pic{height:150px;display:grid;place-items:center;background:var(--tint-3);border-radius:var(--r-md);margin-bottom:14px;border:1.5px solid var(--ink)}
+.task .pic svg{height:130px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.opt{border:2px solid var(--ink);background:var(--paper);border-radius:var(--r-md);padding:13px 14px;font-weight:600;text-align:left;min-height:54px;position:relative;transition:transform .12s var(--ease),box-shadow .12s}
+.opt::before{content:"";position:absolute;top:50%;left:-7px;width:10px;height:10px;border:2px solid var(--ink);border-radius:50%;background:var(--card);transform:translateY(-50%)}
+.opt:hover{transform:translateY(-2px);box-shadow:0 4px 0 var(--ink)}
+.opt:active{transform:scale(.97)}
+.opt.ok{background:var(--ok-bg);border-color:var(--ok);color:#1f4a2c}
+.opt.no{background:var(--no-bg);text-decoration:line-through;text-decoration-thickness:1.5px;opacity:.85}
+.opt[disabled]{cursor:default}
+.shake{animation:shake .3s}
+@keyframes shake{0%,100%{transform:none}20%,60%{transform:translateX(-3px)}40%,80%{transform:translateX(3px)}}
+.fb{margin:14px 0 0;padding:12px 14px;border-radius:var(--r-md);font-size:16px;display:none}
+.fb.show{display:block;animation:rise .35s var(--ease)}
+.fb.ok{background:var(--ok-bg)}
+.fb.ok strong{color:var(--ok)}
+.fb.no{background:var(--no-bg)}
+.fb .trl{display:block;margin-top:6px;font-size:14px;color:var(--ink-soft)}
+.line{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:58px;padding:10px;border:2px dashed var(--ink-soft);border-radius:var(--r-md);background:#fff;margin-bottom:12px}
+.line .fixed{font-weight:700;padding:8px 4px}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;min-height:50px}
+.tiles:empty{display:none}
+.tile{border:2px solid var(--ink);background:var(--tape);border-radius:999px;padding:9px 16px;font-weight:700;transition:transform .15s var(--spring)}
+.tile:active{transform:scale(.94)}
+.tile.placed{background:var(--card)}
+.tile .cat{display:block;font-size:11px;font-weight:600;color:var(--ink-soft)}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.btn{border:2px solid var(--ink);border-radius:999px;padding:11px 22px;font-weight:700;background:var(--card);transition:transform .12s}
+.btn:active{transform:scale(.96)}
+.btn.main{background:var(--ink);color:var(--paper)}
+.btn[hidden]{display:none}
+
+/* stars */
+.stars{display:flex;gap:6px;margin:10px 0}
+.stars svg{width:38px;height:38px}
+.stars .s{opacity:0;transform:scale(.4) rotate(-20deg);animation:pop .5s var(--spring) forwards}
+@keyframes pop{to{opacity:1;transform:none}}
+.review{background:var(--card);border:2px solid var(--ink);border-radius:var(--r-lg);padding:22px;max-width:640px;margin-top:20px;box-shadow:8px 8px 0 var(--tape)}
+.review blockquote{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.35;margin:6px 0 10px}
+.review cite{font-style:normal;color:var(--ink-soft);font-size:15px}
+.rev-list{list-style:none;padding:0;margin:18px 0 0;max-width:640px}
+.rev-list li{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--card);border:1.5px solid var(--ink);border-radius:var(--r-md);padding:12px 16px;margin-bottom:10px}
+.rev-list .st{display:flex;gap:2px}
+.rev-list .st svg{width:22px;height:22px}
+.empty{color:var(--ink-soft);max-width:56ch}
+
+footer.bar{border-top:2px solid var(--ink);background:var(--paper);padding:10px 20px calc(10px + env(safe-area-inset-bottom,0px))}
+.bar-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.credit{font-size:13px;color:var(--ink-soft);margin-right:auto}
+
+@media (max-width:860px){
+  .welcome{grid-template-columns:1fr}
+  .qgrid{grid-template-columns:1fr 1fr}
+  .mirror{grid-template-columns:1fr}
+  .pair{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .credit{flex-basis:100%;font-size:12px}
+  .bar-in{gap:8px}
+  .bar-in .btn{flex:1;padding:10px 12px;font-size:15px}
+  .bar-in .btn[hidden]{display:none}
+  body{font-size:16px}
+  main{padding:20px 14px 30px}
+  .brand{padding:10px 14px 4px}
+  .brand p{display:none}
+  .stop{min-width:100px;padding:14px 12px 8px}
+  .qgrid{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr 1fr;gap:18px 10px}
+  .card .pic{height:112px}
+  .card .pic svg{height:96px}
+  .word{font-size:21px}
+  .task{padding:16px}
+}
+@media (max-width:520px){ .tr{grid-template-columns:1fr} .tr dt{font-size:12px;margin-top:4px} }
+@media (max-width:380px){ .cards{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><h1>The Stylist</h1><p>Day one at the studio: clothes and fashion</p></div>
+  <nav class="tape" aria-label="Sections"><div class="tape-inner" id="route"></div></nav>
+</header>
+
+<main id="main"></main>
+
+<footer class="bar">
+  <div class="bar-in">
+    <span class="credit">Class of Coffee – with AI assistance</span>
+    <button class="btn" id="prevBtn">Previous section</button>
+    <button class="btn main" id="nextBtn">Next section</button>
+  </div>
+</footer>
+
+<script>
+/* ---------- Garment drawing library (shared by the Stylist set) ---------- */
+const G = (() => {
+  let n = 0;
+  const id = p => p + '_' + (++n);
+  const INK = 'var(--g-ink, #2a2230)';
+
+  function shade(hex, amt) {
+    const h = hex.replace('#', '');
+    let r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16);
+    const f = v => Math.max(0, Math.min(255, Math.round(amt >= 0 ? v + (255 - v) * amt : v * (1 + amt))));
+    return '#' + [f(r), f(g), f(b)].map(v => v.toString(16).padStart(2, '0')).join('');
+  }
+
+  /* Returns {defs, fill} for a colour + pattern/texture */
+  function paint(color, pattern, ink2) {
+    const c = color || '#999999';
+    const k = ink2 || shade(c, -0.45);
+    const pid = id('p');
+    let d = '';
+    switch (pattern) {
+      case 'stripes':
+        d = `<pattern id="${pid}" width="9" height="9" patternUnits="userSpaceOnUse"><rect width="9" height="9" fill="${c}"/><rect width="9" height="3.6" fill="${k}"/></pattern>`; break;
+      case 'checks':
+        d = `<pattern id="${pid}" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="${c}"/><rect width="7" height="14" fill="${k}" opacity=".45"/><rect width="14" height="7" fill="${k}" opacity=".45"/><rect x="10" width="1.2" height="14" fill="${shade(c, .6)}" opacity=".8"/><rect y="10" width="14" height="1.2" fill="${shade(c, .6)}" opacity=".8"/></pattern>`; break;
+      case 'spots':
+        d = `<pattern id="${pid}" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="${c}"/><circle cx="3" cy="3" r="2.1" fill="${k}"/><circle cx="9" cy="9" r="2.1" fill="${k}"/></pattern>`; break;
+      case 'floral':
+        d = `<pattern id="${pid}" width="18" height="18" patternUnits="userSpaceOnUse"><rect width="18" height="18" fill="${c}"/><g fill="${k}"><circle cx="5" cy="4" r="2"/><circle cx="8" cy="5.5" r="2"/><circle cx="5" cy="7.6" r="2"/><circle cx="2.2" cy="5.8" r="2"/></g><circle cx="5" cy="5.8" r="1.2" fill="#f2c94c"/><g fill="#3f7a4a"><ellipse cx="13" cy="13" rx="3" ry="1.4" transform="rotate(35 13 13)"/><ellipse cx="15" cy="16" rx="2.4" ry="1.1" transform="rotate(-25 15 16)"/></g></pattern>`; break;
+      case 'lace':
+        d = `<pattern id="${pid}" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="${c}"/><circle cx="5" cy="5" r="2.6" fill="none" stroke="${shade(c, .55)}" stroke-width="1"/><circle cx="0" cy="0" r="1.3" fill="${shade(c, .55)}"/><circle cx="10" cy="10" r="1.3" fill="${shade(c, .55)}"/><circle cx="10" cy="0" r="1.3" fill="${shade(c, .55)}"/><circle cx="0" cy="10" r="1.3" fill="${shade(c, .55)}"/></pattern>`; break;
+      case 'knit':
+        d = `<pattern id="${pid}" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="${c}"/><path d="M0 1 L2 4 L4 1 M4 1 L6 4 L8 1 M0 5 L2 8 L4 5 M4 5 L6 8 L8 5" fill="none" stroke="${shade(c, -0.25)}" stroke-width="1"/></pattern>`; break;
+      case 'denim':
+        d = `<pattern id="${pid}" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="${c}"/><rect width="1.4" height="5" fill="${shade(c, .25)}" opacity=".7"/></pattern>`; break;
+      case 'linen':
+        d = `<pattern id="${pid}" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="${c}"/><rect width="4" height=".7" fill="${shade(c, -0.12)}"/><rect width=".7" height="4" fill="${shade(c, -0.08)}"/></pattern>`; break;
+      case 'suede':
+        d = `<pattern id="${pid}" width="7" height="7" patternUnits="userSpaceOnUse"><rect width="7" height="7" fill="${c}"/><circle cx="1.5" cy="2" r=".6" fill="${shade(c, -0.2)}"/><circle cx="5" cy="1" r=".5" fill="${shade(c, .2)}"/><circle cx="4" cy="5" r=".6" fill="${shade(c, -0.2)}"/><circle cx="1" cy="6" r=".5" fill="${shade(c, .2)}"/></pattern>`; break;
+      case 'fur':
+        d = `<pattern id="${pid}" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="${c}"/><path d="M1 7 L2 2 M4 8 L5 3 M6 6 L7.5 1" stroke="${shade(c, .35)}" stroke-width=".9"/><path d="M3 6 L3.5 1" stroke="${shade(c, -0.3)}" stroke-width=".9"/></pattern>`; break;
+      case 'bones':
+        d = `<pattern id="${pid}" width="16" height="14" patternUnits="userSpaceOnUse"><rect width="16" height="14" fill="${c}"/><rect x="2" y="5" width="12" height="3.2" rx="1.6" fill="#efe6d2"/><circle cx="2.4" cy="5" r="1.6" fill="#efe6d2"/><circle cx="2.4" cy="8.2" r="1.6" fill="#efe6d2"/><circle cx="13.6" cy="5" r="1.6" fill="#efe6d2"/><circle cx="13.6" cy="8.2" r="1.6" fill="#efe6d2"/></pattern>`; break;
+      case 'velvet': case 'silk': case 'leather': case 'lycra': {
+        const hi = pattern === 'velvet' ? shade(c, .32) : pattern === 'silk' ? shade(c, .5) : pattern === 'leather' ? shade(c, .42) : shade(c, .38);
+        const lo = shade(c, pattern === 'velvet' ? -0.45 : -0.2);
+        d = `<linearGradient id="${pid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${lo}"/><stop offset=".38" stop-color="${c}"/><stop offset=".5" stop-color="${hi}"/><stop offset=".62" stop-color="${c}"/><stop offset="1" stop-color="${lo}"/></linearGradient>`; break;
+      }
+      default:
+        return { defs: '', fill: c };
+    }
+    return { defs: d, fill: `url(#${pid})` };
+  }
+
+  const S = `stroke="${INK}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"`;
+  const mirror = inner => `<g transform="translate(120 0) scale(-1 1)">${inner}</g>`;
+
+  /* A top: T-shirt, jumper, hoodie, tank, shirt */
+  function topShapes(o, fill) {
+    const fit = o.fit || 'regular';
+    const s = fit === 'tight' ? 19 : fit === 'loose' ? 29 : 24;
+    const h = fit === 'tight' ? 17 : fit === 'loose' ? 33 : 25;
+    const nw = 9, L = 60 - s;
+    let out = '';
+    // hood behind
+    if (o.neck === 'hood') out += `<path d="M44 26 Q36 -4 60 -2 Q84 -4 76 26 Z" fill="${fill}" ${S}/>`;
+    // sleeves
+    let sl = '';
+    if (o.sleeve === 'short') sl = `<path d="M${L} 22 L${L - 17} 42 L${L - 8} 51 L${L + 1} 43 Z" fill="${fill}" ${S}/>`;
+    if (o.sleeve === 'long') {
+      const w = fit === 'tight' ? 8 : 11;
+      sl = `<path d="M${L} 22 Q${L - 11} 48 ${L - 12} 98 L${L - 12 + w} 99 Q${L - 2} 62 ${L + 1} 44 Z" fill="${fill}" ${S}/>`;
+      if (o.cuffs) sl += `<path d="M${L - 12} 92 L${L - 12 + w} 93" stroke="${INK}" stroke-width="1.2"/>`;
+    }
+    out += sl + mirror(sl);
+    // body
+    let neckline;
+    if (o.neck === 'v') neckline = `L68 14 L60 ${o.deepV ? 46 : 34} Z`;
+    else if (o.neck === 'scoop') neckline = `L68 14 Q60 34 52 14 Z`;
+    else neckline = `L69 14 Q60 25 51 14 Z`;
+    let body;
+    if (o.sleeve === 'none') {
+      const so = o.straps ? 45 : L + 5;
+      const nl = o.neck === 'scoop' ? `Q60 34 69 14` : o.neck === 'v' ? `L60 34 L69 14` : `Q60 25 69 14`;
+      body = `M${so} 13 L51 14 ${nl} L${120 - so} 13 Q${120 - L - 8} 30 ${120 - L + 1} 46 L${60 + h} 108 L${60 - h} 108 L${L - 1} 46 Q${L + 8} 30 ${so} 13 Z`;
+    } else {
+      body = `M51 14 L${L} 22 L${L + 1} 46 L${60 - h} 108 L${60 + h} 108 L${120 - L - 1} 46 L${120 - L} 22 L69 14 ` + (o.neck === 'v' ? `L60 ${o.deepV ? 46 : 34} Z` : o.neck === 'scoop' ? `Q60 34 51 14 Z` : `Q60 25 51 14 Z`);
+    }
+    out += `<path d="${body}" fill="${fill}" ${S}/>`;
+    if (o.lacehem) {
+      let p = `M${60 - h} 108`;
+      for (let x = 60 - h; x < 60 + h; x += 6) p += ` q3 6 6 0`;
+      out += `<path d="${p}" fill="${fill}" ${S}/>`;
+    }
+    if (o.neck === 'polo') out += `<rect x="49" y="3" width="22" height="15" rx="4" fill="${fill}" ${S}/><path d="M50 10 H70" stroke="${INK}" stroke-width="1.1"/>`;
+    if (o.neck === 'hood') out += `<path d="M51 14 Q60 25 69 14" fill="none" ${S}/><path d="M56 22 L55 40 M64 22 L65 40" stroke="${INK}" stroke-width="1.3"/><circle cx="55" cy="41" r="1.4" fill="${INK}"/><circle cx="65" cy="41" r="1.4" fill="${INK}"/><path d="M${60 - h + 6} 80 H${60 + h - 6} V100 H${60 - h + 6} Z" fill="none" stroke="${INK}" stroke-width="1.1" stroke-dasharray="2 2"/>`;
+    if (o.collar) out += `<path d="M51 14 L58 27 L47 24 Z" fill="${fill}" ${S}/><path d="M69 14 L62 27 L73 24 Z" fill="${fill}" ${S}/><path d="M60 26 V106" stroke="${INK}" stroke-width="1.2"/>` + [40, 56, 72, 88].map(y => `<circle cx="62.5" cy="${y}" r="1.5" fill="#f4efe3" stroke="${INK}" stroke-width=".8"/>`).join('');
+    if (o.open) out += `<path d="M60 ${o.deepV ? 46 : 34} V108" stroke="${INK}" stroke-width="1.6"/>` + [56, 70, 84, 98].map(y => `<circle cx="63" cy="${y}" r="1.8" fill="#e9dfc9" stroke="${INK}" stroke-width=".8"/>`).join('') + `<path d="M${60 - h} 101 H${60 + h}" stroke="${INK}" stroke-width="1.1"/>`;
+    if (o.scruffy) out += `<ellipse cx="72" cy="66" rx="7" ry="5" fill="#8a6a3d" opacity=".55"/><path d="M46 88 l4 -3 l3 4 l-2 4 Z" fill="#f4efe3" ${S}/><path d="M${60 + h - 4} 104 l3 4 M${60 - h + 8} 106 l-2 4" stroke="${INK}" stroke-width="1.2"/>`;
+    return out;
+  }
+
+  const draw = {
+    top(o) { const p = paint(o.color, o.pattern, o.ink); return { defs: p.defs, body: topShapes(o, p.fill) }; },
+    waistcoat(o) {
+      const p = paint(o.color, o.pattern || 'denim');
+      const half = `<path d="M48 12 L34 18 Q40 34 32 48 L32 98 L60 106 L60 46 Z" fill="${p.fill}" ${S}/><path d="M36 30 Q40 40 36 50 L36 95" fill="none" stroke="#f4efe3" stroke-width=".9" stroke-dasharray="2 2"/>`;
+      return { defs: p.defs, body: half + mirror(half) + [56, 70, 84, 98].map(y => `<circle cx="60" cy="${y}" r="2" fill="#c9a35a" stroke="${INK}" stroke-width=".8"/>`).join('') + `<path d="M40 70 H52" stroke="${INK}" stroke-width="1.2"/>` };
+    },
+    suit(o) {
+      const p = paint(o.color, o.pattern || 'linen');
+      const sleeve = `<path d="M36 14 Q25 34 23 70 L31 71 Q34 46 38 30 Z" fill="${p.fill}" ${S}/>`;
+      const leg = `<path d="M42 68 L59 68 L58 116 L44 116 Z" fill="${p.fill}" ${S}/>`;
+      return { defs: p.defs, body: leg + mirror(leg) + sleeve + mirror(sleeve) +
+        `<path d="M50 8 L36 14 L35 74 L85 74 L84 14 L70 8 L60 42 Z" fill="${p.fill}" ${S}/>` +
+        `<path d="M50 8 L44 22 L52 26 L60 42 Z" fill="${shade(o.color, -0.12)}" ${S}/><path d="M70 8 L76 22 L68 26 L60 42 Z" fill="${shade(o.color, -0.12)}" ${S}/>` +
+        `<path d="M60 42 V74" stroke="${INK}" stroke-width="1.2"/><circle cx="62" cy="56" r="1.8" fill="${INK}"/>` +
+        (o.tie ? `<path d="M57 10 L63 10 L62 16 L65 38 L60 44 L55 38 L58 16 Z" fill="${o.tie}" ${S}/>` : `<path d="M54 9 L60 20 L66 9" fill="#f4efe3" ${S}/>`) };
+    },
+    swimsuit(o) {
+      const p = paint(o.color, o.pattern || 'lycra');
+      return { defs: p.defs, body: `<path d="M44 8 L50 8 Q60 30 70 8 L76 8 Q73 40 80 62 Q72 86 62 98 L58 98 Q48 86 40 62 Q47 40 44 8 Z" fill="${p.fill}" ${S}/><path d="M40 62 Q50 70 58 98 M80 62 Q70 70 62 98" fill="none" stroke="${INK}" stroke-width="1.1"/>` };
+    },
+    scarf(o) {
+      const p = paint(o.color, o.pattern || 'silk');
+      const fr = x => [0, 3, 6, 9, 12].map(i => `<path d="M${x + i} 104 v6" stroke="${INK}" stroke-width="1"/>`).join('');
+      return { defs: p.defs, body: `<path d="M24 22 Q60 4 96 22 L92 34 Q60 20 28 34 Z" fill="${p.fill}" ${S}/><path d="M50 28 L42 104 L58 104 L62 30 Z" fill="${p.fill}" ${S}/><path d="M60 28 L68 100 L82 96 L70 26 Z" fill="${p.fill}" ${S}/>` + fr(44) };
+    },
+    bowtie(o) {
+      const p = paint(o.color, o.pattern || 'velvet');
+      return { defs: p.defs, body: `<path d="M54 56 L18 34 Q12 60 18 86 L54 66 Z" fill="${p.fill}" ${S}/><path d="M66 56 L102 34 Q108 60 102 86 L66 66 Z" fill="${p.fill}" ${S}/><rect x="51" y="50" width="18" height="22" rx="5" fill="${p.fill}" ${S}/>` };
+    },
+    cardigan(o) {
+      const p = paint(o.color, o.pattern || 'knit');
+      return { defs: p.defs, body: topShapes({ fit: 'regular', sleeve: 'long', neck: 'v', deepV: true, open: true, cuffs: true }, p.fill) };
+    },
+    sandals(o) {
+      const p = paint(o.color, o.pattern || 'leather');
+      const one = (x, r) => `<g transform="rotate(${r} ${x + 14} 60)"><rect x="${x}" y="22" width="28" height="78" rx="14" fill="${shade(o.color, -0.25)}" ${S}/><path d="M${x} 44 Q${x + 14} 36 ${x + 28} 44 L${x + 28} 54 Q${x + 14} 46 ${x} 54 Z" fill="${p.fill}" ${S}/><path d="M${x + 2} 68 Q${x + 14} 60 ${x + 26} 68 L${x + 26} 78 Q${x + 14} 70 ${x + 2} 78 Z" fill="${p.fill}" ${S}/></g>`;
+      return { defs: p.defs, body: one(24, -8) + one(66, 8) };
+    },
+    boots(o) {
+      const p = paint(o.color, o.pattern || 'suede');
+      const one = dx => `<g transform="translate(${dx} 0)"><path d="M20 16 L44 16 L45 72 Q48 82 66 86 Q72 88 72 98 L72 102 L18 102 L18 92 Z" fill="${p.fill}" ${S}/><path d="M18 102 L72 102 L72 106 L18 106 Z" fill="${INK}"/><rect x="18" y="98" width="12" height="10" fill="${INK}"/>` + (o.wet ? `<path d="M48 82 Q60 84 70 90 L72 102 L44 102 Z" fill="#2b1f1a" opacity=".55"/><circle cx="30" cy="100" r="2.4" fill="#4a3a22"/><circle cx="58" cy="99" r="2" fill="#4a3a22"/><circle cx="66" cy="96" r="1.6" fill="#4a3a22"/>` : '') + `</g>`;
+      return { defs: p.defs, body: one(-4) + one(34) };
+    },
+    furcollar(o) {
+      const p = paint(o.color, 'fur');
+      const pts = [];
+      for (let i = 0; i <= 24; i++) { const t = i / 24; pts.push([16 + 88 * t, 22 + Math.sin(t * Math.PI) * 50 + (i % 2 ? 3.5 : -3.5)]); }
+      for (let i = 24; i >= 0; i--) { const t = i / 24; pts.push([36 + 48 * t, 20 + Math.sin(t * Math.PI) * 26 + (i % 2 ? -3 : 3)]); }
+      const d = 'M' + pts.map(q => q[0].toFixed(1) + ' ' + q[1].toFixed(1)).join(' L') + ' Z';
+      const tail = x => { let t = `M${x} 22`; for (let y = 30; y <= 100; y += 7) t += ` L${x - 4 + ((y / 7) % 2 ? 8 : 0)} ${y}`; t += ` L${x + 16} 104`; for (let y = 96; y >= 30; y -= 7) t += ` L${x + 20 - ((y / 7) % 2 ? 8 : 0)} ${y}`; return t + ` L${x + 18} 24 Z`; };
+      return { defs: p.defs, body: `<path d="${tail(14)}" fill="${p.fill}" ${S}/><path d="${tail(86)}" fill="${p.fill}" ${S}/><path d="${d}" fill="${p.fill}" ${S}/>` };
+    },
+    cape(o) {
+      const p = paint(o.color, o.pattern || 'velvet');
+      return { defs: p.defs, body: `<path d="M46 14 L74 14 L106 112 L14 112 Z" fill="${p.fill}" ${S}/><path d="M44 4 L46 18 L60 24 L74 18 L76 4 L60 12 Z" fill="${shade(o.color, -0.2)}" ${S}/>` };
+    },
+    tank(o) { const p = paint(o.color, o.pattern); return { defs: p.defs, body: topShapes({ fit: 'regular', sleeve: 'none', neck: 'scoop', straps: true }, p.fill) }; },
+    lacetop(o) { const p = paint(o.color, 'lace'); return { defs: p.defs, body: topShapes({ fit: 'regular', sleeve: 'none', neck: 'crew', lacehem: true }, p.fill) }; },
+  };
+
+  /* Returns a complete <svg> for one garment */
+  function svg(kind, o = {}, extra = '') {
+    const r = draw[kind](o);
+    return `<svg viewBox="0 -6 120 122" role="img" aria-label="${o.label || kind}" ${extra}><defs>${r.defs}</defs>${r.body}</svg>`;
+  }
+
+  /* A swatch circle showing a texture */
+  function swatch(color, pattern) {
+    const p = paint(color, pattern);
+    return `<svg viewBox="0 0 40 40" aria-hidden="true"><defs>${p.defs}</defs><rect x="2" y="2" width="36" height="36" rx="6" fill="${p.fill}" stroke="${INK}" stroke-width="1.4"/></svg>`;
+  }
+
+  return { svg, swatch, paint, topShapes, shade, draw, mirror, S, INK };
+})();
+
+</script>
+<script>
+/* ================= DATA ================= */
+const SPEAK = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>`;
+
+const FIT = [
+ {w:'loose', ipa:'/luːs/', ca:'ample, folgat', es:'holgado, ancho', g:['top',{fit:'loose',sleeve:'short',neck:'crew',color:'#6fa86b'}], ex:'I like wearing loose clothes on long flights because they are comfortable.', note:['Watch out','Loose /luːs/ is an adjective. The verb lose /luːz/ has a different spelling and a /z/ sound: I always lose my umbrella.']},
+ {w:'tight', ipa:'/taɪt/', ca:'estret, cenyit', es:'ajustado, estrecho', g:['top',{fit:'tight',sleeve:'short',neck:'crew',color:'#d9706a'}], ex:'These jeans are too tight, so I need a bigger size.'},
+];
+const STYLE = [
+ {w:'hooded', ipa:'/ˈhʊdɪd/', ca:'amb caputxa', es:'con capucha', g:['top',{sleeve:'long',neck:'hood',color:'#e8b83a'}], ex:'Ana put on a hooded top because it had started to rain.', note:['UK and US','A hooded top is often called a hoodie in both British and American English.']},
+ {w:'long-sleeved', ipa:'/lɒŋ ˈsliːvd/', ca:'de màniga llarga', es:'de manga larga', g:['top',{sleeve:'long',neck:'crew',color:'#c9403a'}], ex:'I always pack a long-sleeved shirt in case the evenings are cold.'},
+ {w:'polo-neck', ipa:'/ˈpəʊləʊ nek/', ca:'de coll alt', es:'de cuello alto, de cuello vuelto', g:['top',{sleeve:'long',neck:'polo',color:'#2f4a8a'}], ex:'Leo wears a black polo-neck jumper almost every day in winter.', note:['UK and US','In American English, this is a turtleneck. An American polo is a polo shirt, which has a collar and buttons.']},
+ {w:'sleeveless', ipa:'/ˈsliːvləs/', ca:'sense mànigues', es:'sin mangas', g:['top',{sleeve:'none',neck:'crew',color:'#243552'}], ex:'It was so hot that everyone at the festival was wearing sleeveless tops.'},
+ {w:'V-neck', ipa:'/ˈviː nek/', ca:'de coll de pic', es:'de cuello de pico', g:['top',{sleeve:'short',neck:'v',color:'#77777d'}], ex:'Sam bought a grey V-neck jumper for the office.', note:['UK and US','Jumper is British English. In American English, people say sweater, which is also common in Britain.']},
+];
+const PATTERN = [
+ {w:'checked', ipa:'/tʃekt/', ca:'de quadres', es:'de cuadros', g:['top',{sleeve:'long',collar:true,cuffs:true,color:'#7a8fb8',pattern:'checks',ink:'#2a3550'}], ex:'Mo was wearing a red and blue checked shirt.', note:['UK and US','Checked has one syllable. In American English, people usually say plaid /plæd/ or checkered.']},
+ {w:'patterned', ipa:'/ˈpætənd/', ca:'estampat', es:'estampado', g:['top',{sleeve:'short',collar:true,color:'#e9e1d0',pattern:'floral',ink:'#b83c5a'}], ex:'I usually wear plain trousers with a patterned shirt.', note:['Watch out','Patterned is the general word for clothes with any pattern. When you want to be precise, say checked, spotted, striped or floral.']},
+ {w:'plain', ipa:'/pleɪn/', ca:'llis', es:'liso', g:['top',{sleeve:'short',neck:'crew',color:'#cfcfd2'}], ex:'A plain white T-shirt goes with almost everything.'},
+ {w:'spotted', ipa:'/ˈspɒtɪd/', ca:'de pics, de punts', es:'de lunares', g:['top',{sleeve:'short',neck:'crew',color:'#1f1d22',pattern:'spots',ink:'#f4efe3'}], ex:'Lou looks great in that black and white spotted shirt.', note:['UK and US','Polka-dot means the same, and it is more common in American English.']},
+ {w:'striped', ipa:'/straɪpt/', ca:'de ratlles', es:'de rayas', g:['top',{sleeve:'short',neck:'crew',color:'#f4efe3',pattern:'stripes',ink:'#c9403a'}], ex:'Sailors traditionally wore blue and white striped tops.', note:['Watch out','Striped has one syllable: /straɪpt/. Stripy is an informal British word with the same meaning.']},
+];
+const MATERIALS = [
+ {w:'a cotton vest', ipa:'/ˈkɒtn vest/', ca:'una samarreta interior de cotó', es:'una camiseta interior de algodón', g:['tank',{color:'#4a78b8'}], sw:['#f3f0ea',null], feel:'Cotton is soft, light and comfortable. Most T-shirts and a lot of underwear are made of it.', ex:'I wear a cotton vest under my shirt in winter.', note:['UK and US','A British vest is usually worn under other clothes. In American English, it is an undershirt or, if it is worn on its own, a tank top. An American vest is a British waistcoat.']},
+ {w:'a denim waistcoat', ipa:'/ˈdenɪm ˈweɪskəʊt/', ca:'una armilla texana', es:'un chaleco vaquero', g:['waistcoat',{color:'#5b7fa8'}], sw:['#5b7fa8','denim'], feel:'Denim is a strong, thick cotton fabric. It is usually blue, and jeans are made of it.', ex:'Jo wore a denim waistcoat over a plain white shirt.', note:['UK and US','In American English, a waistcoat is a vest. In British English, the t in the middle of waistcoat is usually not pronounced.']},
+ {w:'a fur collar', ipa:'/fɜː ˈkɒlə/', ca:'un coll de pell', es:'un cuello de pelo, de piel', g:['furcollar',{color:'#8d8a86'}], sw:['#8d8a86','fur'], feel:'Fur is the soft, thick hair of an animal. A lot of fur today is artificial, and it is called fake fur or faux fur /fəʊ/.', ex:'The coat had a grey fur collar to keep your neck warm.', note:['Watch out','Catalan pell and Spanish piel can mean fur or leather. English always separates them: fur has hair on it, and leather does not.']},
+ {w:'a lace top', ipa:'/leɪs tɒp/', ca:'un top de punta', es:'un top de encaje', g:['lacetop',{color:'#2f6b3f'}], sw:['#2f6b3f','lace'], feel:'Lace is a delicate fabric with a pattern of small holes.', ex:'Felix wore a black lace top to the party.'},
+ {w:'a linen suit', ipa:'/ˈlɪnɪn suːt/', ca:'un vestit de lli', es:'un traje de lino', g:['suit',{color:'#d6c4a0'}], sw:['#d6c4a0','linen'], feel:'Linen is cool and light, so it is good for hot weather, but it creases easily.', ex:'A linen suit is a good choice for a summer wedding.', note:['Watch out','Suit is pronounced /suːt/, like boot, and not like sweet. Catalan vestit can also mean a dress, but an English suit is always a jacket with matching trousers or a matching skirt. Trousers are pants in American English.']},
+ {w:'a Lycra swimsuit', ipa:'/ˈlaɪkrə ˈswɪmsuːt/', ca:'un banyador de licra', es:'un bañador de licra', g:['swimsuit',{color:'#2a1f2a'}], sw:['#2a1f2a','lycra'], feel:'Lycra is smooth and very stretchy, so it fits tightly and moves with your body.', ex:'Competitive swimmers wear tight Lycra swimsuits.', note:['UK and US','Lycra is a brand name. In American English, people often say spandex. A swimsuit is also called a swimming costume in British English and a bathing suit in American English.']},
+ {w:'a silk scarf', ipa:'/sɪlk skɑːf/', ca:'un mocador de seda', es:'un pañuelo de seda', g:['scarf',{color:'#8e5bb0',pattern:'silk'}], sw:['#8e5bb0','silk'], feel:'Silk is smooth, light and shiny. It comes from the threads that silkworms make.', ex:'My grandfather wore a silk scarf to the opera.', note:['Watch out','The plural is usually scarves.']},
+ {w:'a velvet bow tie', ipa:'/ˈvelvɪt ˌbəʊ ˈtaɪ/', ca:'un corbatí de vellut', es:'una pajarita de terciopelo', g:['bowtie',{color:'#2f8a5a'}], sw:['#2f8a5a','velvet'], feel:'Velvet has short, soft hairs on one side. It looks darker or shinier depending on the direction you stroke it.', ex:'Maya wore a green velvet bow tie with her suit.', note:['Watch out','Here, bow rhymes with go. When bow rhymes with now, it means bending your body forward.']},
+ {w:'a wool(len) cardigan', ipa:'/ˈwʊl(ən) ˈkɑːdɪɡən/', ca:'una jaqueta de punt de llana', es:'una rebeca de lana, una chaqueta de punto', g:['cardigan',{color:'#3a86c8'}], sw:['#3a86c8','knit'], feel:'Wool is warm and thick. It comes from sheep.', ex:'Take a woollen cardigan, because it gets cold in the evening.', note:['UK and US','You can say a wool cardigan or a woollen cardigan. American English spells woolen with one l. Wool rhymes with full, and not with cool.']},
+ {w:'leather sandals', ipa:'/ˈleðə ˈsændlz/', ca:'sandàlies de pell', es:'sandalias de piel, de cuero', g:['sandals',{color:'#a8703a'}], sw:['#a8703a','leather'], feel:'Leather is animal skin with no hair on it. It is strong and often slightly shiny.', ex:'I bought some brown leather sandals for the holiday.', note:['Watch out','In Catalan, shoes and bags are usually de pell, and jackets and trousers are usually de cuir. English uses leather for all of them, and it never uses leather for fur.']},
+ {w:'suede boots', ipa:'/sweɪd buːts/', ca:"botes d'ant", es:'botas de ante', g:['boots',{color:'#b88f6a'}], sw:['#b88f6a','suede'], feel:'Suede is leather with a soft, slightly rough surface. It does not shine, and water marks it easily.', ex:'Don’t wear your suede boots in the rain.', note:['Watch out','Suede has one syllable and rhymes with made. The word comes from the French name for Sweden.']},
+];
+const STYLEADJ = [
+ {w:'casual', ipa:'/ˈkæʒuəl/', ca:'informal, d’esport', es:'informal, de sport', g:['top',{sleeve:'long',neck:'hood',color:'#9aa3ad'}], def:'Casual clothes are comfortable and informal. People wear them to relax or at the weekend.', ex:'On Fridays, everyone in the office wears casual clothes.', note:['Watch out','In Catalan and Spanish, casual means “by chance”. In English, casual describes clothes and situations that are relaxed and informal.']},
+ {w:'classic', ipa:'/ˈklæsɪk/', ca:'clàssic', es:'clásico', g:['top',{sleeve:'long',collar:true,cuffs:true,color:'#f3f0ea'}], def:'Classic clothes have a simple, traditional style that does not go out of fashion.', ex:'A classic white shirt never goes out of fashion.', note:['Watch out','Classical describes music and ancient art, as in classical music. For clothes, use classic.']},
+ {w:'old-fashioned', ipa:'/ˌəʊld ˈfæʃənd/', ca:'passat de moda, antiquat', es:'pasado de moda, anticuado', g:['cardigan',{color:'#8a6a4a'}], def:'Old-fashioned clothes are not modern any more and look like clothes from the past.', ex:'My uncle still wears very old-fashioned ties.', note:['Watch out','Old-fashioned is usually negative. Vintage /ˈvɪntɪdʒ/ describes old clothes in a positive way.']},
+ {w:'scruffy', ipa:'/ˈskrʌfi/', ca:'deixat, desmanegat', es:'desaliñado, descuidado', g:['top',{sleeve:'short',neck:'crew',color:'#e9e4da',scruffy:true}], def:'Scruffy clothes are old, dirty or untidy, and so is a person who wears them.', ex:'Kim looks a bit scruffy because that jumper has holes in it.'},
+ {w:'smart', ipa:'/smɑːt/', ca:'elegant, arreglat', es:'elegante, arreglado', g:['suit',{color:'#2d3a5a',pattern:'plain',tie:'#b3242c'}], def:'Smart clothes are clean, neat and quite formal.', ex:'You need to look smart for a job interview.', note:['UK and US','In American English, smart more often means intelligent. To describe clothes, Americans often say dressy or sharp.']},
+];
+const TREND = [
+ {w:'fashionable', ipa:'/ˈfæʃnəbl/', ca:'de moda', es:'de moda', def:'Fashionable is the general word. It describes clothes or people that follow a style that is popular at a particular time.'},
+ {w:'trendy', ipa:'/ˈtrendi/', ca:'modern, a la moda', es:'moderno, a la última', def:'Trendy has a similar meaning, but it is more informal.'},
+ {w:'stylish', ipa:'/ˈstaɪlɪʃ/', ca:'amb estil, elegant', es:'con estilo, elegante', def:'Stylish describes clothes or people that are fashionable and attractive at the same time.'},
+];
+const VERBS_ON = [
+ {w:'get dressed', ipa:'/ɡet ˈdrest/', ca:'vestir-se', es:'vestirse', def:'to put your clothes on', ex:'I get up at seven and get dressed after breakfast.'},
+ {w:'get undressed', ipa:'/ɡet ʌnˈdrest/', ca:'despullar-se, treure’s la roba', es:'desvestirse', def:'to take your clothes off', ex:'The children got undressed and got into the bath.'},
+ {w:'get changed', ipa:'/ɡet ˈtʃeɪndʒd/', ca:'canviar-se (de roba)', es:'cambiarse (de ropa)', def:'to take off your clothes and put on different ones', ex:'Can you wait five minutes? I need to get changed before we go out.'},
+ {w:'dress up', ipa:'/ˌdres ˈʌp/', ca:'mudar-se, posar-se elegant', es:'arreglarse, vestirse elegante', def:'to put on smart or special clothes', ex:'People usually dress up for weddings.'},
+ {w:'dress up as', ipa:'/ˌdres ˈʌp əz/', ca:'disfressar-se de', es:'disfrazarse de', def:'to wear a costume so that you look like someone or something else', ex:'For Halloween, my brother dressed up as a vampire.'},
+ {w:'hang up', ipa:'/ˌhæŋ ˈʌp/', ca:'penjar', es:'colgar', def:'to put clothes on a hook or a hanger', ex:'Hang up your jacket, or it will get creased.'},
+];
+const VERBS_LOOK = [
+ {w:'fit', ipa:'/fɪt/', ca:'anar bé (de talla)', es:'quedar bien (de talla)', q:'Is it the right size?', ex:'These shoes don’t fit me. They’re too big.', note:['UK and US','The past form is usually fitted in British English and fit in American English.']},
+ {w:'suit', ipa:'/suːt/', ca:'escaure, afavorir', es:'sentar bien, favorecer', q:'Does it look good on this person?', ex:'That colour really suits you.'},
+ {w:'match', ipa:'/mætʃ/', ca:'fer joc amb', es:'hacer juego con', q:'Are the two things the same colour or pattern, or almost?', ex:'Your socks don’t match. One is blue and the other is black.'},
+ {w:'go with', ipa:'/ˈɡəʊ wɪð/', ca:'combinar amb, lligar amb', es:'combinar con, pegar con', q:'Do two different things look good together?', ex:'A navy jacket goes with almost any colour.'},
+];
+
+/* Word order */
+const CATS = ['opinion','fit','colour','pattern','material','type'];
+const CAT_NAMES = {opinion:'opinion',fit:'fit or size',colour:'colour',pattern:'pattern',material:'material',type:'type or style'};
+const CAT_WORD = {opinion:'an opinion word',fit:'a fit or size word',colour:'a colour word',pattern:'a pattern word',material:'a material word',type:'a style word'};
+const CAT_PL = {opinion:'Opinion words',fit:'Fit and size words',colour:'Colour words',pattern:'Pattern words',material:'Material words',type:'Style words'};
+
+/* First-day check */
+const CHECK = [
+ {kind:'mc', pic:['top',{sleeve:'long',neck:'hood',color:'#3f7a4a'}], prompt:'A client wants this top. Which word describes it?', opts:['hooded','polo-neck','V-neck','sleeveless'], a:0, why:'It has a hood, so it is a hooded top.', key:'hooded'},
+ {kind:'mc', pic:['top',{sleeve:'short',neck:'crew',color:'#2f4a8a',pattern:'spots',ink:'#f4efe3'}], prompt:'Which word describes the pattern on this T-shirt?', opts:['spotted','striped','checked','plain'], a:0, why:'The T-shirt is covered in small round spots, so it is spotted. You can also say polka-dot.', key:'spotted'},
+ {kind:'mc', prompt:'A supplier describes a fabric on the phone: “It is smooth, light and shiny, and it comes from silkworms.” Which material is it?', opts:['silk','suede','wool','denim'], a:0, why:'Silk is smooth, light and shiny, and silkworms make the threads.', key:'silk', tr:{ca:'seda',es:'seda'}},
+ {kind:'mc', prompt:'A client from Barcelona says she wants boots “de pell”. Her boots will have no hair on them. Which English word do you need?', opts:['leather','fur','lace','velvet'], a:0, why:'Leather is animal skin with no hair on it. Fur has hair on it, although Catalan pell can mean both.', key:'leather', tr:{ca:'pell (sabates i bosses), cuir (jaquetes i pantalons)',es:'piel, cuero'}},
+ {kind:'mc', prompt:'Alex has paint all over his jumper and holes in his jeans. He looks really ____.', opts:['scruffy','smart','classic','trendy'], a:0, why:'Clothes with paint and holes in them look old and untidy, so Alex looks scruffy.', key:'scruffy'},
+ {kind:'mc', prompt:'“These trousers don’t ____ me any more. They’re too small.”', opts:['fit','suit','match','go with'], a:0, why:'The problem is the size, so the verb is fit.', key:'fit'},
+ {kind:'mc', prompt:'“I’ve spilt coffee on my shirt, so I need to ____ before the meeting.”', opts:['get changed','get dressed','dress up','get undressed'], a:0, why:'You take off the dirty shirt and put on a different one, so you get changed.', key:'get changed'},
+ {kind:'mc', prompt:'“Rin always ____ very smartly for work.”', opts:['dresses','wears','gets dressed','dresses up'], a:0, why:'Dress is followed by an adverb such as smartly. Wear needs the clothes as its object: Rin always wears smart clothes.', key:'dress'},
+ {kind:'build', prompt:'Write the label for this shirt. Put the words in the right order.', pic:['top',{fit:'loose',sleeve:'long',collar:true,cuffs:true,color:'#f3f0ea',pattern:'stripes',ink:'#3a6fb0'}], words:[['loose','fit'],['blue','colour'],['striped','pattern'],['cotton','material']], noun:'shirt'},
+ {kind:'build', prompt:'Write the label for this jacket. Put the words in the right order.', words:[['tight','fit'],['black','colour'],['leather','material']], noun:'jacket'},
+];
+const TITLES = {studio:'First-day check at the studio', blackwood:'The Masquerade at Blackwood Manor'};
+
+/* ================= HELPERS ================= */
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const plainWord = w => w.replace(/^an? /, '').replace(/\(|\)/g, '');
+function speak(text) {
+  try {
+    if (!('speechSynthesis' in window)) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text.replace(/\(len\)/, ''));
+    u.lang = 'en-GB'; u.rate = .9;
+    const v = speechSynthesis.getVoices().find(v => v.lang === 'en-GB');
+    if (v) u.voice = v;
+    speechSynthesis.speak(u);
+  } catch (e) {}
+}
+const canSpeak = 'speechSynthesis' in window;
+function starSVG(filled) {
+  return `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.8 6 6.5.7-4.9 4.4 1.4 6.4L12 16.9 6.2 20.1l1.4-6.4L2.7 9.3l6.5-.7z" fill="${filled ? 'var(--tape)' : 'none'}" stroke="var(--ink)" stroke-width="1.5" stroke-linejoin="round"/></svg>`;
+}
+const STORE = 'theStylist.reviews';
+function loadReviews() { try { return JSON.parse(localStorage.getItem(STORE)) || {}; } catch (e) { return {}; } }
+function saveReview(key, stars) {
+  try { const r = loadReviews(); r[key] = { stars, date: new Date().toISOString().slice(0, 10), best: Math.max(stars, (r[key] && r[key].best) || 0) }; localStorage.setItem(STORE, JSON.stringify(r)); } catch (e) {}
+}
+
+function card(it) {
+  const pic = it.g ? `<div class="pic">${G.svg(it.g[0], Object.assign({label: plainWord(it.w)}, it.g[1]))}</div>` : '';
+  const feel = it.feel ? `<p class="feel">${G.swatch(it.sw[0], it.sw[1])}<span>${esc(it.feel)}</span></p>` : '';
+  const def = it.def ? `<p class="ex"><b>${esc(it.def.charAt(0).toUpperCase() + it.def.slice(1))}${/[.]$/.test(it.def) ? '' : '.'}</b></p>` : '';
+  const q = it.q ? `<p class="ex"><b>Ask: ${esc(it.q)}</b></p>` : '';
+  const note = it.note ? `<p class="note"><b>${esc(it.note[0])}.</b> ${esc(it.note[1])}</p>` : '';
+  const btn = canSpeak ? `<button class="listen" aria-label="Listen to ${esc(plainWord(it.w))}" data-say="${esc(it.w)}">${SPEAK}</button>` : '';
+  return `<article class="card">${pic}<div class="body">
+    <div class="word-row"><h4 class="word">${esc(it.w)}</h4>${btn}</div>
+    <p class="ipa">${esc(it.ipa)}</p>
+    <dl class="tr"><dt>Català</dt><dd>${esc(it.ca)}</dd><dt>Español</dt><dd>${esc(it.es)}</dd></dl>
+    ${def}${q}${feel}<p class="ex">${esc(it.ex || '')}</p>${note}</div></article>`;
+}
+const rail = items => `<div class="rail"><div class="cards">${items.map(card).join('')}</div></div>`;
+
+/* ================= SCREENS ================= */
+const SCREENS = [
+ {id:'welcome', t:'Welcome', k:'Explanation', html:() => `
+  <div class="welcome">
+   <div>
+    <h2>Your first day at the studio</h2>
+    <p class="lede">You are a stylist, and you have just moved to England. Today is your first day at a small styling studio in London.</p>
+    <div class="prose"><p>Before you meet any clients, you need to know the clothes in the studio and the English words for them. In each section, you can listen to every word and see its pronunciation, its translation into Catalan and Spanish, and an example. Some cards also have a note about American English or a common mistake.</p>
+    <p>At the end, there is a short check. Your new manager will give you a review of between one and five stars.</p></div>
+    <ul class="contents" id="contents"></ul>
+   </div>
+   <div class="badge" aria-label="Your studio pass">
+    <span class="clip"></span>
+    <div class="badge-row"><div class="photo">${G.svg('top',{sleeve:'long',neck:'polo',color:'#b3242c'})}</div>
+     <div><h4>New stylist</h4><span class="role">Studio pass</span></div></div>
+    <dl><dt>Studio</dt><dd>Hanger &amp; Thread, London</dd><dt>Started</dt><dd>Today</dd><dt>First task</dt><dd>Learn the stock</dd></dl>
+   </div>
+  </div>`},
+ {id:'rails', t:'The rails', k:'Explanation', html:() => `
+  <h2>The rails: fit, style and pattern</h2>
+  <p class="lede">These words describe the shape of clothes and the design on the fabric.</p>
+  <h3>Fit</h3><p class="group-intro">Fit describes how clothes sit on your body.</p>${rail(FIT)}
+  <h3>Style</h3><p class="group-intro">These words describe the neck, the sleeves and other parts of a garment.</p>${rail(STYLE)}
+  <h3>Pattern</h3><p class="group-intro">These words describe the design on the fabric.</p>${rail(PATTERN)}`},
+ {id:'fabrics', t:'The fabric drawer', k:'Explanation', html:() => `
+  <h2>The fabric drawer: materials</h2>
+  <p class="lede">Materials are difficult to recognise in a photo, so each card also tells you how the material feels.</p>
+  <div class="panel"><h4>Fibres, fabrics and skins</h4><p style="margin:0">Cotton, linen, silk and wool are natural fibres. Denim, lace and velvet are fabrics that are made in a particular way, so velvet, for example, can be made of cotton or silk. Leather, suede and fur come from animal skins, and Lycra is a stretchy artificial fibre.</p></div>
+  ${rail(MATERIALS)}`},
+ {id:'style', t:'The style board', k:'Explanation', html:() => `
+  <h2>The style board: describing style</h2>
+  <p class="lede">These adjectives describe the style of clothes, and also the people who wear them.</p>
+  ${rail(STYLEADJ)}
+  <div class="panel chalk"><h4>Fashionable, trendy and stylish</h4>
+   ${TREND.map(t => `<p style="margin:0 0 10px"><b>${t.w}</b> ${t.ipa}. ${esc(t.def)} <span class="mini-tr">Català: ${t.ca}. Español: ${t.es}.</span></p>`).join('')}
+  </div>`},
+ {id:'verbs', t:'The verbs', k:'Explanation', html:() => `
+  <h2>The verbs: putting on, taking off and looking good</h2>
+  <h3>Putting clothes on and taking them off</h3>${rail(VERBS_ON)}
+  <h3>Talking about how clothes look</h3>
+  <p class="group-intro">These four verbs are easy to confuse. Before you choose one, ask yourself the question on its card.</p>
+  ${rail(VERBS_LOOK)}
+  <div class="panel chalk"><h4>Why Catalan and Spanish speakers mix these up</h4>
+   <p style="margin:0">In Spanish, quedar bien is often used for both fit and suit, and combinar is often used for both match and go with. Catalan works in a similar way. English separates them, so a dress can fit you perfectly and still not suit you, and a tie can go with a shirt without matching it.</p></div>
+  <div class="panel"><h4>Wear or dress?</h4>
+   <div class="pair">
+    <div><span class="lab">wear</span><span class="mini-tr">Català: portar. Español: llevar.</span>
+     <p style="margin:8px 0 0">Use wear with the clothes as the object. You also wear glasses, jewellery and make-up.</p>
+     <ul><li>Kai wears black clothes most of the time.</li><li>My colleague wears very smart suits.</li><li>The twins wore matching jumpers.</li></ul></div>
+    <div><span class="lab">dress</span><span class="mini-tr">Català: vestir(-se). Español: vestir(se).</span>
+     <p style="margin:8px 0 0">Use dress with an adverb or a phrase, or with a person as the object.</p>
+     <ul><li>Kai dresses in black most of the time.</li><li>My colleague dresses very smartly.</li><li>Their parents dressed the twins in matching jumpers.</li></ul></div>
+   </div></div>`},
+ {id:'order', t:'Word order', k:'Explanation and practice', html:() => `
+  <h2>Putting adjectives in the right order</h2>
+  <p class="lede">When you use more than one adjective before a noun, English puts them in a fixed order. A stylist uses this order every time they write a label or describe an outfit.</p>
+  <div class="slot-wrap"><div class="slots">
+   ${[['Opinion','lovely, scruffy'],['Fit or size','loose, long'],['Colour','red, navy'],['Pattern','striped, checked'],['Material','cotton, silk'],['Type or style','V-neck, sleeveless']].map(s => `<div class="slot">${s[0]}<small>${s[1]}</small></div>`).join('')}
+   <div class="slot noun">Noun<small>top, boots</small></div></div>
+   ${[['a','','loose','blue','striped','cotton','','shirt'],['a','smart','','grey','','','V-neck','jumper'],['an','old-fashioned','','brown','checked','','','coat'],['some','','','','','suede','','boots']].map(r => {
+     const art = r[0]; const cells = r.slice(1);
+     const fi = cells.findIndex(c => c);
+     return `<div class="ex-row">${cells.map((c, i) => `<span class="${i === 6 ? 'nn' : c ? 'f' : 'e'}">${i === fi && art ? `<i style="font-weight:400">${art}</i> ` : ''}${c || '·'}</span>`).join('')}</div>`;
+   }).join('')}
+  </div>
+  <div class="panel"><h4>Things to remember</h4><div class="prose">
+   <p>Two or three adjectives before a noun are normal. When you have more information, move some of it into a phrase after the noun: <i>a loose cotton shirt with blue stripes</i>.</p>
+   <p>Do not put commas between these adjectives: <i>a loose blue cotton shirt</i>. Use <i>and</i> only between two colours: <i>a black and white striped top</i>.</p>
+   <p>Style words such as <i>V-neck</i>, <i>polo-neck</i>, <i>hooded</i>, <i>long-sleeved</i> and <i>sleeveless</i> describe the type of garment, so they go after the colour and the pattern, close to the noun: <i>a red long-sleeved top</i>, <i>a striped sleeveless top</i>.</p>
+   <p>The material usually goes directly before the noun. When there is also a style word, both orders are common, so <i>a V-neck wool jumper</i> and <i>a wool V-neck jumper</i> are both correct.</p>
+   <p>In Catalan and Spanish, these adjectives usually come after the noun, and the order is roughly the opposite of English. The material stays next to the noun in all three languages, so it is a good place to start.</p></div>
+   <div class="mirror">
+    <div><b>English</b>a striped linen shirt</div><div><b>Català</b>una camisa de lli de ratlles</div><div><b>Español</b>una camisa de lino de rayas</div>
+    <div><b>English</b>a black leather jacket</div><div><b>Català</b>una jaqueta de cuir negra</div><div><b>Español</b>una chaqueta de cuero negra</div>
+   </div></div>
+  <h3>Try it</h3>
+  <p class="group-intro">Tap the words in the right order. Tap a word in the label to send it back.</p>
+  <div id="orderPractice"></div>`},
+ {id:'check', t:'First-day check', k:'Activity', html:() => `
+  <h2>First-day check</h2>
+  <p class="lede">Your manager wants to see what you have learnt. Answer ten questions, and you will get a review at the end. You can try again after a wrong answer, but every wrong answer counts.</p>
+  <div id="checkArea"></div>`},
+ {id:'reviews', t:'Your reviews', k:'Activity results', html:() => `
+  <h2>Your reviews</h2>
+  <p class="lede">These are the reviews you have received in this set of activities on this device.</p>
+  <ul class="rev-list" id="revList"></ul>
+  <div class="btn-row"><button class="btn" id="clearRev">Delete my reviews</button></div>`},
+];
+
+/* ================= PROGRESS ================= */
+const PKEY = 'theStylist.studio.progress';
+let prog = (() => { try { return JSON.parse(localStorage.getItem(PKEY)) || {}; } catch (e) { return {}; } })();
+function saveProg() { try { localStorage.setItem(PKEY, JSON.stringify(prog)); } catch (e) {} }
+
+/* ================= ROUTER ================= */
+let cur = 0;
+const main = $('#main'), route = $('#route');
+route.innerHTML = SCREENS.map((s, i) => `<button class="stop${s.k.startsWith('Activity') || s.k.includes('practice') ? ' act' : ''}" data-i="${i}"><span class="n">${i + 1}</span><span class="t">${s.t}</span><span class="k">${s.k}</span></button>`).join('');
+main.innerHTML = SCREENS.map(s => `<section class="screen" id="s-${s.id}"></section>`).join('');
+
+function go(i) {
+  cur = Math.max(0, Math.min(SCREENS.length - 1, i));
+  const s = SCREENS[cur];
+  document.querySelectorAll('.screen').forEach(el => el.classList.remove('on'));
+  const el = $('#s-' + s.id);
+  const first = !el.dataset.built;
+  if (first || s.id === 'reviews') { el.innerHTML = s.html(); el.dataset.built = '1'; }
+  el.classList.remove('on'); void el.offsetWidth; el.classList.add('on');
+  document.querySelectorAll('.stop').forEach((b, j) => { b.classList.toggle('on', j === cur); if (j === cur) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+  const on = route.querySelector('.stop.on'); if (on) on.scrollIntoView({ inline: 'center', block: 'nearest' });
+  $('#prevBtn').hidden = cur === 0;
+  $('#nextBtn').hidden = cur === SCREENS.length - 1;
+  $('#nextBtn').textContent = cur === 0 ? 'Start with the rails' : 'Next section';
+  window.scrollTo({ top: 0 });
+  if (first && s.id === 'welcome') buildContents();
+  if (first && s.id === 'order') buildOrderPractice();
+  if (first && s.id === 'check') startCheck(false);
+  if (s.id === 'reviews') buildReviews();
+  prog.cur = cur; saveProg();
+}
+route.addEventListener('click', e => { const b = e.target.closest('.stop'); if (b) go(+b.dataset.i); });
+$('#prevBtn').onclick = () => go(cur - 1);
+$('#nextBtn').onclick = () => go(cur + 1);
+main.addEventListener('click', e => {
+  const l = e.target.closest('.listen'); if (l) { speak(l.dataset.say); const c = l.closest('.card'); c.classList.remove('sway'); void c.offsetWidth; c.classList.add('sway'); return; }
+  const c = e.target.closest('.card'); if (c) { c.classList.remove('sway'); void c.offsetWidth; c.classList.add('sway'); }
+});
+
+function buildContents() {
+  $('#contents').innerHTML = SCREENS.slice(1).map((s, i) => `<li class="${s.k.startsWith('Activity') || s.k.includes('practice') ? 'act' : ''}"><button data-go="${i + 1}">${s.t}</button><span class="kind">${s.k}</span></li>`).join('');
+  $('#contents').onclick = e => { const b = e.target.closest('[data-go]'); if (b) go(+b.dataset.go); };
+}
+
+/* ================= WORD-ORDER BUILDER ================= */
+function builder(host, item, onDone) {
+  const placed = [];
+  const pool = shuffle(item.words.map((w, i) => i));
+  const art = /^[aeiou]/.test(item.words[0][0]) ? 'an' : 'a';
+  let tries = 0, solved = false;
+  host.innerHTML = `<div class="line" aria-label="Your label"></div><div class="tiles" aria-label="Words to use"></div><div class="fb" role="status"></div><div class="btn-row"><button class="btn main chk" hidden>Check the label</button></div>`;
+  const line = $('.line', host), tiles = $('.tiles', host), fb = $('.fb', host), chk = $('.chk', host);
+  function render() {
+    const first = placed.length ? item.words[placed[0]][0] : item.words[0][0];
+    const a = /^[aeiou]/.test(first) ? 'an' : 'a';
+    line.innerHTML = `<span class="fixed">${item.plural ? '' : a}</span>` + placed.map(i => `<button class="tile placed" data-i="${i}" ${solved ? 'disabled' : ''}>${item.words[i][0]}</button>`).join('') + `<span class="fixed">${item.noun}</span>`;
+    tiles.innerHTML = pool.filter(i => !placed.includes(i)).map(i => `<button class="tile" data-i="${i}">${item.words[i][0]}</button>`).join('');
+    chk.hidden = solved || placed.length !== item.words.length;
+  }
+  host.onclick = e => {
+    if (solved) return;
+    const t = e.target.closest('.tile'); if (!t) return;
+    const i = +t.dataset.i;
+    if (t.classList.contains('placed')) placed.splice(placed.indexOf(i), 1); else placed.push(i);
+    fb.className = 'fb'; render();
+  };
+  chk.onclick = () => {
+    const cats = placed.map(i => item.words[i][1]);
+    let bad = -1;
+    for (let k = 0; k < cats.length - 1; k++) if (CATS.indexOf(cats[k]) > CATS.indexOf(cats[k + 1])) { bad = k; break; }
+    if (bad < 0) {
+      solved = true; render();
+      const order = item.words.slice().sort((x, y) => CATS.indexOf(x[1]) - CATS.indexOf(y[1])).map(w => CAT_NAMES[w[1]]);
+      fb.className = 'fb ok show';
+      fb.innerHTML = `<strong>Correct.</strong> The order is ${order.slice(0, -1).join(', ')} and ${order[order.length - 1]}, and then the noun.`;
+      onDone && onDone(tries);
+    } else {
+      tries++;
+      const a = item.words[placed[bad]], b = item.words[placed[bad + 1]];
+      fb.className = 'fb no show';
+      fb.innerHTML = `<strong>Not correct yet.</strong> <i>${b[0]}</i> is ${CAT_WORD[b[1]]}, and <i>${a[0]}</i> is ${CAT_WORD[a[1]]}. ${CAT_PL[b[1]]} come before ${CAT_PL[a[1]].toLowerCase()}. Tap a word in the label to move it.`;
+      line.classList.remove('shake'); void line.offsetWidth; line.classList.add('shake');
+    }
+  };
+  render();
+}
+
+function solveNow(host, item) {
+  const words = item.words.map((w, i) => i).sort((x, y) => CATS.indexOf(item.words[x][1]) - CATS.indexOf(item.words[y][1]));
+  words.forEach(i => { const t = host.querySelector(`.tiles .tile[data-i="${i}"]`); t && t.click(); });
+  const c = host.querySelector('.chk'); c && c.click();
+}
+const PRACTICE = [
+ {words:[['spotted','pattern'],['red','colour'],['silk','material']], noun:'scarf'},
+ {words:[['woollen','material'],['old-fashioned','opinion'],['checked','pattern']], noun:'jacket'},
+ {words:[['suede','material'],['long','fit'],['brown','colour']], noun:'boots', plural:true},
+];
+function buildOrderPractice() {
+  const host = $('#orderPractice');
+  let i = Math.min(prog.pr || 0, PRACTICE.length - 1);
+  function show() {
+    host.innerHTML = `<div class="task"><p class="pos">Label ${i + 1} of ${PRACTICE.length}</p><div class="b"></div><div class="btn-row"><button class="btn main nx" hidden>Next label</button><button class="btn again" hidden>Start again</button></div></div>`;
+    builder($('.b', host), PRACTICE[i], () => {
+      prog.prDone = i; saveProg();
+      const last = i === PRACTICE.length - 1;
+      $('.nx', host).hidden = last; $('.again', host).hidden = !last;
+      if (last) $('.again', host).classList.add('main');
+    });
+    $('.nx', host).onclick = () => { i++; prog.pr = i; saveProg(); show(); };
+    $('.again', host).onclick = () => { i = 0; prog.pr = 0; prog.prDone = -1; saveProg(); show(); };
+    if (prog.prDone === i) solveNow($('.b', host), PRACTICE[i]);
+  }
+  show();
+}
+
+/* ================= FIRST-DAY CHECK ================= */
+let ck = null;
+function startCheck(fresh) {
+  if (fresh || !prog.ck) ck = { i: 0, wrong: 0, done: false, finished: false };
+  else { ck = prog.ck; if (ck.done && !ck.finished) { ck.i++; ck.done = false; } }
+  prog.ck = ck; saveProg();
+  if (ck.finished) finishCheck(); else showCheck();
+}
+function showCheck() {
+  const area = $('#checkArea');
+  if (ck.i >= CHECK.length) return finishCheck();
+  const it = CHECK[ck.i];
+  const pic = it.pic ? `<div class="pic">${G.svg(it.pic[0], it.pic[1])}</div>` : '';
+  area.innerHTML = `<div class="task"><p class="pos">Question ${ck.i + 1} of ${CHECK.length}</p>${pic}<p class="prompt">${esc(it.prompt)}</p><div class="ans"></div><div class="btn-row"><button class="btn main nx" hidden>${ck.i === CHECK.length - 1 ? 'See your review' : 'Next question'}</button></div></div>`;
+  const ans = $('.ans', area), nx = $('.nx', area);
+  nx.onclick = () => { ck.i++; ck.done = false; saveProg(); showCheck(); };
+  if (it.kind === 'mc') {
+    const order = shuffle(it.opts.map((o, i) => i));
+    ans.innerHTML = `<div class="opts">${order.map(i => `<button class="opt" data-i="${i}">${esc(it.opts[i])}</button>`).join('')}</div><div class="fb" role="status"></div>`;
+    const fb = $('.fb', ans);
+    ans.onclick = e => {
+      const b = e.target.closest('.opt'); if (!b || b.disabled) return;
+      if (+b.dataset.i === it.a) {
+        b.classList.add('ok');
+        ans.querySelectorAll('.opt').forEach(o => o.disabled = true);
+        const k = it.tr || findWord(it.key);
+        fb.className = 'fb ok show';
+        fb.innerHTML = `<strong>Correct.</strong> ${esc(it.why)}${k ? `<span class="trl">Català: ${esc(k.ca)}. Español: ${esc(k.es)}.</span>` : ''}`;
+        nx.hidden = false; ck.done = true; saveProg();
+      } else {
+        ck.wrong++; saveProg();
+        b.classList.add('no'); b.disabled = true;
+        b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake');
+        fb.className = 'fb no show';
+        fb.innerHTML = `<strong>Not correct here.</strong> Read the question again and try another answer.`;
+      }
+    };
+  } else {
+    builder(ans, it, tries => { ck.wrong += tries; ck.done = true; saveProg(); nx.hidden = false; });
+  }
+}
+function findWord(k) {
+  const all = [...FIT, ...STYLE, ...PATTERN, ...MATERIALS, ...STYLEADJ, ...VERBS_ON, ...VERBS_LOOK];
+  if (k === 'dress') return { ca: 'vestir(-se)', es: 'vestir(se)' };
+  return all.find(w => plainWord(w.w) === k || w.w === k || plainWord(w.w).split(' ')[0] === k);
+}
+function starsFor(wrong) { return wrong <= 1 ? 5 : wrong <= 3 ? 4 : wrong <= 5 ? 3 : 2; }
+const QUOTES = {
+ 5:'You know the stock perfectly. I would happily send you to any client in London.',
+ 4:'You know the stock well. Have another look at the cards you were unsure about, and you will be ready for clients.',
+ 3:'You have made a good start. Go back to the sections where you made mistakes before you meet your first client.',
+ 2:'There is still quite a lot to learn. Spend some more time on the rails and in the fabric drawer, and then try the check again.'
+};
+function finishCheck() {
+  const stars = starsFor(ck.wrong);
+  if (!ck.finished) { ck.finished = true; saveProg(); saveReview('studio', stars); }
+  $('#checkArea').innerHTML = `<div class="review"><p class="pos">Your review from the studio manager</p>
+   <div class="stars">${Array.from({ length: 5 }, (_, i) => `<span class="s" style="animation-delay:${i * 140}ms">${starSVG(i < stars)}</span>`).join('')}</div>
+   <blockquote>${QUOTES[stars]}</blockquote><cite>Dee Okoro, manager, Hanger &amp; Thread</cite>
+   <p style="margin:14px 0 0">You gave ${ck.wrong === 0 ? 'no wrong answers' : ck.wrong === 1 ? 'one wrong answer' : ck.wrong + ' wrong answers'}.</p>
+   <div class="btn-row"><button class="btn main" id="ckAgain">Start again</button></div></div>`;
+  $('#ckAgain').onclick = () => startCheck(true);
+}
+
+/* ================= REVIEWS ================= */
+function buildReviews() {
+  const r = loadReviews(), keys = Object.keys(r);
+  const list = $('#revList');
+  if (!keys.length) {
+    list.outerHTML = `<p class="empty" id="revList">You have no reviews yet. Complete the first-day check, and your review will appear here.</p>`;
+  } else {
+    list.innerHTML = keys.map(k => `<li><span><b>${esc(TITLES[k] || k)}</b><br><span style="font-size:14px;color:var(--ink-soft)">Best review: ${r[k].best} out of 5</span></span><span class="st" aria-label="${r[k].stars} out of 5 stars">${Array.from({ length: 5 }, (_, i) => starSVG(i < r[k].stars)).join('')}</span></li>`).join('');
+  }
+  const cb = $('#clearRev'); let armed = false;
+  cb.hidden = !keys.length;
+  cb.onclick = () => {
+    if (!armed) { armed = true; cb.textContent = 'Tap again to delete all your reviews'; return; }
+    try { localStorage.removeItem(STORE); } catch (e) {} go(cur);
+  };
+}
+
+if (canSpeak) speechSynthesis.getVoices();
+go(prog.cur || 0);
+</script>
+</body>
+</html>
