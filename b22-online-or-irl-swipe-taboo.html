@@ -1,0 +1,992 @@
+<!doctype html>
+<!--
+  Name:     Online or IRL? · Swipe Taboo · B2.2 Unit 3A
+  Purpose:  Vocabulary on dating and the online world. Four parts:
+            1. Learn the words (slides for the whiteboard, with example sentences)
+            2. Warm-up questions (pairs; whiteboard or phone)
+            3. Swipe Taboo (pass-the-phone game for pairs or groups of 3–4)
+            4. Solo practice (self-study flashcards at home)
+  Version:  1.0 · 2026-11-09
+  Edit:     All words, sentences, questions and settings are in the CONTENT
+            section at the top of the script. In example sentences, put the
+            target word between *stars*. In warm-up questions, write a target
+            word as {text shown|card id}. Nothing else needs editing.
+  Credit:   Class of Coffee – with AI assistance
+-->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Online or IRL? · Swipe Taboo · B2.2</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💘</text></svg>">
+<style>
+/* ================= tokens ================= */
+:root{
+  --bg1:#FF5A6E; --bg2:#FF8A4C;
+  --grad:linear-gradient(140deg,var(--bg1),var(--bg2));
+  --paper:#FFFFFF; --soft:#FFF4F0; --ink:#26213A; --ink-soft:#5E5873; --line:#F0E2DC;
+  --love:#E8326B; --pass:#3A3F58; --alarm:#B45309; --ok:#0F8A5F;
+  --mark:#FFE0E8; --mark-ink:#B0124A;
+  --display:"Avenir Next","Segoe UI","Trebuchet MS",system-ui,sans-serif;
+  --body:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --r-s:12px; --r-m:20px; --r-l:28px;
+  --shadow:0 10px 30px rgba(60,10,30,.22);
+  --spring:cubic-bezier(.34,1.56,.64,1); --ease:cubic-bezier(.25,.46,.45,.94);
+}
+/* ================= base ================= */
+*{box-sizing:border-box}
+html{touch-action:manipulation;-webkit-text-size-adjust:100%;background:#FF7060}
+body{margin:0;min-height:100vh;min-height:100dvh;background:var(--grad);color:var(--ink);
+  font:400 1rem/1.5 var(--body);
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+button{font:inherit;color:inherit;min-height:44px;cursor:pointer;border:0;background:none}
+button:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px var(--ink)}
+button:disabled{opacity:.4;cursor:not-allowed}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0}
+.screen{display:none;min-height:100vh;min-height:100dvh;flex-direction:column}
+.screen.active{display:flex}
+.wrap{width:100%;max-width:560px;margin:0 auto;padding:16px}
+.wide{max-width:1280px}
+mark{background:var(--mark);color:var(--mark-ink);font-weight:700;border-radius:6px;padding:0 .2em}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* top bar */
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 16px;color:#fff}
+.bar h2{font-size:1.1rem;flex:1;min-width:8rem}
+.pill{background:rgba(255,255,255,.22);color:#fff;border-radius:999px;padding:6px 14px;font-weight:700;min-height:40px;display:inline-flex;align-items:center;gap:6px}
+button.pill:hover{background:rgba(255,255,255,.32)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:10px 22px;font-weight:700;
+  background:var(--paper);color:var(--love);box-shadow:0 4px 14px rgba(0,0,0,.15);transition:transform .15s var(--ease)}
+.btn:active{transform:scale(.97)}
+.btn.big{font-size:1.15rem;padding:14px 28px;min-height:56px}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
+
+/* ================= home ================= */
+.home-head{color:#fff;text-align:center;padding:28px 16px 8px}
+.home-head .logo{font-size:3rem;line-height:1}
+.home-head h1{font-size:clamp(2rem,1.4rem + 3vw,3.2rem);margin-top:6px}
+.home-head p{margin:6px 0 0;opacity:.95}
+.menu{display:grid;gap:14px;padding:16px;max-width:560px;margin:0 auto;width:100%}
+.menu button{display:flex;align-items:center;gap:16px;text-align:left;background:var(--paper);border-radius:var(--r-m);padding:16px 18px;box-shadow:var(--shadow);transition:transform .2s var(--spring)}
+.menu button:hover{transform:translateY(-2px)}
+.menu .ico{font-size:2rem;width:3rem;height:3rem;display:grid;place-items:center;background:var(--soft);border-radius:14px;flex:none}
+.menu b{display:block;font-family:var(--display);font-size:1.15rem}
+.menu span span{color:var(--ink-soft);font-size:.92rem}
+.spacer{flex:1}
+
+/* ================= learn (slides) ================= */
+#learn .stage{flex:1;display:flex;flex-direction:column;width:100%;max-width:1280px;margin:0 auto;padding:0 16px 12px}
+.slide-head{color:#fff;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:4px 0 10px}
+.slide-head h3{font-size:clamp(1.4rem,1rem + 1.8vw,2.4rem)}
+.slide-head p{margin:0;opacity:.95;font-size:clamp(.95rem,.85rem + .4vw,1.2rem)}
+.items{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-content:start;flex:1}
+.item{background:var(--paper);border-radius:var(--r-m);padding:14px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px}
+.item .w{font-family:var(--display);font-weight:800;font-size:clamp(1.2rem,1rem + .9vw,1.9rem);color:var(--love)}
+.item .ex{font-size:clamp(1rem,.9rem + .5vw,1.45rem);line-height:1.4}
+.item .mean{display:none;background:var(--soft);border-radius:var(--r-s);padding:8px 12px;font-size:clamp(.95rem,.85rem + .4vw,1.3rem)}
+.item.open .mean{display:block}
+.item .note{display:block;margin-top:4px;color:var(--ink-soft);font-size:.92em}
+.item .reveal{align-self:flex-start;color:var(--ink);background:var(--soft);border-radius:999px;padding:6px 14px;font-weight:700;min-height:40px;font-size:.95rem}
+.slide-nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;padding:12px 0 4px}
+.dots{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.dot{width:40px;height:40px;min-height:40px;border-radius:50%;background:rgba(255,255,255,.3);color:#fff;font-weight:700;font-size:.85rem}
+.dot[aria-current="true"]{background:#fff;color:var(--love)}
+
+/* ================= warm-up ================= */
+.q-list{display:grid;gap:14px;width:100%;max-width:1100px;margin:0 auto;padding:0 16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.q{background:var(--paper);border-radius:var(--r-m);padding:18px;box-shadow:var(--shadow)}
+.q .n{display:inline-grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:var(--grad);color:#fff;font-weight:800;margin-bottom:6px}
+.q p{margin:0;font-size:clamp(1.05rem,.95rem + .6vw,1.6rem);line-height:1.75}
+.q button.kw{min-height:0;padding:.12em .3em;display:inline;font-size:inherit;background:var(--mark);color:var(--mark-ink);font-weight:700;border-radius:6px;text-decoration:underline dotted;text-underline-offset:3px;line-height:inherit}
+.q .gloss{margin-top:10px;background:var(--soft);border-radius:var(--r-s);padding:8px 12px;font-size:clamp(.95rem,.85rem + .4vw,1.25rem)}
+.intro{color:#fff;text-align:center;max-width:900px;margin:0 auto;padding:0 16px 14px;font-size:clamp(1rem,.9rem + .5vw,1.35rem)}
+
+/* ================= setup ================= */
+.panel{background:var(--paper);border-radius:var(--r-l);padding:18px;box-shadow:var(--shadow)}
+.panel h3{font-size:1.25rem;margin-bottom:8px}
+.rules{margin:0;padding-left:1.3rem}
+.rules li{margin:4px 0}
+.opt{margin-top:14px}
+.opt .lab{font-weight:700;margin-bottom:6px;display:block}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{min-width:48px;border-radius:999px;padding:8px 16px;background:var(--soft);font-weight:700;box-shadow:inset 0 0 0 2px var(--line)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:none}
+.seg button[aria-pressed="true"]::before{content:"✓ "}
+.tip{margin-top:12px;font-size:.92rem;color:var(--ink-soft)}
+.best{margin-top:10px;font-weight:700}
+
+/* ================= game ================= */
+.g-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 12px;color:#fff}
+.g-top .who{font-weight:800;flex:1;min-width:7rem}
+.timer.low{background:#fff;color:var(--love)}
+.g-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6px 14px 14px;width:100%;max-width:520px;margin:0 auto;gap:12px}
+.deck{position:relative;width:100%;flex:1;min-height:320px;max-height:600px;display:flex}
+.card{position:absolute;inset:0;background:var(--paper);border-radius:var(--r-l);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;touch-action:none;user-select:none;-webkit-user-select:none;will-change:transform}
+.card.back-card{transform:scale(.95) translateY(10px);opacity:.6}
+.card .photo{background:var(--grad);color:#fff;padding:14px 18px;display:flex;align-items:flex-end;gap:12px;flex:0 0 auto;min-height:110px;position:relative}
+.card .photo .emo{font-size:3.2rem;line-height:1;filter:drop-shadow(0 3px 6px rgba(0,0,0,.2))}
+.card .photo .nm{font-family:var(--display);font-weight:800;font-size:1.35rem}
+.card .photo .nm small{font-weight:600;opacity:.9}
+.card .body{padding:14px 18px 16px;display:flex;flex-direction:column;gap:10px;flex:1;overflow:auto}
+.card .lbl{font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.card .word{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,1.3rem + 2.4vw,2.4rem);line-height:1.1;color:var(--ink)}
+.taboo{border:2px dashed var(--love);border-radius:var(--r-m);padding:10px 12px}
+.taboo .lbl{color:var(--love)}
+.taboo ul{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.taboo li{background:var(--mark);color:var(--mark-ink);font-weight:800;border-radius:999px;padding:4px 12px;font-size:1.1rem}
+.taboo li::before{content:"🚫 ";font-size:.85em}
+.hint{background:var(--soft);border-radius:var(--r-s);padding:8px 12px;font-size:.98rem}
+.stamp{position:absolute;top:18px;padding:4px 12px;border:4px solid;border-radius:10px;font-family:var(--display);font-weight:900;font-size:1.6rem;opacity:0;pointer-events:none;background:rgba(255,255,255,.9)}
+.stamp.yes{left:16px;color:var(--ok);transform:rotate(-14deg)}
+.stamp.no{right:16px;color:var(--pass);transform:rotate(14deg)}
+.actions{display:flex;justify-content:center;align-items:flex-end;gap:18px;flex-wrap:wrap}
+.act{display:flex;flex-direction:column;align-items:center;gap:4px;color:#fff;font-weight:700;font-size:.85rem;min-height:0}
+.act .c{width:66px;height:66px;border-radius:50%;background:var(--paper);display:grid;place-items:center;font-size:1.9rem;box-shadow:0 6px 16px rgba(0,0,0,.2);transition:transform .15s var(--spring)}
+.act:active .c{transform:scale(.9)}
+.act.small .c{width:52px;height:52px;font-size:1.4rem}
+.act.pass .c{color:var(--pass)}
+.act.love .c{color:var(--love)}
+.cover{position:absolute;inset:0;border-radius:var(--r-l);background:var(--paper);box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:22px;
+  background-image:repeating-linear-gradient(45deg,#FFF4F0 0 14px,#FFE9E2 14px 28px)}
+.cover .art{font-size:3.4rem;line-height:1}
+.cover h3{font-size:1.5rem}
+.cover p{margin:0;color:var(--ink-soft);max-width:22rem}
+.cover .btn{background:var(--grad);color:#fff}
+.matchscreen{position:fixed;inset:0;z-index:20;background:rgba(38,33,58,.92);color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:24px}
+.matchscreen.show{display:flex;animation:pop .35s var(--spring)}
+.matchscreen h2{font-size:clamp(2.2rem,1.6rem + 3vw,3.4rem);background:linear-gradient(90deg,#FF8FB1,#FFC07A);-webkit-background-clip:text;background-clip:text;color:transparent}
+.matchscreen .mw{font-family:var(--display);font-weight:800;font-size:1.8rem}
+.matchscreen .bio{background:#fff;color:var(--ink);border-radius:var(--r-m);padding:12px 16px;max-width:26rem;font-size:1.1rem}
+.matchscreen .bio small{display:block;color:var(--ink-soft);font-size:.82rem;margin-bottom:2px}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
+
+/* end */
+.score-big{font-family:var(--display);font-size:3.4rem;font-weight:900;color:var(--love);line-height:1}
+.recap{display:grid;gap:8px;margin-top:10px}
+.recap div{background:var(--soft);border-radius:var(--r-s);padding:8px 12px}
+.recap b{display:block}
+.recap h4{margin:12px 0 2px}
+
+/* ================= solo ================= */
+.prog{height:10px;background:rgba(255,255,255,.3);border-radius:999px;overflow:hidden;width:100%}
+.prog i{display:block;height:100%;background:#fff;border-radius:999px;transition:width .3s var(--ease)}
+.solo-clue{font-size:1.15rem}
+.gapline{font-size:1.1rem;background:var(--soft);border-radius:var(--r-s);padding:8px 12px}
+
+/* ================= footer (signature) ================= */
+.coc-footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 16px;padding:7px 20px;
+  background:var(--coc-tan,#E6C496);color:var(--coc-coffee-dark,#5A2D0C);font-family:var(--coc-body,'Nunito','Segoe UI',Verdana,sans-serif);font-size:13px;line-height:1.4}
+.coc-footer__brand{display:flex;align-items:center;gap:10px;font-weight:600}
+.coc-footer__mark{width:30px;height:30px;flex:none}
+.coc-footer a{color:inherit;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:40px;padding:0 4px}
+.coc-footer a:focus-visible{outline:2px solid var(--coc-coffee-dark,#5A2D0C);outline-offset:3px;border-radius:4px}
+
+/* whiteboard and large screens */
+@media (min-width:1400px){
+  .items{grid-template-columns:repeat(3,1fr)}
+}
+@media (min-width:1600px){ html{font-size:136%} .menu,.wrap{max-width:720px}
+  .item{padding:12px 16px;gap:4px} .item .w{font-size:1.45rem} .item .ex{font-size:1.12rem;line-height:1.35} .item .mean{font-size:1rem}
+  .slide-head h3{font-size:2rem} .slide-head p{font-size:1rem} }
+@media (max-height:760px) and (orientation:portrait){
+  .card .photo{min-height:64px;padding:8px 14px}
+  .card .photo .emo{font-size:2.2rem}
+  .card .body{gap:8px;padding:10px 14px 12px}
+  .cover .art{font-size:2.6rem}
+}
+@media (max-height:560px) and (orientation:landscape){
+  .g-main{max-width:820px;flex-direction:row;align-items:stretch}
+  .deck{min-height:260px}
+  .actions{flex-direction:column;justify-content:center}
+  .card .photo{min-height:70px;padding:8px 14px}
+  .card .photo .emo{font-size:2.2rem}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main id="app">
+
+  <!-- HOME -->
+  <section class="screen active" id="home" aria-labelledby="homeTitle">
+    <div class="home-head">
+      <div class="logo" aria-hidden="true">💘</div>
+      <h1 id="homeTitle">Online or IRL?</h1>
+      <p>B2.2 · Unit 3A · Dating and the online world</p>
+    </div>
+    <nav class="menu" aria-label="Activities">
+      <button data-act="go-learn"><span class="ico" aria-hidden="true">📖</span><span><b>1. Learn the words</b><span>Slides with example sentences. Good for the whiteboard.</span></span></button>
+      <button data-act="go-warm"><span class="ico" aria-hidden="true">💬</span><span><b>2. Warm-up questions</b><span>Talk in pairs about dating and life online.</span></span></button>
+      <button data-act="go-setup"><span class="ico" aria-hidden="true">🔥</span><span><b>3. Swipe Taboo</b><span>Describe the word without the forbidden words. Pairs or groups, one phone.</span></span></button>
+      <button data-act="go-solo"><span class="ico" aria-hidden="true">🎧</span><span><b>4. Solo practice</b><span>Flashcards for self-study at home.</span></span></button>
+    </nav>
+    <div class="spacer"></div>
+    <footer class="coc-footer" data-footer></footer>
+  </section>
+
+  <!-- LEARN -->
+  <section class="screen" id="learn" aria-labelledby="learnTitle">
+    <div class="bar"><button class="pill" data-act="home">← Menu</button><h2 id="learnTitle">Learn the words</h2><button class="pill" data-act="learn-all" id="learnAllBtn">Show all meanings</button></div>
+    <div class="stage">
+      <div class="slide-head"><h3 id="slideTitle"></h3><p id="slideSub"></p></div>
+      <div class="items" id="items"></div>
+      <div class="slide-nav">
+        <button class="btn ghost" data-act="learn-prev" aria-label="Previous slide">◀ Back</button>
+        <div class="dots" id="dots"></div>
+        <button class="btn" data-act="learn-next" aria-label="Next slide">Next ▶</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WARM-UP -->
+  <section class="screen" id="warm" aria-labelledby="warmTitle">
+    <div class="bar"><button class="pill" data-act="home">← Menu</button><h2 id="warmTitle">Warm-up questions</h2><span class="pill" id="warmCount"></span></div>
+    <p class="intro" id="warmIntro"></p>
+    <div class="q-list" id="qList"></div>
+    <div class="slide-nav"><button class="btn big" data-act="warm-new">🔄 New questions</button></div>
+    <div class="spacer"></div>
+  </section>
+
+  <!-- SETUP -->
+  <section class="screen" id="setup" aria-labelledby="setupTitle">
+    <div class="bar"><button class="pill" data-act="home">← Menu</button><h2 id="setupTitle">Swipe Taboo</h2></div>
+    <div class="wrap">
+      <div class="panel">
+        <h3>How to play</h3>
+        <ol class="rules" id="rules"></ol>
+        <div class="opt"><span class="lab" id="lPlayers">Number of players</span><div class="seg" role="group" aria-labelledby="lPlayers" data-seg="players"></div></div>
+        <div class="opt"><span class="lab" id="lTurns">Turns for each player</span><div class="seg" role="group" aria-labelledby="lTurns" data-seg="turns"></div></div>
+        <div class="opt"><span class="lab" id="lDeck">Cards</span><div class="seg" role="group" aria-labelledby="lDeck" data-seg="deck"></div></div>
+        <div class="opt"><span class="lab" id="lTime">Time for each turn</span><div class="seg" role="group" aria-labelledby="lTime" data-seg="time"></div></div>
+        <p class="tip" id="setupTip"></p>
+        <p class="best" id="bestLine"></p>
+        <div style="text-align:center;margin-top:14px"><button class="btn big dark" data-act="start">Start the game</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAME -->
+  <section class="screen" id="game" aria-label="Swipe Taboo game">
+    <div class="g-top">
+      <button class="pill" data-act="quit" aria-label="Back to the menu">✕ Quit</button>
+      <span class="who" id="gWho"></span>
+      <span class="pill" id="gScore"></span>
+      <button class="pill timer" id="gTimer" data-act="pause" aria-label="Pause"></button>
+    </div>
+    <div class="g-main" id="gMain"></div>
+  </section>
+
+  <!-- END -->
+  <section class="screen" id="end" aria-labelledby="endTitle">
+    <div class="bar"><button class="pill" data-act="home">← Menu</button><h2 id="endTitle">Game over</h2></div>
+    <div class="wrap"><div class="panel" id="endPanel"></div></div>
+    <div class="spacer"></div>
+    <footer class="coc-footer" data-footer></footer>
+  </section>
+
+  <!-- SOLO -->
+  <section class="screen" id="solo" aria-labelledby="soloTitle">
+    <div class="bar"><button class="pill" data-act="home">← Menu</button><h2 id="soloTitle">Solo practice</h2><span class="pill" id="soloCount"></span></div>
+    <div class="wrap" style="padding-top:0"><div class="prog" aria-hidden="true"><i id="soloBar"></i></div></div>
+    <div class="g-main" id="soloMain"></div>
+  </section>
+
+  <div class="matchscreen" id="matchScreen" role="dialog" aria-modal="true" aria-labelledby="matchTitle"></div>
+  <p class="sr" aria-live="polite" id="live"></p>
+</main>
+
+<script>
+/* =====================================================================
+   CONTENT (edit here)
+   ---------------------------------------------------------------------
+   cards: one object per word.
+     id     short name, no spaces (used by slides and questions)
+     w      the word or phrase shown on the card
+     taboo  three words the describer must not say
+     deck   "easy" = also in the Easy deck; "full" = only in the Full deck
+     emoji  picture on the profile card
+     ex     example sentence; the target word goes between *stars*
+     m      meaning (simple English)
+     note   optional UK/US or style note
+     bio    a funny profile line using the word (shown on "It's a match!")
+   ===================================================================== */
+const CONTENT = {
+  title: "Online or IRL?",
+  credit: "Class of Coffee – with AI assistance",
+  names: ["Alex","Sam","Jordan","Robin","Charlie","Kai","Jo","Taylor","Ali","Lou","Max","Noa","Remy","Sasha","Toni","Eli"],
+
+  cards: [
+    /* --- using dating apps --- */
+    {id:"swipe", w:"swipe right / swipe left", taboo:["like","finger","yes"], deck:"easy", emoji:"👉",
+     ex:"Sam *swiped left* on every profile without reading a single word.",
+     m:"On a dating app, move a profile to the right to say yes, or to the left to say no.",
+     bio:"I swipe right on anyone who brings snacks."},
+    {id:"match", w:"match (with someone)", taboo:["both","like","app"], deck:"easy", emoji:"💞",
+     ex:"We *matched* on Friday and started chatting the same evening.",
+     m:"When two people both say yes to each other on a dating app.",
+     bio:"If we match, I promise to reply before Christmas."},
+    {id:"profile", w:"profile", taboo:["photo","information","page"], deck:"easy", emoji:"🪪",
+     ex:"Robin spent an hour choosing the photos for their dating *profile*.",
+     m:"The page about you on an app or website, with photos and information.",
+     bio:"My profile photo is ten years old, but so are my jokes."},
+    {id:"irl", w:"IRL", taboo:["online","real","life"], deck:"easy", emoji:"🤝",
+     ex:"We've chatted for weeks, but we haven't met *IRL* yet.",
+     m:"\"In real life\": face to face, not online.",
+     bio:"Funnier IRL than in messages. Probably."},
+    {id:"fatigue", w:"swipe fatigue", taboo:["tired","apps","too many"], deck:"full", emoji:"😩",
+     ex:"After three months of swiping every night, Jo was suffering from *swipe fatigue*.",
+     m:"Feeling tired and bored after using dating apps too much.",
+     bio:"Taking a break because of swipe fatigue. Currently swiping anyway."},
+    {id:"coach", w:"dating coach", taboo:["advice","teacher","love"], deck:"easy", emoji:"📋",
+     ex:"A *dating coach* helped Kai write a better first message.",
+     m:"A professional who gives people advice on how to find a partner.",
+     bio:"My dating coach says I talk too much about my cat."},
+
+    /* --- online world (easier) --- */
+    {id:"notification", w:"notification", taboo:["phone","message","alert"], deck:"easy", emoji:"🔔",
+     ex:"I turned off *notifications* so that my phone doesn't buzz during dinner.",
+     m:"A message on your phone or computer that tells you something new has happened.",
+     bio:"Notifications on. For you only."},
+    {id:"scroll", w:"scroll", taboo:["down","screen","finger"], deck:"easy", emoji:"📜",
+     ex:"I *scrolled* through social media for an hour instead of going to sleep.",
+     m:"Move text or pictures up or down on a screen.",
+     bio:"Will stop scrolling for the right person."},
+    {id:"selfie", w:"selfie", taboo:["photo","yourself","camera"], deck:"easy", emoji:"🤳",
+     ex:"We took a *selfie* in front of the cathedral.",
+     m:"A photo that you take of yourself, usually with a phone.",
+     bio:"Selfie skills: 3/10. Personality: 9/10."},
+    {id:"filter", w:"filter", taboo:["photo","change","beautiful"], deck:"easy", emoji:"✨",
+     ex:"That photo has so many *filters* that I didn't recognise you.",
+     m:"An effect that changes how a photo looks, for example its colours or your skin.",
+     bio:"No filters. This is really my face."},
+    {id:"screenshot", w:"screenshot", taboo:["picture","screen","save"], deck:"easy", emoji:"📸",
+     ex:"Be careful what you write: anyone can take a *screenshot* of it.",
+     m:"A picture of exactly what is on your screen.",
+     bio:"I will not screenshot your messages. Probably."},
+    {id:"block", w:"block someone", taboo:["stop","contact","message"], deck:"easy", emoji:"⛔",
+     ex:"Max *blocked* the account after it sent fifty messages in one night.",
+     m:"Stop someone from contacting you or seeing your profile.",
+     bio:"Rude people get blocked. Nice people get cake."},
+    {id:"bio", w:"bio", taboo:["profile","about","short"], deck:"easy", emoji:"✍️",
+     ex:"Write a short, funny *bio* so that people know a little about you.",
+     m:"A short text about yourself on a profile.",
+     bio:"My bio is shorter than my coffee order."},
+    {id:"screentime", w:"screen time", taboo:["hours","phone","use"], deck:"easy", emoji:"⏳",
+     ex:"My phone tells me that my *screen time* is five hours a day!",
+     m:"The amount of time you spend looking at a phone, computer or TV.",
+     bio:"Trying to reduce my screen time. Swipe quickly."},
+    {id:"offline", w:"offline", taboo:["internet","connected","not"], deck:"easy", emoji:"🏔️",
+     ex:"I go *offline* at weekends to spend more time with my family.",
+     m:"Not connected to the internet.",
+     bio:"Best version of me: offline, on a mountain."},
+    {id:"viral", w:"go viral", taboo:["famous","internet","share"], deck:"easy", emoji:"🚀",
+     ex:"A video of a dancing cat *went viral* overnight.",
+     m:"Spread very quickly on the internet, so that millions of people see it.",
+     bio:"Once went viral for falling off a bike."},
+    {id:"followers", w:"followers", taboo:["people","Instagram","account"], deck:"easy", emoji:"👥",
+     ex:"The singer has over ten million *followers* on social media.",
+     m:"The people who choose to see your posts on social media.",
+     bio:"Few followers, loyal friends."},
+    {id:"unfollow", w:"unfollow", taboo:["stop","account","posts"], deck:"easy", emoji:"🙅",
+     ex:"I *unfollowed* that account because it posted too many ads.",
+     m:"Stop seeing someone's posts on social media.",
+     bio:"Will unfollow anyone who spoils a series."},
+    {id:"password", w:"password", taboo:["secret","log in","letters"], deck:"easy", emoji:"🔑",
+     ex:"Never share your *password*, not even with your partner.",
+     m:"A secret word or set of characters that you use to enter an account.",
+     bio:"My password is my dog's name. Don't tell anyone."},
+    {id:"catfish", w:"catfish someone", taboo:["fake","profile","lie"], deck:"full", emoji:"🐟",
+     ex:"The \"model\" Lou was chatting to turned out to be someone completely different. Lou had been *catfished*.",
+     m:"Trick someone online by pretending to be a different person, with a fake profile.",
+     bio:"Not a catfish. Happy to video call to prove it."},
+
+    /* --- bad dating behaviour --- */
+    {id:"ghost", w:"ghost someone", taboo:["disappear","message","explain"], deck:"easy", emoji:"👻",
+     ex:"After three great dates, Alex *ghosted* me: no calls, no messages, nothing.",
+     m:"Suddenly stop all contact with someone without explaining why.",
+     bio:"I've never ghosted anyone. I just reply very, very slowly."},
+    {id:"bench", w:"bench someone", taboo:["wait","better","later"], deck:"full", emoji:"🪑",
+     ex:"Sam isn't serious about me. I think I'm being *benched* until someone better comes along.",
+     m:"Keep someone interested as a back-up option while you look for someone better.",
+     bio:"Looking for a teammate, not a substitute. No benching, please."},
+    {id:"breadcrumb", w:"breadcrumb someone", taboo:["attention","interested","commit"], deck:"full", emoji:"🍞",
+     ex:"Jordan likes my posts and sends the odd message, but never suggests meeting. I think I'm being *breadcrumbed*.",
+     m:"Give someone just enough attention to keep them interested, with no real plan for a relationship.",
+     bio:"I want the whole loaf, not the breadcrumbs."},
+    {id:"hold", w:"put someone / something on hold", taboo:["wait","phone","later"], deck:"full", emoji:"⏸️",
+     ex:"The company *put the project on hold* until next year.",
+     m:"Stop something for a time, or keep someone waiting.",
+     bio:"Please don't put me on hold. I'm not a call centre."},
+
+    /* --- relationships --- */
+    {id:"commit", w:"commit (to someone)", taboo:["serious","relationship","promise"], deck:"full", emoji:"💍",
+     ex:"Taylor likes Robin a lot but isn't ready to *commit* to a relationship.",
+     m:"Decide to stay with someone or something seriously, for a long time.",
+     bio:"Ready to commit… to a second date."},
+    {id:"accountability", w:"accountability", taboo:["responsible","consequences","blame"], deck:"full", emoji:"⚖️",
+     ex:"When nobody knows who you are online, there is little *accountability* for bad behaviour.",
+     m:"Having to explain your actions and accept what happens because of them.",
+     bio:"Full accountability: I ate the last biscuit."},
+    {id:"loyalty", w:"loyalty", taboo:["faithful","friend","trust"], deck:"easy", emoji:"🐕",
+     ex:"Charlie's *loyalty* to friends is the thing I admire most.",
+     m:"Being faithful to someone and always supporting them.",
+     bio:"Loyalty level: same hairdresser for fifteen years."},
+    {id:"followup", w:"follow up on (something)", taboo:["later","do","again"], deck:"full", emoji:"📌",
+     ex:"Ali said they would book the restaurant, but they never *followed up on* it.",
+     m:"Do what you said you would do, or take the next step after something.",
+     bio:"I always follow up on a good conversation."},
+
+    /* --- meeting people IRL --- */
+    {id:"chatup", w:"chat someone up", taboo:["flirt","talk","bar"], deck:"full", emoji:"😏",
+     ex:"Someone tried to *chat me up* on the train, but I had my headphones on.",
+     m:"Talk to someone in a friendly way because you find them attractive.",
+     note:"UK. In American English: hit on someone.",
+     bio:"Chat me up about books and you have my attention."},
+    {id:"chatupline", w:"chat-up line", taboo:["sentence","flirt","first"], deck:"full", emoji:"💬",
+     ex:"\"Do you come here often?\" must be the oldest *chat-up line* in the world.",
+     m:"A sentence someone says to start a conversation with a person they find attractive.",
+     note:"UK. In American English: pickup line.",
+     bio:"Best chat-up line wins a coffee."},
+    {id:"setup", w:"set someone up (with someone)", taboo:["friend","introduce","date"], deck:"full", emoji:"🎯",
+     ex:"My best friend *set me up with* a colleague from work, and we're still together.",
+     m:"Arrange for two people to meet because you think they will like each other.",
+     bio:"Set up by my gran. She has excellent taste."},
+    {id:"blind", w:"blind date", taboo:["know","meet","first time"], deck:"easy", emoji:"🙈",
+     ex:"Robin went on a *blind date* and discovered it was an old classmate.",
+     m:"A date with someone you have never met before, usually arranged by friends.",
+     bio:"Survived four blind dates. Still optimistic."},
+    {id:"effort", w:"make the effort", taboo:["try","hard","work"], deck:"easy", emoji:"💪",
+     ex:"If you want to meet new people, you have to *make the effort* to go out.",
+     m:"Try hard to do something, even when it is not easy.",
+     bio:"I make the effort: I iron my shirt for first dates."},
+    {id:"comeacross", w:"come across someone", taboo:["meet","find","chance"], deck:"full", emoji:"🍀",
+     ex:"I *came across* an old friend at the airport last week.",
+     m:"Meet or find someone or something by chance.",
+     bio:"Came across this app by accident. Staying on purpose."},
+    {id:"cues", w:"social cues", taboo:["signals","body language","understand"], deck:"full", emoji:"👀",
+     ex:"Some people find it hard to read *social cues*, like when someone wants to end a conversation.",
+     m:"Small signals, such as looks, gestures or tone of voice, that show what people think or feel.",
+     bio:"Great at social cues. If I yawn, it's not you."},
+    {id:"pool", w:"a pool of people", taboo:["group","many","choose"], deck:"full", emoji:"🏊",
+     ex:"Big cities give you a much larger *pool of people* to meet.",
+     m:"The whole group of people that you can choose from.",
+     bio:"Jumping into the dating pool. Can't swim."},
+
+    /* --- feelings and reactions --- */
+    {id:"awkward", w:"awkward", taboo:["uncomfortable","embarrassing","situation"], deck:"easy", emoji:"😬",
+     ex:"There was an *awkward* silence when nobody knew what to say.",
+     m:"Making you feel uncomfortable or embarrassed.",
+     bio:"Expert in awkward silences. Let's make one together."},
+    {id:"overwhelming", w:"overwhelming", taboo:["too much","feel","stress"], deck:"full", emoji:"🌊",
+     ex:"Chatting to ten people at the same time can feel *overwhelming*.",
+     m:"So strong or so much that it is difficult to deal with.",
+     bio:"Fifty matches? Overwhelming. I'll start with one."},
+    {id:"sweat", w:"bring someone out in a cold sweat", taboo:["nervous","scared","sweat"], deck:"full", emoji:"😰",
+     ex:"The idea of speaking in public *brings me out in a cold sweat*.",
+     m:"Make someone feel very nervous or afraid.",
+     bio:"First dates bring me out in a cold sweat. Bring a towel."},
+    {id:"disposable", w:"disposable", taboo:["throw","use","once"], deck:"full", emoji:"🥤",
+     ex:"Many cafés have stopped using *disposable* cups.",
+     m:"Made to be used once and then thrown away; easy to replace.",
+     bio:"Not looking for anything disposable. Except paper plates."},
+
+    /* --- big changes --- */
+    {id:"conveyor", w:"conveyor belt", taboo:["move","airport","factory"], deck:"full", emoji:"🧳",
+     ex:"Swiping through faces can feel like watching suitcases go round on a *conveyor belt*.",
+     m:"A moving belt that carries things from one place to another, for example in a factory or an airport.",
+     bio:"Life is not a conveyor belt. Unless it's sushi."},
+    {id:"backlash", w:"backlash", taboo:["against","reaction","negative"], deck:"full", emoji:"📢",
+     ex:"The new rule caused a huge *backlash* on social media.",
+     m:"A strong negative reaction from a lot of people against something.",
+     bio:"Ready for the backlash: I put pineapple on pizza."},
+    {id:"gamechanging", w:"game-changing", taboo:["different","revolution","big"], deck:"full", emoji:"🎮",
+     ex:"Smartphones were *game-changing*: they changed how we work, shop and meet people.",
+     m:"Completely changing the way something is done.",
+     bio:"My pancakes are game-changing. Ask anyone."},
+    {id:"relinquish", w:"relinquish", taboo:["give up","let go","control"], deck:"full", emoji:"🎛️",
+     ex:"It's hard to *relinquish* control when you've always made the decisions.",
+     m:"(formal) Give up something, such as power, control or a possession.",
+     bio:"Will never relinquish the TV remote."}
+  ],
+
+  /* Slides for "Learn the words": a title, a short instruction and the card ids. */
+  slides: [
+    {t:"Using dating apps", ids:["swipe","match","profile","irl","fatigue"]},
+    {t:"The online world (1)", ids:["notification","scroll","selfie","filter","screenshot"]},
+    {t:"The online world (2)", ids:["block","bio","screentime","offline","viral"]},
+    {t:"The online world (3)", ids:["followers","unfollow","password","catfish"]},
+    {t:"Bad dating behaviour", ids:["ghost","bench","breadcrumb","hold"]},
+    {t:"Relationships", ids:["commit","accountability","loyalty","followup"]},
+    {t:"Meeting people IRL (1)", ids:["chatup","chatupline","setup","blind"]},
+    {t:"Meeting people IRL (2)", ids:["effort","comeacross","cues","pool","coach"]},
+    {t:"Feelings and reactions", ids:["awkward","overwhelming","sweat","disposable"]},
+    {t:"Big changes", ids:["conveyor","backlash","gamechanging","relinquish"]}
+  ],
+  slideInstruction: "Read the sentences. What do the words in colour mean? Discuss with a partner, then tap to check.",
+
+  /* Warm-up questions. Mark a target word as {text shown|card id}. */
+  warmIntro: "Work in pairs. Choose two of the three questions and discuss them. Tap a word in colour to see what it means.",
+  questions: [
+    "How many {notifications|notification} do you get a day? Which ones would you happily switch off?",
+    "Do you think dating apps have been {game-changing|gamechanging}, or have they made meeting people harder?",
+    "Would you go on a {blind date|blind} if a friend {set you up|setup}? Why or why not?",
+    "Is {ghosting|ghost} ever acceptable, in dating or in friendships?",
+    "What makes a good {profile|profile} or {bio|bio}, on any app?",
+    "Do you think people find it more {awkward|awkward} to {chat someone up|chatup} {IRL|irl} than they used to?",
+    "Is it easier to read {social cues|cues} face to face than in messages? Give an example.",
+    "Why do you think some people {catfish|catfish} others online?",
+    "How much {screen time|screentime} is too much? Could you {relinquish|relinquish} your phone for a weekend?",
+    "\"Apps make people feel {disposable|disposable}.\" Do you agree? Why or why not?"
+  ],
+
+  /* Swipe Taboo rules and settings */
+  rules: [
+    "One person describes the word on the card. The others guess.",
+    "Don't say the word, part of the word, or the three words under \"Don't say\".",
+    "When someone says the word, swipe right or tap ♥. It's a match!",
+    "Stuck? Swipe left or tap ✕ to pass. You have two passes in each turn.",
+    "Someone said a forbidden word? Tap 🚨 and the card goes.",
+    "The next card stays hidden until you tap \"Show next card\".",
+    "When the time is up, pass the phone to the next person."
+  ],
+  setupTip: "In a group of three or four, the people who are not guessing can be the \"taboo police\": they listen for forbidden words and tap 🚨. The whole group plays as one team, so try to beat your best score together.",
+  options: {
+    players: [2,3,4],
+    turns: [1,2,3],
+    deck: [["easy","Easy"],["full","All words"]],
+    time: [[60,"60 s"],[90,"90 s"],[0,"No timer"]]
+  },
+  defaults: {players:2, turns:2, deck:"easy", time:60},
+  passesPerTurn: 2,
+  hintAfterSeconds: 20,      /* the gap sentence appears on the describer's card after this */
+  cardsPerUntimedTurn: 5,    /* with "No timer", a turn ends after this many cards */
+  matchScreenSeconds: 2.2
+};
+
+/* ================= helpers ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const CARD = Object.fromEntries(CONTENT.cards.map((c,i) => [c.id, Object.assign({i}, c)]));
+function shuffle(a){ a = a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function markEx(ex){ return esc(ex).replace(/\*(.+?)\*/g, '<mark>$1</mark>'); }
+function gapEx(ex){ return esc(ex).replace(/\*(.+?)\*/g, '<b>_______</b>'); }
+function deckIds(deck){ return CONTENT.cards.filter(c => deck === 'full' || c.deck === 'easy').map(c => c.id); }
+function nameFor(c){ const n = CONTENT.names; return {name:n[c.i % n.length], age:22 + (c.i*7) % 19}; }
+let KBD = false;
+function focusIf(el){ if(el && KBD) el.focus({preventScroll:true}); }
+function say(t){ $('#live').textContent = t; }
+
+/* ================= state ================= */
+let S = {
+  learn:{slide:0, open:{}},
+  warm:{order:[], pos:0, open:{}},
+  set:Object.assign({}, CONTENT.defaults),
+  g:null,
+  solo:null
+};
+
+/* ================= saving ================= */
+const KEY = 'b22-online-irl-swipe-taboo.v1';
+function load(){ try{ const d = JSON.parse(localStorage.getItem(KEY)); if(d && d.v === 1) return d; }catch(e){} return {v:1, best:{}, known:{}, set:null}; }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(SAVE)); }catch(e){} }
+let SAVE = load();
+if(SAVE.set){ for(const k of ['players','turns','deck','time']){ if(SAVE.set[k] !== undefined) S.set[k] = SAVE.set[k]; } }
+if(!SAVE.best || typeof SAVE.best !== 'object') SAVE.best = {};
+if(!SAVE.known || typeof SAVE.known !== 'object') SAVE.known = {};
+
+/* ================= logic: warm-up ================= */
+function warmDeal(){
+  const W = S.warm, n = CONTENT.questions.length;
+  if(!W.order.length){ W.order = shuffle([...Array(n).keys()]); W.pos = 0; }
+  else W.pos += 3;
+  if(W.pos + 3 > W.order.length){
+    const prev = W.order.slice(W.pos);           /* questions not yet shown come first */
+    const rest = shuffle([...Array(n).keys()].filter(i => !prev.includes(i)));
+    W.order = prev.concat(rest); W.pos = 0;
+  }
+  W.open = {};
+}
+
+/* ================= logic: game ================= */
+function newGame(){
+  const st = S.set;
+  S.g = {
+    players: st.players, turns: st.turns, deck: st.deck, time: st.time,
+    queue: shuffle(deckIds(st.deck)), player: 0, turn: 0, total: st.players * st.turns,
+    phase: 'handover', score: 0, turnScore: 0, matched: [], passed: [], taboo: [],
+    card: null, passesLeft: CONTENT.passesPerTurn, timeLeft: st.time, cardsThisTurn: 0,
+    cardStart: 0, hint: false, paused: false, last: 0
+  };
+}
+function drawCard(){
+  const g = S.g;
+  if(!g.queue.length){
+    /* recycle passed cards; if nothing left, the deck is finished */
+    const back = shuffle(g.passed.concat(g.taboo).filter(id => !g.matched.includes(id)));
+    g.queue = [...new Set(back)];
+  }
+  g.card = g.queue.shift() || null;
+  g.cardStart = Date.now(); g.hint = false;
+  return g.card;
+}
+function beginTurn(){
+  const g = S.g;
+  g.passesLeft = CONTENT.passesPerTurn; g.turnScore = 0; g.cardsThisTurn = 0;
+  g.timeLeft = g.time; g.paused = false; g.last = Date.now();
+  if(!drawCard()){ finishGame(); return; }
+  g.phase = 'card';
+}
+function cardDone(kind){             /* kind: 'match' | 'pass' | 'taboo' */
+  const g = S.g; if(!g || g.phase !== 'card' || !g.card) return;
+  if(kind === 'pass' && g.passesLeft <= 0) return;
+  const id = g.card;
+  if(kind === 'match'){ g.score++; g.turnScore++; g.matched.push(id); }
+  if(kind === 'pass'){ g.passesLeft--; g.passed.push(id); }
+  if(kind === 'taboo'){ g.taboo.push(id); }
+  g.cardsThisTurn++;
+  g.card = null;
+  if(g.time === 0 && g.cardsThisTurn >= CONTENT.cardsPerUntimedTurn){ g.phase = 'timeup'; }
+  else g.phase = 'cover';
+  return id;
+}
+function revealNext(){
+  const g = S.g; if(g.phase !== 'cover') return;
+  if(!drawCard()){ finishGame(); return; }
+  g.phase = 'card';
+}
+function nextTurn(){
+  const g = S.g;
+  g.turn++;
+  if(g.turn >= g.total){ finishGame(); return; }
+  g.player = g.turn % g.players;
+  g.phase = 'handover';
+}
+function finishGame(){
+  const g = S.g; g.phase = 'end';
+  const k = g.deck + '-' + g.players + 'x' + g.turns + '-' + g.time;
+  g.prevBest = SAVE.best[k] || 0;
+  if(g.score > g.prevBest){ SAVE.best[k] = g.score; save(); }
+  g.bestKey = k;
+}
+function tick(){
+  const g = S.g; if(!g || g.time === 0) return;
+  const now = Date.now();
+  if(g.phase === 'card' || g.phase === 'cover'){
+    if(!g.paused){ g.timeLeft -= (now - g.last)/1000; }
+    if(g.timeLeft <= 0){ g.timeLeft = 0; g.card = null; g.phase = 'timeup'; closeMatch(); renderGame(); say("Time's up"); }
+  }
+  g.last = now;
+  if(g.phase === 'card' && !g.hint && !g.paused && (now - g.cardStart)/1000 >= CONTENT.hintAfterSeconds){ g.hint = true; renderGame(); }
+  renderTimer();
+}
+
+/* ================= logic: solo ================= */
+function newSolo(deck){
+  const known = new Set(SAVE.known[deck] || []);
+  const ids = deckIds(deck);
+  S.solo = {deck, ids, queue: shuffle(ids.filter(id => !known.has(id))), flipped:false};
+}
+function soloAnswer(knew){
+  const s = S.solo; const id = s.queue.shift();
+  if(knew){ const k = new Set(SAVE.known[s.deck] || []); k.add(id); SAVE.known[s.deck] = [...k]; save(); }
+  else { const at = Math.min(s.queue.length, 3 + Math.floor(Math.random()*3)); s.queue.splice(at, 0, id); }
+  s.flipped = false;
+}
+
+/* ================= display ================= */
+function show(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id));
+  window.scrollTo(0,0);
+}
+const FOOTER = `<span class="coc-footer__brand"><svg class="coc-footer__mark" xmlns="http://www.w3.org/2000/svg" viewBox="4 4 48 48" aria-hidden="true" focusable="false"><path d="M42.57 20.25A16.5 16.5 0 1 0 42.57 35.75L38.77 33.73A12.2 12.2 0 1 1 38.77 22.27Z" fill="#EDE3D6"/><path d="M42.57 20.25A16.5 16.5 0 1 0 42.57 35.75L40.89 34.85A14.6 14.6 0 1 1 40.89 21.15Z" fill="#D9C8B2"/><path d="M48.31 17.2A23 23 0 1 0 48.31 38.8A3.25 3.25 0 0 0 42.57 35.75A16.5 16.5 0 1 1 42.57 20.25A3.25 3.25 0 0 0 48.31 17.2Z" fill="#A2521A" stroke="#5A2D0C" stroke-width="1.8" stroke-linejoin="round"/><circle cx="28" cy="28" r="12.2" fill="#744823" stroke="#5A3517" stroke-width="1"/><path d="M32.5 22.64A7.0 7.0 0 1 0 32.5 33.36L32.64 32.21A5.5 5.5 0 1 1 32.64 23.79Z" fill="#F3E2BF" stroke="#F3E2BF" stroke-width="0.7" stroke-linejoin="round"/></svg><span>${esc(CONTENT.credit)}</span></span><a href="https://classofcoffee.com">classofcoffee.com</a>`;
+
+/* learn */
+function renderLearn(){
+  const L = S.learn, sl = CONTENT.slides[L.slide];
+  $('#slideTitle').textContent = sl.t;
+  $('#slideSub').textContent = CONTENT.slideInstruction;
+  const allOpen = sl.ids.every(id => L.open[id]);
+  $('#learnAllBtn').textContent = allOpen ? 'Hide meanings' : 'Show all meanings';
+  $('#items').innerHTML = sl.ids.map(id => {
+    const c = CARD[id], o = !!L.open[id];
+    return `<article class="item${o?' open':''}">
+      <div class="w">${esc(c.emoji)} ${esc(c.w)}</div>
+      <div class="ex">${markEx(c.ex)}</div>
+      <div class="mean" id="mean-${id}">${esc(c.m)}${c.note?`<span class="note">🇬🇧/🇺🇸 ${esc(c.note)}</span>`:''}</div>
+      <button class="reveal" data-act="learn-toggle" data-id="${id}" aria-expanded="${o}" aria-controls="mean-${id}">${o?'Hide meaning':'Show meaning'}</button>
+    </article>`;
+  }).join('');
+  $('#dots').innerHTML = CONTENT.slides.map((s,i) =>
+    `<button class="dot" data-act="learn-go" data-i="${i}" aria-label="Slide ${i+1}: ${esc(s.t)}" aria-current="${i===L.slide}">${i+1}</button>`).join('');
+}
+
+/* warm-up */
+function qHtml(q, qi){
+  return esc(q).replace(/\{([^|}]+)\|([^}]+)\}/g, (m, txt, id) =>
+    `<button class="kw" data-act="kw" data-q="${qi}" data-id="${esc(id)}">${txt}</button>`);
+}
+function renderWarm(){
+  const W = S.warm;
+  $('#warmIntro').textContent = CONTENT.warmIntro;
+  const set = W.order.slice(W.pos, W.pos + 3);
+  $('#warmCount').textContent = `${Math.min(W.pos + 3, W.order.length)} / ${W.order.length}`;
+  $('#qList').innerHTML = set.map((qi, k) => {
+    const g = W.open[qi]; const c = g && CARD[g];
+    return `<article class="q"><span class="n" aria-hidden="true">${String.fromCharCode(65+k)}</span>
+      <p>${qHtml(CONTENT.questions[qi], qi)}</p>
+      ${c ? `<div class="gloss" role="status"><b>${esc(c.w)}</b>: ${esc(c.m)}${c.note?` <i>(${esc(c.note)})</i>`:''}</div>` : ''}</article>`;
+  }).join('');
+}
+
+/* setup */
+function renderSetup(){
+  $('#rules').innerHTML = CONTENT.rules.map(r => `<li>${esc(r)}</li>`).join('');
+  $('#setupTip').textContent = CONTENT.setupTip;
+  const O = CONTENT.options;
+  const seg = (key, list) => list.map(v => {
+    const [val, lab] = Array.isArray(v) ? v : [v, String(v)];
+    return `<button data-act="opt" data-k="${key}" data-v="${val}" aria-pressed="${S.set[key] == val}">${esc(lab)}</button>`;
+  }).join('');
+  document.querySelector('[data-seg="players"]').innerHTML = seg('players', O.players);
+  document.querySelector('[data-seg="turns"]').innerHTML = seg('turns', O.turns);
+  document.querySelector('[data-seg="deck"]').innerHTML = seg('deck', O.deck);
+  document.querySelector('[data-seg="time"]').innerHTML = seg('time', O.time);
+  const n = deckIds(S.set.deck).length;
+  const k = S.set.deck + '-' + S.set.players + 'x' + S.set.turns + '-' + S.set.time;
+  $('#bestLine').textContent = `${n} cards in this deck.` + (SAVE.best[k] ? ` Your best score with these settings: ${SAVE.best[k]} ♥` : '');
+}
+
+/* game */
+function cardHtml(id, opts = {}){
+  const c = CARD[id], p = nameFor(c), g = S.g;
+  return `<div class="card" id="theCard" ${opts.solo?'':'tabindex="0" aria-label="Card. Use the right arrow for match and the left arrow to pass."'}>
+    <div class="photo"><span class="emo" aria-hidden="true">${esc(c.emoji)}</span><span class="nm">${esc(p.name)} <small>${p.age}</small></span>
+      <span class="stamp yes" id="stYes">MATCH ♥</span><span class="stamp no" id="stNo">PASS ✕</span></div>
+    <div class="body">
+      ${opts.solo ? opts.solo : `
+      <div><div class="lbl">Describe</div><div class="word">${esc(c.w)}</div></div>
+      <div class="taboo"><div class="lbl">Don't say</div><ul>${c.taboo.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div>
+      ${g && g.hint ? `<div class="hint"><b>Stuck? Say this sentence with a gap:</b><br>${gapEx(c.ex)}</div>` : ''}`}
+    </div></div>`;
+}
+function renderTimer(){
+  const g = S.g; const t = $('#gTimer'); if(!g) return;
+  if(g.time === 0){ t.textContent = `🃏 ${g.cardsThisTurn}/${CONTENT.cardsPerUntimedTurn}`; t.setAttribute('aria-label','Cards this turn'); t.classList.remove('low'); t.disabled = true; return; }
+  const s = Math.ceil(g.timeLeft);
+  const active = g.phase === 'card' || g.phase === 'cover';
+  t.disabled = !active;
+  t.textContent = (g.paused ? '▶ ' : '⏸ ') + s + ' s';
+  t.setAttribute('aria-label', g.paused ? `Resume. ${s} seconds left` : `Pause. ${s} seconds left`);
+  t.classList.toggle('low', active && s <= 10);
+}
+function renderGame(){
+  const g = S.g; if(!g) return;
+  $('#gWho').textContent = `Player ${g.player + 1} · Turn ${g.turn + 1} of ${g.total}`;
+  $('#gScore').textContent = `♥ ${g.score}`;
+  renderTimer();
+  const M = $('#gMain');
+  if(g.phase === 'handover'){
+    M.innerHTML = `<div class="deck"><div class="cover">
+      <div class="art" aria-hidden="true">📱➡️🙋</div>
+      <h3>Pass the phone to Player ${g.player + 1}</h3>
+      <p>Player ${g.player + 1}, you describe. Don't let the others see the screen. Everyone else, get ready to guess!</p>
+      <button class="btn big" data-act="ready">I'm ready: show my card</button></div></div>`;
+    focusIf($('[data-act="ready"]'));
+  } else if(g.phase === 'cover' || (g.phase === 'card' && g.paused)){
+    const paused = g.paused;
+    M.innerHTML = `<div class="deck"><div class="cover">
+      <div class="art" aria-hidden="true">${paused?'⏸️':'🂠'}</div>
+      <h3>${paused ? 'Paused' : 'Next card ready'}</h3>
+      <p>${paused ? 'The card is hidden while the game is paused.' : 'Only the describer looks at the screen.'}</p>
+      ${paused ? `<button class="btn big" data-act="pause">▶ Continue</button>` : `<button class="btn big" data-act="reveal">Show next card</button>`}
+      </div></div>`;
+    focusIf(M.querySelector('.btn'));
+  } else if(g.phase === 'card'){
+    M.innerHTML = `<div class="deck">${cardHtml(g.card)}</div>
+      <div class="actions">
+        <button class="act pass" data-act="pass" ${g.passesLeft<=0?'disabled':''} aria-label="Pass. ${g.passesLeft} passes left"><span class="c" aria-hidden="true">✕</span>Pass (${g.passesLeft})</button>
+        <button class="act small" data-act="tabooSaid" aria-label="Someone said a forbidden word"><span class="c" aria-hidden="true">🚨</span>Taboo!</button>
+        <button class="act love" data-act="match" aria-label="Match: they guessed it"><span class="c" aria-hidden="true">♥</span>Match</button>
+      </div>`;
+    attachSwipe($('#theCard'), dir => { cardDoneUI(dir > 0 ? 'match' : 'pass'); }, () => S.g.passesLeft > 0);
+  } else if(g.phase === 'timeup'){
+    const last = g.turn + 1 >= g.total;
+    M.innerHTML = `<div class="deck"><div class="cover">
+      <div class="art" aria-hidden="true">⏰</div>
+      <h3>${g.time === 0 ? 'End of your turn!' : "Time's up!"}</h3>
+      <p>Player ${g.player + 1} got <b>${g.turnScore}</b> ${g.turnScore === 1 ? 'match' : 'matches'} in this turn.</p>
+      <button class="btn big" data-act="next-turn">${last ? 'See the results' : 'Next player'}</button></div></div>`;
+    focusIf(M.querySelector('.btn'));
+  } else if(g.phase === 'end'){
+    renderEnd(); show('end');
+  }
+}
+function cardDoneUI(kind){
+  const id = cardDone(kind); if(!id) return;
+  if(kind === 'match'){ openMatch(id); }
+  else say(kind === 'pass' ? 'Passed' : 'Taboo word. Card removed');
+  renderGame();
+}
+let matchTimer = null;
+function openMatch(id){
+  const c = CARD[id], p = nameFor(c);
+  const ms = $('#matchScreen');
+  ms.innerHTML = `<h2 id="matchTitle">It's a match! 💘</h2>
+    <div class="mw">${esc(c.w)}</div>
+    <div class="bio"><small>${esc(p.name)}'s bio</small>${esc(c.bio)}</div>
+    <button class="btn" data-act="close-match">Continue</button>`;
+  ms.classList.add('show');
+  focusIf(ms.querySelector('button'));
+  say(`It's a match: ${c.w}`);
+  clearTimeout(matchTimer);
+  matchTimer = setTimeout(closeMatch, CONTENT.matchScreenSeconds * 1000);
+}
+function closeMatch(){
+  clearTimeout(matchTimer);
+  const ms = $('#matchScreen'); if(!ms.classList.contains('show')) return;
+  ms.classList.remove('show'); ms.innerHTML = '';
+  focusIf($('#gMain .btn'));
+}
+function renderEnd(){
+  const g = S.g;
+  const list = ids => ids.length ? ids.map(id => { const c = CARD[id]; return `<div><b>${esc(c.emoji)} ${esc(c.w)}</b>${esc(c.m)}</div>`; }).join('') : '<div>None</div>';
+  const missed = [...new Set(g.passed.concat(g.taboo))].filter(id => !g.matched.includes(id));
+  const record = g.score > g.prevBest && g.prevBest > 0 ? '🎉 New best score!' : (g.prevBest ? `Your best: ${Math.max(g.prevBest, g.score)} ♥` : 'Play again and try to beat it!');
+  $('#endPanel').innerHTML = `<div style="text-align:center"><div aria-hidden="true" style="font-size:2.6rem">💘</div>
+      <div class="score-big">${g.score} ♥</div><p style="margin:.3rem 0 0">matches for the whole group</p><p style="margin:.2rem 0 0;font-weight:700">${esc(record)}</p></div>
+    <div class="recap"><h4>Words to practise again (${missed.length})</h4>${list(missed)}
+      <h4>Words you matched (${g.matched.length})</h4>${list(g.matched)}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:16px">
+      <button class="btn dark" data-act="again">Play again</button><button class="btn" data-act="home">Menu</button></div>`;
+}
+
+/* solo */
+function renderSolo(){
+  const s = S.solo, M = $('#soloMain');
+  const done = s.ids.length - s.queue.length;
+  $('#soloCount').textContent = `✓ ${done} / ${s.ids.length}`;
+  $('#soloBar').style.width = (100 * done / s.ids.length) + '%';
+  if(!s.queue.length){
+    M.innerHTML = `<div class="deck"><div class="cover"><div class="art" aria-hidden="true">🏆</div>
+      <h3>You know all ${s.ids.length} words!</h3><p>Come back in a few days and try again: that helps you remember.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
+      <button class="btn" data-act="solo-reset">Start again</button>
+      <button class="btn" data-act="solo-deck" data-v="${s.deck === 'easy' ? 'full' : 'easy'}">Try ${s.deck === 'easy' ? 'all words' : 'the Easy deck'}</button></div></div></div>
+      <div class="actions"><button class="btn ghost" data-act="home">Menu</button></div>`;
+    return;
+  }
+  const c = CARD[s.queue[0]];
+  const front = `<div class="lbl">What's the word?</div>
+      <div class="solo-clue">${esc(c.m)}</div>
+      <div class="gapline">${gapEx(c.ex)}</div>
+      <div class="lbl" style="text-transform:none;letter-spacing:0">Say the word aloud. Then tap "Check".</div>`;
+  const back = `<div class="lbl">The word is</div><div class="word">${esc(c.w)}</div>
+      <div class="gapline">${markEx(c.ex)}</div>${c.note?`<div class="hint">🇬🇧/🇺🇸 ${esc(c.note)}</div>`:''}
+      <div class="lbl" style="text-transform:none;letter-spacing:0">Did you know it? Swipe right or left, or tap a button.</div>`;
+  M.innerHTML = `<div class="seg" role="group" aria-label="Deck" style="justify-content:center">
+      ${CONTENT.options.deck.map(([v,l]) => `<button data-act="solo-deck" data-v="${v}" aria-pressed="${s.deck===v}">${esc(l)}</button>`).join('')}</div>
+    <div class="deck">${cardHtml(c.id, {solo: s.flipped ? back : front})}</div>
+    <div class="actions">${s.flipped
+      ? `<button class="act pass" data-act="solo-no"><span class="c" aria-hidden="true">✕</span>Practise again</button>
+         <button class="act love" data-act="solo-yes"><span class="c" aria-hidden="true">♥</span>I knew it</button>`
+      : `<button class="btn big" data-act="solo-flip">Check</button>`}</div>`;
+  if(s.flipped) attachSwipe($('#theCard'), dir => { soloAnswer(dir > 0); renderSolo(); }, () => true);
+  focusIf(M.querySelector('.actions button'));
+}
+
+/* swipe gesture (also works with a mouse) */
+function attachSwipe(el, onSwipe, canLeft){
+  if(!el) return;
+  let x0 = null, dx = 0, id = null;
+  const yes = el.querySelector('#stYes'), no = el.querySelector('#stNo');
+  el.addEventListener('pointerdown', e => { if(e.target.closest('button')) return; x0 = e.clientX; dx = 0; id = e.pointerId; el.setPointerCapture(id); el.style.transition = 'none'; });
+  el.addEventListener('pointermove', e => {
+    if(x0 === null) return; dx = e.clientX - x0;
+    if(dx < 0 && !canLeft()) dx = Math.max(dx, -30);
+    el.style.transform = `translateX(${dx}px) rotate(${dx/18}deg)`;
+    yes.style.opacity = Math.max(0, Math.min(1, dx/100)); no.style.opacity = Math.max(0, Math.min(1, -dx/100));
+  });
+  const end = () => {
+    if(x0 === null) return; x0 = null;
+    el.style.transition = 'transform .25s ease';
+    if(Math.abs(dx) > 100 && (dx > 0 || canLeft())){
+      el.style.transform = `translateX(${dx > 0 ? 600 : -600}px) rotate(${dx > 0 ? 25 : -25}deg)`;
+      setTimeout(() => onSwipe(dx > 0 ? 1 : -1), 180);
+    } else { el.style.transform = ''; yes.style.opacity = 0; no.style.opacity = 0; }
+  };
+  el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+}
+
+/* ================= screen wake lock (phones) ================= */
+let wake = null;
+async function keepAwake(on){
+  try{
+    if(on && 'wakeLock' in navigator && !wake){ wake = await navigator.wakeLock.request('screen'); wake.addEventListener('release', () => { wake = null; }); }
+    if(!on && wake){ await wake.release(); wake = null; }
+  }catch(e){ wake = null; }
+}
+document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'visible' && S.g && S.g.phase !== 'end' && $('#game').classList.contains('active')) keepAwake(true); });
+
+/* ================= events ================= */
+let ticker = null;
+function stopGame(){ clearInterval(ticker); ticker = null; closeMatch(); keepAwake(false); }
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if(!b || b.disabled) return;
+  const a = b.dataset.act, L = S.learn;
+  switch(a){
+    case 'home': stopGame(); show('home'); break;
+    case 'go-learn': renderLearn(); show('learn'); break;
+    case 'learn-toggle': L.open[b.dataset.id] = !L.open[b.dataset.id]; renderLearn(); break;
+    case 'learn-all': { const ids = CONTENT.slides[L.slide].ids; const all = ids.every(id => L.open[id]); ids.forEach(id => L.open[id] = !all); renderLearn(); break; }
+    case 'learn-prev': L.slide = (L.slide - 1 + CONTENT.slides.length) % CONTENT.slides.length; renderLearn(); break;
+    case 'learn-next': L.slide = (L.slide + 1) % CONTENT.slides.length; renderLearn(); break;
+    case 'learn-go': L.slide = +b.dataset.i; renderLearn(); break;
+    case 'go-warm': if(!S.warm.order.length) warmDeal(); renderWarm(); show('warm'); break;
+    case 'warm-new': warmDeal(); renderWarm(); break;
+    case 'kw': { const q = +b.dataset.q; S.warm.open[q] = S.warm.open[q] === b.dataset.id ? null : b.dataset.id; renderWarm(); break; }
+    case 'go-setup': renderSetup(); show('setup'); break;
+    case 'opt': { const k = b.dataset.k; let v = b.dataset.v; if(k !== 'deck') v = +v; S.set[k] = v; SAVE.set = S.set; save(); renderSetup(); break; }
+    case 'start': case 'again':
+      newGame(); show('game'); renderGame(); keepAwake(true);
+      clearInterval(ticker); ticker = setInterval(tick, 250); break;
+    case 'ready': beginTurn(); renderGame(); break;
+    case 'reveal': revealNext(); renderGame(); break;
+    case 'match': cardDoneUI('match'); break;
+    case 'pass': cardDoneUI('pass'); break;
+    case 'tabooSaid': cardDoneUI('taboo'); break;
+    case 'close-match': closeMatch(); break;
+    case 'pause': { const g = S.g;
+      if(g && (g.phase === 'card' || g.phase === 'cover') && g.time){
+        g.paused = !g.paused; g.last = Date.now();
+        if(g.paused) g.pausedAt = Date.now(); else g.cardStart += Date.now() - (g.pausedAt || Date.now());
+        closeMatch(); renderGame();
+      } break; }
+    case 'next-turn': closeMatch(); nextTurn(); renderGame(); break;
+    case 'quit': stopGame(); renderSetup(); show('setup'); break;
+    case 'go-solo': newSolo((S.solo && S.solo.deck) || 'easy'); renderSolo(); show('solo'); break;
+    case 'solo-deck': newSolo(b.dataset.v); renderSolo(); break;
+    case 'solo-flip': S.solo.flipped = true; renderSolo(); break;
+    case 'solo-yes': soloAnswer(true); renderSolo(); break;
+    case 'solo-no': soloAnswer(false); renderSolo(); break;
+    case 'solo-reset': SAVE.known[S.solo.deck] = []; save(); newSolo(S.solo.deck); renderSolo(); break;
+  }
+});
+$('#matchScreen').addEventListener('click', e => { if(e.target.id === 'matchScreen') closeMatch(); });
+document.addEventListener('pointerdown', () => { KBD = false; }, true);
+document.addEventListener('keydown', e => {
+  if(e.key === 'Tab' || e.key === 'Enter' || e.key === ' ' || e.key.startsWith('Arrow')) KBD = true;
+  if(e.key === 'Escape') closeMatch();
+  if($('#game').classList.contains('active') && S.g && S.g.phase === 'card' && !S.g.paused && !$('#matchScreen').classList.contains('show')){
+    if(e.key === 'ArrowRight'){ e.preventDefault(); cardDoneUI('match'); }
+    if(e.key === 'ArrowLeft'){ e.preventDefault(); if(S.g.passesLeft > 0) cardDoneUI('pass'); }
+  }
+  if($('#learn').classList.contains('active')){
+    if(e.key === 'ArrowRight'){ S.learn.slide = (S.learn.slide + 1) % CONTENT.slides.length; renderLearn(); }
+    if(e.key === 'ArrowLeft'){ S.learn.slide = (S.learn.slide - 1 + CONTENT.slides.length) % CONTENT.slides.length; renderLearn(); }
+  }
+});
+document.querySelectorAll('[data-footer]').forEach(f => f.innerHTML = FOOTER);
+</script>
+</body>
+</html>
