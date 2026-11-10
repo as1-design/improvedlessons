@@ -1,0 +1,899 @@
+<!doctype html>
+<!--
+  Name:     get – one verb, five jobs · B2.2 grammar practice
+  Purpose:  Presents and practises the uses of get (coursebook grammar box "get"):
+            1 Sort it (five uses), 2 State or change? (be vs get), 3 Build it
+            (get something done / get someone to do), plus a diary review,
+            Practise my mistakes, speaking cards for the teacher and a grammar guide.
+  Version:  1.1 · 2026-11-10
+  Edit:     All sentences, options, notes and cards are in the CONTENT section at
+            the top of the script. Change the text there; nothing else needs editing.
+            Progress is saved in the browser (key "b22get.v1"). Reset buttons are on
+            the home screen and on each activity (tap twice to confirm).
+  Credit:   Class of Coffee – with AI assistance
+-->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>get – one verb, five jobs · B2.2</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
+<style>
+/* ================= tokens ================= */
+:root{
+  --bg:#FFF7EC; --paper:#FFFFFF; --ink:#26213F; --ink-soft:#5E5878; --line:#EADFCF;
+  --accent:#FF5A36; --accent-dark:#C8401F; --accent-ink:#FFFFFF;
+  --act1:#FF5A36; --act2:#26213F; --act3:#0E7C86;
+  --good:#13804F; --good-bg:#DDF6E9; --bad:#C2321B; --bad-bg:#FFE3DC; --hl:#FFD34D;
+  /* reserved meaning colours: one per use of get, never used for anything else */
+  --u1:#FF8A5B; --u1-bg:#FFE9DF;   /* receive / bring / arrive */
+  --u2:#E2A400; --u2-bg:#FFF3C9;   /* become */
+  --u3:#8E6CF0; --u3-bg:#EEE8FF;   /* passive */
+  --u4:#1FA67A; --u4-bg:#DDF6EC;   /* get something done */
+  --u5:#2D8BD8; --u5-bg:#DDEEFC;   /* get someone to do */
+  --display: ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
+  --body: system-ui, -apple-system, "Segoe UI", Roboto, Verdana, sans-serif;
+  --r-s:12px; --r-m:18px; --r-l:26px;
+  --maxw:1000px; --bar-h:66px;
+  --shadow:0 3px 0 rgba(38,33,63,.12), 0 10px 24px rgba(38,33,63,.08);
+  --spring:cubic-bezier(.34,1.56,.64,1); --ease:cubic-bezier(.25,.46,.45,.94);
+}
+/* Large screens and whiteboards: everything grows with the root size */
+@media (min-width:1500px) and (min-height:800px){ html{font-size:20px} :root{--maxw:1400px; --bar-h:78px} }
+/* Short screens (phone landscape) */
+@media (max-height:500px) and (orientation:landscape){ :root{--bar-h:56px} }
+
+/* ================= base ================= */
+*{box-sizing:border-box}
+html{touch-action:manipulation;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);
+  font:400 clamp(1rem,.95rem + .3vw,1.2rem)/1.5 var(--body);
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+body.has-bar{padding-bottom:calc(var(--bar-h) + env(safe-area-inset-bottom))}
+.deco{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
+.deco span{position:absolute;border-radius:50%;opacity:.35}
+main{flex:1;width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(10px,2vw,24px) 16px 24px}
+button{font:inherit;color:inherit;min-height:44px;cursor:pointer;border:0;background:none;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+button:disabled{cursor:default}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0}
+.screen{display:none}.screen.active{display:block;animation:pop .3s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes wiggle{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+@keyframes bounce{0%{transform:scale(.94)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:479px){ .lbl{display:none} }
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.45em;padding:.55em 1.1em;border-radius:999px;
+  font-family:var(--display);font-weight:700;background:var(--accent);color:var(--accent-ink);box-shadow:0 3px 0 var(--accent-dark);
+  transition:transform .15s var(--spring), opacity .2s}
+.btn:active:not(:disabled){transform:translateY(2px);box-shadow:0 1px 0 var(--accent-dark)}
+.btn:disabled{opacity:.4;box-shadow:none}
+.btn.ghost{background:var(--paper);color:var(--ink);box-shadow:0 0 0 2px var(--line) inset}
+.btn.small{min-height:44px;min-width:44px;padding:.3em .85em;font-size:.9em}
+.btn.warn{background:var(--paper);color:var(--bad);box-shadow:0 0 0 2px var(--bad) inset}
+
+/* ---------- top of each activity ---------- */
+.topbar{display:flex;align-items:center;gap:8px 10px;margin-bottom:8px}
+.topbar h2{flex:1;min-width:0;font-size:clamp(1.15rem,min(1rem + 1vw,.8rem + 2vh),2rem)}
+.instr{margin:0 0 12px;color:var(--ink-soft);font-size:.92em}
+
+/* ---------- fixed bottom bar: progress + Next always in the same place ---------- */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(255,253,248,.97);border-top:2px solid var(--line);
+  padding:0 16px env(safe-area-inset-bottom);box-shadow:0 -6px 18px rgba(38,33,63,.06)}
+.bar[hidden]{display:none}
+.bar-in{max-width:var(--maxw);margin:0 auto;height:var(--bar-h);display:flex;align-items:center;gap:8px}
+.bar .btn.primary{min-width:7.2em}
+.bar .btn.ghost{padding:.3em .8em}
+.meter{flex:1;min-width:60px;display:flex;align-items:center;gap:8px;font-weight:700;font-size:.85em;white-space:nowrap}
+.meter .track{flex:1;height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.meter .track i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .4s var(--ease)}
+
+/* ---------- cards and text ---------- */
+.card{background:var(--paper);border-radius:var(--r-l);box-shadow:var(--shadow);padding:clamp(14px,2.6vw,30px)}
+.prompt{font-family:var(--display);font-weight:700;font-size:clamp(1.2rem,min(1rem + 1.3vw,.7rem + 2.6vh),2.4rem);line-height:1.3;margin:0}
+.situ{font-size:clamp(1.05rem,min(.95rem + .7vw,.7rem + 2vh),1.8rem);margin:0}
+.from{display:inline-block;margin:0 0 8px;font-size:.8em;font-weight:700;color:var(--ink-soft);background:var(--bg);border-radius:99px;padding:.15em .7em}
+mark{background:none;color:inherit;font-weight:800;padding:0 .15em;border-radius:6px;box-shadow:inset 0 -.45em 0 var(--hl)}
+.feedback{margin-top:12px;padding:10px 14px;border-radius:var(--r-m);scroll-margin-bottom:calc(var(--bar-h) + 16px);animation:bounce .35s var(--spring)}
+.feedback.ok{background:var(--good-bg)}
+.feedback.no{background:var(--bad-bg)}
+.feedback b.tag{font-family:var(--display)}
+.feedback .us{display:block;margin-top:6px;font-size:.9em;background:#fff;border:2px dashed var(--ink-soft);border-radius:10px;padding:3px 8px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+
+/* ---------- home ---------- */
+.hero{text-align:center;margin:6px 0 20px}
+.hero .lvl{display:inline-block;font-family:var(--display);font-weight:800;background:var(--ink);color:#fff;border-radius:99px;padding:.15em .8em;font-size:.9em}
+.hero h1{font-size:clamp(2.1rem,1.5rem + 3vw,4rem);margin:.25em 0 .1em;letter-spacing:-.01em}
+.hero h1 .get{color:var(--accent);font-style:italic}
+.hero p{margin:0;color:var(--ink-soft)}
+.hero .aim{display:inline-block;margin-top:10px;padding:.35em .9em;border-radius:14px;background:var(--paper);box-shadow:0 0 0 2px var(--line) inset;color:var(--ink);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}
+.chip{display:inline-flex;align-items:center;gap:.35em;padding:.2em .7em;border-radius:99px;font-weight:700;font-size:.9em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.act{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;padding:18px 20px;border-radius:var(--r-l);
+  background:var(--paper);box-shadow:var(--shadow);transition:transform .2s var(--spring);min-height:150px}
+.act:hover{transform:translateY(-3px) rotate(-.4deg)}
+.act .num{font-family:var(--display);font-weight:800;font-size:1.6em;width:1.6em;height:1.6em;display:grid;place-items:center;border-radius:50%;color:#fff}
+.act h3{font-size:1.25em}
+.act p{margin:0;color:var(--ink-soft);font-size:.92em}
+.act .prog{margin-top:auto;font-weight:700;font-size:.85em}
+.section-title{font-family:var(--display);font-size:1.1em;margin:24px 0 10px;color:var(--ink-soft)}
+.side{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:12px}
+.side .act{min-height:0;background:#FFFDF8;box-shadow:0 0 0 2px var(--line) inset}
+.home-foot{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin-top:24px}
+
+/* ---------- answer options ---------- */
+.opts{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.opts>.opt{flex:1 1 calc(50% - 5px);min-width:0}
+.opts.two>.opt{flex-basis:100%}
+.opts.three>.opt{flex-basis:calc(33.333% - 7px)}
+@media (min-width:640px){ .opts.two>.opt{flex-basis:calc(50% - 5px)} }
+@media (min-width:700px){ .opts.five{justify-content:center} .opts.five>.opt{flex:0 1 calc(33.333% - 7px)} }
+.opt{display:flex;align-items:center;gap:.55em;text-align:left;padding:.6em .8em;border-radius:var(--r-m);background:var(--paper);
+  box-shadow:0 0 0 2px var(--line) inset,0 3px 0 var(--line);font-weight:700;min-height:52px;transition:transform .15s var(--spring)}
+.opt:not(:disabled):hover{transform:translateY(-2px)}
+.opt .n{flex:none;width:1.65em;height:1.65em;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:#fff;font-family:var(--display);font-size:.8em}
+.opt .ic{font-size:1.3em;flex:none}
+.opt .tx{flex:1;min-width:0}
+.opt small{display:block;font-weight:400;color:var(--ink-soft);font-size:.9em}
+.opt .mk{margin-left:auto;font-size:1.2em;font-weight:800;flex:none}
+.opt.right{background:var(--good-bg);box-shadow:0 0 0 3px var(--good) inset}
+.opt.wrong{background:var(--bad-bg);box-shadow:0 0 0 3px var(--bad) inset;animation:wiggle .3s}
+.opt:disabled:not(.right):not(.wrong){opacity:.5}
+.u1{--u:var(--u1);--ub:var(--u1-bg)} .u2{--u:var(--u2);--ub:var(--u2-bg)} .u3{--u:var(--u3);--ub:var(--u3-bg)}
+.u4{--u:var(--u4);--ub:var(--u4-bg)} .u5{--u:var(--u5);--ub:var(--u5-bg)}
+.opt.cat{background:var(--ub);box-shadow:0 0 0 2px var(--u) inset,0 3px 0 var(--u)}
+.opt.cat.right{box-shadow:0 0 0 4px var(--good) inset}
+.opt.cat.wrong{box-shadow:0 0 0 4px var(--bad) inset}
+.chip.u1,.chip.u2,.chip.u3,.chip.u4,.chip.u5{background:var(--ub);box-shadow:0 0 0 2px var(--u) inset}
+/* phones: compact answer boxes (the pattern appears in the feedback instead) */
+@media (max-width:699px){ .opt small{display:none} }
+@media (max-width:419px){ .opt .ic{display:none} .opt{padding:.55em .65em} .opts.three .opt .n{display:none} }
+.opt{position:relative}
+.opts.three .opt .mk{position:absolute;top:3px;right:7px;font-size:.95em}
+.opts.three .opt{padding-right:1.4em}
+
+/* ---------- build it ---------- */
+.answer-line{min-height:64px;display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start;padding:10px;border-radius:var(--r-m);
+  background:#FFFDF8;border:2px dashed var(--line)}
+.answer-line.ok{border-color:var(--good);background:var(--good-bg)}
+.answer-line.no{border-color:var(--bad);animation:wiggle .3s}
+.answer-line .hint{color:var(--ink-soft);align-self:center;padding:0 6px}
+.pool{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;min-height:50px}
+.tile{padding:.4em .85em;border-radius:14px;background:var(--paper);box-shadow:0 0 0 2px var(--ink) inset,0 3px 0 var(--ink);
+  font-weight:700;font-size:clamp(1rem,min(.9rem + .6vw,.7rem + 2vh),1.6rem);transition:transform .15s var(--spring)}
+.tile:not(:disabled):hover{transform:translateY(-2px) rotate(-1deg)}
+.tile.get{background:var(--hl)}
+.answer-line .tile{box-shadow:0 0 0 2px var(--ink-soft) inset}
+
+/* ---------- story ---------- */
+.story-wrap{display:grid;gap:12px}
+.story{font-size:clamp(1rem,min(.95rem + .45vw,.7rem + 1.8vh),1.4rem);line-height:1.75}
+.story h2{font-size:1.15em;margin-bottom:8px}
+.story h3{margin:12px 0 2px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.06em;font-size:.8em}
+.story h3:first-child{margin-top:0}
+.story p{margin:0}
+.story-box{position:relative;max-height:max(140px,calc(100vh - 410px));max-height:max(140px,calc(100dvh - 410px));overflow-y:auto;padding-right:6px;overscroll-behavior:contain}
+.gap{display:inline-block;min-width:4.5em;padding:0 .4em;border-radius:8px;font-weight:800;text-align:center;line-height:1.5}
+.gap.todo{border-bottom:3px dotted var(--ink-soft);color:transparent}
+.gap.now{background:var(--hl);box-shadow:0 0 0 3px var(--ink) inset;color:var(--ink)}
+.gap.ok{background:var(--good-bg);color:var(--good)}
+.gap.no{background:var(--bad-bg);color:var(--bad)}
+.story-side .label{font-weight:700;font-size:.9em;margin:0}
+.story-side .opts{margin-top:8px}
+@media (min-width:900px), (max-height:500px) and (min-width:640px) and (orientation:landscape){
+  .story-wrap{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:start}
+  .story-box{max-height:calc(100vh - var(--bar-h) - 210px);max-height:calc(100dvh - var(--bar-h) - 210px)}
+  .story-side .opts>.opt{flex-basis:100%}
+}
+
+/* ---------- speaking cards ---------- */
+.speak-card{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:16px;
+  background:var(--paper);border-radius:var(--r-l);box-shadow:var(--shadow);padding:clamp(18px,4vw,60px) clamp(22px,4vw,60px);
+  min-height:max(200px,calc(100vh - var(--bar-h) - 150px));min-height:max(200px,calc(100dvh - var(--bar-h) - 150px));position:relative;overflow:hidden}
+.speak-card .q{font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,min(1rem + 2.6vw,.6rem + 5vh),4rem);line-height:1.2;margin:0;max-width:22ch}
+.speak-card .f{color:var(--ink-soft);font-size:clamp(1rem,min(.9rem + .8vw,.6rem + 2.4vh),1.8rem);margin:0;max-width:34ch}
+.speak-card .stripe{position:absolute;left:0;top:0;bottom:0;width:12px;background:var(--u)}
+
+/* ---------- guide ---------- */
+.uses{display:grid;gap:12px}
+.use{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:start;padding:14px 16px;border-radius:var(--r-m);background:var(--ub);box-shadow:0 0 0 2px var(--u) inset}
+.use .ic{font-size:1.8em;grid-row:span 3}
+.use h3{font-size:1.1em}
+.use .pat{font-family:var(--display);font-weight:700}
+.use p{margin:0}
+.note{margin-top:14px;padding:14px 16px;border-radius:var(--r-m);background:var(--paper);box-shadow:0 0 0 2px var(--line) inset}
+.note p{margin:.3em 0}
+
+/* ---------- end / message cards ---------- */
+.done{text-align:center}
+.done .big{font-size:3rem;line-height:1.2}
+.done h3{font-size:1.6em;margin:.2em 0}
+.done p{margin:.3em 0}
+
+/* ---------- short screens (phone landscape) ---------- */
+@media (max-height:500px) and (orientation:landscape){
+  body{font-size:1rem}
+  main{padding-top:8px}
+  .topbar{margin-bottom:4px}
+  .topbar .btn.small{min-height:40px}
+  .instr{margin-bottom:8px;font-size:.85em}
+  .card{padding:12px 16px}
+  .opts{margin-top:10px;gap:8px}
+  .opt{min-height:44px;padding:.4em .7em}
+  .opt small{display:none}
+  .feedback{margin-top:8px;padding:8px 12px}
+  .speak-card{gap:10px;min-height:max(180px,calc(100vh - var(--bar-h) - 100px));min-height:max(180px,calc(100dvh - var(--bar-h) - 100px))}
+}
+
+/* ================= signature footer (Class of Coffee, unchanged) ================= */
+.coc-footer{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:4px 16px; padding:7px 20px;
+  background:var(--coc-tan,#E6C496); color:var(--coc-coffee-dark,#5A2D0C);
+  font-family:var(--coc-body,'Nunito','Segoe UI',Verdana,sans-serif); font-size:13px; line-height:1.4;
+}
+.coc-footer__brand{ display:flex; align-items:center; gap:10px; font-weight:600; }
+.coc-footer__mark{ width:30px; height:30px; flex:none; }
+.coc-footer a{ color:inherit; text-decoration:underline; text-underline-offset:3px;
+  display:inline-flex; align-items:center; min-height:40px; padding:0 4px; }
+.coc-footer a:focus-visible{ outline:2px solid var(--coc-coffee-dark,#5A2D0C); outline-offset:3px; border-radius:4px; }
+</style>
+</head>
+<body>
+<div class="deco" aria-hidden="true">
+  <span style="width:340px;height:340px;background:var(--u2-bg);top:-120px;left:-110px"></span>
+  <span style="width:260px;height:260px;background:var(--u3-bg);bottom:-90px;right:-70px"></span>
+  <span style="width:150px;height:150px;background:var(--u5-bg);top:38%;right:-60px"></span>
+</div>
+
+<main id="app">
+  <section class="screen active" id="home" aria-labelledby="homeTitle"></section>
+  <section class="screen" id="quiz"></section>
+  <section class="screen" id="build"></section>
+  <section class="screen" id="story"></section>
+  <section class="screen" id="prac"></section>
+  <section class="screen" id="speak"></section>
+  <section class="screen" id="guide"></section>
+</main>
+
+<nav class="bar" id="bar" aria-label="Progress and next step" hidden></nav>
+
+<footer class="coc-footer">
+  <span class="coc-footer__brand">
+    <svg class="coc-footer__mark" xmlns="http://www.w3.org/2000/svg" viewBox="4 4 48 48" aria-hidden="true" focusable="false"><path d="M42.57 20.25A16.5 16.5 0 1 0 42.57 35.75L38.77 33.73A12.2 12.2 0 1 1 38.77 22.27Z" fill="#EDE3D6"/><path d="M42.57 20.25A16.5 16.5 0 1 0 42.57 35.75L40.89 34.85A14.6 14.6 0 1 1 40.89 21.15Z" fill="#D9C8B2"/><path d="M48.31 17.2A23 23 0 1 0 48.31 38.8A3.25 3.25 0 0 0 42.57 35.75A16.5 16.5 0 1 1 42.57 20.25A3.25 3.25 0 0 0 48.31 17.2Z" fill="#A2521A" stroke="#5A2D0C" stroke-width="1.8" stroke-linejoin="round"/><circle cx="28" cy="28" r="12.2" fill="#744823" stroke="#5A3517" stroke-width="1"/><path d="M32.5 22.64A7.0 7.0 0 1 0 32.5 33.36L32.64 32.21A5.5 5.5 0 1 1 32.64 23.79Z" fill="#F3E2BF" stroke="#F3E2BF" stroke-width="0.7" stroke-linejoin="round"/></svg>
+    <span>Class of Coffee – with AI assistance</span>
+  </span>
+  <a href="https://classofcoffee.com">classofcoffee.com</a>
+</footer>
+
+<script>
+/* ================= CONTENT (edit here) ================= */
+// Mini-format: in sentences, square brackets [ ] mark the words that are highlighted.
+// "a" is the index of the correct option, counting from 0. "us" is an optional
+// American English note and "l1" an optional Spanish/Catalan note, both shown after the answer.
+
+const SETTINGS = {
+  buildHighlightFirst: 4,   // Build it: the get tile is yellow in the first 4 sentences only
+};
+
+// The five uses of get. Their order is used by activity 1 (Sort it).
+const USES = [
+  { id:'u1', icon:'📦', name:'receive, bring, arrive', short:'receive / bring / arrive',
+    pattern:'get + noun / pronoun · get to + place',
+    explain:'With a noun or pronoun, get usually means receive, bring, fetch, obtain, buy or catch. With to + a place, it means arrive at or in.',
+    example:'I [got] a strange email this morning. · What time did you [get to] the station?' },
+  { id:'u2', icon:'🌗', name:'become', short:'become',
+    pattern:'get + adjective / comparative adjective',
+    explain:'With an adjective or a comparative adjective, get means become. It describes a change.',
+    example:'It\'s [getting colder]. · Prices have [got higher].' },
+  { id:'u3', icon:'⚡', name:'passive', short:'passive',
+    pattern:'get + past participle',
+    explain:'Get + past participle can replace be in a passive structure. It is more informal, and it is often used for bad or unexpected things.',
+    example:'My bike [got stolen]. · The match [got cancelled].' },
+  { id:'u4', icon:'✂️', name:'someone does it for you', short:'get something done',
+    pattern:'get + object + past participle', gist:'someone else does it for you.',
+    explain:'In informal spoken English, get + object + past participle can replace have + object + past participle. You ask or pay someone to do something for you.',
+    example:'We\'re [getting the kitchen painted]. · Where do you [get your car serviced]?' },
+  { id:'u5', icon:'🗣️', name:'make or persuade someone', short:'get someone to do',
+    pattern:'get + object + to + infinitive', gist:'you make or persuade someone to do something.',
+    explain:'Get + object + infinitive with to means make, tell or persuade somebody to do something.',
+    example:'I [got Robin to help] me. · Can you [get the kids to tidy] their room?' },
+];
+
+// A Spanish/Catalan contrast note, used in Build it, the diary and the guide.
+const L1_HAIR = 'Spanish and Catalan speakers often say "I cut my hair" (me he cortado el pelo / m\'he tallat els cabells) when a hairdresser did it. In English, "I cut my hair" means you did it yourself. Say "I got my hair cut" or "I had my hair cut".';
+
+// Notes for the guide screen.
+const GUIDE_NOTES = [
+  'Compare be + adjective and get + adjective. Be describes a state; get describes a change. It\'s dark. / It\'s getting dark. I\'m used to the climate. / I\'m getting used to the climate.',
+];
+const GUIDE_US = [
+  'In American English, the past participle of get is usually gotten: Prices have gotten higher. In British English: Prices have got higher.',
+  'In American English, have + object + infinitive without to is common: I\'ll have someone send you the details. The British equivalent is often: I\'ll get someone to send you the details.',
+];
+const GUIDE_L1 = [ L1_HAIR ];
+
+// Activity 1 · Sort it. "u" is the index in USES (0–4).
+const SORT = [
+  { s:'Can you [get] some milk on your way home?', u:0, note:'Get + noun here means buy.' },
+  { s:'What time did your train [get to] Barcelona?', u:0, note:'Get to + a place means arrive at or in.' },
+  { s:'I [got] a really strange email from my bank this morning.', u:0, note:'Get + noun here means receive.' },
+  { s:'It\'s [getting colder], so take a jacket.', u:1, note:'Get + comparative adjective means become: the weather is changing.' },
+  { s:'My neighbours are [getting louder] every weekend.', u:1, note:'Get + comparative adjective means become.' },
+  { s:'Prices have [got much higher] since last year.', u:1, note:'Get + comparative adjective means become.', us:'American English: Prices have gotten much higher.' },
+  { s:'My bike [got stolen] outside the station.', u:2, note:'Get + past participle is an informal passive. Someone stole the bike: bad news!' },
+  { s:'Kai [got fined] for parking in the wrong place.', u:2, note:'Get + past participle is an informal passive: someone fined Kai.' },
+  { s:'The match [got cancelled] because of the rain.', u:2, note:'Get + past participle is an informal passive, often for unexpected events.' },
+  { s:'We\'re [getting the kitchen painted] next month.', u:3, note:'Get + object + past participle: a painter will do it for us.' },
+  { s:'Where do you [get your car serviced]?', u:3, note:'Get + object + past participle: a mechanic does it for you.' },
+  { s:'I need to [get my eyes tested].', u:3, note:'Get + object + past participle: an optician will do it.' },
+  { s:'I finally [got Robin to help] me move the sofa.', u:4, note:'Get + object + to + infinitive: I persuaded Robin.' },
+  { s:'Can you [get the kids to tidy] their room before dinner?', u:4, note:'Get + object + to + infinitive: tell or persuade the kids.' },
+  { s:'My manager [got me to work] late again on Friday.', u:4, note:'Get + object + to + infinitive: my manager made me do it.' },
+];
+
+// Activity 2 · State or change? Each situation has two sentences; "a" is the correct one.
+const STATE = [
+  { s:'It\'s 6 pm in November. The sun went down a few minutes ago, and the sky is slowly changing colour.',
+    o:['It\'s dark.','It\'s getting dark.'], a:1, note:'The light is changing, so we use get: it\'s getting dark.' },
+  { s:'It\'s 3 am and there are no lights in the street.',
+    o:['It\'s dark.','It\'s getting dark.'], a:0, note:'Nothing is changing. This is a state, so we use be.' },
+  { s:'Ana moved to Leeds three years ago. The rain doesn\'t bother her at all now.',
+    o:['She\'s used to the weather.','She\'s getting used to the weather.'], a:0, note:'The rain feels normal now. This is a state: be used to.' },
+  { s:'Ana moved to Leeds three weeks ago. Every day the rain bothers her a little less.',
+    o:['She\'s used to the weather.','She\'s getting used to the weather.'], a:1, note:'The situation is changing day by day: get used to.' },
+  { s:'It\'s 9 am on a summer day. At 7 am it was cool, but the temperature is going up every hour.',
+    o:['It\'s hot.','It\'s getting hot.'], a:1, note:'The temperature is still rising, so we use get: it\'s getting hot.' },
+  { s:'It\'s 3 pm on a summer day. It\'s 38°C, and everyone is staying inside.',
+    o:['It\'s hot.','It\'s getting hot.'], a:0, note:'The temperature is not changing much now. This is a state, so we use be.' },
+  { s:'Jordan has worked night shifts for ten years. Starting work at midnight feels completely normal.',
+    o:['Jordan is used to working at night.','Jordan is getting used to working at night.'], a:0, note:'It is normal for Jordan now: be used to + -ing.' },
+  { s:'Jordan started night shifts last month. It\'s still hard, but it\'s a little easier each week.',
+    o:['Jordan is used to working at night.','Jordan is getting used to working at night.'], a:1, note:'It is becoming easier: get used to + -ing.' },
+  { s:'You\'ve been walking for three hours, and your legs are starting to feel heavy.',
+    o:['I\'m tired.','I\'m getting tired.'], a:1, note:'The feeling is growing: I\'m getting tired.' },
+  { s:'You didn\'t sleep at all last night, and you can hardly keep your eyes open.',
+    o:['I\'m tired.','I\'m getting tired.'], a:0, note:'This is how you feel right now: I\'m tired.' },
+];
+
+// Activity 3 · Build it. Tiles are written in the correct order; the app shuffles them.
+// "g" is the position of the get tile. "u" is 3 (get something done) or 4 (get someone to do).
+const BUILD = [
+  { t:['We\'re','getting','the windows','cleaned','on Monday.'], g:1, u:3 },
+  { t:['Could you','get','Alex','to call','me back?'], g:1, u:4, us:'American English often uses: Could you have Alex call me back?' },
+  { t:['You should','get','that tooth','looked at','by a dentist.'], g:1, u:3 },
+  { t:['I can never','get','my cat','to come','inside at night.'], g:1, u:4 },
+  { t:['I','got','my phone screen','repaired','for free.'], g:1, u:3 },
+  { t:['We\'ll have to','get','a plumber','to look at','the shower.'], g:1, u:4 },
+  { t:['Where','do you','get','your hair','cut?'], g:2, u:3, l1:L1_HAIR },
+  { t:['How did you','get','your landlord','to lower','the rent?'], g:1, u:4 },
+];
+
+// Side activity · Diary review. Strings are text; objects are gaps.
+// "##" at the start of a string starts a new day (heading).
+const STORY = {
+  title:'Noor\'s diary: a week to forget',
+  parts:[
+    '##Monday', 'On Monday, I ',
+    { o:['got caught','got fined','got sacked'], a:0, note:'Get + past participle (passive): the storm caught me.' },
+    ' in a huge storm on the way to work. By the time I ',
+    { o:['got to','got used to','got on with'], a:0, note:'Get to + a place means arrive.' },
+    ' the office, I was soaking wet.',
+    '##Tuesday', 'On Tuesday, my laptop stopped working, so I took it to a shop to ',
+    { o:['get it repaired','get it to repair','get repaired it'], a:0, note:'Get + object + past participle: the shop does it for you.' },
+    '. It won\'t be ready until next week, so I\'ve been borrowing my flatmate Dani\'s laptop. I think Dani is ',
+    { o:['getting','being','having'], a:0, note:'Get + adjective means become: Dani is becoming tired of it.' },
+    ' a bit tired of it.',
+    '##Wednesday', 'On Wednesday, I finally got my landlord ',
+    { o:['to fix','fix','fixed'], a:0, note:'Get + object + to + infinitive: I persuaded my landlord.', us:'American English often uses have + object + infinitive without to: I had my landlord fix the shower.' },
+    ' the shower, which hadn\'t worked properly for a month. The plumber arrived at 7 am, so I didn\'t ',
+    { o:['get','take','make'], a:0, note:'Get + noun: I didn\'t get (= have) much sleep.' },
+    ' much sleep.',
+    '##Thursday', 'On Thursday, I ',
+    { o:['got','caught','took'], a:0, note:'Get + noun means receive.' },
+    ' a message from Kai, an old friend from school. Kai has just moved back to Tarragona after ten years in a big house in the countryside, and is still ',
+    { o:['getting used','used','use'], a:0, note:'Get used to: it is still changing and still hard for Kai.' },
+    ' to living in a small flat.',
+    '##Friday', 'On Friday, a colleague\'s bike ',
+    { o:['got stolen','got repaired','got painted'], a:0, note:'Get + past participle (passive), for bad or unexpected things.' },
+    ' outside the office, so I gave them a lift home. On the way, we got ',
+    { o:['stopped','stop','stopping'], a:0, note:'Get + past participle (passive): the police stopped us.' },
+    ' by the police because one of my lights wasn\'t working!',
+    '##Next week', 'Next week, I\'m going to ',
+    { o:['get','make','let'], a:0, note:'Get + object + past participle: a hairdresser will cut it.', l1:L1_HAIR },
+    ' my hair cut and try to relax. Things can only ',
+    { o:['get','make','have'], a:0, note:'Get + comparative adjective means become.' },
+    ' better!',
+  ],
+};
+
+// Side activity · Speaking cards (teacher display). "u" picks the colour stripe (index in USES).
+const SPEAK = [
+  { q:'What\'s something you would never get someone else to do for you?', f:'Why not?', u:4 },
+  { q:'What took you a long time to get used to?', f:'A place, a job, a habit, a person…', u:1 },
+  { q:'Have you ever got caught doing something you shouldn\'t?', f:'What happened next?', u:2 },
+  { q:'What do you usually get done instead of doing it yourself?', f:'Your hair, your car, your clothes…', u:3 },
+  { q:'What\'s getting more expensive where you live?', f:'How do you feel about it?', u:1 },
+  { q:'Have you ever got lost somewhere?', f:'How did you get home?', u:0 },
+  { q:'Who can you always get to help you at short notice?', f:'When did they last help you?', u:4 },
+  { q:'What\'s getting easier for you in English?', f:'And what is still hard?', u:1 },
+  { q:'When did you last get really annoyed about something small?', f:'What was it?', u:1 },
+  { q:'What would you love to get fixed or changed in your town?', f:'Who could you get to do it?', u:3 },
+  { q:'What\'s the best thing you\'ve ever got as a present?', f:'Who gave it to you?', u:0 },
+  { q:'How do you usually get to class?', f:'Has anything ever gone wrong on the way?', u:0 },
+];
+
+// Interface text
+const TXT = {
+  homeSub:'Practise the uses of get from the grammar box.',
+  aim:'Aim: I can recognise and use the main meanings of get in informal English.',
+  acts:[
+    { id:'sort', title:'Sort it', desc:'Tap the meaning of get in each sentence.' },
+    { id:'state', title:'State or change?', desc:'Choose between be and get.' },
+    { id:'build', title:'Build it', desc:'Put the words in order: get something done and get someone to do.' },
+  ],
+  side:[
+    { id:'story', icon:'📔', title:'Review: Noor\'s diary', desc:'A short story with gaps. Use it to review.' },
+    { id:'prac', icon:'🔁', title:'Practise my mistakes', desc:'Try again the items you got wrong.' },
+    { id:'speak', icon:'💬', title:'Speaking cards', desc:'Questions to display for pair work.' },
+    { id:'guide', icon:'📌', title:'The five uses', desc:'A summary of the grammar.' },
+  ],
+  instr:{
+    sort:'Read the sentence. Tap the meaning of the highlighted words.',
+    state:'Read the situation. Tap the sentence that fits.',
+    build:'Tap the words in the right order. Then tap Check.',
+    story:'Read the diary. Tap the best option for each gap.',
+    prac:'These are items you got wrong. Answer each one again.',
+    speak:'Ask and answer the question with a partner. Give details.',
+  },
+  from:{ sort:'From 1 · Sort it', state:'From 2 · State or change?', build:'From 3 · Build it', story:'From Noor\'s diary' },
+};
+
+/* ================= state ================= */
+const KEY = 'b22get.v1';
+let S = null;          // all progress lives here and is saved
+let resetArm = null;   // which reset button is waiting for a second tap
+let resetTimer = null;
+let storyBoxTop = null;
+
+function shuffle(a){ a = a.slice(); for (let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+const range = n => Array.from({ length:n }, (_, i) => i);
+function shuffleNotSame(n){ if (n < 2) return range(n); let o; do { o = shuffle(range(n)); } while (o.every((v, i) => v === i)); return o; }
+const GAPS = STORY.parts.filter(p => typeof p === 'object');
+
+function freshAct(id){
+  if (id === 'sort')  return { order:shuffle(range(SORT.length)), i:0, picks:{} };
+  if (id === 'state') return { order:shuffle(range(STATE.length)), i:0, picks:{}, opt:{} };
+  if (id === 'build') return { order:range(BUILD.length), i:0, placed:{}, pool:{}, res:{}, tries:{}, wrong:false };
+  if (id === 'story') { const opt = {}; GAPS.forEach((g, k) => opt[k] = shuffle(range(g.o.length))); return { i:0, picks:{}, opt }; }
+  if (id === 'speak') return { order:range(SPEAK.length), i:0 };
+}
+function freshPracRound(){ return { queue:[], i:0, picks:{}, opt:{}, placed:{}, pool:{}, res:{}, tries:{}, wrong:false }; }
+function freshPrac(){ return { ...freshPracRound(), fixed:{} }; }
+function freshState(){ return { v:1, screen:'home', act:'sort', sort:freshAct('sort'), state:freshAct('state'), build:freshAct('build'), story:freshAct('story'), speak:freshAct('speak'), prac:freshPrac() }; }
+
+/* ================= logic ================= */
+function correctOf(kind, i){ return kind === 'sort' ? SORT[i].u : kind === 'state' ? STATE[i].a : kind === 'story' ? GAPS[i].a : null; }
+function optOrder(kind, i, store, key){
+  if (kind === 'sort') return range(USES.length);
+  const n = kind === 'state' ? STATE[i].o.length : GAPS[i].o.length;
+  if (!store.opt[key]) store.opt[key] = shuffle(range(n));
+  return store.opt[key];
+}
+const parseKey = k => { const [kind, n] = k.split(':'); return { kind, i:+n }; };
+
+// The item on screen now, for choice questions and for Build it
+function ctxChoice(){
+  const scr = S.screen;
+  if (scr === 'sort' || scr === 'state') { const A = S[scr]; if (A.i >= A.order.length) return null; const it = A.order[A.i]; return { kind:scr, i:it, key:it, store:A }; }
+  if (scr === 'story') { const A = S.story; if (A.i >= GAPS.length) return null; return { kind:'story', i:A.i, key:A.i, store:A }; }
+  if (scr === 'prac') { const P = S.prac; if (P.i >= P.queue.length) return null; const key = P.queue[P.i], { kind, i } = parseKey(key); if (kind === 'build') return null; return { kind, i, key, store:P, prac:true }; }
+  return null;
+}
+function ctxBuild(){
+  if (S.screen === 'build') { const A = S.build; if (A.i >= A.order.length) return null; const it = A.order[A.i]; return { i:it, key:it, store:A, highlight: it < SETTINGS.buildHighlightFirst }; }
+  if (S.screen === 'prac') { const P = S.prac; if (P.i >= P.queue.length) return null; const key = P.queue[P.i], { kind, i } = parseKey(key); if (kind !== 'build') return null; return { i, key, store:P, prac:true, highlight:false }; }
+  return null;
+}
+
+function pick(o){
+  const c = ctxChoice(); if (!c || c.store.picks[c.key] !== undefined) return false;
+  c.store.picks[c.key] = o;
+  if (c.prac && o === correctOf(c.kind, c.i)) S.prac.fixed[c.key] = true;
+  save(); return true;
+}
+function next(){
+  const scr = S.screen;
+  if (scr === 'sort' || scr === 'state' || scr === 'build') { const A = S[scr]; A.i = Math.min(A.i + 1, A.order.length); A.wrong = false; }
+  else if (scr === 'story') S.story.i = Math.min(S.story.i + 1, GAPS.length);
+  else if (scr === 'prac') { const P = S.prac; P.i = Math.min(P.i + 1, P.queue.length); P.wrong = false; }
+  save();
+}
+
+function buildEnsure(c){ const st = c.store; if (!st.pool[c.key]) { st.pool[c.key] = shuffleNotSame(BUILD[c.i].t.length); st.placed[c.key] = []; } }
+function placeTile(k){ const c = ctxBuild(); if (!c) return; buildEnsure(c); const st = c.store; if (st.res[c.key] || st.placed[c.key].includes(k)) return; st.placed[c.key].push(k); st.wrong = false; save(); }
+function unplaceTile(k){ const c = ctxBuild(); if (!c) return; buildEnsure(c); const st = c.store; if (st.res[c.key]) return; st.placed[c.key] = st.placed[c.key].filter(x => x !== k); st.wrong = false; save(); }
+function checkBuild(){
+  const c = ctxBuild(); if (!c) return; buildEnsure(c); const st = c.store, t = BUILD[c.i].t;
+  if (st.placed[c.key].length !== t.length || st.res[c.key]) return;
+  const ok = st.placed[c.key].map(k => t[k]).join(' ') === t.join(' ');
+  st.tries[c.key] = (st.tries[c.key] || 0) + 1;
+  if (ok) { st.res[c.key] = st.tries[c.key] === 1 ? 'first' : 'later'; st.wrong = false; if (c.prac) S.prac.fixed[c.key] = true; }
+  else st.wrong = true;
+  save();
+}
+function showBuild(){ const c = ctxBuild(); if (!c) return; buildEnsure(c); const st = c.store; st.placed[c.key] = range(BUILD[c.i].t.length); st.res[c.key] = 'shown'; st.wrong = false; save(); }
+
+// Mistakes: wrong answers in Sort it, State or change?, the diary, and Build it items not right first time
+function mistakeKeys(){
+  const k = [];
+  Object.entries(S.sort.picks).forEach(([i, p]) => { if (SORT[i] && p !== SORT[i].u) k.push('sort:' + i); });
+  Object.entries(S.state.picks).forEach(([i, p]) => { if (STATE[i] && p !== STATE[i].a) k.push('state:' + i); });
+  Object.entries(S.build.res).forEach(([i, r]) => { if (BUILD[i] && r !== 'first') k.push('build:' + i); });
+  Object.entries(S.story.picks).forEach(([g, p]) => { if (GAPS[g] && p !== GAPS[g].a) k.push('story:' + g); });
+  return k;
+}
+const pendingMistakes = () => mistakeKeys().filter(k => !S.prac.fixed[k]);
+function startPrac(){ S.prac = { ...freshPracRound(), queue:shuffle(pendingMistakes()), fixed:S.prac.fixed }; save(); }
+
+function quizScore(id){ const A = S[id]; return Object.keys(A.picks).filter(k => A.picks[k] === correctOf(id, +k)).length; }
+const buildScore = () => Object.values(S.build.res).filter(r => r === 'first').length;
+function progressOf(id){
+  if (id === 'sort' || id === 'state') { const A = S[id]; return { done:Object.keys(A.picks).length, total:A.order.length, score:quizScore(id), finished:A.i >= A.order.length }; }
+  if (id === 'build') { const A = S.build; return { done:Object.keys(A.res).length, total:BUILD.length, score:buildScore(), finished:A.i >= A.order.length }; }
+  if (id === 'story') { const A = S.story; return { done:Object.keys(A.picks).length, total:GAPS.length, score:quizScore('story'), finished:A.i >= GAPS.length }; }
+}
+
+function speakMove(d){ const A = S.speak; A.i = (A.i + d + A.order.length) % A.order.length; save(); }
+function speakShuffle(){ S.speak.order = shuffle(range(SPEAK.length)); S.speak.i = 0; save(); }
+
+function resetAct(id){
+  if (id === 'prac') { S.prac = freshPrac(); save(); return; }
+  S[id] = freshAct(id);
+  // Remove this activity's mistakes from Practise my mistakes
+  Object.keys(S.prac.fixed).forEach(k => { if (k.startsWith(id + ':')) delete S.prac.fixed[k]; });
+  if (S.prac.queue.some(k => k.startsWith(id + ':'))) S.prac = { ...freshPracRound(), fixed:S.prac.fixed };
+  if (id === 'story') storyBoxTop = null;
+  save();
+}
+function resetAll(){ S = freshState(); storyBoxTop = null; store.clear(); save(); }
+
+/* ================= display ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+const hl = s => esc(s).replace(/\[(.+?)\]/g, '<mark>$1</mark>');
+const ACT_COLOURS = ['var(--act1)','var(--act2)','var(--act3)'];
+const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const SCREEN_OF = { home:'home', sort:'quiz', state:'quiz', build:'build', story:'story', prac:'prac', speak:'speak', guide:'guide' };
+
+function show(id){ document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id)); }
+function go(scr){
+  if (!SCREEN_OF[scr]) scr = 'home';
+  S.screen = scr; if (['sort','state','build','story'].includes(scr)) S.act = scr;
+  resetArm = null; save(); render(); show(SCREEN_OF[scr]); window.scrollTo(0, 0);
+  // Move keyboard focus to the new screen's heading, so focus is never left on a hidden screen
+  const h = document.querySelector(`#${SCREEN_OF[scr]} h1, #${SCREEN_OF[scr]} h2`);
+  if (h) { h.tabIndex = -1; h.focus({ preventScroll:true }); }
+}
+function render(){
+  const r = { home:renderHome, sort:renderQuiz, state:renderQuiz, build:renderBuild, story:renderStory, prac:renderPrac, speak:renderSpeak, guide:renderGuide }[S.screen];
+  r();
+}
+
+/* --- bottom bar: progress on the left, Next (or Check) always on the right --- */
+function meter(done, total){
+  const pct = total ? Math.round(done / total * 100) : 0;
+  return `<div class="meter"><span>${done} / ${total}</span><span class="track" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${done}" aria-label="Progress"><i style="width:${pct}%"></i></span></div>`;
+}
+function setBar(cfg){
+  const bar = $('#bar');
+  if (!cfg) { bar.hidden = true; bar.innerHTML = ''; document.body.classList.remove('has-bar'); return; }
+  bar.hidden = false; document.body.classList.add('has-bar');
+  const sec = (cfg.sec || []).map(b => `<button class="btn ghost" data-act="${b.act}" aria-label="${esc(b.label)}"><span aria-hidden="true">${b.icon}</span><span class="lbl">${esc(b.label)}</span></button>`).join('');
+  const p = cfg.primary;
+  bar.innerHTML = `<div class="bar-in">${cfg.total ? meter(cfg.done, cfg.total) : '<span class="meter"></span>'}${sec}
+    <button class="btn primary" data-act="${p.act}"${p.id ? ` data-id="${p.id}"` : ''} ${p.disabled ? 'disabled' : ''}>${esc(p.label)}</button></div>`;
+}
+const NEXT = disabled => ({ act:'next', label:'Next →', disabled });
+const MENU = { act:'go', id:'home', label:'Menu' };
+
+function resetBtn(id, label, small = true){
+  const armed = resetArm === id;
+  if (armed) return `<button class="btn ${small ? 'small' : ''} warn" data-act="reset" data-id="${id}">Tap again to reset</button>`;
+  return `<button class="btn ${small ? 'small' : ''} ghost" data-act="reset" data-id="${id}" aria-label="${esc(label)}"><span aria-hidden="true">↺</span><span class="lbl">${esc(label)}</span></button>`;
+}
+function topbar(title, resetId){
+  return `<div class="topbar"><button class="btn small ghost" data-act="go" data-id="home" aria-label="Back to the menu">← Menu</button>
+    <h2>${esc(title)}</h2>${resetId ? resetBtn(resetId, 'Reset') : ''}</div>`;
+}
+function feedbackHTML(ok, tag, noteHTML, us, l1){
+  return `<div class="feedback ${ok ? 'ok' : 'no'}" role="status"><b class="tag">${tag}</b> ${noteHTML}
+    ${us ? `<span class="us">🇺🇸 ${esc(us)}</span>` : ''}${l1 ? `<span class="us">Spanish / Catalan: ${esc(l1)}</span>` : ''}</div>`;
+}
+
+/* --- one choice question (used by Sort it, State or change?, the diary and Practise) --- */
+function describe(kind, i){
+  if (kind === 'sort') { const it = SORT[i], u = USES[it.u];
+    return { prompt:`<p class="prompt">${hl(it.s)}</p>`, layout:'five',
+      label:o => `<span class="ic" aria-hidden="true">${USES[o].icon}</span><span class="tx">${esc(USES[o].name)}<small>${esc(USES[o].pattern)}</small></span>`,
+      cls:o => 'cat ' + USES[o].id, note:`${u.icon} <b>${esc(u.name)}</b> (${esc(u.pattern)}). ${esc(it.note)}`, us:it.us }; }
+  if (kind === 'state') { const it = STATE[i];
+    return { prompt:`<p class="situ">${esc(it.s)}</p>`, layout:'two', label:o => `<span class="tx">${esc(it.o[o])}</span>`, cls:() => '', note:esc(it.note), us:it.us }; }
+  const g = GAPS[i], c = gapContext(i);
+  return { prompt:`<p class="situ">${esc(c.before)}<span class="gap now">?</span>${esc(c.after)}</p>`, layout:'three',
+    label:o => `<span class="tx">${esc(g.o[o])}</span>`, cls:() => '', note:esc(g.note), us:g.us, l1:g.l1 };
+}
+function choiceBlock(c){
+  const d = describe(c.kind, c.i), order = optOrder(c.kind, c.i, c.store, c.key);
+  const picked = c.store.picks[c.key], answered = picked !== undefined, correct = correctOf(c.kind, c.i);
+  const opts = order.map((o, n) => {
+    let cls = 'opt ' + d.cls(o), mk = '';
+    if (answered && o === correct) { cls += ' right'; mk = '<span class="mk" aria-hidden="true">✓</span>'; }
+    else if (answered && o === picked) { cls += ' wrong'; mk = '<span class="mk" aria-hidden="true">✗</span>'; }
+    return `<button class="${cls}" data-act="pick" data-id="${o}" ${answered ? 'disabled' : ''}><span class="n" aria-hidden="true">${n + 1}</span>${d.label(o)}${mk}</button>`;
+  }).join('');
+  const ok = picked === correct;
+  return { prompt:d.prompt, answered,
+    opts:`<div class="opts ${d.layout}">${opts}</div>`,
+    fb: answered ? feedbackHTML(ok, ok ? '✓ Correct!' : '✗ Not this time.', d.note, d.us, d.l1) : '' };
+}
+// The sentence around a diary gap, for Practise my mistakes
+function gapContext(g){
+  const idx = STORY.parts.indexOf(GAPS[g]);
+  const b = String(STORY.parts[idx - 1] || ''), a = String(STORY.parts[idx + 1] || '');
+  const cut = Math.max(b.lastIndexOf('. '), b.lastIndexOf('! '));
+  const m = a.search(/[.!?]/);
+  return { before: cut >= 0 ? b.slice(cut + 2) : b, after: m >= 0 ? a.slice(0, m + 1) : a };
+}
+
+/* --- one Build it sentence --- */
+function buildBlock(c){
+  buildEnsure(c);
+  const st = c.store, it = BUILD[c.i], placed = st.placed[c.key], res = st.res[c.key], wrong = st.wrong && !res;
+  const tile = (k, where) => `<button class="tile${c.highlight && k === it.g ? ' get' : ''}" data-act="${where}" data-id="${k}" ${res ? 'disabled' : ''}>${esc(it.t[k])}</button>`;
+  const line = placed.length ? placed.map(k => tile(k, 'unplace')).join('') : '<span class="hint">Tap the words below…</span>';
+  const pool = st.pool[c.key].filter(k => !placed.includes(k)).map(k => tile(k, 'place')).join('');
+  const u = USES[it.u];
+  let fb = '';
+  if (res) fb = feedbackHTML(true, res === 'shown' ? 'Here is the answer.' : '✓ Correct!', `${u.icon} <b>${esc(u.pattern)}</b>: ${esc(u.gist)}`, it.us, it.l1);
+  else if (wrong) fb = feedbackHTML(false, '✗ Not quite.', 'Tap a word to move it back, then try again.');
+  return { res, full: placed.length === it.t.length, tried:(st.tries[c.key] || 0) > 0,
+    html:`<div class="answer-line ${res ? 'ok' : wrong ? 'no' : ''}" aria-label="Your sentence">${line}</div><div class="pool" aria-label="Words to use">${pool}</div>${fb}` };
+}
+function buildBar(b, done, total){
+  return { done, total, sec: (!b.res && b.tried) ? [{ act:'show', icon:'💡', label:'Show answer' }] : [],
+    primary: b.res ? NEXT(false) : { act:'check', label:'Check ✓', disabled:!b.full } };
+}
+
+function endCard(score, total, id){
+  const pct = total ? score / total : 0;
+  const big = pct === 1 ? '🏆' : pct >= .7 ? '🌟' : '💪';
+  const msg = pct === 1 ? 'Perfect score!' : pct >= .7 ? 'Well done!' : 'Good effort. Try it again to improve your score.';
+  const left = pendingMistakes().filter(k => k.startsWith(id + ':')).length;
+  return `<div class="card done"><div class="big" aria-hidden="true">${big}</div><h3>${score} / ${total}${id === 'build' ? ' right first time' : ''}</h3><p>${msg}</p>
+    ${left ? `<p>You can try your ${left === 1 ? 'mistake' : left + ' mistakes'} again in <b>Practise my mistakes</b> on the menu.</p>` : ''}
+    <div class="row" style="justify-content:center"><button class="btn ghost" data-act="again" data-id="${id}">↺ Do it again</button></div></div>`;
+}
+
+/* --- screens --- */
+function renderHome(){
+  setBar(null);
+  const acts = TXT.acts.map((a, k) => {
+    const p = progressOf(a.id);
+    const prog = p.done === 0 ? 'Not started' : p.finished ? `✓ Finished · ${p.score} / ${p.total}${a.id === 'build' ? ' first time' : ' correct'}` : `In progress · ${p.done} / ${p.total}`;
+    return `<button class="act" data-act="go" data-id="${a.id}">
+      <span class="num" style="background:${ACT_COLOURS[k]}">${k + 1}</span>
+      <h3>${esc(a.title)}</h3><p>${esc(a.desc)}</p><span class="prog">${prog}</span></button>`;
+  }).join('');
+  const side = TXT.side.map(a => {
+    let prog = '';
+    if (a.id === 'story') { const p = progressOf('story'); prog = p.done === 0 ? 'Not started' : p.finished ? `✓ Finished · ${p.score} / ${p.total} correct` : `In progress · ${p.done} / ${p.total}`; }
+    if (a.id === 'prac') { const n = pendingMistakes().length; prog = n ? `${n} ${n === 1 ? 'item' : 'items'} to practise` : 'Nothing to practise yet'; }
+    return `<button class="act" data-act="go" data-id="${a.id}"><h3>${a.icon} ${esc(a.title)}</h3><p>${esc(a.desc)}</p>${prog ? `<span class="prog">${prog}</span>` : ''}</button>`;
+  }).join('');
+  const chips = USES.map(u => `<span class="chip ${u.id}">${u.icon} ${esc(u.short)}</span>`).join('');
+  $('#home').innerHTML = `
+    <div class="hero"><span class="lvl">B2.2 · Grammar</span>
+      <h1 id="homeTitle"><span class="get">get</span>: one verb, five jobs</h1>
+      <p>${esc(TXT.homeSub)}</p><p class="aim">🎯 ${esc(TXT.aim)}</p>
+      <div class="chips" aria-label="The five uses">${chips}</div></div>
+    <div class="grid">${acts}</div>
+    <h2 class="section-title">Also in this app</h2>
+    <div class="side">${side}</div>
+    <div class="home-foot"><span>Your progress is saved on this device.</span>${resetBtn('all', 'Reset all progress', false)}</div>`;
+}
+
+function renderQuiz(){
+  const id = S.screen, A = S[id], k = TXT.acts.findIndex(a => a.id === id);
+  let body;
+  if (A.i >= A.order.length) { body = endCard(quizScore(id), A.order.length, id); setBar({ done:A.order.length, total:A.order.length, primary:MENU }); }
+  else {
+    const b = choiceBlock(ctxChoice());
+    body = `<div class="card">${b.prompt}${b.opts}${b.fb}</div>`;
+    setBar({ done:Object.keys(A.picks).length, total:A.order.length, primary:NEXT(!b.answered) });
+  }
+  $('#quiz').innerHTML = topbar(`${k + 1} · ${TXT.acts[k].title}`, id) + `<p class="instr">${esc(TXT.instr[id])}</p>` + body;
+}
+
+function renderBuild(){
+  const A = S.build;
+  let body;
+  if (A.i >= A.order.length) { body = endCard(buildScore(), BUILD.length, 'build'); setBar({ done:BUILD.length, total:BUILD.length, primary:MENU }); }
+  else { const b = buildBlock(ctxBuild()); body = `<div class="card">${b.html}</div>`; setBar(buildBar(b, Object.keys(A.res).length, BUILD.length)); }
+  $('#build').innerHTML = topbar('3 · Build it', 'build') + `<p class="instr">${esc(TXT.instr.build)}</p>` + body;
+}
+
+function renderStory(){
+  const A = S.story, finished = A.i >= GAPS.length;
+  let gi = 0, html = '<p>';
+  STORY.parts.forEach(p => {
+    if (typeof p === 'string') { html += p.startsWith('##') ? `</p><h3>${esc(p.slice(2))}</h3><p>` : esc(p); return; }
+    const k = gi++, pk = A.picks[k];
+    if (pk !== undefined) html += pk === p.a ? `<span class="gap ok">${esc(p.o[p.a])} <span aria-hidden="true">✓</span></span>`
+      : `<span class="gap no"><s>${esc(p.o[pk])}</s> ${esc(p.o[p.a])} <span aria-hidden="true">✗</span></span>`;
+    else if (k === A.i) html += `<span class="gap now" id="curGap">${k + 1}</span>`;
+    else html += `<span class="gap todo" aria-label="gap ${k + 1}">${k + 1}</span>`;
+  });
+  html += '</p>';
+  const text = `<div class="card story"><h2>${esc(STORY.title)}</h2><div class="story-box" id="storyBox" tabindex="0" aria-label="Diary text">${html}</div></div>`;
+  let body;
+  if (finished) { body = endCard(quizScore('story'), GAPS.length, 'story') + `<div style="margin-top:14px">${text}</div>`; setBar({ done:GAPS.length, total:GAPS.length, primary:MENU }); }
+  else {
+    const b = choiceBlock(ctxChoice());
+    body = `<div class="story-wrap">${text}<div class="story-side"><p class="label">Gap ${A.i + 1} of ${GAPS.length}</p>${b.opts}${b.fb}</div></div>`;
+    setBar({ done:Object.keys(A.picks).length, total:GAPS.length, primary:NEXT(!b.answered) });
+  }
+  $('#story').innerHTML = topbar('Review: Noor\'s diary', 'story') + `<p class="instr">${esc(TXT.instr.story)}</p>` + body;
+  // Keep the current gap in view inside the scrolling text box (the page itself does not move).
+  const cur = document.getElementById('curGap'), box = document.getElementById('storyBox');
+  if (box) {
+    if (cur) box.scrollTop = Math.max(0, cur.offsetTop - box.clientHeight / 3);
+    else if (storyBoxTop != null) box.scrollTop = storyBoxTop;
+    box.addEventListener('scroll', () => { storyBoxTop = box.scrollTop; }, { passive:true });
+  }
+}
+
+function renderPrac(){
+  const P = S.prac, pending = pendingMistakes();
+  let body;
+  if (P.queue.length && P.i < P.queue.length) {
+    const { kind } = parseKey(P.queue[P.i]);
+    const done = P.i + (kind === 'build' ? (P.res[P.queue[P.i]] ? 1 : 0) : (P.picks[P.queue[P.i]] !== undefined ? 1 : 0));
+    if (kind === 'build') { const b = buildBlock(ctxBuild()); body = `<div class="card"><p class="from">${esc(TXT.from.build)}</p>${b.html}</div>`; setBar(buildBar(b, done, P.queue.length)); }
+    else { const b = choiceBlock(ctxChoice()); body = `<div class="card"><p class="from">${esc(TXT.from[kind])}</p>${b.prompt}${b.opts}${b.fb}</div>`; setBar({ done, total:P.queue.length, primary:NEXT(!b.answered) }); }
+  } else if (P.queue.length) {
+    const fixedNow = P.queue.filter(k => P.fixed[k]).length;
+    body = `<div class="card done"><div class="big" aria-hidden="true">${fixedNow === P.queue.length ? '🏆' : '💪'}</div><h3>${fixedNow} / ${P.queue.length} fixed</h3>
+      <p>${pending.length ? `${pending.length} ${pending.length === 1 ? 'item is' : 'items are'} still waiting. Practise again, or come back later.` : 'You have fixed all your mistakes. Well done!'}</p></div>`;
+    setBar({ done:P.queue.length, total:P.queue.length, primary: pending.length ? { act:'pracStart', label:'Practise again' } : MENU });
+  } else if (pending.length) {
+    body = `<div class="card done"><div class="big" aria-hidden="true">🔁</div><h3>${pending.length} ${pending.length === 1 ? 'item' : 'items'} to practise</h3>
+      <p>They come from the activities and the diary. Tap Start when you are ready.</p></div>`;
+    setBar({ done:0, total:pending.length, primary:{ act:'pracStart', label:'Start →' } });
+  } else {
+    body = `<div class="card done"><div class="big" aria-hidden="true">✨</div><h3>Nothing to practise yet</h3>
+      <p>Do activities 1–3 or the diary first. Any item you get wrong will appear here.</p></div>`;
+    setBar({ done:0, total:0, primary:MENU });
+  }
+  $('#prac').innerHTML = topbar('Practise my mistakes', 'prac') + `<p class="instr">${esc(TXT.instr.prac)}</p>` + body;
+}
+
+function renderSpeak(){
+  const A = S.speak, c = SPEAK[A.order[A.i]], u = USES[c.u];
+  $('#speak').innerHTML = topbar('Speaking cards', null) + `<p class="instr">${esc(TXT.instr.speak)}</p>
+    <div class="speak-card ${u.id}"><span class="stripe" aria-hidden="true"></span>
+      <p class="q">${esc(c.q)}</p><p class="f">${esc(c.f)}</p><span class="chip ${u.id}">${u.icon} ${esc(u.short)}</span></div>`;
+  setBar({ done:A.i + 1, total:SPEAK.length, sec:[{ act:'speakPrev', icon:'←', label:'Back' }, { act:'speakShuffle', icon:'🔀', label:'Shuffle' }], primary:{ act:'speakNext', label:'Next →' } });
+}
+
+function renderGuide(){
+  setBar(null);
+  const uses = USES.map(u => `<div class="use ${u.id}"><span class="ic" aria-hidden="true">${u.icon}</span><h3>${esc(u.name)}</h3><p class="pat">${esc(u.pattern)}</p><p>${esc(u.explain)}<br><i>${hl(u.example)}</i></p></div>`).join('');
+  $('#guide').innerHTML = topbar('The five uses of get', null) + `<div class="uses">${uses}</div>
+    <div class="note"><h3>be or get?</h3>${GUIDE_NOTES.map(n => `<p>${esc(n)}</p>`).join('')}</div>
+    <div class="note"><h3>🇬🇧 British and 🇺🇸 American English</h3>${GUIDE_US.map(n => `<p>${esc(n)}</p>`).join('')}</div>
+    <div class="note"><h3>Spanish and Catalan speakers</h3>${GUIDE_L1.map(n => `<p>${esc(n)}</p>`).join('')}</div>
+    <div class="row" style="justify-content:center"><button class="btn" data-act="go" data-id="sort">Start activity 1 →</button></div>`;
+}
+
+// After an answer, make sure the feedback is visible above the bottom bar
+function revealFeedback(){
+  requestAnimationFrame(() => {
+    const fb = document.querySelector('.screen.active .feedback'); if (!fb) return;
+    const r = fb.getBoundingClientRect(), barH = $('#bar').hidden ? 0 : $('#bar').offsetHeight;
+    if (r.bottom > innerHeight - barH || r.top < 0) fb.scrollIntoView({ block:'nearest', behavior: reduced() ? 'auto' : 'smooth' });
+  });
+}
+
+/* ================= saving ================= */
+const store = {
+  load(){ try { return JSON.parse(localStorage.getItem(KEY)); } catch(e){ return null; } },
+  save(d){ try { localStorage.setItem(KEY, JSON.stringify(d)); } catch(e){} },
+  clear(){ try { localStorage.removeItem(KEY); } catch(e){} },
+};
+function save(){ if (S) store.save(S); }
+// Check a saved state before using it, and update saves from version 1.0. Anything that does not fit starts fresh.
+function validState(d){
+  try {
+    if (!d || d.v !== 1) return false;
+    const okOrder = (o, n) => Array.isArray(o) && o.length === n && new Set(o).size === n && o.every(x => Number.isInteger(x) && x >= 0 && x < n);
+    const obj = x => x && typeof x === 'object' && !Array.isArray(x);
+    if (!okOrder(d.sort.order, SORT.length) || !okOrder(d.state.order, STATE.length) || !okOrder(d.build.order, BUILD.length) || !okOrder(d.speak.order, SPEAK.length)) return false;
+    for (const k of ['sort','state','story']) if (!obj(d[k].picks) || !Number.isInteger(d[k].i)) return false;
+    if (!Number.isInteger(d.build.i) || !Number.isInteger(d.speak.i) || d.speak.i < 0 || d.speak.i >= SPEAK.length) return false;
+    if (!obj(d.story.opt) || !GAPS.every((g, k) => okOrder(d.story.opt[k], g.o.length))) return false;
+    if (!obj(d.state.opt)) d.state.opt = {};
+    Object.keys(d.state.opt).forEach(k => { if (!STATE[k] || !okOrder(d.state.opt[k], STATE[k].o.length)) delete d.state.opt[k]; });
+    const cleanBuild = (st, idxOf) => {
+      for (const f of ['placed','pool','res','tries']) if (!obj(st[f])) st[f] = {};
+      Object.keys(st.pool).forEach(k => { const n = BUILD[idxOf(k)]?.t.length; const pl = st.placed[k];
+        if (!okOrder(st.pool[k], n) || !Array.isArray(pl) || !pl.every(x => Number.isInteger(x) && x >= 0 && x < n) || new Set(pl).size !== pl.length) { delete st.pool[k]; delete st.placed[k]; delete st.res[k]; } });
+      st.wrong = !!st.wrong;
+    };
+    cleanBuild(d.build, k => +k);
+    // Practise my mistakes (added in version 1.1)
+    if (!obj(d.prac)) d.prac = freshPrac();
+    const P = d.prac;
+    const okKey = k => { const m = /^(sort|state|build|story):(\d+)$/.exec(k); if (!m) return false; return +m[2] < { sort:SORT.length, state:STATE.length, build:BUILD.length, story:GAPS.length }[m[1]]; };
+    if (!obj(P.fixed)) P.fixed = {};
+    Object.keys(P.fixed).forEach(k => { if (!okKey(k)) delete P.fixed[k]; });
+    if (!Array.isArray(P.queue) || !P.queue.every(okKey) || !Number.isInteger(P.i) || P.i < 0) Object.assign(P, freshPracRound());
+    for (const f of ['picks','opt']) if (!obj(P[f])) P[f] = {};
+    Object.keys(P.opt).forEach(k => { const { kind, i } = parseKey(k); const n = kind === 'state' ? STATE[i]?.o.length : kind === 'story' ? GAPS[i]?.o.length : 0; if (!okKey(k) || !okOrder(P.opt[k], n)) delete P.opt[k]; });
+    cleanBuild(P, k => parseKey(k).i);
+    if (!SCREEN_OF[d.screen]) d.screen = 'home';
+    return true;
+  } catch(e){ return false; }
+}
+
+/* ================= events ================= */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b || b.disabled) return;
+  const id = b.dataset.id, act = b.dataset.act;
+  if (act !== 'reset') resetArm = null;
+  let reveal = false, top = false;
+  switch (act) {
+    case 'go': go(id); return;
+    case 'pick': reveal = pick(+id); break;
+    case 'next': next(); top = true; break;
+    case 'place': placeTile(+id); break;
+    case 'unplace': unplaceTile(+id); break;
+    case 'check': checkBuild(); reveal = true; break;
+    case 'show': showBuild(); reveal = true; break;
+    case 'pracStart': startPrac(); top = true; break;
+    case 'speakNext': speakMove(1); break;
+    case 'speakPrev': speakMove(-1); break;
+    case 'speakShuffle': speakShuffle(); break;
+    case 'again': resetAct(id); top = true; break;
+    case 'reset':
+      if (resetArm !== id) { resetArm = id; render(); clearTimeout(resetTimer); resetTimer = setTimeout(() => { resetArm = null; render(); }, 4000); return; }
+      resetArm = null; clearTimeout(resetTimer);
+      if (id === 'all') resetAll(); else resetAct(id);
+      top = true; break;
+  }
+  render();
+  if (top) window.scrollTo(0, 0);
+  if (reveal) revealFeedback();
+});
+// Keyboard: 1–5 choose an answer, Enter = Next, arrows move through speaking cards
+document.addEventListener('keydown', e => {
+  if (e.altKey || e.ctrlKey || e.metaKey) return;
+  if (/^[1-9]$/.test(e.key)) { const o = document.querySelectorAll('.screen.active .opts .opt')[+e.key - 1]; if (o && !o.disabled) { o.click(); e.preventDefault(); } return; }
+  if (e.key === 'Enter' && !(document.activeElement && document.activeElement.closest('button'))) { const p = $('#bar .primary'); if (p && !p.disabled && !$('#bar').hidden) { p.click(); e.preventDefault(); } return; }
+  if (S.screen === 'speak' && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) { speakMove(e.key === 'ArrowRight' ? 1 : -1); render(); }
+});
+
+/* ================= start ================= */
+(function init(){
+  const saved = store.load();
+  S = validState(saved) ? saved : freshState();
+  go(S.screen);
+})();
+</script>
+</body>
+</html>
