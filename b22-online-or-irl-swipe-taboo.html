@@ -6,7 +6,7 @@
             2. Warm-up questions (pairs; whiteboard or phone)
             3. Swipe Taboo (pass-the-phone game for pairs or groups of 3–4)
             4. Solo practice (self-study flashcards at home)
-  Version:  1.0 · 2026-11-09
+  Version:  1.1 · 2026-11-12 (time-up screen can show the last card)
   Edit:     All words, sentences, questions and settings are in the CONTENT
             section at the top of the script. In example sentences, put the
             target word between *stars*. In warm-up questions, write a target
@@ -188,7 +188,8 @@ button.pill:hover{background:rgba(255,255,255,.32)}
 }
 @media (min-width:1600px){ html{font-size:136%} .menu,.wrap{max-width:720px}
   .item{padding:12px 16px;gap:4px} .item .w{font-size:1.45rem} .item .ex{font-size:1.12rem;line-height:1.35} .item .mean{font-size:1rem}
-  .slide-head h3{font-size:2rem} .slide-head p{font-size:1rem} }
+  .slide-head h3{font-size:2rem} .slide-head p{font-size:1rem}
+  .g-main{max-width:660px} .deck{max-height:820px;min-height:640px} }
 @media (max-height:760px) and (orientation:portrait){
   .card .photo{min-height:64px;padding:8px 14px}
   .card .photo .emo{font-size:2.2rem}
@@ -548,7 +549,7 @@ const CONTENT = {
     "Stuck? Swipe left or tap ✕ to pass. You have two passes in each turn.",
     "Someone said a forbidden word? Tap 🚨 and the card goes.",
     "The next card stays hidden until you tap \"Show next card\".",
-    "When the time is up, pass the phone to the next person."
+    "When the time is up, you can tap \"Show the last card\" to see the word. Then pass the phone to the next person."
   ],
   setupTip: "In a group of three or four, the people who are not guessing can be the \"taboo police\": they listen for forbidden words and tap 🚨. The whole group plays as one team, so try to beat your best score together.",
   options: {
@@ -614,7 +615,7 @@ function newGame(){
   S.g = {
     players: st.players, turns: st.turns, deck: st.deck, time: st.time,
     queue: shuffle(deckIds(st.deck)), player: 0, turn: 0, total: st.players * st.turns,
-    phase: 'handover', score: 0, turnScore: 0, matched: [], passed: [], taboo: [],
+    phase: 'handover', score: 0, turnScore: 0, matched: [], passed: [], taboo: [], missed: [], lastCard: null, showLast: false,
     card: null, passesLeft: CONTENT.passesPerTurn, timeLeft: st.time, cardsThisTurn: 0,
     cardStart: 0, hint: false, paused: false, last: 0
   };
@@ -623,7 +624,7 @@ function drawCard(){
   const g = S.g;
   if(!g.queue.length){
     /* recycle passed cards; if nothing left, the deck is finished */
-    const back = shuffle(g.passed.concat(g.taboo).filter(id => !g.matched.includes(id)));
+    const back = shuffle(g.passed.concat(g.taboo, g.missed).filter(id => !g.matched.includes(id)));
     g.queue = [...new Set(back)];
   }
   g.card = g.queue.shift() || null;
@@ -646,9 +647,14 @@ function cardDone(kind){             /* kind: 'match' | 'pass' | 'taboo' */
   if(kind === 'taboo'){ g.taboo.push(id); }
   g.cardsThisTurn++;
   g.card = null;
-  if(g.time === 0 && g.cardsThisTurn >= CONTENT.cardsPerUntimedTurn){ g.phase = 'timeup'; }
+  if(g.time === 0 && g.cardsThisTurn >= CONTENT.cardsPerUntimedTurn){ g.lastCard = null; g.phase = 'timeup'; }
   else g.phase = 'cover';
   return id;
+}
+function timeOutCard(){            /* the card on screen when time ran out: kept so it can be shown, and goes back in the deck */
+  const g = S.g; g.lastCard = g.card || null; g.showLast = false;
+  if(g.card){ g.missed.push(g.card); g.queue.push(g.card); }
+  g.card = null;
 }
 function revealNext(){
   const g = S.g; if(g.phase !== 'cover') return;
@@ -674,7 +680,7 @@ function tick(){
   const now = Date.now();
   if(g.phase === 'card' || g.phase === 'cover'){
     if(!g.paused){ g.timeLeft -= (now - g.last)/1000; }
-    if(g.timeLeft <= 0){ g.timeLeft = 0; g.card = null; g.phase = 'timeup'; closeMatch(); renderGame(); say("Time's up"); }
+    if(g.timeLeft <= 0){ g.timeLeft = 0; timeOutCard(); g.phase = 'timeup'; closeMatch(); renderGame(); say("Time's up"); }
   }
   g.last = now;
   if(g.phase === 'card' && !g.hint && !g.paused && (now - g.cardStart)/1000 >= CONTENT.hintAfterSeconds){ g.hint = true; renderGame(); }
@@ -810,14 +816,24 @@ function renderGame(){
         <button class="act love" data-act="match" aria-label="Match: they guessed it"><span class="c" aria-hidden="true">♥</span>Match</button>
       </div>`;
     attachSwipe($('#theCard'), dir => { cardDoneUI(dir > 0 ? 'match' : 'pass'); }, () => S.g.passesLeft > 0);
+  } else if(g.phase === 'timeup' && g.showLast && g.lastCard){
+    const c = CARD[g.lastCard];
+    M.innerHTML = `<div class="deck">${cardHtml(g.lastCard, {solo: `
+        <div class="lbl">The word was</div><div class="word">${esc(c.w)}</div>
+        <div class="taboo"><div class="lbl">Don't say</div><ul>${c.taboo.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div>
+        <div class="gapline">${markEx(c.ex)}</div>
+        <div class="lbl" style="text-transform:none;letter-spacing:0">This card goes back into the deck, so you may see it again.</div>`})}</div>
+      <div class="actions"><button class="btn big" data-act="hide-last">← Back</button></div>`;
+    focusIf(M.querySelector('.btn'));
   } else if(g.phase === 'timeup'){
     const last = g.turn + 1 >= g.total;
     M.innerHTML = `<div class="deck"><div class="cover">
       <div class="art" aria-hidden="true">⏰</div>
       <h3>${g.time === 0 ? 'End of your turn!' : "Time's up!"}</h3>
       <p>Player ${g.player + 1} got <b>${g.turnScore}</b> ${g.turnScore === 1 ? 'match' : 'matches'} in this turn.</p>
+      ${g.lastCard ? `<button class="btn" data-act="show-last" style="background:var(--paper);color:var(--love);box-shadow:inset 0 0 0 2px var(--love)">👀 Show the last card</button>` : ''}
       <button class="btn big" data-act="next-turn">${last ? 'See the results' : 'Next player'}</button></div></div>`;
-    focusIf(M.querySelector('.btn'));
+    focusIf(M.querySelector('[data-act="next-turn"]'));
   } else if(g.phase === 'end'){
     renderEnd(); show('end');
   }
@@ -851,7 +867,7 @@ function closeMatch(){
 function renderEnd(){
   const g = S.g;
   const list = ids => ids.length ? ids.map(id => { const c = CARD[id]; return `<div><b>${esc(c.emoji)} ${esc(c.w)}</b>${esc(c.m)}</div>`; }).join('') : '<div>None</div>';
-  const missed = [...new Set(g.passed.concat(g.taboo))].filter(id => !g.matched.includes(id));
+  const missed = [...new Set(g.passed.concat(g.taboo, g.missed))].filter(id => !g.matched.includes(id));
   const record = g.score > g.prevBest && g.prevBest > 0 ? '🎉 New best score!' : (g.prevBest ? `Your best: ${Math.max(g.prevBest, g.score)} ♥` : 'Play again and try to beat it!');
   $('#endPanel').innerHTML = `<div style="text-align:center"><div aria-hidden="true" style="font-size:2.6rem">💘</div>
       <div class="score-big">${g.score} ♥</div><p style="margin:.3rem 0 0">matches for the whole group</p><p style="margin:.2rem 0 0;font-weight:700">${esc(record)}</p></div>
@@ -962,7 +978,9 @@ document.addEventListener('click', e => {
         if(g.paused) g.pausedAt = Date.now(); else g.cardStart += Date.now() - (g.pausedAt || Date.now());
         closeMatch(); renderGame();
       } break; }
-    case 'next-turn': closeMatch(); nextTurn(); renderGame(); break;
+    case 'next-turn': closeMatch(); S.g.lastCard = null; S.g.showLast = false; nextTurn(); renderGame(); break;
+    case 'show-last': S.g.showLast = true; renderGame(); break;
+    case 'hide-last': S.g.showLast = false; renderGame(); break;
     case 'quit': stopGame(); renderSetup(); show('setup'); break;
     case 'go-solo': newSolo((S.solo && S.solo.deck) || 'easy'); renderSolo(); show('solo'); break;
     case 'solo-deck': newSolo(b.dataset.v); renderSolo(); break;
