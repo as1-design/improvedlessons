@@ -1,0 +1,1076 @@
+<!doctype html>
+<!--
+  Name:     Conflict & Legend · B2.2 vocabulary
+  Purpose:  Presents and practises the Vocabulary Bank "Conflict and warfare" and key words
+            from the King Arthur reading, linked to real headlines and to students' lives.
+            Play: 1 What does it mean here?  2 Headline or History?  3 Word forge  4 Stress sort.
+            Talk: Your life in conflict verbs (pair cards), Legend has it… (local legends),
+            How far from the battlefield? (whole-class discussion track).
+            Two modes: Class (teams) for the touch screen, with scores and thinking time,
+            and On my own for self-study, with Practise my mistakes.
+  Version:  1.0 · 2026-11-17
+  Edit:     All sentences, options, notes, cards and labels are in the CONTENT section at the
+            top of the script. Change the text there; nothing else needs editing.
+            Mini-format: [[word]] is the word in bold; ___ is the gap.
+            Progress is saved in this browser (key "b22conflict.v1"). Settings such as sound
+            and the Hurry-up length are saved separately ("b22conflict.prefs").
+  Credit:   Class of Coffee – with AI assistance
+-->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' data: blob:; connect-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Conflict &amp; Legend · B2.2 vocabulary</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>">
+<style>
+/* ================= tokens ================= */
+:root{
+  --bg:#F6F0E2; --paper:#FFFCF5; --ink:#1F2A2E; --ink-soft:#56605F; --line:#E2D7C0;
+  --green:#1E6B4A; --green-dark:#154D35; --green-bg:#E1F0E7;
+  --crimson:#A3262A; --crimson-bg:#FBE4E2;
+  --gold:#C8962E; --gold-bg:#FFF1CF;
+  --good:#16754A; --good-bg:#DDF3E6; --bad:#B42318; --bad-bg:#FDE3DF;
+  --mark:#FFE07A;
+  --head: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  --body: system-ui, -apple-system, "Segoe UI", Roboto, Verdana, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --r-s:10px; --r-m:16px; --r-l:24px;
+  --maxw:1000px; --bar-h:68px;
+  --shadow:0 2px 0 rgba(31,42,46,.10), 0 10px 24px rgba(31,42,46,.07);
+  --spring:cubic-bezier(.34,1.56,.64,1); --ease:cubic-bezier(.25,.46,.45,.94);
+}
+@media (min-width:1500px) and (min-height:800px){ html{font-size:21px} :root{--maxw:1400px; --bar-h:84px} }
+@media (max-height:500px) and (orientation:landscape){ :root{--bar-h:56px} }
+
+/* ================= base ================= */
+*{box-sizing:border-box}
+html{touch-action:manipulation;-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);
+  font:400 clamp(1rem,.95rem + .3vw,1.18rem)/1.5 var(--body);
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+body.has-bar{padding-bottom:calc(var(--bar-h) + env(safe-area-inset-bottom) + 8px)}
+main{flex:1;width:100%;max-width:var(--maxw);margin:0 auto;padding:clamp(10px,2vw,22px) 14px 24px}
+button{font:inherit;color:inherit;min-height:44px;cursor:pointer;border:0;background:none;-webkit-tap-highlight-color:transparent}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+button:disabled{cursor:default}
+input[type=text]{font:inherit;font-size:16px;min-height:44px;padding:8px 12px;border:2px solid var(--line);border-radius:var(--r-s);background:var(--paper);color:var(--ink);width:100%}
+h1,h2,h3{font-family:var(--head);line-height:1.15;margin:0;font-weight:700}
+p{margin:.4em 0}
+.screen{display:none}.screen.active{display:block}
+.enter{animation:pop .3s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.muted{color:var(--ink-soft)}
+.small{font-size:.88rem}
+
+/* ================= buttons ================= */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border-radius:999px;
+  background:var(--paper);border:2px solid var(--ink);font-weight:700;text-align:center;line-height:1.2}
+.btn:hover:not(:disabled){background:#fff}
+.btn.primary{background:var(--green);border-color:var(--green);color:#fff}
+.btn.primary:hover:not(:disabled){background:var(--green-dark)}
+.btn.warn{border-color:var(--crimson);color:var(--crimson)}
+.btn.ghost{border-color:var(--line)}
+.btn:disabled{opacity:.4}
+.btn.sm{min-height:40px;padding:6px 12px;font-size:.9rem}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* ================= top bar ================= */
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-bottom:12px}
+.top h2{font-size:clamp(1.15rem,1rem + 1vw,1.7rem);flex:1 1 220px}
+.top .tools{display:flex;flex-wrap:wrap;gap:6px}
+.icon-btn{min-width:44px;min-height:44px;border-radius:12px;border:2px solid var(--line);background:var(--paper);font-size:1.05rem;padding:0 10px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;background:var(--paper);border:2px solid var(--line);font-size:.88rem;font-weight:700}
+
+/* ================= home ================= */
+.hero{background:var(--paper);border-radius:var(--r-l);box-shadow:var(--shadow);padding:clamp(16px,3vw,30px);margin-bottom:16px;position:relative;overflow:hidden}
+.hero h1{font-size:clamp(1.7rem,1.2rem + 2.6vw,3rem)}
+.hero .kicker{font-weight:800;color:var(--crimson);letter-spacing:.04em;font-size:.9rem;text-transform:uppercase}
+.cando{margin-top:10px;padding:10px 14px;border-left:5px solid var(--green);background:var(--green-bg);border-radius:0 var(--r-s) var(--r-s) 0}
+.modes{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.mode{flex:1 1 200px;text-align:left;padding:12px 16px;border-radius:var(--r-m);border:3px solid var(--line);background:#fff}
+.mode b{display:block;font-size:1.05rem}
+.mode[aria-pressed=true]{border-color:var(--green);background:var(--green-bg)}
+.mode[aria-pressed=true] b::after{content:" ✓"}
+h3.sec{font-size:1.25rem;margin:18px 4px 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.tile{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;padding:14px 16px;border-radius:var(--r-m);background:var(--paper);box-shadow:var(--shadow);border:2px solid transparent;min-height:120px}
+.tile:hover{border-color:var(--line)}
+.tile .ic{font-size:1.6rem;line-height:1}
+.tile b{font-family:var(--head);font-size:1.15rem}
+.tile .prog{margin-top:auto;font-size:.85rem;font-weight:700;color:var(--green-dark)}
+.scorebar{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.team-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--paper);border:2px solid var(--line);font-weight:700}
+.team-chip .pts{font-family:var(--mono);font-size:1.05em}
+.team-chip.now{border-color:var(--ink);background:var(--gold-bg)}
+
+/* ================= setup ================= */
+.panel{background:var(--paper);border-radius:var(--r-l);box-shadow:var(--shadow);padding:clamp(14px,3vw,26px);margin-bottom:14px}
+.count-btns{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.count-btns button{min-width:64px;border-radius:12px;border:3px solid var(--line);background:#fff;font-weight:800;font-size:1.1rem}
+.count-btns button[aria-pressed=true]{border-color:var(--green);background:var(--green-bg)}
+.team-inputs{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.team-inputs label{display:flex;align-items:center;gap:8px;font-weight:700}
+.check{display:flex;align-items:center;gap:10px;margin-top:14px;font-weight:600}
+
+/* ================= play ================= */
+.turnbox{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;background:var(--paper);border-radius:var(--r-m);box-shadow:var(--shadow);padding:10px 14px;margin-bottom:12px}
+.turnbox .who{display:flex;flex-direction:column;gap:2px}
+.turnbox .round{font-size:.9rem;font-weight:700;color:var(--ink-soft)}
+.turnbox .team{font-family:var(--head);font-size:clamp(1.2rem,1rem + 1vw,1.8rem);font-weight:700}
+.final{display:inline-block;margin-left:6px;padding:2px 10px;border-radius:999px;background:var(--crimson);color:#fff;font-size:.8rem;font-weight:800;vertical-align:middle}
+#qt{display:flex;flex-direction:column;align-items:flex-end;gap:2px;min-width:150px}
+#qt .sw{font-family:var(--mono);font-size:clamp(1.8rem,1.4rem + 2vw,3rem);font-weight:700;line-height:1}
+#qt .cd{font-family:var(--mono);font-weight:800;color:var(--crimson);font-size:clamp(1.1rem,1rem + 1vw,1.6rem);line-height:1.1}
+#qt .cd.up{font-family:var(--body)}
+#qt .lab{font-size:.8rem;color:var(--ink-soft)}
+.qtctl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.qtctl .len{min-width:44px;border-radius:10px;border:2px solid var(--line);background:#fff;font-weight:700;font-size:.9rem}
+.qtctl .len[aria-pressed=true]{border-color:var(--crimson);color:var(--crimson)}
+
+.card{background:var(--paper);border-radius:var(--r-l);box-shadow:var(--shadow);padding:clamp(14px,3vw,28px);margin-bottom:12px}
+.card .count{font-size:.88rem;font-weight:700;color:var(--ink-soft);margin-bottom:6px}
+.instr{font-weight:600;margin:0 0 10px}
+.headline{font-family:var(--head);font-size:clamp(1.3rem,1.05rem + 1.6vw,2.3rem);line-height:1.25;margin:4px 0 6px}
+.src{font-size:.85rem;color:var(--ink-soft)}
+.src .tag{display:inline-block;padding:1px 8px;border-radius:999px;border:1.5px solid currentColor;font-weight:700;font-size:.78rem;margin-right:6px}
+mark.t{background:var(--mark);color:inherit;font-weight:800;padding:0 .15em;border-radius:4px}
+.gap{display:inline-block;min-width:4.5em;border-bottom:3px solid var(--ink);text-align:center;font-weight:800}
+.gap.ok{border-color:var(--good);color:var(--good)}
+.prompt-big{font-family:var(--head);font-size:clamp(1.6rem,1.2rem + 2vw,2.8rem);margin:4px 0}
+.prompt-big small{display:block;font-family:var(--body);font-size:1rem;font-weight:600;color:var(--ink-soft)}
+
+.step{margin-top:14px}
+.step h4{margin:0 0 8px;font-size:1rem}
+.opts{display:grid;grid-template-columns:1fr;gap:10px}
+.opts.cols{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+.opt{position:relative;display:flex;align-items:center;gap:10px;text-align:left;padding:12px 38px 12px 14px;border-radius:var(--r-m);border:3px solid var(--line);background:#fff;font-weight:600;min-height:56px}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt .key{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--bg);font-weight:800;font-size:.9rem}
+.opt .mk{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-weight:900;font-size:1.2rem}
+.opt .lab{min-width:0;overflow-wrap:anywhere}
+.opt.right{border-color:var(--good);background:var(--good-bg)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg);text-decoration:line-through}
+.opt.dim{opacity:.55}
+.opt:disabled{cursor:default}
+.syl{font-size:1.25rem;letter-spacing:.02em}
+.syl b{font-weight:900;text-decoration:underline;text-underline-offset:4px}
+.dots{display:block;font-size:.95rem;letter-spacing:.25em;color:var(--ink-soft)}
+
+.fb{margin-top:12px;padding:12px 16px;border-radius:var(--r-m);border:2px solid var(--line);background:#fff}
+.fb .verdict{font-weight:800}
+.fb.ok{border-color:var(--good)} .fb.ok .verdict{color:var(--good)}
+.fb.no{border-color:var(--bad)} .fb.no .verdict{color:var(--bad)}
+.fb .note{margin-top:6px}
+.fb .extra{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:.92rem}
+.fb .extra b{color:var(--green-dark)}
+.retry{margin-top:10px;font-weight:700;color:var(--crimson)}
+
+/* bottom bar: Previous and Next always in the same place */
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(246,240,226,.96);border-top:2px solid var(--line);
+  padding:8px max(14px, env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left))}
+#bar .in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:10px;min-height:calc(var(--bar-h) - 16px)}
+#bar .info{flex:1;font-size:.9rem;font-weight:700;color:var(--ink-soft)}
+#bar .btn{min-width:130px}
+@media (max-width:600px){ #bar .info{display:none} #bar .btn{flex:1;min-width:0} }
+
+/* end */
+.done{text-align:center}
+.done .big{font-size:3rem;line-height:1}
+.rank{list-style:none;padding:0;margin:12px auto;max-width:460px;text-align:left}
+.rank li{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--r-m);background:#fff;border:2px solid var(--line);margin-bottom:8px;font-weight:700}
+.rank li .pts{margin-left:auto;font-family:var(--mono);font-size:1.2rem}
+
+/* ================= talk ================= */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.scard{position:relative;text-align:left;padding:16px;border-radius:var(--r-m);background:#fff;border:3px solid var(--line);display:flex;flex-direction:column;gap:6px;min-height:150px}
+.scard .chunk{display:inline-block;align-self:flex-start;padding:2px 10px;border-radius:999px;background:var(--mark);font-weight:800;font-size:.9rem}
+.scard .q{font-weight:600}
+.scard .f{font-size:.92rem;color:var(--ink-soft)}
+.scard[aria-pressed=true]{border-color:var(--green);background:var(--green-bg)}
+.scard .sel{font-weight:800;color:var(--green-dark);font-size:.9rem}
+.ptimer{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0}
+.ptimer .clock{font-family:var(--mono);font-size:2rem;font-weight:700;min-width:4ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chips span{padding:6px 12px;border-radius:999px;background:#fff;border:2px solid var(--line);font-weight:600}
+.legend-pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:8px 0 12px}
+.legend-pick button{text-align:left;padding:12px 14px;border-radius:var(--r-m);border:3px solid var(--line);background:#fff;font-weight:700}
+.legend-pick button[aria-pressed=true]{border-color:var(--green);background:var(--green-bg)}
+.legend-pick button[aria-pressed=true]::after{content:" ✓"}
+.lbox{border-radius:var(--r-m);background:#fff;border:2px solid var(--line);padding:12px 16px;margin-top:10px}
+.lbox h4{margin:0 0 4px;font-size:.95rem;color:var(--crimson)}
+ol.steps{margin:6px 0 0;padding-left:1.4em}
+ol.steps li{margin:4px 0}
+
+/* track */
+.track{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+@media (max-width:640px){ .track{grid-template-columns:repeat(2,1fr)} }
+.zone{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:12px 8px;border-radius:var(--r-m);border:3px solid var(--line);background:#fff;font-weight:700;text-align:center;min-height:96px}
+.zone .zi{font-size:1.8rem;line-height:1}
+.zone[aria-pressed=true]{border-color:var(--ink);background:var(--gold-bg)}
+.zone .tagz{font-size:.8rem;font-weight:800}
+.zone.sugg{box-shadow:inset 0 0 0 3px var(--green)}
+.arrow{display:flex;justify-content:space-between;font-size:.85rem;font-weight:700;color:var(--ink-soft);margin-top:6px}
+
+/* confetti */
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50}
+.confetti i{position:absolute;top:-20px;width:10px;height:14px;border-radius:2px;animation:fall 1.6s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+
+/* ================= signature footer (Class of Coffee, unchanged) ================= */
+.coc-footer{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:4px 16px; padding:7px 20px;
+  background:var(--coc-tan,#E6C496); color:var(--coc-coffee-dark,#5A2D0C);
+  font-family:var(--coc-body,'Nunito','Segoe UI',Verdana,sans-serif); font-size:13px; line-height:1.4;
+}
+.coc-footer__brand{ display:flex; align-items:center; gap:10px; font-weight:600; }
+.coc-footer__mark{ width:30px; height:30px; flex:none; }
+.coc-footer a{ color:inherit; text-decoration:underline; text-underline-offset:3px;
+  display:inline-flex; align-items:center; min-height:40px; padding:0 4px; } /* 40 px tap target */
+.coc-footer a:focus-visible{ outline:2px solid var(--coc-coffee-dark,#5A2D0C); outline-offset:3px; border-radius:4px; }
+body.hide-footer .coc-footer{display:none}
+
+/* whiteboard: no text below 18 px */
+@media (min-width:1500px) and (min-height:800px){
+  .tile .prog,.src,.src .tag,#qt .lab,.small,.count,.turnbox .round,.zone .tagz,.final,.arrow{font-size:18px} }
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main id="app">
+  <section class="screen" id="home"></section>
+  <section class="screen" id="setup"></section>
+  <section class="screen" id="play"></section>
+  <section class="screen" id="track"></section>
+  <section class="screen" id="cards"></section>
+  <section class="screen" id="legend"></section>
+</main>
+<div id="bar" hidden><div class="in"><span class="info" id="barInfo"></span>
+  <button class="btn" data-act="prev" id="prevBtn">← Previous</button>
+  <button class="btn primary" data-act="next" id="nextBtn">Next →</button></div></div>
+<div class="sr" aria-live="polite" id="live"></div>
+
+<footer class="coc-footer">
+  <span class="coc-footer__brand">
+    <svg class="coc-footer__mark" xmlns="http://www.w3.org/2000/svg" viewBox="4 4 48 48" aria-hidden="true" focusable="false"><path d="M42.57 20.25A16.5 16.5 0 1 0 42.57 35.75L38.77 33.73A12.2 12.2 0 1 1 38.77 22.27Z" fill="#EDE3D6"/><path d="M42.57 20.25A16.5 16.5 0 1 0 42.57 35.75L40.89 34.85A14.6 14.6 0 1 1 40.89 21.15Z" fill="#D9C8B2"/><path d="M48.31 17.2A23 23 0 1 0 48.31 38.8A3.25 3.25 0 0 0 42.57 35.75A16.5 16.5 0 1 1 42.57 20.25A3.25 3.25 0 0 0 48.31 17.2Z" fill="#A2521A" stroke="#5A2D0C" stroke-width="1.8" stroke-linejoin="round"/><circle cx="28" cy="28" r="12.2" fill="#744823" stroke="#5A3517" stroke-width="1"/><path d="M32.5 22.64A7.0 7.0 0 1 0 32.5 33.36L32.64 32.21A5.5 5.5 0 1 1 32.64 23.79Z" fill="#F3E2BF" stroke="#F3E2BF" stroke-width="0.7" stroke-linejoin="round"/></svg>
+    <span>Class of Coffee – with AI assistance</span>
+  </span>
+  <a href="https://classofcoffee.com">classofcoffee.com</a>
+</footer>
+
+<script>
+/* ================= CONTENT (edit here) ================= */
+// Mini-format inside sentences: [[word]] = the word in bold; ___ = the gap.
+// In every question, "o" is the list of options (shown in this order, never shuffled)
+// and "a" is the number of the right option, counting from 0.
+
+const TXT = {
+  title: 'Conflict & Legend',
+  kicker: 'B2.2 · Vocabulary · Conflict and warfare + King Arthur',
+  intro: 'Practise the words for conflict and warfare, and some useful words from the King Arthur texts. You will meet them in history, in real headlines and in your own life.',
+  cando: 'I can understand conflict vocabulary in history and in the news, and use it to talk about my own life.',
+  modes: {
+    teams: { name: 'Class (teams)', desc: 'For the classroom screen. Teams take turns, with points and thinking time.' },
+    solo:  { name: 'On my own', desc: 'For self-study. No points and no timer. Your mistakes come back later.' },
+  },
+  secPlay: 'Play', secTalk: 'Talk', secPrac: 'Practise',
+  teamPresets: [
+    { name: 'Dragons', icon: '🐉' }, { name: 'Knights', icon: '🛡️' },
+    { name: 'Rebels',  icon: '✊' }, { name: 'Wizards', icon: '🧙' },
+  ],
+  setupTitle: 'Set up the teams',
+  setupHow: 'Choose how many teams are playing. You can change the names.',
+  doubleLabel: 'Double points in the final round of each game',
+  sourceTags: { news: 'News', older: 'Older news', book: 'Coursebook' },
+  hurryHelp: 'Hurry up starts a countdown. Space pauses. H also starts Hurry up.',
+};
+
+const ACTS = [
+  { id: 'mean', icon: '📰', title: 'What does it mean here?',
+    blurb: 'Real headlines and sentences. Choose what the word in bold means.',
+    instr: 'Read the sentence. What does the word in bold mean here?' },
+  { id: 'hist', icon: '📜', title: 'Headline or History?',
+    blurb: 'Fill the gap. Then decide: is it from the King Arthur texts or from the news?',
+    instr: 'Step 1: choose the missing word.', instr2: 'Step 2: where does this line come from?' },
+  { id: 'forge', icon: '⚒️', title: 'Word forge',
+    blurb: 'Build new words from the words you know.',
+    instr: 'Choose the correct word.' },
+  { id: 'stress', icon: '🗣️', title: 'Stress sort',
+    blurb: 'Where is the stress? Choose the right pattern.',
+    instr: 'Which syllable is stressed? ● shows the stressed syllable.' },
+];
+
+// The four zones of the discussion track, from the battlefield to everyday life.
+const ZONES = [
+  { icon: '⚔️', name: 'On the battlefield' },
+  { icon: '🏟️', name: 'Sport and games' },
+  { icon: '📰', name: 'News and public life' },
+  { icon: '🏠', name: 'Everyday life' },
+];
+
+// 1 · What does it mean here?  Ordered from sport and everyday news to real conflicts.
+// src: where the sentence comes from · kind: news | older | book · zone: 0–3 (see ZONES)
+const MEANING = [
+  { t: 'Barcelona tries to regroup after consecutive [[defeats]] in Champions League and Spanish league clasico',
+    src: 'AP headline · 26 October 2026', kind: 'news', zone: 1,
+    o: ['matches the team lost', 'times when the soldiers ran away', 'matches the team refused to play'], a: 0,
+    note: 'In sport, a defeat is a match you lose. The verb works the same way: PSG defeated Barcelona 4–2.',
+    us: 'This is an American (AP) headline: "Barcelona tries", with a singular verb. British reports often treat a team as plural: "Barcelona try".' },
+  { t: 'Barcelona restore three-point lead with comeback [[victory]]',
+    src: 'Al Jazeera live report · 8 November 2026', kind: 'news', zone: 1,
+    o: ['an agreement to stop playing', 'a win after the team had been losing', 'a win in a war'], a: 1,
+    note: 'A victory is a win. A comeback victory is a win after being behind. The adjective is victorious.',
+    us: 'Here the verb is plural ("Barcelona restore"), which is typical of British English.' },
+  { t: 'KTLA traffic reporter Ginger Chan said the fire [[broke out]] at a recycling facility',
+    src: 'Tasnim News, on a fire in Los Angeles · 11 November 2026', kind: 'news', zone: 2,
+    o: ['was put out quickly', 'escaped from the building', 'started suddenly'], a: 2,
+    note: 'Fires, wars, fights and diseases break out: they start suddenly.',
+    l1: 'In Spanish you might say "se declaró un incendio", and in Catalan "es va declarar un incendi". In English, a fire breaks out. It is never "declared".' },
+  { t: 'The new princess has [[captured]] the imagination of the public.',
+    src: 'Vocabulary Bank 3a', kind: 'book', zone: 2,
+    o: ['taken people prisoner', 'made people very interested in her', 'taken photos of people'], a: 1,
+    note: 'If something captures your imagination, it makes you very interested and excited.' },
+  { t: 'I read the instructions three times, but they completely [[defeated]] me.',
+    src: 'Vocabulary Bank 3a', kind: 'book', zone: 3,
+    o: ['I could not understand them at all', 'I won an argument about them', 'I followed them very easily'], a: 0,
+    note: 'If something defeats you, it is too difficult for you to understand or do.' },
+  { t: 'A crisis has [[blown up]] over the new education policy.',
+    src: 'Vocabulary Bank 3a', kind: 'book', zone: 2,
+    o: ['has been solved quickly', 'has exploded with a bomb', 'has suddenly become serious'], a: 2,
+    note: 'A crisis or a row (an argument) blows up when it suddenly becomes serious and everyone notices it.' },
+  { t: 'Judge orders former Binance CEO Changpeng Zhao to "[[surrender]]" Canadian passport',
+    src: 'Blockworks headline · an older story', kind: 'older', zone: 2,
+    o: ['admit that he had lost a fight', 'give it to the authorities', 'destroy it'], a: 1,
+    note: 'To surrender a passport, a weapon or a ticket means to give it to someone in authority because you must.',
+    l1: 'In Catalan and Spanish this is "entregar", not "rendir-se" or "rendirse". Surrender can mean both in English.' },
+  { t: 'The flood water took a long time to [[retreat]] from the streets.',
+    src: 'Vocabulary Bank 3a', kind: 'book', zone: 3,
+    o: ['to go back down', 'to attack the houses', 'to be cleaned'], a: 0,
+    note: 'Water, glaciers and armies retreat: they move back.' },
+  { t: 'He [[declared]] that he was in love with her.',
+    src: 'Vocabulary Bank 3a', kind: 'book', zone: 3,
+    o: ['wrote it on an official form', 'started a war against her', 'said it clearly and openly'], a: 2,
+    note: 'To declare something is to say it clearly, often in public. Compare: to declare war.' },
+  { t: 'The army [[released]] most of the rebel prisoners.',
+    src: 'Vocabulary Bank 2a', kind: 'book', zone: 0,
+    o: ['let them go free', 'took them prisoner', 'moved them to another prison'], a: 0,
+    note: 'To release prisoners is to let them go. Metaphorical uses: the police released details; the band released a new album.' },
+  { t: 'A [[ceasefire]] in a devastated Ukrainian city holds for its first 30 hours, officials say',
+    src: 'AP headline · 28 October 2026', kind: 'news', zone: 0,
+    o: ['a fire that someone started on purpose', 'a fire that destroys a whole city', 'an agreement to stop fighting for a time'], a: 2,
+    note: 'A ceasefire is an agreement to stop fighting, usually for a limited time. "Holds" means it continues to work.' },
+  { t: 'Kherson braces for return of war as localised Russia-Ukraine [[truce]] ends',
+    src: 'Al Jazeera headline · 1 November 2026', kind: 'news', zone: 0,
+    o: ['a temporary agreement to stop fighting', 'a sudden, illegal change of government', 'a large group of soldiers'], a: 0,
+    note: 'A truce is very similar to a ceasefire. To brace for something is to prepare for something difficult.',
+    us: '"Localised" is the British spelling. American English writes "localized".' },
+];
+
+// 2 · Headline or History?  s: 0 = from the King Arthur texts, 1 = from the news.
+const SOURCES = ['From the King Arthur texts', 'From the news'];
+const HISTORY = [
+  { t: 'As a boy, his future as king had been ___ …', o: ['foretold', 'forgotten', 'forbidden'], a: 0, s: 0,
+    src: 'The story of King Arthur (coursebook)', note: 'Foretold = said before it happened, as a prediction.' },
+  { t: 'Barcelona tries to regroup after consecutive ___ in Champions League and Spanish league clasico',
+    o: ['victories', 'defeats', 'ceasefires'], a: 1, s: 1,
+    src: 'AP headline · 26 October 2026', note: 'A team regroups after losing, so the word is defeats.' },
+  { t: '… the sword out of a huge stone in which it had been ___ by the magician Merlin.',
+    o: ['captured', 'released', 'confined'], a: 2, s: 0,
+    src: 'The story of King Arthur (coursebook)', note: 'Confined = kept inside a small space.' },
+  { t: '… the fire ___ at a recycling facility …', o: ['broke down', 'broke out', 'broke up'], a: 1, s: 1,
+    src: 'Tasnim News · 11 November 2026', note: 'A fire breaks out. Things break down (a car), and couples break up.' },
+  { t: '… while he was away at battle, she ___ him with one of his knights, Sir Lancelot.',
+    o: ['betrayed', 'defeated', 'surrendered'], a: 0, s: 0,
+    src: 'The story of King Arthur (coursebook)', note: 'Betray = be disloyal to someone who trusts you. The noun is betrayal.' },
+  { t: 'A ___ in a devastated Ukrainian city holds for its first 30 hours, officials say',
+    o: ['revolution', 'casualty', 'ceasefire'], a: 2, s: 1,
+    src: 'AP headline · 28 October 2026', note: 'A ceasefire holds when both sides keep to it.' },
+  { t: 'But it\'s really a myth ___ as history …', o: ['surrendering', 'masquerading', 'retreating'], a: 1, s: 0,
+    src: '… and the truth behind it (coursebook)', note: 'Masquerade as = pretend to be something you are not.' },
+  { t: 'Over 200 years later, after the Normans ___ Britain in 1066 …', o: ['invaded', 'released', 'declared'], a: 0, s: 0,
+    src: '… and the truth behind it (coursebook)', note: 'Invade = enter a country by force with an army.' },
+  { t: 'Barcelona restore three-point lead with comeback ___', o: ['treaty', 'victory', 'siege'], a: 1, s: 1,
+    src: 'Al Jazeera live report · 8 November 2026', note: 'A comeback victory is a win after being behind.' },
+  { t: 'Geoffrey had an expert way of mixing myth with fact, thus ___ reality …', o: ['looting', 'shelling', 'blurring'], a: 2, s: 0,
+    src: '… and the truth behind it (coursebook)', note: 'Blur = make something less clear, so it is hard to see where one thing ends and another begins.' },
+  { t: 'Kherson braces for return of war as localised Russia-Ukraine ___ ends', o: ['truce', 'rebellion', 'survivor'], a: 0, s: 1,
+    src: 'Al Jazeera headline · 1 November 2026', note: 'A truce is a temporary agreement to stop fighting.' },
+  { t: '… Henry VII\'s eldest son was baptized as Prince Arthur, to ___ a new age.', o: ['herald', 'loot', 'shell'], a: 0, s: 0,
+    src: '… and the truth behind it (coursebook)', note: 'Herald = announce or be a sign that something new is coming.',
+    us: 'The coursebook writes "baptized". Both British and American English use -ize; British English also accepts "baptised".' },
+];
+
+// 3 · Word forge.  role: what to build from the base word.
+const FORGE = [
+  { base: 'victory', role: 'the adjective', o: ['victorical', 'victorious', 'victoryful'], a: 1, note: 'A victorious army has won.' },
+  { base: 'conquer', role: 'the abstract noun', o: ['conquest', 'conquerment', 'conquery'], a: 0, note: 'The Norman Conquest of 1066.',
+    l1: 'Catalan conquesta, Spanish conquista: English has no final vowel.' },
+  { base: 'history', role: 'the person', o: ['historic', 'historian', 'historist'], a: 1,
+    note: 'A historian studies history. Historic is an adjective: a historic day (an important one).' },
+  { base: 'hero', role: 'the adjective', o: ['heroful', 'heroish', 'heroic'], a: 2, note: 'Arthur is described as a heroic British general.' },
+  { base: 'war', role: 'the person', o: ['warman', 'warrior', 'warer'], a: 1, note: 'Warrior is used for fighters in history and legend. Today we usually say soldier.' },
+  { base: 'myth', role: 'the adjective', o: ['mythical', 'mythous', 'mythful'], a: 0, note: 'A mythical superstar. Mythic is also possible.' },
+  { base: 'betray', role: 'the abstract noun', o: ['betrayment', 'betrayance', 'betrayal'], a: 2, note: 'Guinevere\'s betrayal of Arthur.',
+    l1: 'Catalan traïció, Spanish traición. The English noun comes from the verb: betray → betrayal.' },
+  { base: 'legend', role: 'the adjective', o: ['legendous', 'legendary', 'legendish'], a: 1, note: 'The legendary King Arthur.' },
+  { base: 'real', role: 'the abstract noun', o: ['realhood', 'realment', 'reality'], a: 2, note: 'Geoffrey blurred myth and reality.' },
+  { base: 'conquer', role: 'the person', o: ['conqueror', 'conquerist', 'conquerant'], a: 0,
+    note: 'Jaume I el Conqueridor is James I the Conqueror in English. The ending is -or, not -er.' },
+  { base: 'rebel', role: 'the noun for the event', o: ['rebelment', 'rebellion', 'rebelity'], a: 1, note: 'A rebellion is an attempt to change the government using violence. Note the double l.' },
+  { base: 'survive', role: 'the person', o: ['survivant', 'survivist', 'survivor'], a: 2,
+    note: 'Survivors are people who stay alive.', l1: 'Catalan supervivent, Spanish superviviente, French survivant. In English: survivor.' },
+];
+
+// 4 · Stress sort.  syl: the syllables · s: the stressed syllable, counting from 0 · say: what "Hear it" reads.
+const STRESS = [
+  { say: 'ceasefire', syl: ['cease', 'fire'], s: 0 },
+  { say: 'civilians', syl: ['ci', 'vil', 'ians'], s: 1 },
+  { say: 'revolution', syl: ['rev', 'o', 'lu', 'tion'], s: 2,
+    l1: 'Catalan revolució and Spanish revolución stress the last syllable. English stresses -lu-.' },
+  { say: 'casualties', syl: ['cas', 'u', 'al', 'ties'], s: 0 },
+  { say: 'survivors', syl: ['sur', 'vi', 'vors'], s: 1 },
+  { say: 'a rebel', label: 'a rebel (noun)', syl: ['reb', 'el'], s: 0,
+    note: 'Many two-syllable words that are both a noun and a verb stress the noun at the start: a REBel.' },
+  { say: 'to rebel', label: 'to rebel (verb)', syl: ['re', 'bel'], s: 1,
+    note: '…and the verb at the end: to reBEL. Compare a REcord / to reCORD.' },
+  { say: 'refugees', syl: ['ref', 'u', 'gees'], s: 2,
+    us: 'In American English you also hear the stress at the start: REF-u-gees.' },
+  { say: 'rebellion', syl: ['re', 'bel', 'lion'], s: 1 },
+  { say: 'treaty', syl: ['trea', 'ty'], s: 0 },
+  { say: 'historian', syl: ['his', 'tor', 'i', 'an'], s: 1 },
+  { say: 'conquest', syl: ['con', 'quest'], s: 0 },
+];
+
+// Talk A · Your life in conflict verbs (pairs choose three).
+const CARDS = [
+  { chunk: 'capture your imagination', q: 'What captured your imagination when you were a child? A book, a film, a place or a person?', f: 'Does it still capture your imagination today? Why or why not?' },
+  { chunk: 'defeat someone', q: 'Think of a form, an app, a recipe or some instructions that completely defeated you. What happened?', f: 'Did you ask for help, or did you give up?' },
+  { chunk: 'a row blows up', q: 'Have you ever seen a row blow up in a group chat? What was it about? You don\'t need to give names.', f: 'How did it end?' },
+  { chunk: 'retreat from a plan', q: 'Tell your partner about a time you retreated from a plan at the last minute. Why did you change your mind?', f: 'Were you glad you did?' },
+  { chunk: 'a crisis breaks out', q: 'Describe a small crisis that broke out at home, at work or on holiday. How did you deal with it?', f: 'What would you do differently now?' },
+  { chunk: 'surrender something', q: 'What would you surrender to have one more free afternoon a week? Your phone? Your car? Something else?', f: 'What would you do with that afternoon?' },
+];
+const CARDS_TXT = {
+  title: 'Your life in conflict verbs',
+  how: ['Work in pairs.', 'Choose three cards.', 'Take one minute to plan what you will say.', 'Ask each other the questions. Use the words in yellow in your answers.'],
+  max: 3,
+};
+
+// Talk B · Legend has it…  Facts checked against sources on 17 November 2026.
+const LEGENDS = [
+  { id: 'jordi', icon: '🐉', name: 'Sant Jordi and the dragon',
+    says: 'In the most popular version, a dragon terrorised the town of Montblanc, near Tarragona. Sant Jordi killed it, and a bush of red roses grew where its blood fell.',
+    know: 'This is why people in Catalonia give roses on Sant Jordi\'s Day, 23 April.' },
+  { id: 'guifre', icon: '🛡️', name: 'Guifré el Pelós and the four bars',
+    says: 'The Frankish king dipped his fingers in the wounded count\'s blood and drew four red bars on his golden shield.',
+    know: 'Guifré was Count of Barcelona until 897. The story of the four bars first appears in writing in the mid-16th century, more than 600 years after his death.' },
+  { id: 'jaume', icon: '🦇', name: 'Jaume I and the bat',
+    says: 'During the conquest of Valencia in 1238, a bat woke the king\'s camp and warned them of a surprise attack.',
+    know: 'Some historians think the bat on Valencia\'s coat of arms developed from the dragon on the royal helmet. The bat became an official part of the coat of arms in the 17th century.' },
+  { id: 'own', icon: '🌍', name: 'A legend from anywhere you know',
+    says: 'Choose a legend from your town, your family or another country.',
+    know: 'Think about what the legend says and what people really know about it.' },
+];
+const LEGEND_TXT = {
+  title: 'Legend has it…',
+  how: ['Work in pairs or small groups.', 'Choose one legend.', 'Take one minute to plan.', 'Tell the story to another group. Answer the three questions below.'],
+  questions: ['What does the legend say?', 'What do we actually know?', 'How do you think the story spread, and why do people still tell it?'],
+  lang: ['Legend has it that …', 'It was foretold that …', 'He was betrayed by …', 'The story propelled him from … to …', 'It\'s a myth masquerading as history.', 'It blurs fact and fiction.', 'There are no contemporary sources.', '… to herald a new age.'],
+};
+
+const TRACK_TXT = {
+  title: 'How far from the battlefield?',
+  how: 'Discuss as a class. Where does this use of the word belong? Tap a zone, then compare with our suggestion.',
+  sugg: 'Our suggestion',
+  caveat: 'Some sentences could fit more than one zone. Explain your choice.',
+};
+
+const SETTINGS = { hurryLens: [20, 10, 5], planSecs: 60 };
+
+/* ================= state ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+const fmt = s => esc(s).replace(/\[\[(.+?)\]\]/g, '<mark class="t">$1</mark>');
+const BANK = { mean: MEANING, hist: HISTORY, forge: FORGE, stress: STRESS };
+const PARTS = { mean: ['m'], hist: ['w', 's'], forge: ['f'], stress: ['st'] };
+
+function freshProg(){ const p = {}; ACTS.forEach(a => p[a.id] = { i: 0, rec: {} }); return p; }
+function freshTeams(n = 2){
+  return { n, names: TXT.teamPresets.slice(0, 4).map(t => t.name), icons: TXT.teamPresets.map(t => t.icon), scores: [0, 0, 0, 0], double: true, set: false };
+}
+function freshState(){
+  return { v: 1, mode: 'solo', screen: 'home', act: 'mean',
+    prog: { solo: freshProg(), teams: freshProg() },
+    teams: freshTeams(), mist: {}, prac: null,
+    talk: { chosen: [], legend: null, track: { i: 0, pick: {}, shown: {} } } };
+}
+let S = null;
+let prefs = { sound: true, hurry: 10 };
+let resetArm = null;          // which reset button is waiting for a second tap
+let lastDrawn = '';           // used to animate only new screens and questions
+
+/* ================= logic ================= */
+// Option list and right answer for one part of one item.
+function partInfo(act, i, part){
+  const it = BANK[act][i];
+  if (part === 's') return { n: SOURCES.length, a: it.s };
+  if (part === 'st') return { n: it.syl.length, a: it.s };
+  return { n: it.o.length, a: it.a };
+}
+const P = () => S.prog[S.mode];                    // progress for the current mode
+const isPrac = () => S.screen === 'prac';
+function store(){ return isPrac() ? S.prac : P()[S.act]; }
+function curAct(){ return isPrac() ? S.prac.queue[S.prac.i]?.act : S.act; }
+function curIdx(){ return isPrac() ? S.prac.queue[S.prac.i]?.i : P()[S.act].i; }
+function recKey(){ return isPrac() ? S.prac.i : P()[S.act].i; }
+
+// Teams: how many questions are played so every team answers the same number.
+function playable(act){ const len = BANK[act].length; if (S.mode !== 'teams') return len; const n = S.teams.n; return Math.floor(len / n) * n; }
+function rounds(act){ return Math.floor(playable(act) / S.teams.n); }
+function teamOf(q){ return q % S.teams.n; }
+function roundOf(q){ return Math.floor(q / S.teams.n); }
+function isFinal(act, q){ return S.mode === 'teams' && S.teams.double && roundOf(q) === rounds(act) - 1; }
+
+function getRec(k){ const st = store(); st.rec[k] = st.rec[k] || {}; return st.rec[k]; }
+function partDone(r, part){ return !!(r[part] && r[part].done); }
+function itemDone(act, r){ return PARTS[act].every(p => partDone(r, p)); }
+function activePart(act, r){ return PARTS[act].find(p => !partDone(r, p)); }
+
+function pick(part, o){
+  const act = curAct(), i = curIdx(); if (act == null) return;
+  const k = recKey(), r = getRec(k);
+  if (activePart(act, r) !== part) return;
+  const pr = r[part] = r[part] || { p: [], done: false, pts: 0, late: false };
+  if (pr.done || pr.p.includes(o)) return;
+  const { n, a } = partInfo(act, i, part);
+  pr.p.push(o);
+  const teams = S.mode === 'teams' && !isPrac();
+  if (teams) pr.late = pr.late || qtTimeUp();
+  if (o === a){
+    pr.done = true;
+    if (teams){ pr.pts = pr.late ? 0 : (pr.p.length === 1 ? 2 : 1) * (isFinal(act, k) ? 2 : 1); S.teams.scores[teamOf(k)] += pr.pts; }
+    sfx.good();
+  } else {
+    sfx.bad();
+    if (pr.p.length >= 2 || n <= 2){ pr.done = true; pr.pts = 0; }
+  }
+  // mistakes: in On my own mode, a wrong first try puts the item in Practise my mistakes
+  if (S.mode === 'solo' && !isPrac() && pr.p[0] !== a) S.mist[`${act}:${i}`] = 1;
+  if (itemDone(act, r)){
+    if (teams) qtStop();
+    if (isPrac()){ const clean = PARTS[act].every(p => r[p].p[0] === partInfo(act, i, p).a); if (clean) delete S.mist[`${act}:${i}`]; }
+  }
+  save();
+}
+
+function next(){
+  if (isPrac()){ const pr = S.prac; if (pr.i < pr.queue.length && !itemDone(curAct(), getRec(pr.i))) return; pr.i = Math.min(pr.i + 1, pr.queue.length); save(); return; }
+  const st = P()[S.act]; const len = playable(S.act);
+  if (st.i < len && !itemDone(S.act, getRec(st.i))) return;
+  st.i = Math.min(st.i + 1, len); save();
+}
+function prev(){ const st = isPrac() ? S.prac : P()[S.act]; st.i = Math.max(0, st.i - 1); save(); }
+function reviewFromStart(){ P()[S.act].i = 0; save(); }
+function firstOpen(act){ const st = P()[act], len = playable(act); for (let q = 0; q < len; q++) if (!itemDone(act, st.rec[q] || {})) return q; return len; }
+
+function scoreSolo(act){
+  const st = P()[act]; let n = 0;
+  for (let q = 0; q < BANK[act].length; q++){ const r = st.rec[q]; if (r && itemDone(act, r) && PARTS[act].every(p => r[p].p[0] === partInfo(act, q, p).a)) n++; }
+  return n;
+}
+function progressOf(act){
+  const st = P()[act], len = playable(act);
+  let done = 0; for (let q = 0; q < len; q++) if (st.rec[q] && itemDone(act, st.rec[q])) done++;
+  return { done, len };
+}
+function mistakeList(){ return Object.keys(S.mist).map(k => { const [act, i] = k.split(':'); return { act, i: +i }; }).filter(x => BANK[x.act] && BANK[x.act][x.i]); }
+function startPrac(){ const list = mistakeList(); for (let j = list.length - 1; j > 0; j--){ const r = Math.floor(Math.random() * (j + 1)); [list[j], list[r]] = [list[r], list[j]]; } S.prac = { queue: list, i: 0, rec: {} }; S.screen = 'prac'; save(); }
+
+function setMode(m){ S.mode = m; save(); }
+function setTeamsCount(n){ S.teams.n = n; save(); }
+function newTeamGame(){ S.prog.teams = freshProg(); S.teams.scores = [0, 0, 0, 0]; S.teams.set = true; qtReset(); save(); }
+function resetAct(act){ P()[act] = { i: 0, rec: {} }; if (S.mode === 'teams') recountScores(); qtReset(); save(); }
+function recountScores(){
+  const sc = [0, 0, 0, 0];
+  ACTS.forEach(a => { const st = S.prog.teams[a.id]; Object.keys(st.rec).forEach(q => PARTS[a.id].forEach(p => { const pr = st.rec[q][p]; if (pr) sc[teamOf(+q)] += pr.pts || 0; })); });
+  S.teams.scores = sc;
+}
+function resetAll(){ const keepPrefs = prefs; S = freshState(); prefs = keepPrefs; qtReset(); save(); }
+
+/* ================= thinking time (Teams mode only) ================= */
+// Stopwatch always runs during a question; Hurry up starts a countdown on demand.
+const QT = { key: null, running: false, paused: false, t0: 0, acc: 0, hOn: false, hEnd: 0, hLeft: 0, up: false, lastTick: -1 };
+function qtReset(){ Object.assign(QT, { key: null, running: false, paused: false, acc: 0, hOn: false, up: false, lastTick: -1 }); }
+function qtStart(key){ Object.assign(QT, { key, running: true, paused: false, t0: Date.now(), acc: 0, hOn: false, hEnd: 0, hLeft: 0, up: false, lastTick: -1 }); }
+function qtElapsed(){ return QT.acc + (QT.running && !QT.paused ? Date.now() - QT.t0 : 0); }
+function qtStop(){ if (QT.running && !QT.paused) QT.acc += Date.now() - QT.t0; QT.running = false; QT.paused = false; }
+function qtPause(){
+  if (!QT.running) return;
+  if (!QT.paused){ QT.acc += Date.now() - QT.t0; if (QT.hOn) QT.hLeft = QT.hEnd - Date.now(); QT.paused = true; }
+  else { QT.t0 = Date.now(); if (QT.hOn) QT.hEnd = Date.now() + QT.hLeft; QT.paused = false; }
+}
+function qtHurry(){
+  if (!QT.running || QT.up) return;
+  QT.hOn = true; QT.lastTick = -1;
+  if (QT.paused) QT.hLeft = prefs.hurry * 1000; else QT.hEnd = Date.now() + prefs.hurry * 1000;
+}
+function qtLeft(){ return !QT.hOn ? null : QT.paused ? QT.hLeft : QT.hEnd - Date.now(); }
+function qtTimeUp(){ return QT.up; }
+function qtTick(){
+  if (!QT.running || QT.paused) return;
+  if (QT.hOn && !QT.up){
+    const left = qtLeft(), secs = Math.ceil(left / 1000);
+    if (left <= 0){ QT.up = true; sfx.timeup(); }
+    else if (secs <= 5 && secs !== QT.lastTick){ QT.lastTick = secs; sfx.tick(); }
+  }
+  qtDraw();
+}
+const mmss = ms => { const s = Math.max(0, Math.floor(ms / 1000)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+
+/* ================= sound ================= */
+let AC = null;
+function tone(freq, dur = .12, type = 'sine', gain = .08, when = 0){
+  if (!prefs.sound) return;
+  try {
+    AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    const t = AC.currentTime + when, o = AC.createOscillator(), g = AC.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(gain, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    o.connect(g).connect(AC.destination); o.start(t); o.stop(t + dur + .02);
+  } catch(e){}
+}
+const sfx = {
+  good(){ [523, 659, 784].forEach((f, i) => tone(f, .16, 'triangle', .07, i * .07)); },
+  bad(){ tone(196, .2, 'sawtooth', .035); },
+  tick(){ tone(880, .05, 'square', .03); },
+  timeup(){ [784, 622, 523].forEach((f, i) => tone(f, .3, 'sine', .08, i * .18)); },
+  chime(){ [784, 988, 1175, 1568].forEach((f, i) => tone(f, .5, 'sine', .06, i * .16)); },
+};
+function hear(text){
+  try {
+    if (!('speechSynthesis' in window)) return;
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text); u.lang = 'en-GB'; u.rate = .85;
+    const v = speechSynthesis.getVoices().find(v => v.lang === 'en-GB') || speechSynthesis.getVoices().find(v => /^en/.test(v.lang));
+    if (v) u.voice = v;
+    speechSynthesis.speak(u);
+  } catch(e){}
+}
+const canHear = () => 'speechSynthesis' in window;
+
+/* ================= planning timer (Talk) ================= */
+const PT = { left: SETTINGS.planSecs * 1000, end: 0, on: false };
+function ptToggle(){ if (PT.on){ PT.left = PT.end - Date.now(); PT.on = false; } else { if (PT.left <= 0) PT.left = SETTINGS.planSecs * 1000; PT.end = Date.now() + PT.left; PT.on = true; } }
+function ptReset(){ PT.on = false; PT.left = SETTINGS.planSecs * 1000; }
+function ptTick(){ if (!PT.on) return; if (PT.end - Date.now() <= 0){ PT.on = false; PT.left = 0; sfx.chime(); } ptDraw(); }
+
+/* ================= display ================= */
+function show(id){ document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id)); }
+function animate(el, sig){ if (sig !== lastDrawn){ el.classList.remove('enter'); void el.offsetWidth; el.classList.add('enter'); lastDrawn = sig; } }
+function render(){
+  const scr = S.screen;
+  const screenId = scr === 'prac' ? 'play' : scr;
+  show(screenId);
+  document.body.classList.toggle('hide-footer', !['home', 'setup'].includes(scr) && !(scr === 'play' && P()[S.act].i >= playable(S.act)));
+  if (scr === 'home') renderHome();
+  else if (scr === 'setup') renderSetup();
+  else if (scr === 'play' || scr === 'prac') renderPlay();
+  else if (scr === 'track') renderTrack();
+  else if (scr === 'cards') renderCards();
+  else if (scr === 'legend') renderLegend();
+  if (!['play', 'prac', 'track'].includes(scr)) setBar(null);
+}
+function topbar(title, extra = ''){
+  return `<div class="top"><button class="icon-btn" data-act="home" aria-label="Back to the menu">⌂ <span class="small">Menu</span></button>
+    <h2>${esc(title)}</h2><div class="tools">${extra}
+    <button class="icon-btn" data-act="sound" aria-pressed="${prefs.sound}" aria-label="Sound ${prefs.sound ? 'on' : 'off'}">${prefs.sound ? '🔊' : '🔇'}</button>
+    <button class="icon-btn" data-act="full" aria-label="Full screen">⛶</button></div></div>`;
+}
+function setBar(cfg){
+  const bar = $('#bar');
+  if (!cfg){ bar.hidden = true; document.body.classList.remove('has-bar'); return; }
+  bar.hidden = false; document.body.classList.add('has-bar');
+  $('#barInfo').textContent = cfg.info || '';
+  $('#prevBtn').disabled = !cfg.prev;
+  const n = $('#nextBtn'); n.disabled = !cfg.next; n.textContent = cfg.nextLabel || 'Next →';
+}
+function scoreChips(nowTeam = -1){
+  const t = S.teams;
+  return `<div class="scorebar" aria-label="Scores">${t.names.slice(0, t.n).map((nm, k) =>
+    `<span class="team-chip${k === nowTeam ? ' now' : ''}"><span aria-hidden="true">${t.icons[k]}</span>${esc(nm)} <span class="pts">${t.scores[k]}</span></span>`).join('')}</div>`;
+}
+function resetBtn(id, label){
+  const armed = resetArm === id;
+  return `<button class="btn sm ${armed ? 'warn' : 'ghost'}" data-act="reset" data-id="${id}">${armed ? 'Tap again to confirm' : esc(label)}</button>`;
+}
+
+function renderHome(){
+  const el = $('#home'), m = S.mode;
+  const tiles = ACTS.map((a, k) => {
+    const p = progressOf(a.id);
+    let prog = p.done === 0 ? 'Not started' : p.done >= p.len ? `✓ Finished${m === 'solo' ? ` · ${scoreSolo(a.id)} / ${p.len} right first time` : ''}` : `In progress · ${p.done} / ${p.len}`;
+    return `<button class="tile" data-act="open" data-id="${a.id}"><span class="ic" aria-hidden="true">${a.icon}</span><b>${k + 1} · ${esc(a.title)}</b><span class="small">${esc(a.blurb)}</span><span class="prog">${prog}</span></button>`;
+  }).join('');
+  const nm = mistakeList().length;
+  const teamsLine = m === 'teams'
+    ? `<div class="panel"><div class="row" style="justify-content:space-between"><b>Scores</b><button class="btn sm" data-act="setup">Teams and new game</button></div>${scoreChips()}</div>` : '';
+  el.innerHTML = `
+    <div class="hero">
+      <div class="kicker">${esc(TXT.kicker)}</div>
+      <h1>${esc(TXT.title)}</h1>
+      <p>${esc(TXT.intro)}</p>
+      <div class="cando"><b>Can-do:</b> ${esc(TXT.cando)}</div>
+      <div class="modes" role="group" aria-label="Mode">
+        ${['teams', 'solo'].map(k => `<button class="mode" data-act="mode" data-id="${k}" aria-pressed="${m === k}"><b>${esc(TXT.modes[k].name)}</b><span class="small">${esc(TXT.modes[k].desc)}</span></button>`).join('')}
+      </div>
+    </div>
+    ${teamsLine}
+    <h3 class="sec">${esc(TXT.secPlay)}</h3>
+    <div class="grid">${tiles}</div>
+    <h3 class="sec">${esc(TXT.secTalk)}</h3>
+    <div class="grid">
+      <button class="tile" data-act="go" data-id="cards"><span class="ic" aria-hidden="true">💬</span><b>A · ${esc(CARDS_TXT.title)}</b><span class="small">Pairs choose three cards and talk about their own lives.</span></button>
+      <button class="tile" data-act="go" data-id="legend"><span class="ic" aria-hidden="true">🏰</span><b>B · ${esc(LEGEND_TXT.title)}</b><span class="small">Tell a local legend and the truth behind it.</span></button>
+      <button class="tile" data-act="go" data-id="track"><span class="ic" aria-hidden="true">🧭</span><b>C · ${esc(TRACK_TXT.title)}</b><span class="small">Whole class: from the battlefield to everyday life.</span></button>
+    </div>
+    ${m === 'solo' ? `<h3 class="sec">${esc(TXT.secPrac)}</h3><div class="grid"><button class="tile" data-act="prac" ${nm ? '' : 'disabled'}><span class="ic" aria-hidden="true">🔁</span><b>Practise my mistakes</b><span class="small">Questions you got wrong come back until you get them right first time.</span><span class="prog">${nm ? `${nm} to practise` : 'Nothing to practise yet'}</span></button></div>` : ''}
+    <div class="row" style="margin-top:18px">${resetBtn('all', 'Clear all progress on this device')}</div>`;
+  animate(el, 'home');
+}
+
+function renderSetup(){
+  const el = $('#setup'), t = S.teams;
+  el.innerHTML = topbar(TXT.setupTitle) + `
+    <div class="panel">
+      <p>${esc(TXT.setupHow)}</p>
+      <div class="count-btns" role="group" aria-label="Number of teams">${[2, 3, 4].map(n => `<button data-act="count" data-id="${n}" aria-pressed="${t.n === n}">${n} teams</button>`).join('')}</div>
+      <div class="team-inputs">${t.names.slice(0, t.n).map((nm, k) => `<label><span aria-hidden="true">${t.icons[k]}</span><span class="sr">Team ${k + 1} name</span><input type="text" maxlength="20" data-team="${k}" value="${esc(nm)}"></label>`).join('')}</div>
+      <div class="check"><button class="btn sm ${t.double ? 'primary' : ''}" data-act="dbl" aria-pressed="${t.double}">${t.double ? '✓ On' : 'Off'}</button><span>${esc(TXT.doubleLabel)}</span></div>
+    </div>
+    <div class="row"><button class="btn primary" data-act="startteams">Start a new game</button>
+      ${t.set ? '<button class="btn" data-act="home">Keep the current game</button>' : ''}</div>
+    <p class="small muted" style="margin-top:12px">Starting a new game sets all team scores to 0. Progress in On my own mode is not affected.</p>`;
+  animate(el, 'setup');
+}
+
+/* --- question parts --- */
+function optButtons(act, i, part, r){
+  const it = BANK[act][i], pr = r[part], { a, n } = partInfo(act, i, part);
+  const done = pr && pr.done, picks = pr ? pr.p : [];
+  let labels;
+  if (part === 's') labels = SOURCES.map(esc);
+  else if (part === 'st') labels = it.syl.map((_, k) => `<span class="syl">${it.syl.map((x, j) => j === k ? `<b>${esc(x.toUpperCase())}</b>` : esc(x)).join('·')}</span><span class="dots" aria-hidden="true">${it.syl.map((_, j) => j === k ? '●' : '○').join(' ')}</span>`);
+  else labels = it.o.map(esc);
+  const cols = (part === 's' || part === 'st' || act === 'forge') ? ' cols' : '';
+  return `<div class="opts${cols}" role="group">${labels.map((lab, o) => {
+    let cls = 'opt', mk = '', dis = done || picks.includes(o);
+    if (o === a && done){ cls += ' right'; mk = '<span class="mk" aria-hidden="true">✓</span>'; }
+    else if (picks.includes(o)){ cls += ' wrong'; mk = '<span class="mk" aria-hidden="true">✗</span>'; }
+    else if (done) cls += ' dim';
+    const sr = o === a && done ? ' (right answer)' : picks.includes(o) ? ' (wrong)' : '';
+    return `<button class="${cls}" data-act="pick" data-part="${part}" data-o="${o}" ${dis ? 'disabled' : ''}><span class="key" aria-hidden="true">${o + 1}</span><span class="lab">${lab}<span class="sr">${sr}</span></span>${mk}</button>`;
+  }).join('')}</div>`;
+}
+function feedback(act, i, part, r, extraHTML){
+  const pr = r[part]; if (!pr) return '';
+  const { a } = partInfo(act, i, part);
+  if (!pr.done) return `<p class="retry" role="status">✗ Not quite. Try once more.</p>`;
+  const ok = pr.p[pr.p.length - 1] === a;
+  const teams = S.mode === 'teams' && !isPrac();
+  let verdict = ok ? (pr.p.length === 1 ? '✓ Right first time!' : '✓ Right at the second try.') : '✗ Here is the right answer.';
+  if (teams){
+    const pts = pr.pts || 0;
+    verdict += pr.late ? ` · Time's up, so 0 points.` : ` · ${pts} ${pts === 1 ? 'point' : 'points'}${isFinal(act, recKey()) && pts ? ' (double)' : ''}.`;
+  }
+  return `<div class="fb ${ok ? 'ok' : 'no'}" role="status"><div class="verdict">${verdict}</div>${extraHTML || ''}</div>`;
+}
+function extras(it){
+  let h = '';
+  if (it.note) h += `<div class="note">${esc(it.note)}</div>`;
+  if (it.l1) h += `<div class="extra"><b>Catalan and Spanish:</b> ${esc(it.l1)}</div>`;
+  if (it.us) h += `<div class="extra"><b>UK and US:</b> ${esc(it.us)}</div>`;
+  return h;
+}
+function srcLine(it){ return `<div class="src"><span class="tag">${esc(TXT.sourceTags[it.kind] || '')}</span>${esc(it.src)}</div>`; }
+
+function itemHTML(act, i, r){
+  const it = BANK[act][i], A = ACTS.find(x => x.id === act);
+  if (act === 'mean'){
+    return `<p class="instr">${esc(A.instr)}</p><div class="headline">${fmt(it.t)}</div>${srcLine(it)}
+      <div class="step">${optButtons(act, i, 'm', r)}${feedback(act, i, 'm', r, extras(it))}</div>`;
+  }
+  if (act === 'hist'){
+    const wDone = partDone(r, 'w');
+    const gap = wDone ? `<span class="gap ok">${esc(it.o[it.a])}</span>` : '<span class="gap">?</span>';
+    const line = esc(it.t).replace('___', gap);
+    const sDone = partDone(r, 's');
+    let h = `<div class="headline">${line}</div>
+      <div class="step"><h4>${esc(A.instr)}</h4>${optButtons(act, i, 'w', r)}${feedback(act, i, 'w', r, '')}</div>`;
+    if (wDone) h += `<div class="step"><h4>${esc(A.instr2)}</h4>${optButtons(act, i, 's', r)}${feedback(act, i, 's', r, sDone ? `<div class="note"><b>Source:</b> ${esc(it.src)}</div>` + extras(it) : '')}</div>`;
+    return h;
+  }
+  if (act === 'forge'){
+    return `<p class="instr">${esc(A.instr)}</p><div class="prompt-big"><small>${esc(it.role)} from</small>${esc(it.base)}</div>
+      <div class="step">${optButtons(act, i, 'f', r)}${feedback(act, i, 'f', r, extras(it))}</div>`;
+  }
+  if (act === 'stress'){
+    const done = partDone(r, 'st');
+    const hearBtn = canHear() && (done || S.mode === 'solo' || isPrac()) ? `<button class="btn sm" data-act="hear" data-id="${esc(it.say)}">🔈 Hear it</button>` : '';
+    return `<p class="instr">${esc(A.instr)}</p><div class="row" style="justify-content:space-between"><div class="prompt-big">${esc(it.label || it.say)}</div>${hearBtn}</div>
+      <div class="step">${optButtons(act, i, 'st', r)}${feedback(act, i, 'st', r, extras(it))}</div>`;
+  }
+  return '';
+}
+
+function renderPlay(){
+  const el = $('#play');
+  if (isPrac()) return renderPrac(el);
+  const act = S.act, A = ACTS.find(x => x.id === act), st = P()[act], len = playable(act), teams = S.mode === 'teams';
+  const k = ACTS.indexOf(A) + 1;
+  if (st.i >= len){ renderEnd(el, act); return; }
+  const q = st.i, r = getRec(q), done = itemDone(act, r), open = firstOpen(act);
+  let head = topbar(`${k} · ${A.title}`, resetBtn(act, 'Start again'));
+  if (teams){
+    const tm = teamOf(q), t = S.teams;
+    const reviewing = q < open && done;
+    if (!done && QT.key !== `${act}:${q}`) qtStart(`${act}:${q}`);
+    head += `<div class="turnbox"><div class="who"><span class="round">Round ${roundOf(q) + 1} of ${rounds(act)}${isFinal(act, q) ? '<span class="final">Final round · double points</span>' : ''}</span>
+        <span class="team">${reviewing ? 'Answered by ' : ''}<span aria-hidden="true">${t.icons[tm]}</span> ${esc(t.names[tm])}${reviewing ? '' : (/s$/i.test(t.names[tm]) ? '’ turn' : '’s turn')}</span></div>
+      ${done ? '' : `<div class="qtctl"><button class="btn sm warn" data-act="hurry">⏱ Hurry up</button>${SETTINGS.hurryLens.map(s => `<button class="len" data-act="hlen" data-id="${s}" aria-pressed="${prefs.hurry === s}" aria-label="${s} seconds">${s}s</button>`).join('')}<button class="btn sm ghost" data-act="pause" id="pauseBtn">⏸ Pause</button></div><div id="qt" aria-live="off"></div>`}
+    </div>${scoreChips(done ? -1 : tm)}`;
+  }
+  el.innerHTML = head + `<div class="card" id="qcard"><div class="count">Question ${q + 1} of ${len}</div>${itemHTML(act, q, r)}</div>`;
+  if (teams && !done) qtDraw();
+  animate($('#qcard'), `${S.mode}:${act}:${q}`);
+  setBar({ info: `${A.title} · ${q + 1} / ${len}`, prev: q > 0, next: done, nextLabel: q + 1 >= len ? 'Finish →' : 'Next →' });
+  focusFeedback();
+}
+function renderEnd(el, act){
+  const A = ACTS.find(x => x.id === act), len = playable(act);
+  let body;
+  if (S.mode === 'teams'){
+    const t = S.teams, order = [...Array(t.n).keys()].sort((x, y) => t.scores[y] - t.scores[x]);
+    const top = t.scores[order[0]], winners = order.filter(k => t.scores[k] === top);
+    body = `<div class="big" aria-hidden="true">🏆</div><h3>${winners.length > 1 ? 'A draw at the top!' : `${esc(t.names[winners[0]])} are in the lead!`}</h3>
+      <p class="muted">Total scores after ${esc(A.title)}</p>
+      <ol class="rank">${order.map(k => `<li><span aria-hidden="true">${t.icons[k]}</span>${esc(t.names[k])}<span class="pts">${t.scores[k]}</span></li>`).join('')}</ol>`;
+    if (BANK[act].length > len) body += `<p class="small muted">${BANK[act].length - len} question(s) were left out so that every team had the same number of turns.</p>`;
+  } else {
+    const sc = scoreSolo(act), nm = mistakeList().filter(x => x.act === act).length;
+    body = `<div class="big" aria-hidden="true">${sc === len ? '🏆' : sc >= len * .7 ? '🌟' : '💪'}</div><h3>${sc} / ${len} right first time</h3>
+      <p>${sc === len ? 'Perfect!' : sc >= len * .7 ? 'Well done!' : 'Good effort. Try again to improve your score.'}</p>
+      ${nm ? `<p>You can practise ${nm === 1 ? 'your mistake' : `your ${nm} mistakes`} in <b>Practise my mistakes</b> on the menu.</p>` : ''}`;
+  }
+  el.innerHTML = topbar(A.title) + `<div class="card done" id="endcard">${body}
+    <div class="row" style="justify-content:center;margin-top:12px"><button class="btn" data-act="review">Review answers</button><button class="btn primary" data-act="home">Back to the menu</button></div></div>`;
+  if (`end:${act}` !== lastDrawn) celebrate();
+  animate($('#endcard'), `end:${act}`);
+  setBar(null);
+}
+function renderPrac(el){
+  const pr = S.prac;
+  if (!pr || pr.i >= pr.queue.length){
+    const left = mistakeList().length;
+    el.innerHTML = topbar('Practise my mistakes') + `<div class="card done" id="pend"><div class="big" aria-hidden="true">${left ? '💪' : '🏆'}</div>
+      <h3>${left ? `${left} ${left === 1 ? 'item is' : 'items are'} still waiting` : 'You have fixed all your mistakes!'}</h3>
+      <p>${left ? 'Practise again now, or come back later.' : 'Well done.'}</p>
+      <div class="row" style="justify-content:center">${left ? '<button class="btn" data-act="prac">Practise again</button>' : ''}<button class="btn primary" data-act="home">Back to the menu</button></div></div>`;
+    animate($('#pend'), 'pracend'); setBar(null); return;
+  }
+  const { act, i } = pr.queue[pr.i], r = getRec(pr.i), A = ACTS.find(x => x.id === act);
+  el.innerHTML = topbar('Practise my mistakes') + `<div class="card" id="qcard"><div class="count">${pr.i + 1} of ${pr.queue.length} · from ${esc(A.title)}</div>${itemHTML(act, i, r)}</div>`;
+  animate($('#qcard'), `prac:${pr.i}:${act}:${i}`);
+  setBar({ info: `Practise · ${pr.i + 1} / ${pr.queue.length}`, prev: pr.i > 0, next: itemDone(act, r), nextLabel: pr.i + 1 >= pr.queue.length ? 'Finish →' : 'Next →' });
+  focusFeedback();
+}
+function focusFeedback(){
+  const fb = document.querySelector('#qcard .fb:last-of-type, #qcard .retry');
+  if (fb && lastAction === 'pick'){ $('#live').textContent = fb.textContent; requestAnimationFrame(() => fb.scrollIntoView({ block: 'nearest', behavior: 'smooth' })); }
+}
+function qtDraw(){
+  const el = $('#qt'); if (!el) return;
+  const left = qtLeft();
+  let cd = '';
+  if (QT.up) cd = `<span class="cd up">Time's up!</span>`;
+  else if (left != null) cd = `<span class="cd">${Math.ceil(left / 1000)} s</span>`;
+  el.innerHTML = `${cd}<span class="sw">${mmss(qtElapsed())}</span><span class="lab">${QT.paused ? '⏸ Paused' : 'thinking time'}</span>`;
+  const pb = $('#pauseBtn'); if (pb) pb.textContent = QT.paused ? '▶ Resume' : '⏸ Pause';
+}
+
+/* --- Talk --- */
+function ptBlock(){ return `<div class="ptimer"><span class="clock" id="ptClock">${mmss(PT.on ? PT.end - Date.now() : PT.left)}</span><button class="btn sm" data-act="ptgo" id="ptBtn">${PT.on ? '⏸ Pause' : '▶ Planning minute'}</button><button class="btn sm ghost" data-act="ptreset">↺ Reset</button></div>`; }
+function ptDraw(){ const c = $('#ptClock'); if (c) c.textContent = mmss(PT.on ? PT.end - Date.now() : PT.left); const b = $('#ptBtn'); if (b) b.textContent = PT.on ? '⏸ Pause' : '▶ Planning minute'; }
+function renderCards(){
+  const el = $('#cards'), ch = S.talk.chosen;
+  el.innerHTML = topbar(CARDS_TXT.title) + `<div class="panel"><ol class="steps">${CARDS_TXT.how.map(s => `<li>${esc(s)}</li>`).join('')}</ol>
+    <p class="small muted">Chosen: ${ch.length} of ${CARDS_TXT.max}</p>${ptBlock()}</div>
+    <div class="cards">${CARDS.map((c, k) => { const on = ch.includes(k); return `<button class="scard" data-act="card" data-id="${k}" aria-pressed="${on}"><span class="chunk">${esc(c.chunk)}</span>${on ? '<span class="sel">✓ Chosen</span>' : ''}<span class="q">${esc(c.q)}</span><span class="f">${esc(c.f)}</span></button>`; }).join('')}</div>`;
+  animate(el, 'cards');
+}
+function renderLegend(){
+  const el = $('#legend'), sel = LEGENDS.find(l => l.id === S.talk.legend);
+  el.innerHTML = topbar(LEGEND_TXT.title) + `<div class="panel"><ol class="steps">${LEGEND_TXT.how.map(s => `<li>${esc(s)}</li>`).join('')}</ol></div>
+    <div class="legend-pick" role="group" aria-label="Choose a legend">${LEGENDS.map(l => `<button data-act="legend" data-id="${l.id}" aria-pressed="${S.talk.legend === l.id}"><span aria-hidden="true">${l.icon}</span> ${esc(l.name)}</button>`).join('')}</div>
+    ${sel ? `<div class="panel"><h3>${sel.icon} ${esc(sel.name)}</h3>
+      <div class="lbox"><h4>What the legend says</h4>${esc(sel.says)}</div>
+      <div class="lbox"><h4>What we know</h4>${esc(sel.know)}</div>
+      ${ptBlock()}
+      <div class="lbox"><h4>Answer these questions</h4><ol class="steps">${LEGEND_TXT.questions.map(q => `<li>${esc(q)}</li>`).join('')}</ol></div>
+      <div class="lbox"><h4>Useful language from the reading</h4><div class="chips">${LEGEND_TXT.lang.map(x => `<span>${esc(x)}</span>`).join('')}</div></div></div>` : '<p class="muted">Choose a legend to see the planning card.</p>'}`;
+  animate(el, 'legend:' + (sel ? sel.id : ''));
+}
+function renderTrack(){
+  const el = $('#track'), T = S.talk.track, i = T.i, it = MEANING[i], pk = T.pick[i], shown = !!T.shown[i];
+  el.innerHTML = topbar(TRACK_TXT.title) + `<div class="card" id="tcard"><p class="instr">${esc(TRACK_TXT.how)}</p>
+    <div class="count">${i + 1} of ${MEANING.length}</div><div class="headline">${fmt(it.t)}</div>${srcLine(it)}
+    <div class="track" role="group" aria-label="Zones">${ZONES.map((z, k) => `<button class="zone${shown && it.zone === k ? ' sugg' : ''}" data-act="zone" data-id="${k}" aria-pressed="${pk === k}"><span class="zi" aria-hidden="true">${z.icon}</span>${esc(z.name)}${pk === k ? '<span class="tagz">● Our class</span>' : ''}${shown && it.zone === k ? `<span class="tagz">★ ${esc(TRACK_TXT.sugg)}</span>` : ''}</button>`).join('')}</div>
+    <div class="arrow" aria-hidden="true"><span>⚔️ war</span><span>→ further away →</span><span>everyday 🏠</span></div>
+    <div class="row" style="margin-top:12px"><button class="btn sm" data-act="suggest" ${shown ? 'disabled' : ''}>Show our suggestion</button></div>
+    ${shown ? `<div class="fb ok" role="status"><div class="verdict">★ ${esc(TRACK_TXT.sugg)}: ${ZONES[it.zone].icon} ${esc(ZONES[it.zone].name)}</div><div class="note">${esc(TRACK_TXT.caveat)}</div><div class="note">${esc(it.note)}</div></div>` : ''}</div>`;
+  animate($('#tcard'), 'track:' + i);
+  setBar({ info: `${TRACK_TXT.title} · ${i + 1} / ${MEANING.length}`, prev: i > 0, next: i < MEANING.length - 1 });
+}
+
+function celebrate(){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const box = document.createElement('div'); box.className = 'confetti'; box.setAttribute('aria-hidden', 'true');
+  const cols = ['#A3262A', '#1E6B4A', '#C8962E', '#1F2A2E', '#FFE07A'];
+  for (let k = 0; k < 70; k++){ const p = document.createElement('i'); p.style.left = Math.random() * 100 + 'vw'; p.style.background = cols[k % cols.length]; p.style.animationDelay = Math.random() * .5 + 's'; box.appendChild(p); }
+  document.body.appendChild(box); setTimeout(() => box.remove(), 2300); sfx.chime();
+}
+function toggleFull(){ const d = document, el = d.documentElement; try { (d.fullscreenElement ? d.exitFullscreen() : el.requestFullscreen()).catch(() => {}); } catch(e){} }
+
+/* ================= saving ================= */
+const KEY = 'b22conflict.v1', PKEY = 'b22conflict.prefs';
+const storeLS = {
+  load(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } },
+  save(k, d){ try { localStorage.setItem(k, JSON.stringify(d)); } catch(e){} },
+  clear(k){ try { localStorage.removeItem(k); } catch(e){} },
+};
+function save(){ if (S) storeLS.save(KEY, S); storeLS.save(PKEY, prefs); }
+// Check a saved state before using it; anything unexpected is replaced by a fresh state.
+function validState(d){
+  try {
+    if (!d || d.v !== 1 || !['solo', 'teams'].includes(d.mode)) return null;
+    const f = freshState();
+    const obj = x => x && typeof x === 'object' && !Array.isArray(x);
+    for (const m of ['solo', 'teams']){
+      if (!obj(d.prog?.[m])) return null;
+      for (const a of ACTS){
+        const st = d.prog[m][a.id]; if (!obj(st) || !Number.isInteger(st.i) || st.i < 0 || st.i > BANK[a.id].length || !obj(st.rec)) return null;
+        for (const q of Object.keys(st.rec)){
+          if (!/^\d+$/.test(q) || +q >= BANK[a.id].length || !obj(st.rec[q])) return null;
+          for (const p of Object.keys(st.rec[q])){
+            const pr = st.rec[q][p];
+            if (!PARTS[a.id].includes(p) || !obj(pr) || !Array.isArray(pr.p) || !pr.p.every(Number.isInteger) || typeof pr.pts !== 'number') return null;
+          }
+        }
+      }
+    }
+    const t = d.teams; if (!obj(t) || ![2, 3, 4].includes(t.n) || !Array.isArray(t.names) || t.names.length < 4 || !Array.isArray(t.scores) || !t.scores.every(Number.isFinite)) return null;
+    t.names = t.names.slice(0, 4).map(x => String(x).slice(0, 20)); t.icons = f.teams.icons;
+    if (!obj(d.mist)) d.mist = {};
+    Object.keys(d.mist).forEach(k => { const [a, i] = k.split(':'); if (!BANK[a] || !BANK[a][+i]) delete d.mist[k]; });
+    if (!obj(d.talk)) d.talk = f.talk;
+    if (!Array.isArray(d.talk.chosen)) d.talk.chosen = [];
+    d.talk.chosen = d.talk.chosen.filter(x => Number.isInteger(x) && x >= 0 && x < CARDS.length).slice(0, CARDS_TXT.max);
+    if (!LEGENDS.some(l => l.id === d.talk.legend)) d.talk.legend = null;
+    if (!obj(d.talk.track) || !Number.isInteger(d.talk.track.i) || d.talk.track.i < 0 || d.talk.track.i >= MEANING.length) d.talk.track = f.talk.track;
+    d.prac = null; d.screen = 'home'; d.act = ACTS.some(a => a.id === d.act) ? d.act : 'mean';
+    return d;
+  } catch(e){ return null; }
+}
+
+/* ================= events ================= */
+let lastAction = '';
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b || b.disabled) return;
+  const act = b.dataset.act, id = b.dataset.id;
+  lastAction = act;
+  if (act !== 'reset') resetArm = null;
+  switch (act){
+    case 'home': S.screen = 'home'; save(); break;
+    case 'mode':
+      setMode(id);
+      if (id === 'teams' && !S.teams.set){ S.screen = 'setup'; }
+      break;
+    case 'setup': S.screen = 'setup'; break;
+    case 'count': readTeamInputs(); setTeamsCount(+id); break;
+    case 'dbl': readTeamInputs(); S.teams.double = !S.teams.double; save(); break;
+    case 'startteams': readTeamInputs(); newTeamGame(); S.screen = 'home'; save(); break;
+    case 'open': S.act = id; S.screen = 'play'; if (S.mode === 'teams' && !S.teams.set){ S.screen = 'setup'; } else { const st = P()[id]; st.i = Math.min(firstOpen(id), playable(id)); } save(); break;
+    case 'go': S.screen = id; ptReset(); save(); break;
+    case 'prac': startPrac(); break;
+    case 'pick': pick(b.dataset.part, +b.dataset.o); break;
+    case 'next':
+      if (S.screen === 'track'){ S.talk.track.i = Math.min(S.talk.track.i + 1, MEANING.length - 1); save(); }
+      else next();
+      break;
+    case 'prev':
+      if (S.screen === 'track'){ S.talk.track.i = Math.max(0, S.talk.track.i - 1); save(); }
+      else prev();
+      break;
+    case 'review': reviewFromStart(); break;
+    case 'hurry': qtHurry(); qtDraw(); return;
+    case 'pause': qtPause(); qtDraw(); return;
+    case 'hlen': prefs.hurry = +id; save(); document.querySelectorAll('.len').forEach(x => x.setAttribute('aria-pressed', x.dataset.id === id)); return;
+    case 'hear': hear(id); return;
+    case 'sound': prefs.sound = !prefs.sound; save(); break;
+    case 'full': toggleFull(); return;
+    case 'reset':
+      if (resetArm !== id){ resetArm = id; break; }
+      resetArm = null;
+      if (id === 'all') resetAll(); else resetAct(id);
+      break;
+    case 'card': {
+      const k = +id, ch = S.talk.chosen;
+      if (ch.includes(k)) S.talk.chosen = ch.filter(x => x !== k);
+      else if (ch.length < CARDS_TXT.max) ch.push(k);
+      save(); break;
+    }
+    case 'legend': S.talk.legend = id; ptReset(); save(); break;
+    case 'ptgo': ptToggle(); ptDraw(); return;
+    case 'ptreset': ptReset(); ptDraw(); return;
+    case 'zone': S.talk.track.pick[S.talk.track.i] = +id; save(); break;
+    case 'suggest': S.talk.track.shown[S.talk.track.i] = true; save(); break;
+  }
+  render();
+});
+document.addEventListener('input', e => {
+  const inp = e.target.closest('input[data-team]'); if (!inp) return;
+  S.teams.names[+inp.dataset.team] = inp.value.slice(0, 20); save();
+});
+function readTeamInputs(){
+  document.querySelectorAll('input[data-team]').forEach(inp => { const v = inp.value.trim().slice(0, 20); S.teams.names[+inp.dataset.team] = v || TXT.teamPresets[+inp.dataset.team].name; });
+}
+addEventListener('keydown', e => {
+  if (e.target.closest('input, textarea, [contenteditable]')) return;
+  const playing = S.screen === 'play' || S.screen === 'prac';
+  if (e.key === 'f' || e.key === 'F'){ toggleFull(); return; }
+  if (playing && S.mode === 'teams' && !isPrac()){
+    if (e.key === 'h' || e.key === 'H'){ qtHurry(); qtDraw(); return; }
+    if (e.key === ' ' && !(document.activeElement && document.activeElement.closest('button'))){ e.preventDefault(); qtPause(); qtDraw(); return; }
+  }
+  if (playing && /^[1-4]$/.test(e.key)){
+    const btn = [...document.querySelectorAll('#qcard .opt')].filter(b => !b.disabled && b.dataset.o === String(+e.key - 1));
+    if (btn.length){ btn[btn.length - 1].click(); return; }
+  }
+  if ((playing || S.screen === 'track') && (e.key === 'ArrowRight' || (e.key === 'Enter' && !(document.activeElement && document.activeElement.closest('button'))))){ const n = $('#nextBtn'); if (!n.disabled && !$('#bar').hidden){ n.click(); e.preventDefault(); } return; }
+  if ((playing || S.screen === 'track') && e.key === 'ArrowLeft'){ const p = $('#prevBtn'); if (!p.disabled && !$('#bar').hidden) p.click(); return; }
+  if (e.key === 'Escape' && S.screen !== 'home'){ S.screen = 'home'; save(); render(); }
+});
+addEventListener('visibilitychange', () => { if (document.hidden) save(); });
+
+/* ================= start ================= */
+(function init(){
+  const p = storeLS.load(PKEY);
+  if (p && typeof p === 'object'){ prefs.sound = p.sound !== false; prefs.hurry = SETTINGS.hurryLens.includes(p.hurry) ? p.hurry : 10; }
+  S = validState(storeLS.load(KEY)) || freshState();
+  render();
+  setInterval(() => { qtTick(); ptTick(); }, 200);
+})();
+</script>
+</body>
+</html>
