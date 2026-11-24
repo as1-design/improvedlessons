@@ -1,0 +1,1051 @@
+<!doctype html>
+<!--
+  Name:     Reviewing books, films and series · B2.2 warm-ups
+  Purpose:  Four short warm-ups that introduce and practise the language of
+            reviews (English File Advanced, File 3, Vocabulary: describing books),
+            extended to films and series. Teams mode (whiteboard) or Just me (phone).
+            1 Thumbs up or down · 2 Mini-reviews · 3 Thirty-second review · 4 Mistakes round
+  Version:  1.1 · 2026-11-24 (examples always visible; Catalan and Spanish translations in warm-up 1)
+  Edit:     All words, examples, reviews, cards and screen text are in the CONTENT
+            section at the top of the script. Change the text there; nothing else
+            needs editing. The format of each list is explained above it.
+  Credit:   Class of Coffee – with AI assistance
+-->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' data: blob:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reviewing books, films and series · B2.2 warm-ups</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+<style>
+/* ================= tokens ================= */
+:root{
+  --bg:#FBF4E9; --paper:#FFFDF8; --ink:#1F1B33; --ink-soft:#5A5470; --line:#EADCC8;
+  --red:#D7263D;      /* cinema red: accents and buttons */
+  --gold:#F5B82E;     /* popcorn */
+  --teal:#0E6B66;     /* bookshop green */
+  --plum:#5B3E8C;
+  --good:#167A4A; --good-bg:#E3F4EA;   /* right answer (always with ✓ and a word) */
+  --bad:#B3261E;  --bad-bg:#FBE7E5;    /* wrong answer (always with ✗ and a word) */
+  --display:"Avenir Next","Segoe UI","Helvetica Neue",system-ui,-apple-system,Roboto,sans-serif;
+  --body:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --r-s:10px; --r-m:16px; --r-l:24px;
+  --shadow:0 2px 0 rgba(31,27,51,.08),0 8px 24px rgba(31,27,51,.08);
+  --spring:cubic-bezier(.34,1.56,.64,1); --ease:cubic-bezier(.25,.46,.45,.94);
+  --fs: clamp(1rem, .92rem + .35vw, 1.35rem);
+  --fs-big: clamp(1.9rem, 1.2rem + 3vw, 4rem);
+  --navh: 64px;
+}
+/* ================= base ================= */
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{touch-action:manipulation;-webkit-text-size-adjust:100%;font-size:clamp(16px,7px + .7vw,22px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--fs)/1.5 var(--body);
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  min-height:100vh;display:flex;flex-direction:column}
+button{font:inherit;color:inherit;min-height:44px;cursor:pointer;border:0;background:none;border-radius:var(--r-s)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--plum);outline-offset:2px}
+button:disabled{cursor:not-allowed;opacity:.45}
+h1,h2,h3{font-family:var(--display);line-height:1.15;margin:0 0 .4em}
+p{margin:.3em 0 .7em}
+.deco{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-1}
+.deco span{position:absolute;font-size:9rem;opacity:.06}
+.wrap{width:min(100%,1040px);margin:0 auto;padding:12px 16px}
+main{flex:1}
+.screen{display:none}.screen.active{display:block}
+.enter{animation:pop .35s var(--spring)}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* ================= top bar ================= */
+.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:2px dashed var(--line)}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding-top:8px;padding-bottom:8px}
+.top .title{margin:0;flex:1 1 180px;font-family:var(--display);font-weight:800;font-size:1rem;line-height:1.2}
+.top .title small{display:block;font-weight:500;color:var(--ink-soft);font-size:.82rem}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:var(--paper);
+  border:2px solid var(--line);font-weight:700;font-size:.9rem;min-height:44px}
+.chip:hover{border-color:var(--ink-soft)}
+
+/* ================= buttons ================= */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;font-weight:700;
+  border-radius:var(--r-m);background:var(--paper);border:2px solid var(--ink);box-shadow:0 3px 0 var(--ink)}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--ink)}
+.btn.primary{background:var(--red);color:#fff;border-color:#8E1324;box-shadow:0 3px 0 #8E1324}
+.btn.gold{background:var(--gold);border-color:#9A6B00;box-shadow:0 3px 0 #9A6B00}
+.btn.small{padding:6px 12px;font-size:.9rem;min-height:40px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* ================= ticket cards ================= */
+.ticket{position:relative;background:var(--paper);border-radius:var(--r-l);box-shadow:var(--shadow);padding:22px clamp(18px,3vw,36px);
+  -webkit-mask:radial-gradient(circle 14px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 14px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;
+          mask:radial-gradient(circle 14px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 14px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.ticket.edge{border-top:8px solid var(--red)}
+.ticket.teal{border-top-color:var(--teal)} .ticket.gold{border-top-color:var(--gold)} .ticket.plum{border-top-color:var(--plum)}
+.kicker{font-family:var(--display);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem;color:var(--ink-soft)}
+
+/* ================= home ================= */
+.hero{text-align:center;padding:18px 0 8px}
+.hero h2{font-size:clamp(1.8rem,1.2rem + 2.6vw,3.4rem);font-weight:900}
+.hero h2 .pop{color:var(--red)}
+.cando{display:inline-block;background:var(--paper);border:2px dashed var(--teal);border-radius:var(--r-m);padding:10px 16px;margin:4px 0 6px;font-weight:600}
+.cando b{color:var(--teal)}
+.modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
+.modecard{text-align:left;background:var(--paper);border:3px solid var(--line);border-radius:var(--r-l);padding:16px 18px;box-shadow:var(--shadow)}
+.modecard[aria-pressed="true"]{border-color:var(--ink)}
+.modecard .big{font-size:2rem}
+.modecard h3{margin:.2em 0}
+.teamsel{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.teamsel button{min-width:56px;border:2px solid var(--line);background:var(--bg);font-weight:800}
+.teamsel button[aria-pressed="true"]{border-color:var(--ink);background:var(--gold)}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:12px 0 24px}
+.sec{text-align:left;display:flex;flex-direction:column;gap:6px;padding:18px;border-radius:var(--r-l);background:var(--paper);
+  box-shadow:var(--shadow);border:3px solid transparent;min-height:170px}
+.sec:hover{border-color:var(--line)}
+.sec .n{font-family:var(--display);font-weight:900;font-size:.85rem;letter-spacing:.06em;color:var(--ink-soft)}
+.sec .em{font-size:2rem;line-height:1}
+.sec h3{font-size:1.2rem;margin:0}
+.sec p{margin:0;color:var(--ink-soft);font-size:.92rem}
+.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:auto}
+.bar i{display:block;height:100%;background:var(--teal)}
+.sec .status{font-size:.85rem;font-weight:700}
+.sec .go{align-self:flex-start;margin-top:4px;padding:4px 12px;border-radius:99px;background:var(--ink);color:#fff;font-weight:700;font-size:.9rem}
+
+/* ================= teams strip and timer ================= */
+.teams{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:8px 0 12px}
+.team{flex:1 1 120px;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:var(--r-m);background:var(--paper);border:3px solid var(--line);font-weight:700}
+.team .sym{font-size:1.3rem}
+.team .pts{margin-left:auto;font-family:var(--mono);font-size:1.4rem}
+.team.now{border-color:var(--ink);background:#FFF3CF}
+.team.now::before{content:"▶";font-size:.9rem}
+.turnline{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-bottom:10px}
+.turnline .who{font-family:var(--display);font-weight:800;font-size:1.15rem}
+.timer{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-left:auto}
+.clock{font-family:var(--mono);font-weight:800;font-size:clamp(1.6rem,1.2rem + 1.6vw,2.6rem);min-width:4.2ch;text-align:right;line-height:1}
+.clock.hurry{color:var(--red)}
+.clock small{display:block;font-size:.8rem;font-weight:600;color:var(--ink-soft);text-align:right}
+.seg{display:inline-flex;border:2px solid var(--line);border-radius:var(--r-s);overflow:hidden}
+.seg button{border-radius:0;min-width:44px;font-weight:700;font-size:.9rem;background:var(--paper)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+
+/* ================= question card ================= */
+.phase{font-family:var(--display);font-weight:800;color:var(--teal)}
+.qmeta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-bottom:8px;color:var(--ink-soft);font-weight:600;font-size:.92rem}
+.tag{display:inline-block;padding:2px 10px;border-radius:99px;background:var(--bg);border:1.5px solid var(--line);font-weight:700;font-size:.85rem;color:var(--ink)}
+.word{font-family:var(--display);font-weight:900;font-size:var(--fs-big);line-height:1.05;margin:.1em 0 .15em;overflow-wrap:anywhere}
+.chunk{font-size:1.2em;color:var(--ink-soft)}
+.chunk b{color:var(--ink)}
+.example{margin:8px 0 0;padding:10px 14px;background:#F3EEFA;border-left:5px solid var(--plum);border-radius:var(--r-s);font-style:italic}
+.review{font-size:clamp(1.15rem,1rem + .9vw,1.9rem);line-height:1.45;margin:.2em 0 .4em}
+.review .gap{display:inline-block;min-width:5.5em;border-bottom:3px solid var(--ink);text-align:center;font-weight:800;color:var(--plum)}
+.review .gap.ok{color:var(--good);border-color:var(--good)}
+.stars{color:#B07A00;letter-spacing:2px;font-size:1.1rem}
+.medium{font-weight:800}
+.opts{display:grid;gap:10px;margin-top:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.opt{display:flex;align-items:center;justify-content:center;gap:10px;text-align:center;min-height:64px;padding:10px 14px;border-radius:var(--r-m);
+  background:var(--paper);border:3px solid var(--ink);box-shadow:0 4px 0 var(--ink);font-weight:800;font-size:clamp(1.05rem,.95rem + .6vw,1.6rem)}
+.opt:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.opt .k{font-family:var(--mono);font-size:.75rem;padding:1px 6px;border:1.5px solid currentColor;border-radius:6px;opacity:.6}
+.opt.good{background:var(--good-bg);border-color:var(--good);color:var(--good);box-shadow:0 4px 0 var(--good);opacity:1}
+.opt.bad{background:var(--bad-bg);border-color:var(--bad);color:var(--bad);box-shadow:none;opacity:1;text-decoration:line-through}
+.opt.pos{background:#E6F5EE}.opt.neg{background:#FCECEA}
+.fb{margin-top:14px;padding:12px 16px;border-radius:var(--r-m);border:2px solid var(--line);background:var(--bg)}
+.fb.good{border-color:var(--good);background:var(--good-bg)}
+.fb.bad{border-color:var(--bad);background:var(--bad-bg)}
+.fb .verdict{font-weight:800}
+.fb .pts{font-family:var(--mono);font-weight:800}
+.note{font-size:.95rem;color:var(--ink-soft)}
+.note b{color:var(--ink)}
+.talk .em{font-size:2.6rem}
+.tr{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px;padding:10px 14px;border-radius:var(--r-s);background:#E8F5F4;border-left:5px solid var(--teal)}
+.tr .lang{display:inline-block;margin-right:6px;padding:1px 8px;border-radius:99px;background:var(--teal);color:#fff;font-size:.8rem;letter-spacing:.03em}
+.talk .q{font-size:clamp(1.2rem,1rem + 1vw,2rem);font-weight:700;margin:.3em 0}
+.readonly{display:inline-block;margin-bottom:8px;padding:2px 10px;border-radius:99px;background:var(--ink);color:#fff;font-size:.82rem;font-weight:700}
+
+/* ================= nav bar (fixed place) ================= */
+.nav{position:fixed;z-index:6;right:16px;bottom:calc(14px + env(safe-area-inset-bottom));display:flex;gap:10px;align-items:center;
+  background:var(--paper);padding:8px;border-radius:var(--r-l);box-shadow:var(--shadow);border:2px solid var(--line)}
+.nav .count{font-family:var(--mono);font-weight:700;padding:0 6px;font-size:.95rem}
+.nav .btn{min-width:130px}
+body.hasnav main{padding-bottom:calc(var(--navh) + 40px)}
+@media (max-width:640px), (max-height:500px){
+  .nav{left:0;right:0;bottom:0;border-radius:0;border-width:2px 0 0;padding:8px 10px calc(8px + env(safe-area-inset-bottom));justify-content:space-between}
+  .nav .btn{flex:1;min-width:0}
+}
+
+/* ================= end and lists ================= */
+.score{font-family:var(--mono);font-weight:800;font-size:2.4rem}
+.podium{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:10px 0}
+.podium .team{flex:0 1 180px}
+.callout{background:#FFF3CF;border:2px solid var(--gold);border-radius:var(--r-m);padding:12px 16px;margin:12px 0}
+.frame{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));margin:12px 0}
+.frame div{background:var(--bg);border-radius:var(--r-m);padding:10px 14px;border:2px solid var(--line)}
+.frame b{display:block;font-family:var(--display);color:var(--teal);font-size:max(.85rem,min(18px,1vw + 6px));text-transform:uppercase;letter-spacing:.05em}
+.toolbox{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.toolbox span{padding:3px 10px;border-radius:99px;background:var(--paper);border:1.5px solid var(--line);font-size:.9rem}
+.bigclock{font-family:var(--mono);font-weight:800;font-size:clamp(2.4rem,2rem + 3vw,5rem);line-height:1}
+.listener{background:#E8F5F4;border-left:6px solid var(--teal);border-radius:var(--r-s);padding:10px 14px;margin-top:12px}
+.slipnote{margin-top:8px;padding:10px 14px;border-radius:var(--r-s);background:#F3EEFA;border-left:5px solid var(--plum)}
+
+/* phones: compact top bar (icons keep their aria-labels) */
+@media (max-width:560px){
+  .top .chip span{display:none}
+  .top .chip{padding:6px 10px;min-width:44px;justify-content:center}
+  .top .wrap{flex-wrap:nowrap}
+  .top .title{font-size:.88rem;min-width:0}
+  .nav .btn{padding:10px 8px}
+}
+/* whiteboard: no text under 18 px */
+@media (min-width:1600px){
+  .wrap{width:min(100%,1400px)}
+  .kicker,.tr .lang,.top .title small,.tag,.sec .n,.sec .status,.teamsel button,.seg button,.btn.small,.chip,.clock small,.note,.opt .k{font-size:max(18px,.9rem)}
+}
+/* ================= panels (settings, QR) ================= */
+.panel{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;background:rgba(31,27,51,.5);padding:16px}
+.panel.open{display:flex}
+.panel .box{background:var(--paper);border-radius:var(--r-l);padding:20px;width:min(100%,520px);max-height:92vh;overflow:auto;box-shadow:var(--shadow)}
+.panel .box h2{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.setlist{display:grid;gap:10px}
+.setlist .btn{justify-content:flex-start}
+.qr{width:min(78vw,62vh,520px);margin:0 auto;display:block;background:#fff;padding:10px;border-radius:var(--r-m)}
+.qr svg{display:block;width:100%;height:auto}
+.panel .box.qrbox{width:auto;max-width:96vw;text-align:center}
+
+/* ================= signature footer (Class of Coffee) ================= */
+.coc-footer{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:4px 16px; padding:7px 20px;
+  background:var(--coc-tan,#E6C496); color:var(--coc-coffee-dark,#5A2D0C);
+  font-family:var(--coc-body,'Nunito','Segoe UI',Verdana,sans-serif); font-size:13px; line-height:1.4;
+}
+.coc-footer__brand{ display:flex; align-items:center; gap:10px; font-weight:600; }
+.coc-footer__mark{ width:30px; height:30px; flex:none; }
+.coc-footer a{ color:inherit; text-decoration:underline; text-underline-offset:3px;
+  display:inline-flex; align-items:center; min-height:40px; padding:0 4px; }
+.coc-footer a:focus-visible{ outline:2px solid var(--coc-coffee-dark,#5A2D0C); outline-offset:3px; border-radius:4px; }
+.coc-footer{margin-top:18px;border-radius:var(--r-m)}
+</style>
+</head>
+<body>
+<div class="deco" aria-hidden="true"><span style="top:8%;left:-2%">🎬</span><span style="top:55%;right:-3%">📚</span><span style="bottom:-4%;left:30%">🍿</span></div>
+
+<header class="top">
+  <div class="wrap">
+    <button class="chip" data-act="home" aria-label="Menu">🏠 <span>Menu</span></button>
+    <h1 class="title" id="topTitle"></h1>
+    <button class="chip" data-act="modepage" id="modeChip" aria-label="Change mode"></button>
+    <button class="chip" data-act="settings" aria-label="Settings">⚙️ <span>Settings</span></button>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="screen" id="s-mode"></section>
+    <section class="screen" id="s-menu"></section>
+    <section class="screen" id="s-play"></section>
+    <section class="screen" id="s-speak"></section>
+    <section class="screen" id="s-end"></section>
+  </div>
+</main>
+
+<nav class="nav" id="nav" hidden>
+  <button class="btn" data-act="prev" id="prevBtn">◀ Previous</button>
+  <span class="count" id="navCount"></span>
+  <button class="btn primary" data-act="next" id="nextBtn">Next ▶</button>
+</nav>
+
+<div class="panel" id="p-settings" role="dialog" aria-modal="true" aria-labelledby="setTitle">
+  <div class="box">
+    <h2 id="setTitle">Settings <button class="btn small" data-act="close">✕ Close</button></h2>
+    <div class="setlist" id="setList"></div>
+  </div>
+</div>
+<div class="panel" id="p-qr" role="dialog" aria-modal="true" aria-label="QR code">
+  <div class="box qrbox">
+    <h2>Scan to open on your phone <button class="btn small" data-act="close">✕ Close</button></h2>
+    <div class="qr"><svg viewBox="0 0 41 41" role="img" aria-label="QR code for this page" xmlns="http://www.w3.org/2000/svg" class="segno"><path fill="#fff" d="M0 0h41v41h-41z"/><path class="qrline" stroke="#231e3d" d="M2 2.5h7m3 0h4m1 0h3m1 0h3m1 0h1m1 0h1m4 0h7m-37 1h1m5 0h1m2 0h1m1 0h1m3 0h1m1 0h1m6 0h1m2 0h2m1 0h1m5 0h1m-37 1h1m1 0h3m1 0h1m1 0h3m1 0h1m1 0h3m4 0h1m1 0h1m2 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-37 1h1m1 0h3m1 0h1m1 0h1m1 0h2m2 0h2m1 0h1m1 0h1m3 0h5m2 0h1m1 0h3m1 0h1m-37 1h1m1 0h3m1 0h1m1 0h3m1 0h1m2 0h1m3 0h3m1 0h1m1 0h1m2 0h1m1 0h1m1 0h3m1 0h1m-37 1h1m5 0h1m1 0h5m8 0h2m3 0h3m1 0h1m5 0h1m-37 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-29 1h1m9 0h2m1 0h1m4 0h1m-27 1h1m1 0h5m3 0h1m3 0h4m6 0h4m2 0h5m-32 1h2m5 0h1m3 0h2m2 0h3m2 0h1m4 0h2m1 0h1m2 0h2m-35 1h2m1 0h1m1 0h1m2 0h1m2 0h1m2 0h3m4 0h1m2 0h3m2 0h2m2 0h3m-37 1h3m4 0h1m1 0h2m4 0h1m2 0h4m2 0h1m1 0h1m1 0h4m4 0h1m-36 1h7m1 0h1m1 0h2m1 0h2m1 0h1m1 0h2m1 0h1m2 0h2m1 0h3m1 0h5m-37 1h1m1 0h1m2 0h1m1 0h1m1 0h2m1 0h2m2 0h5m2 0h1m4 0h2m1 0h1m-32 1h2m1 0h4m1 0h1m4 0h4m4 0h2m1 0h2m1 0h7m2 0h1m-34 1h1m3 0h4m2 0h1m7 0h2m1 0h1m2 0h2m2 0h2m2 0h1m-35 1h1m4 0h2m3 0h1m2 0h2m1 0h1m4 0h6m1 0h2m1 0h1m1 0h1m1 0h1m-37 1h1m1 0h1m1 0h1m2 0h5m1 0h1m1 0h2m1 0h2m3 0h1m1 0h1m2 0h1m2 0h1m1 0h1m1 0h1m-36 1h1m2 0h1m2 0h2m1 0h1m10 0h2m3 0h4m1 0h1m1 0h5m-36 1h2m2 0h1m2 0h6m2 0h1m2 0h1m1 0h2m4 0h1m1 0h1m3 0h1m2 0h1m-34 1h4m4 0h1m2 0h1m1 0h2m2 0h1m1 0h4m4 0h1m1 0h1m1 0h1m-34 1h2m1 0h1m3 0h2m1 0h1m2 0h1m1 0h6m1 0h1m1 0h1m2 0h2m3 0h1m1 0h1m-36 1h1m3 0h3m1 0h1m2 0h3m1 0h2m3 0h1m1 0h1m1 0h4m3 0h3m1 0h2m-37 1h1m2 0h2m3 0h1m1 0h2m2 0h1m3 0h1m1 0h2m4 0h7m-31 1h1m1 0h5m1 0h1m1 0h2m1 0h2m1 0h3m1 0h1m1 0h4m1 0h4m1 0h2m-36 1h1m2 0h3m3 0h2m1 0h1m1 0h2m2 0h3m2 0h3m2 0h1m2 0h1m1 0h1m-34 1h1m1 0h3m1 0h2m1 0h2m1 0h1m1 0h3m3 0h1m1 0h1m2 0h4m1 0h2m1 0h4m-37 1h1m4 0h1m1 0h1m2 0h4m1 0h1m2 0h1m1 0h5m3 0h6m1 0h1m-36 1h1m2 0h2m1 0h1m1 0h3m1 0h6m1 0h1m5 0h8m1 0h2m-28 1h1m1 0h1m1 0h2m2 0h1m1 0h3m2 0h1m1 0h1m1 0h2m3 0h2m-34 1h7m3 0h1m3 0h3m1 0h1m1 0h2m3 0h2m1 0h1m1 0h1m1 0h1m1 0h3m-37 1h1m5 0h1m1 0h3m3 0h3m1 0h1m2 0h2m1 0h1m1 0h1m1 0h1m3 0h2m1 0h1m-36 1h1m1 0h3m1 0h1m1 0h1m1 0h2m3 0h1m2 0h2m2 0h2m1 0h8m1 0h2m-36 1h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h8m2 0h1m6 0h1m1 0h2m2 0h1m-37 1h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h3m7 0h1m2 0h2m1 0h1m4 0h4m-37 1h1m5 0h1m3 0h1m5 0h1m1 0h1m1 0h5m1 0h1m1 0h3m1 0h2m2 0h1m-37 1h7m1 0h1m1 0h5m2 0h1m1 0h1m2 0h5m2 0h2m1 0h5"/></svg></div>
+    <p class="note" id="qrUrl"></p>
+  </div>
+</div>
+
+<script>
+/* ================= CONTENT (edit here) ================= */
+/*
+  All text students see is here. Notes on the formats:
+  - SORT lists (section 1): w = the word or phrase, chunk = how it is used (the word
+    is shown in bold automatically), ex = example sentence (always visible), p = '+' (positive) or '-' (negative),
+    ca / es = Catalan and Spanish translations (shown after the answer; on talk cards, always).
+  - TALK cards (section 1, unscored): words whose meaning depends on the genre or the viewer.
+  - REVIEWS (section 2): kind = 'blurb' | 'review' | 'spoiler'; stars = 1–5 (reviews only);
+    medium = book | film | series; text uses ___ for the gap; opts = three options in a fixed
+    order; a = index of the right option (0, 1 or 2); note = short explanation after answering.
+  - main lists are played by every team; reserve items are used only to complete the last
+    round when the main items do not divide evenly between the teams (and always in Just me).
+*/
+const CONTENT = {
+  title: 'Reviewing books, films and series',
+  level: 'B2.2',
+  canDo: 'I can describe a book, film or series and explain what worked and what didn’t.',
+  credit: 'Class of Coffee – with AI assistance',
+  url: 'https://as1-design.github.io/improvedlessons/b22-reviewing-books-and-films.html',
+
+  sections: [
+    { id:'sort',     n:1, em:'👍', name:'Thumbs up or down',      desc:'Is it praise or a complaint? Sort the words, then talk about the tricky ones.' },
+    { id:'reviews',  n:2, em:'⭐', name:'Mini-reviews',           desc:'Blurbs, star ratings and spoiler posts. Choose the missing word.' },
+    { id:'speak',    n:3, em:'🎤', name:'Thirty-second review',   desc:'Plan for a minute, then review something in pairs.' },
+    { id:'mistakes', n:4, em:'🔁', name:'Mistakes round',         desc:'Your mistakes come back until you get them right, plus common slips.' },
+  ],
+
+  SORT: {
+    introA: { title:'Round A · Words from your coursebook', text:'Is each word praise (👍) or a complaint (👎)? Read the example to help you decide. The Catalan and Spanish translations appear after you answer.' },
+    introB: { title:'Round B · New words and phrases', text:'These words work for books, films and series. Some are only for one of them: look at the labels.' },
+    a: [
+      { w:'gripping', ca:'apassionant, que enganxa', es:'apasionante, que engancha',          chunk:'a gripping plot',            p:'+', ex:'I meant to read one chapter before bed, but the plot was so gripping that I finished the book at 3 a.m.' },
+      { w:'heavy going', ca:'feixuc, pesat', es:'pesado, denso',       chunk:'it was heavy going',         p:'-', ex:'The first hundred pages were heavy going: long descriptions and almost no action.' },
+      { w:'haunting', ca:'inoblidable, colpidor', es:'inolvidable, evocador',          chunk:'a haunting soundtrack',      p:'+', ex:'The music in that film was so haunting that I was still humming it a week later.' },
+      { w:'intriguing', ca:'intrigant', es:'intrigante',        chunk:'an intriguing opening',      p:'+', ex:'The opening scene is intriguing: a letter arrives forty years too late.' },
+      { w:'implausible', ca:'inversemblant', es:'inverosímil',       chunk:'implausible dialogue',       p:'-', ex:'The dialogue was implausible: real people just don’t talk like that.' },
+      { w:'moving', ca:'commovedor, emotiu', es:'conmovedor, emotivo',            chunk:'a moving ending',            p:'+', ex:'The last episode was so moving that the whole family was in tears.' },
+      { w:'fast-paced', ca:'trepidant, amb molt de ritme', es:'trepidante, con mucho ritmo',        chunk:'a fast-paced thriller',      p:'+', ex:'It’s a fast-paced thriller: something happens on every page.' },
+      { w:'heart-warming', ca:'entranyable, reconfortant', es:'entrañable, reconfortante',     chunk:'a heart-warming story',      p:'+', ex:'It’s a heart-warming story about a grumpy neighbour who slowly becomes part of the community.' },
+      { w:'thought-provoking', ca:'que fa pensar', es:'que da que pensar', chunk:'a thought-provoking documentary', p:'+', ex:'It’s a thought-provoking documentary that made me rethink how much I use my phone.' },
+    ],
+    talkA: [
+      { w:'creepy', ca:'inquietant, esgarrifós', es:'inquietante, espeluznante', chunk:'a creepy atmosphere', em:'👻', q:'Is “creepy” a compliment for a horror film? And for a film for young children?', ex:'The old house in the film had a really creepy atmosphere.' },
+    ],
+    b: [
+      { w:'a page-turner', ca:'un llibre que enganxa', es:'un libro que engancha',        tag:'books',            chunk:'a real page-turner',           p:'+', ex:'Pack it for the beach: it’s a real page-turner.' },
+      { w:'predictable', ca:'previsible', es:'predecible, previsible',          chunk:'a predictable plot',           p:'-', ex:'The plot was so predictable that I guessed the ending in the first ten minutes.' },
+      { w:'binge-watch', ca:'fer una marató (de sèries), fer-se un tip de veure', es:'hacer un maratón (de series), darse un atracón',          tag:'series',           chunk:'I binge-watched it',          p:'+', ex:'I binge-watched the whole series in one weekend.', note:'UK: the whole series · US: the whole show / season.' },
+      { w:'wooden', ca:'(interpretació) encarcarada, rígida', es:'(actuación) acartonada, rígida',               tag:'films and series', chunk:'wooden acting',               p:'-', ex:'The story is good, but the acting is wooden: nobody seems to feel anything.' },
+      { w:'well-drawn', ca:'ben construïts, ben perfilats', es:'bien construidos, bien perfilados',           chunk:'well-drawn characters',        p:'+', ex:'The characters are so well-drawn that they feel like people you know.' },
+      { w:'far-fetched', ca:'rebuscat, forçat, poc creïble', es:'rebuscado, traído por los pelos',          chunk:'a far-fetched plot',           p:'-', ex:'A teenager breaks into a bank with a calculator? It’s a bit far-fetched.' },
+      { w:'it drags', ca:'es fa llarg', es:'se hace largo',             chunk:'it drags in the middle',       p:'-', ex:'The film starts well, but it drags in the middle.' },
+      { w:'relatable', ca:'amb qui t\u2019identifiques', es:'con quien te identificas',            chunk:'relatable characters',         p:'+', ex:'The characters are very relatable: they argue about the washing-up, just like us.' },
+      { w:'overrated', ca:'sobrevalorat', es:'sobrevalorado',            chunk:'it’s overrated',               p:'-', ex:'Everyone raves about it, but I think it’s overrated.' },
+      { w:'uplifting', ca:'esperançador, que t\u2019anima', es:'esperanzador, que te levanta el ánimo',            chunk:'an uplifting ending',          p:'+', ex:'After a sad start, the ending is surprisingly uplifting.' },
+      { w:'one-dimensional', ca:'plans, sense matisos', es:'planos, sin matices',      chunk:'one-dimensional characters',   p:'-', ex:'The villain is one-dimensional: evil from start to finish, with no backstory.' },
+      { w:'convincing', ca:'(interpretació) convincent', es:'(actuación) convincente',           tag:'films and series', chunk:'convincing acting',           p:'+', ex:'The acting is so convincing that you forget they’re actors.' },
+      { w:'hard to get into', ca:'costa entrar-hi, costa enganxar-s\u2019hi', es:'cuesta meterse, cuesta engancharse',     chunk:'it’s hard to get into',        p:'-', ex:'It’s hard to get into: the first episode introduces about twenty characters.' },
+      { w:'a must-read / a must-see', ca:'de lectura obligada / imprescindible', es:'de lectura obligada / imprescindible', chunk:'it’s a must-see',          p:'+', ex:'If you liked the book, the series is a must-see.', note:'a must-read (books) · a must-see (films and series)' },
+      { w:'didn’t live up to the hype', ca:'no va estar a l\u2019altura de les expectatives', es:'no estuvo a la altura de las expectativas', chunk:'it didn’t live up to the hype', p:'-', ex:'After all the posters and trailers, it didn’t live up to the hype.' },
+    ],
+    bReserve: [
+      { w:'laugh-out-loud funny', ca:'per morir-se de riure', es:'para partirse de risa', chunk:'it’s laugh-out-loud funny',    p:'+', ex:'It’s laugh-out-loud funny: I had to stop reading on the bus because people were staring.' },
+      { w:'it grew on me', ca:'m\u2019ha anat agradant cada cop més', es:'me fue gustando cada vez más',        chunk:'the series grew on me',        p:'+', ex:'I didn’t like the first episode, but the series grew on me.' },
+      { w:'rushed', ca:'precipitat', es:'precipitado',               chunk:'the ending felt rushed',       p:'-', ex:'The ending felt rushed, as if the writers had run out of time.' },
+    ],
+    talkB: [
+      { w:'bleak', ca:'desolador, desesperançat', es:'desolador, sombrío',          chunk:'a bleak ending',    em:'🌧️', q:'Can a bleak story still be a good one? Think of an example.', ex:'The ending is bleak: nobody gets what they wanted.' },
+      { w:'a tearjerker', ca:'una pel·lícula (o història) llagrimosa, lacrimògena', es:'lacrimógeno, un dramón',   chunk:'a real tearjerker', em:'😭', q:'Do you enjoy tearjerkers, or do you avoid them?', ex:'Take tissues: it’s a real tearjerker.' },
+      { w:'a slow burner', ca:'que va de menys a més', es:'que va de menos a más',  chunk:'a slow burner',     em:'🕯️', q:'Would you give a slow burner three episodes, or stop after one?', ex:'It’s a slow burner, but by episode four I was hooked.' },
+      { w:'slow-paced', ca:'de ritme lent, pausat', es:'de ritmo lento, pausado',     chunk:'a slow-paced film', em:'🐢', q:'When is “slow-paced” a good thing?', ex:'It’s slow-paced, which gives you time to get to know the characters.' },
+      { w:'a cliffhanger', ca:'un final que et deixa amb l\u2019ai al cor', es:'un final que te deja en vilo',  chunk:'it ends on a cliffhanger', em:'🧗', q:'Do cliffhangers make you watch more, or do they annoy you?', ex:'Every episode ends on a cliffhanger, so it’s hard to stop.' },
+      { w:'a plot twist', ca:'un gir argumental', es:'un giro argumental, un giro de guion',   chunk:'a clever plot twist', em:'🌀', q:'What makes a plot twist feel clever and not cheap?', ex:'I didn’t see the plot twist coming at all.' },
+    ],
+  },
+
+  REVIEWS: {
+    intro: { title:'Mini-reviews', text:'Read the blurb, review or post. Choose the word that fits the meaning.' },
+    main: [
+      { kind:'blurb',   medium:'book',   title:'The Salt House',   text:'A ___ thriller that you won’t be able to put down until the very last page.', opts:['gripping','predictable','far-fetched'], a:0, note:'You can’t put it down, so the plot holds your attention: gripping.' },
+      { kind:'review',  stars:5, medium:'film', title:'Northbound', text:'I cried through the last twenty minutes. A truly ___ film about two old friends saying goodbye.', opts:['fast-paced','implausible','moving'], a:2, note:'It made the reviewer cry: moving.' },
+      { kind:'review',  stars:2, medium:'series', title:'Firm Ground', text:'Season 1 was brilliant, but the middle of season 2 is so ___: four episodes where nothing happens!', opts:['slow-paced','fast-paced','gripping'], a:0, note:'Nothing happens, so it moves slowly: slow-paced. UK: series 2 · US: season 2.' },
+      { kind:'spoiler', medium:'book',   title:'The Glass Orchard', text:'I did not see that ___ coming. The narrator was the thief all along!', opts:['cliffhanger','plot twist','tearjerker'], a:1, note:'A surprise that changes the story is a plot twist. A cliffhanger leaves the story unfinished at the end of a chapter or episode.' },
+      { kind:'review',  stars:1, medium:'book',  title:'Crown of Ash', text:'The characters are completely ___. The villain is evil, the hero is perfect, and nobody ever changes.', opts:['relatable','well-drawn','one-dimensional'], a:2, note:'Characters with only one side to them are one-dimensional.' },
+      { kind:'review',  stars:2, medium:'film',  title:'Red Line', text:'The acting was so ___ that I couldn’t believe a single character. They sounded as if they were reading a shopping list.', opts:['convincing','wooden','uplifting'], a:1, note:'Stiff acting with no emotion is wooden.' },
+      { kind:'review',  stars:4, medium:'book',  title:'Small Hours', text:'It was ___ at first, but it grew on me and I loved the ending.', opts:['hard to get into','heart-warming','a must-read'], a:0, note:'“At first” and “it grew on me” tell you the start was difficult: hard to get into.' },
+      { kind:'blurb',   medium:'film',   title:'Paper Moons', text:'A ___ comedy: the funniest film of the year.', opts:['bleak','laugh-out-loud','thought-provoking'], a:1, note:'The funniest film of the year makes you laugh out loud.' },
+      { kind:'review',  stars:2, medium:'series', title:'Kingsbridge Road', text:'Everyone told me it was amazing, but honestly, it’s ___. It didn’t live up to the hype.', opts:['overrated','uplifting','intriguing'], a:0, note:'Praised more than it deserves: overrated.' },
+      { kind:'spoiler', medium:'film',   title:'The Long Field', text:'The ending felt really ___: two hours of slow build-up, then everything was solved in five minutes.', opts:['haunting','rushed','moving'], a:1, note:'Everything solved too quickly: rushed.' },
+      { kind:'review',  stars:5, medium:'book',  title:'Paper Lanterns', text:'A wonderfully ___ story about a neighbourhood that comes together after a flood. It made me feel good about people again.', opts:['bleak','creepy','uplifting'], a:2, note:'It made the reviewer feel good: uplifting.' },
+      { kind:'review',  stars:1, medium:'film',  title:'Garden Wars', text:'The plot was totally ___. A retired teacher fights an army with a garden hose? Come on!', opts:['gripping','relatable','far-fetched'], a:2, note:'Very hard to believe: far-fetched.' },
+    ],
+    reserve: [
+      { kind:'review',  stars:3, medium:'series', title:'Night Ferry', text:'Every episode ends on a ___, so it’s impossible to stop after just one.', opts:['cliffhanger','tearjerker','page-turner'], a:0, note:'An unfinished, exciting ending to an episode is a cliffhanger.' },
+      { kind:'blurb',   medium:'book',   title:'The Lisbon Account', text:'Set in 1920s Lisbon, this ___ novel asks difficult questions about love, money and loyalty.', opts:['laugh-out-loud','thought-provoking','creepy'], a:1, note:'It asks difficult questions: thought-provoking.' },
+      { kind:'review',  stars:2, medium:'book',  title:'Blue Harbour', text:'I guessed the ending on page twenty. Very ___.', opts:['haunting','intriguing','predictable'], a:2, note:'You can guess the ending: predictable.' },
+    ],
+  },
+
+  SPEAK: {
+    intro: 'Work in pairs. Take a card, plan for one minute, then speak for about thirty seconds. Films, series and podcasts count too.',
+    frame: [
+      { h:'It starts…',            t:'It’s set in… / It’s told from the point of view of… / It revolves around…' },
+      { h:'By the middle…',        t:'It’s gripping / it drags / it grew on me / there’s a plot twist…' },
+      { h:'What stays with you…',  t:'What stays with you is… / The ending is… / I’d recommend it to anyone who…' },
+    ],
+    listener: 'Listener: when your partner finishes, say whether you would read or watch it, and why. Use one word from the toolbox. Then swap roles.',
+    toolbox: ['gripping','fast-paced','haunting','moving','heart-warming','intriguing','thought-provoking','creepy','heavy going','implausible',
+              'a page-turner','predictable','far-fetched','it drags','well-drawn','one-dimensional','relatable','uplifting','bleak','a tearjerker',
+              'a slow burner','a cliffhanger','a plot twist','convincing / wooden acting','overrated','hard to get into','it grew on me','a must-read / a must-see','didn’t live up to the hype'],
+    planSecs: 60, speakSecs: 30,
+    cards: [
+      { em:'🗣️', t:'A book, film or series you couldn’t stop talking about' },
+      { em:'🛑', t:'A series you gave up on' },
+      { em:'🤷', t:'A film everyone loved, but you didn’t' },
+      { em:'😢', t:'Something that made you cry' },
+      { em:'🌀', t:'Something with a twist you didn’t see coming (no spoilers!)' },
+      { em:'📖', t:'A film or series that was better than the book, or worse' },
+      { em:'🐌', t:'Something that was hard to get into but grew on you' },
+      { em:'🛋️', t:'A series you’d recommend for a long weekend at home' },
+      { em:'🧒', t:'A book or film from your childhood. Would it still work today?' },
+      { em:'📍', t:'A film or series set in a place you know' },
+      { em:'🔥', t:'Something everyone is talking about right now. Is it worth the hype?' },
+      { em:'⏱️', t:'The last thing you read or watched' },
+    ],
+  },
+
+  /* Common slips (section 4). Two options in a fixed order; note compares Catalan and Spanish. */
+  SLIPS: [
+    { text:'I was so ___ that I fell asleep in the cinema.', opts:['bored','boring'], a:0,
+      note:'<b>bored</b> = how you feel; <b>boring</b> = what the film is like. Catalan <i>avorrit</i> and Spanish <i>aburrido</i> cover both meanings.' },
+    { text:'The ___ is about a family who inherit an old hotel.', opts:['argument','plot'], a:1,
+      note:'Catalan <i>l’argument</i> and Spanish <i>el argumento</i> = the <b>plot</b>. In English, an <b>argument</b> is a disagreement or a set of reasons.' },
+    { text:'The film is ___ a true story.', opts:['based on','based in'], a:0,
+      note:'Catalan <i>basada en</i> and Spanish <i>basada en</i> → <b>based on</b>.' },
+    { text:'The series is ___ 1980s Glasgow.', opts:['situated in','set in'], a:1,
+      note:'Catalan <i>ambientada a</i> and Spanish <i>ambientada en</i> → <b>set in</b>.' },
+  ],
+
+  UI: {
+    modeTitle:'How are you playing today?',
+    teams:{ em:'🏆', name:'Teams', desc:'On the board. Teams take turns; 2 points for a right first answer, 1 point for a right second answer.' },
+    solo:{ em:'📱', name:'Just me', desc:'On your phone, at your own pace. Your progress is saved on this device.' },
+    teamNames:['Team 1','Team 2','Team 3','Team 4'], teamSyms:['★','▲','●','◆'],
+    pos:'👍 Positive', neg:'👎 Negative',
+  },
+};
+
+/* ================= state ================= */
+const KEY = 'b22reviews.v1', PREFKEY = 'b22reviews.prefs';
+let S = null;           // progress (saved)
+let prefs = { sound:true, hurry:10 };
+let V = { screen:'mode', ex:false };    // view-only state (not saved)
+
+function freshState(){
+  return { v:1, mode:null, nTeams:2, teams:[], last:null,
+    sec:{ sort:null, reviews:null, speak:{ order:null, i:0 }, mistakes:{ hist:[], pos:0 } },
+    mistakes:[],      // keys of items to review
+    mastered:[] };    // slip keys answered right first time
+}
+
+/* ================= logic: items ================= */
+const C = CONTENT;
+function getItem(k){
+  const [src, id] = k.split(':');
+  const pick = { sa:C.SORT.a, sb:C.SORT.b, sr:C.SORT.bReserve, rm:C.REVIEWS.main, rr:C.REVIEWS.reserve, sl:C.SLIPS, ta:C.SORT.talkA, tb:C.SORT.talkB }[src];
+  if (!pick || !/^\d+$/.test(id) || !pick[+id]) return null;
+  if (src==='sa' || src==='sb' || src==='sr'){
+    const list = src==='sa' ? C.SORT.a : src==='sb' ? C.SORT.b : C.SORT.bReserve;
+    const it = list[+id]; return { kind:'sort', ...it, opts:[C.UI.pos, C.UI.neg], a: it.p==='+' ? 0 : 1 };
+  }
+  if (src==='rm' || src==='rr'){ const it = (src==='rm' ? C.REVIEWS.main : C.REVIEWS.reserve)[+id]; return { kind:'mc', ...it }; }
+  if (src==='sl'){ return { kind:'slip', ...C.SLIPS[+id] }; }
+  if (src==='ta'){ return { kind:'talk', ...C.SORT.talkA[+id] }; }
+  if (src==='tb'){ return { kind:'talk', ...C.SORT.talkB[+id] }; }
+  return null;
+}
+const keys = (pre, list) => list.map((_, i) => pre + ':' + i);
+
+/* Fair turns: main items in full rounds; reserves fill the last round if needed. */
+function fairList(main, reserve){
+  if (S.mode !== 'teams') return main.concat(reserve);
+  const n = S.nTeams, rem = main.length % n;
+  if (!rem) return main.slice();
+  const need = n - rem;
+  return need <= reserve.length ? main.concat(reserve.slice(0, need)) : main.slice(0, main.length - rem);
+}
+
+function buildSection(id){
+  let steps = [];
+  if (id === 'sort'){
+    const qa = keys('sa', C.SORT.a), qb = keys('sb', C.SORT.b), qr = keys('sr', C.SORT.bReserve);
+    // Fair turns are counted across both rounds together.
+    const all = fairList(qa.concat(qb), qr);
+    const inA = all.filter(k => k.startsWith('sa')), inB = all.filter(k => !k.startsWith('sa'));
+    steps.push({ t:'phase', k:'introA' }); inA.forEach(k => steps.push({ t:'q', k }));
+    keys('ta', C.SORT.talkA).forEach(k => steps.push({ t:'talk', k }));
+    steps.push({ t:'phase', k:'introB' }); inB.forEach(k => steps.push({ t:'q', k }));
+    keys('tb', C.SORT.talkB).forEach(k => steps.push({ t:'talk', k }));
+  }
+  if (id === 'reviews'){
+    steps.push({ t:'phase', k:'intro' });
+    fairList(keys('rm', C.REVIEWS.main), keys('rr', C.REVIEWS.reserve)).forEach(k => steps.push({ t:'q', k }));
+  }
+  let qi = 0; steps.forEach(s => { if (s.t==='q') s.n = qi++; });
+  S.sec[id] = { steps, pos:0, ans:{}, done:false, nq:qi, nTeams:S.mode==='teams'?S.nTeams:0 };
+}
+
+function teamFor(sec, step){ return sec.nTeams ? step.n % sec.nTeams : -1; }
+
+function addMistake(k){ if (!S.mistakes.includes(k)) S.mistakes.push(k); }
+function removeMistake(k){ S.mistakes = S.mistakes.filter(x => x !== k); }
+
+/* Answer a question. Returns nothing; updates the record. */
+function answer(rec, item, choice, opts){
+  if (rec.final || rec.tries.includes(choice)) return;
+  rec.tries.push(choice);
+  const right = choice === item.a;
+  const late = !!opts.late;
+  if (rec.tries.length === 1) rec.late = late;
+  if (right){
+    rec.final = true; rec.first = rec.tries.length === 1;
+    rec.pts = late ? 0 : (rec.tries.length === 1 ? 2 : 1);
+  } else {
+    if (rec.tries.length === 1 && opts.mistakeKey) addMistake(opts.mistakeKey);
+    if (item.opts.length < 3 || rec.tries.length >= 2){ rec.final = true; rec.first = false; rec.pts = 0; }
+  }
+  if (late) rec.pts = 0;
+}
+
+function scores(sec){
+  const t = Array(S.nTeams).fill(0);
+  Object.values(sec.ans).forEach(r => { if (r.team >= 0 && r.final) t[r.team] += r.pts || 0; });
+  return t;
+}
+
+/* Mistakes round: queue = learner's mistakes + common slips not yet mastered. */
+function mistakeQueue(){
+  const slips = keys('sl', C.SLIPS).filter(k => !S.mastered.includes(k) && !S.mistakes.includes(k));
+  return S.mistakes.concat(slips);
+}
+
+/* ================= thinking time (Teams mode) ================= */
+const QT = { start:0, stopped:null, hurryEnd:null, paused:false, pausedAt:0, ticked:-1, int:null, up:false };
+function qtStart(){ Object.assign(QT, { start:Date.now(), stopped:null, hurryEnd:null, paused:false, up:false, ticked:-1 }); qtLoop(); }
+function qtStop(){ if (QT.stopped === null) QT.stopped = Date.now(); }
+function qtHurry(){ if (QT.stopped !== null || QT.paused) return; QT.hurryEnd = Date.now() + prefs.hurry*1000; QT.up = false; drawTimer(); }
+function qtPause(){
+  if (QT.stopped !== null) return;
+  if (!QT.paused){ QT.paused = true; QT.pausedAt = Date.now(); }
+  else { const d = Date.now() - QT.pausedAt; QT.start += d; if (QT.hurryEnd) QT.hurryEnd += d; QT.paused = false; }
+  drawTimer();
+}
+function qtTimeUp(){ return !!QT.hurryEnd && (QT.up || Date.now() >= QT.hurryEnd); }
+function qtLoop(){ clearInterval(QT.int); QT.int = setInterval(drawTimer, 200); }
+function qtElapsed(){ const end = QT.stopped ?? (QT.paused ? QT.pausedAt : Date.now()); return Math.max(0, end - QT.start); }
+function qtLeft(){ if (!QT.hurryEnd) return null; const now = QT.stopped ?? (QT.paused ? QT.pausedAt : Date.now()); return Math.max(0, QT.hurryEnd - now); }
+
+/* ================= display helpers ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = ms => { const s = Math.floor(ms/1000); return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0'); };
+let lastShown = '';
+function show(id, animKey){
+  document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === 's-' + id));
+  const el = $('#s-' + id);
+  if (animKey !== lastShown){ el.classList.remove('enter'); void el.offsetWidth; el.classList.add('enter'); lastShown = animKey; }
+}
+function setTop(sub){
+  $('#topTitle').innerHTML = `${esc(C.title)} <small>${esc(C.level)}${sub ? ' · ' + esc(sub) : ''}</small>`;
+  $('#modeChip').innerHTML = S.mode === 'teams' ? `🏆 <span>Teams (${S.nTeams})</span>` : S.mode === 'solo' ? `📱 <span>Just me</span>` : `🎛️ <span>Mode</span>`;
+}
+function setNav(on, prevOk, nextOk, count, nextLabel){
+  const nav = $('#nav'); nav.hidden = !on; document.body.classList.toggle('hasnav', on);
+  if (!on) return;
+  $('#prevBtn').disabled = !prevOk; $('#nextBtn').disabled = !nextOk;
+  $('#navCount').textContent = count || '';
+  $('#nextBtn').textContent = nextLabel || 'Next ▶';
+}
+const footer = () => `<footer class="coc-footer"><span class="coc-footer__brand"><svg class="coc-footer__mark" xmlns="http://www.w3.org/2000/svg" viewBox="4 4 48 48" aria-hidden="true" focusable="false"><path d="M42.57 20.25A16.5 16.5 0 1 0 42.57 35.75L38.77 33.73A12.2 12.2 0 1 1 38.77 22.27Z" fill="#EDE3D6"/><path d="M42.57 20.25A16.5 16.5 0 1 0 42.57 35.75L40.89 34.85A14.6 14.6 0 1 1 40.89 21.15Z" fill="#D9C8B2"/><path d="M48.31 17.2A23 23 0 1 0 48.31 38.8A3.25 3.25 0 0 0 42.57 35.75A16.5 16.5 0 1 1 42.57 20.25A3.25 3.25 0 0 0 48.31 17.2Z" fill="#A2521A" stroke="#5A2D0C" stroke-width="1.8" stroke-linejoin="round"/><circle cx="28" cy="28" r="12.2" fill="#744823" stroke="#5A3517" stroke-width="1"/><path d="M32.5 22.64A7.0 7.0 0 1 0 32.5 33.36L32.64 32.21A5.5 5.5 0 1 1 32.64 23.79Z" fill="#F3E2BF" stroke="#F3E2BF" stroke-width="0.7" stroke-linejoin="round"/></svg><span>${esc(C.credit)}</span></span><a href="https://classofcoffee.com">classofcoffee.com</a></footer>`;
+
+/* ================= display: mode page ================= */
+function renderMode(){
+  setTop('Choose a mode'); setNav(false);
+  const u = C.UI, t = S.mode === 'teams', so = S.mode === 'solo';
+  $('#s-mode').innerHTML = `
+    <div class="hero"><h2>Reviewing <span class="pop">books, films</span> and series</h2>
+      <div class="cando"><b>Today:</b> ${esc(C.canDo)}</div></div>
+    <h2>${esc(u.modeTitle)}</h2>
+    <div class="modes">
+      <div class="modecard" ${t?'aria-pressed="true"':''}>
+        <div class="big">${u.teams.em}</div><h3>${esc(u.teams.name)}</h3><p>${esc(u.teams.desc)}</p>
+        <div class="kicker">How many teams?</div>
+        <div class="teamsel">${[2,3,4].map(n => `<button data-act="teams" data-n="${n}" aria-pressed="${t && S.nTeams===n}">${n} teams</button>`).join('')}</div>
+      </div>
+      <div class="modecard" ${so?'aria-pressed="true"':''}>
+        <div class="big">${u.solo.em}</div><h3>${esc(u.solo.name)}</h3><p>${esc(u.solo.desc)}</p>
+        <button class="btn primary" data-act="solo">Play on my own</button>
+      </div>
+    </div>
+    <p class="note">You can come back to this page at any time with the mode button at the top. Changing mode keeps your progress.</p>
+    ${footer()}`;
+  show('mode', 'mode');
+}
+
+/* ================= display: menu ================= */
+function secProgress(id){
+  if (id === 'speak'){ const sp = S.sec.speak; return { done: sp.i, total: C.SPEAK.cards.length, label: sp.i ? `Card ${sp.i+1} of ${C.SPEAK.cards.length}` : 'Not started' }; }
+  if (id === 'mistakes'){ const n = mistakeQueue().length; return { done: 0, total: 0, label: n ? `${n} to practise` : 'Nothing to review yet' , n }; }
+  const sec = S.sec[id];
+  if (!sec) return { done:0, total:1, label:'Not started' };
+  const answered = Object.values(sec.ans).filter(r => r.final).length;
+  return { done: answered, total: sec.nq, label: sec.done ? `Finished · ${answered} of ${sec.nq}` : `${answered} of ${sec.nq} answered` };
+}
+function renderMenu(){
+  setTop('Menu'); setNav(false);
+  const cards = C.sections.map(s => {
+    const p = secProgress(s.id);
+    const pct = p.total ? Math.round(100*p.done/p.total) : 0;
+    const started = s.id==='mistakes' ? false : (s.id==='speak' ? S.sec.speak.i>0 : !!S.sec[s.id]);
+    const go = s.id==='mistakes' ? 'Practise ▶' : (S.sec[s.id] && S.sec[s.id].done) ? 'Results ▶' : started ? 'Resume ▶' : 'Start ▶';
+    return `<button class="sec" data-act="open" data-id="${s.id}">
+      <span class="n">WARM-UP ${s.n}</span><span class="em">${s.em}</span><h3>${esc(s.name)}</h3><p>${esc(s.desc)}</p>
+      ${s.id==='mistakes' ? '' : `<span class="bar" aria-hidden="true"><i style="width:${pct}%"></i></span>`}
+      <span class="status">${esc(p.label)}</span><span class="go">${go}</span></button>`;
+  }).join('');
+  const last = S.last && C.sections.find(s => s.id === S.last);
+  $('#s-menu').innerHTML = `
+    <div class="hero"><h2>Reviewing <span class="pop">books, films</span> and series</h2>
+      <div class="cando"><b>Today:</b> ${esc(C.canDo)}</div></div>
+    ${last ? `<div class="row" style="justify-content:center"><button class="btn primary" data-act="open" data-id="${last.id}">▶ Resume: ${esc(last.name)}</button></div>` : ''}
+    <div class="menu">${cards}</div>
+    ${footer()}`;
+  show('menu', 'menu');
+}
+
+/* ================= display: question sections ================= */
+function curSecId(){ return V.sec; }
+function renderTeams(sec, step){
+  if (!sec.nTeams || S.mode !== 'teams') return '';
+  const sc = scores(sec), cur = step && step.t==='q' ? teamFor(sec, step) : -1;
+  return `<div class="teams">${sc.map((p,i) => `<div class="team ${i===cur?'now':''}"><span class="sym" aria-hidden="true">${C.UI.teamSyms[i]}</span><span>${esc(C.UI.teamNames[i])}</span><span class="pts" aria-label="${p} points">${p}</span></div>`).join('')}</div>`;
+}
+function renderPlay(){
+  const id = V.sec, sec = S.sec[id], meta = C.sections.find(s => s.id === id);
+  setTop(meta.name);
+  const step = sec.steps[sec.pos];
+  const qCount = sec.nq, qNow = step.t==='q' ? step.n + 1 : null;
+  let html = '';
+  if (step.t === 'phase'){
+    const ph = id==='sort' ? C.SORT[step.k] : C.REVIEWS.intro;
+    html = `<div class="ticket edge teal"><div class="kicker">Warm-up ${meta.n} · ${esc(meta.name)}</div>
+      <h2 class="phase" style="font-size:clamp(1.5rem,1.1rem + 1.8vw,2.6rem)">${esc(ph.title)}</h2><p style="font-size:1.15em">${esc(ph.text)}</p>
+      ${sec.nTeams && S.mode==='teams' ? `<p class="note">${sec.nTeams} teams · ${Math.floor(qCount/sec.nTeams)} turns each · round ${roundOf(sec, step)} of ${Math.ceil(qCount/sec.nTeams)}. Press <b>H</b> or “Hurry up” if a team needs a countdown.</p>` : ''}
+    </div>`;
+  } else if (step.t === 'talk'){
+    const it = getItem(step.k);
+    html = `<div class="ticket edge gold talk"><div class="kicker">🤔 It depends · Talk about it</div>
+      <div class="em" aria-hidden="true">${it.em}</div>
+      <div class="word">${esc(it.w)}</div>
+      <div class="chunk">${boldIn(it.chunk, it.w)}</div>
+      <p class="example">${esc(it.ex)}</p>
+      ${trHtml(it)}
+      <p class="q">${esc(it.q)}</p>
+      <p class="note">No points: discuss in your team for a minute, then share one idea with the class.</p></div>`;
+  } else {
+    html = renderQ(sec, step);
+  }
+  const teamsHtml = renderTeams(sec, step);
+  const turn = (step.t==='q' && sec.nTeams && S.mode==='teams') ? renderTurnLine(sec, step) : '';
+  $('#s-play').innerHTML = teamsHtml + turn + html;
+  const rec = sec.ans[sec.pos];
+  const answered = step.t !== 'q' || (rec && rec.final);
+  const isLast = sec.pos === sec.steps.length - 1;
+  setNav(true, sec.pos > 0, answered, qNow ? `${qNow} / ${qCount}` : '', isLast ? 'Finish ▶' : 'Next ▶');
+  show('play', id + ':' + sec.pos);
+  if (step.t==='q' && sec.nTeams && S.mode==='teams' && !(rec && rec.final)) { if (V.timerFor !== id+':'+sec.pos){ V.timerFor = id+':'+sec.pos; qtStart(); } drawTimer(); }
+  else { clearInterval(QT.int); V.timerFor = null; }
+}
+function roundOf(sec, step){
+  if (!sec.nTeams) return 1;
+  let n = step.n; if (n === undefined){ const nx = sec.steps.slice(sec.pos).find(s => s.t==='q'); n = nx ? nx.n : sec.nq - 1; }
+  return Math.floor(n / sec.nTeams) + 1;
+}
+function renderTurnLine(sec, step){
+  const t = teamFor(sec, step), rec = sec.ans[sec.pos];
+  const done = rec && rec.final;
+  return `<div class="turnline"><span class="who">${C.UI.teamSyms[t]} ${esc(C.UI.teamNames[t])}${done ? ' answered' : '’s turn'}</span>
+    <span class="tag">Round ${roundOf(sec, step)} of ${Math.ceil(sec.nq / sec.nTeams)}</span>
+    ${done ? '' : `<div class="timer">
+      <div class="clock" id="clock" aria-live="off"></div>
+      <button class="btn small gold" data-act="hurry">⏳ Hurry up</button>
+      <span class="seg" role="group" aria-label="Countdown length">${[20,10,5].map(s => `<button data-act="hsecs" data-s="${s}" aria-pressed="${prefs.hurry===s}">${s}s</button>`).join('')}</span>
+      <button class="btn small" data-act="pause" id="pauseBtn">❚❚ Pause</button></div>`}
+  </div>`;
+}
+function drawTimer(){
+  const el = document.getElementById('clock'); if (!el) return;
+  const left = qtLeft();
+  if (left !== null){
+    const s = Math.ceil(left/1000);
+    if (left <= 0 && !QT.up){ QT.up = true; sfx.chime(); }
+    if (s <= 5 && s > 0 && QT.ticked !== s && !QT.paused && QT.stopped===null){ QT.ticked = s; sfx.tick(); }
+    el.classList.add('hurry');
+    el.innerHTML = (left <= 0 ? 'Time’s up!' : s + 's') + `<small>thinking ${fmt(qtElapsed())}</small>`;
+  } else { el.classList.remove('hurry'); el.innerHTML = fmt(qtElapsed()) + `<small>thinking time</small>`; }
+  const pb = document.getElementById('pauseBtn'); if (pb) pb.textContent = QT.paused ? '▶ Resume' : '❚❚ Pause';
+}
+function boldIn(chunk, w){
+  const base = w.replace(/^(a |an )/,'').split(' / ')[0];
+  const i = chunk.toLowerCase().indexOf(base.toLowerCase().replace('binge-watch','binge-watch'));
+  if (i < 0) return esc(chunk);
+  return esc(chunk.slice(0,i)) + '<b>' + esc(chunk.slice(i, i+base.length)) + '</b>' + esc(chunk.slice(i+base.length));
+}
+function stars(n){ return '<span class="stars" aria-label="' + n + ' out of 5 stars">' + '★'.repeat(n) + '<span style="opacity:.3">' + '★'.repeat(5-n) + '</span></span>'; }
+const KINDS = { blurb:'📕 Back-cover blurb', review:'✍️ Reader review', spoiler:'⚠️ Spoilers ahead!' };
+const MEDIA = { book:'📚 Book', film:'🎬 Film', series:'📺 Series' };
+
+function itemBody(it, rec){
+  if (it.kind === 'sort'){
+    return `<div class="qmeta"><span class="tag">${it.p ? (it.tag ? 'mainly ' + esc(it.tag) : 'books · films · series') : ''}</span></div>
+      <div class="word">${esc(it.w)}</div>
+      <div class="chunk">${boldIn(it.chunk, it.w)}</div>
+      <p class="example">${esc(it.ex)}</p>
+      ${rec && rec.final ? trHtml(it) : ''}`;
+  }
+  const filled = rec && rec.final ? `<span class="gap ok">${esc(it.opts[it.a])}</span>` : `<span class="gap"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">(gap)</span>&nbsp;</span>`;
+  const text = esc(it.text).replace('___', filled);
+  if (it.kind === 'slip') return `<div class="qmeta"><span class="tag">Common slip</span></div><p class="review">${text}</p>`;
+  return `<div class="qmeta"><span class="tag">${KINDS[it.kind]}</span><span class="medium">${MEDIA[it.medium]}</span>
+      <span><i>${esc(it.title)}</i></span>${it.stars ? stars(it.stars) : ''}</div>
+    <p class="review">${it.kind==='spoiler' ? '' : ''}${text}</p>`;
+}
+function trHtml(it){
+  if (!it.ca && !it.es) return '';
+  return `<div class="tr"><span><b class="lang">Català</b> ${esc(it.ca)}</span><span><b class="lang">Español</b> ${esc(it.es)}</span></div>`;
+}
+function optsHtml(it, rec, readonly){
+  return `<div class="opts" role="group" aria-label="Options">${it.opts.map((o,i) => {
+    const tried = rec && rec.tries.includes(i);
+    const showRight = rec && rec.final && i === it.a;
+    const cls = showRight ? 'good' : tried ? 'bad' : (it.kind==='sort' ? (i===0?'pos':'neg') : '');
+    const mark = showRight ? '✓ ' : tried ? '✗ ' : '';
+    const dis = readonly || (rec && rec.final) || tried;
+    return `<button class="opt ${cls}" data-act="ans" data-i="${i}" ${dis?'disabled':''}>${mark}${esc(o)}${!dis ? ` <span class="k" aria-hidden="true">${i+1}</span>` : ''}</button>`;
+  }).join('')}</div>`;
+}
+function fbHtml(it, rec, teamMode){
+  if (!rec || !rec.tries.length) return '';
+  if (!rec.final){
+    return `<div class="fb bad" aria-live="polite"><span class="verdict">✗ Not quite.</span> One more try.</div>`;
+  }
+  const right = rec.tries[rec.tries.length-1] === it.a;
+  const verdict = right ? (rec.first ? '✓ Right first time!' : '✓ Right on the second try.') : `✗ The answer is “${esc(it.opts[it.a])}”.`;
+  const pts = teamMode ? ` <span class="pts">+${rec.pts} point${rec.pts===1?'':'s'}</span>${rec.late ? ' · after time’s up' : ''}` : '';
+  let note = '';
+  if (it.kind==='sort') note = it.note ? `<p class="note">${esc(it.note)}</p>` : '';
+  else if (it.kind==='slip') note = `<div class="slipnote">${it.note}</div>`;
+  else note = `<p class="note">${esc(it.note)}</p>`;
+  return `<div class="fb ${right?'good':'bad'}" aria-live="polite"><span class="verdict">${verdict}</span>${pts}${note}</div>`;
+}
+function renderQ(sec, step){
+  const it = getItem(step.k), rec = sec.ans[sec.pos];
+  const ro = rec && rec.final && V.reviewing;
+  const color = it.kind==='sort' ? '' : 'plum';
+  return `<div class="ticket edge ${color}">${rec && rec.final && sec.pos < (sec.max||0) ? '<span class="readonly">Answered · review</span>' : ''}
+    ${itemBody(it, rec)}${optsHtml(it, rec, ro)}${fbHtml(it, rec, sec.nTeams && S.mode==='teams')}</div>`;
+}
+function firstOpen(sec){ for (let i=0;i<sec.steps.length;i++){ const s = sec.steps[i]; if (s.t==='q' && !(sec.ans[i] && sec.ans[i].final)) return i; } return sec.steps.length; }
+
+/* ================= display: end of section ================= */
+function renderEnd(){
+  const id = V.sec, sec = S.sec[id], meta = C.sections.find(s => s.id === id);
+  setTop(meta.name + ' · finished'); setNav(false);
+  const recs = Object.values(sec.ans).filter(r => r.final);
+  const first = recs.filter(r => r.first).length;
+  const nMist = mistakeQueue().length;
+  let scoreHtml = '';
+  if (sec.nTeams && S.mode==='teams'){
+    const sc = scores(sec), max = Math.max(...sc);
+    scoreHtml = `<div class="podium">${sc.map((p,i) => `<div class="team ${p===max?'now':''}"><span class="sym" aria-hidden="true">${C.UI.teamSyms[i]}</span><span>${esc(C.UI.teamNames[i])}${p===max?' 🏆':''}</span><span class="pts">${p}</span></div>`).join('')}</div>`;
+  } else {
+    scoreHtml = `<p class="score">${first} / ${recs.length}</p><p>right first time</p>`;
+  }
+  const nextSec = C.sections[C.sections.findIndex(s => s.id===id) + 1];
+  $('#s-end').innerHTML = `<div class="ticket edge" style="text-align:center">
+      <div class="kicker">Warm-up ${meta.n} · ${esc(meta.name)}</div><h2 style="font-size:clamp(1.6rem,1.2rem + 2vw,2.8rem)">🎉 Well done!</h2>${scoreHtml}
+      ${nMist ? `<div class="callout">🔁 You have <b>${nMist}</b> word${nMist===1?'':'s'} to review in the Mistakes round.</div>` : ''}
+      <div class="row" style="justify-content:center">
+        <button class="btn" data-act="review">🔍 Review answers</button>
+        ${nMist ? `<button class="btn gold" data-act="open" data-id="mistakes">🔁 Practise my words</button>` : ''}
+        ${nextSec ? `<button class="btn primary" data-act="open" data-id="${nextSec.id}">Next: ${esc(nextSec.name)} ▶</button>` : ''}
+      </div>
+      <div class="row" style="justify-content:center;margin-top:10px">
+        <button class="btn small" data-act="home">🏠 Menu</button>
+        <button class="btn small" data-act="again">↺ Play this section again</button></div>
+    </div>${footer()}`;
+  show('end', 'end:' + id);
+}
+
+/* ================= display: speaking ================= */
+const SP = { mode:null, end:0, int:null, paused:false, left:0 };
+function renderSpeak(){
+  setTop('Thirty-second review');
+  const sp = S.sec.speak, cards = C.SPEAK.cards;
+  if (!sp.order) sp.order = shuffle(cards.map((_,i)=>i));
+  const card = cards[sp.order[sp.i]];
+  $('#s-speak').innerHTML = `<div class="ticket edge">
+      <div class="kicker">Warm-up 3 · Card ${sp.i+1} of ${cards.length}</div>
+      <p class="note">${esc(C.SPEAK.intro)}</p>
+      <div class="talk"><div class="em" aria-hidden="true" style="font-size:3rem">${card.em}</div>
+      <p class="q" style="font-size:clamp(1.4rem,1.1rem + 1.6vw,2.6rem);font-family:var(--display);font-weight:800">${esc(card.t)}</p></div>
+      <div class="row" style="margin:8px 0">
+        <button class="btn gold" data-act="sptime" data-m="plan">📝 Plan · ${C.SPEAK.planSecs/60} min</button>
+        <button class="btn primary" data-act="sptime" data-m="speak">🎤 Speak · ${C.SPEAK.speakSecs} s</button>
+        <span class="bigclock" id="spclock" aria-live="off">–:––</span>
+        <button class="btn small" data-act="sppause" id="spPause" hidden>❚❚ Pause</button>
+      </div>
+      <div class="frame">${C.SPEAK.frame.map(f => `<div><b>${esc(f.h)}</b>${esc(f.t)}</div>`).join('')}</div>
+      <div class="listener">👂 ${esc(C.SPEAK.listener)}</div>
+      <div class="kicker" style="margin-top:14px">Toolbox</div>
+      <div class="toolbox">${C.SPEAK.toolbox.map(w => `<span>${esc(w)}</span>`).join('')}</div>
+    </div>`;
+  setNav(true, sp.i > 0, true, `${sp.i+1} / ${cards.length}`, sp.i === cards.length-1 ? 'Menu ▶' : 'Next card ▶');
+  show('speak', 'speak:' + sp.i);
+  drawSp();
+}
+function spStart(m){
+  SP.mode = m; SP.paused = false; SP.end = Date.now() + (m==='plan' ? C.SPEAK.planSecs : C.SPEAK.speakSecs)*1000; SP.done = false;
+  clearInterval(SP.int); SP.int = setInterval(drawSp, 200); keepAwake(true); drawSp();
+}
+function spPause(){
+  if (!SP.mode) return;
+  if (!SP.paused){ SP.paused = true; SP.left = SP.end - Date.now(); } else { SP.paused = false; SP.end = Date.now() + SP.left; }
+  drawSp();
+}
+function drawSp(){
+  const el = document.getElementById('spclock'), pb = document.getElementById('spPause'); if (!el) { clearInterval(SP.int); return; }
+  if (!SP.mode){ el.textContent = '–:––'; if (pb) pb.hidden = true; return; }
+  const left = SP.paused ? SP.left : SP.end - Date.now();
+  if (left <= 0){ el.textContent = SP.mode==='plan' ? 'Ready? Speak!' : 'Time! Listener…'; if (!SP.done){ SP.done = true; sfx.chime(); } clearInterval(SP.int); if (pb) pb.hidden = true; return; }
+  el.textContent = fmt(left + 999); if (pb){ pb.hidden = false; pb.textContent = SP.paused ? '▶ Resume' : '❚❚ Pause'; }
+}
+function spReset(){ clearInterval(SP.int); SP.mode = null; }
+
+/* ================= display: mistakes ================= */
+function renderMistakes(){
+  setTop('Mistakes round');
+  const m = S.sec.mistakes;
+  const q = mistakeQueue();
+  // History view (read-only) or current item
+  if (m.pos < m.hist.length){
+    const h = m.hist[m.pos], it = getItem(h.k);
+    $('#s-play').innerHTML = `<div class="kicker" style="margin-bottom:8px">🔁 Mistakes round · answered earlier</div>
+      <div class="ticket edge plum"><span class="readonly">Answered · review</span>${itemBody(it, h.rec)}${optsHtml(it, h.rec, true)}${fbHtml(it, h.rec, false)}</div>`;
+    setNav(true, m.pos > 0, true, `${q.length} left`);
+    show('play', 'mh:' + m.pos); return;
+  }
+  if (!q.length){
+    $('#s-play').innerHTML = `<div class="ticket edge teal" style="text-align:center"><div style="font-size:3rem">✨</div><h2>All clear!</h2>
+      <p>There is nothing to review at the moment. Mistakes from warm-ups 1 and 2 will appear here.</p>
+      <div class="row" style="justify-content:center"><button class="btn primary" data-act="home">🏠 Menu</button></div></div>${footer()}`;
+    setNav(m.hist.length > 0, m.pos > 0, false, ''); show('play', 'mempty'); return;
+  }
+  const k = q[0], it = getItem(k);
+  if (!m.cur || m.cur.k !== k) m.cur = { k, rec:{ tries:[], team:-1 } };
+  const rec = m.cur.rec;
+  $('#s-play').innerHTML = `<div class="kicker" style="margin-bottom:8px">🔁 Mistakes round · ${q.length} to go · a word leaves the list when you get it right first time</div>
+    <div class="ticket edge plum">${itemBody(it, rec)}${optsHtml(it, rec, false)}${fbHtml(it, rec, false)}</div>`;
+  setNav(true, m.pos > 0, !!rec.final, `${q.length} left`);
+  show('play', 'mq:' + m.hist.length + ':' + k);
+}
+function mistakesNext(){
+  const m = S.sec.mistakes;
+  if (m.pos < m.hist.length){ m.pos++; return; }
+  if (!m.cur || !m.cur.rec.final) return;
+  const k = m.cur.k, ok = m.cur.rec.first;
+  if (ok){ removeMistake(k); if (k.startsWith('sl') && !S.mastered.includes(k)) S.mastered.push(k); }
+  else if (!S.mistakes.includes(k)) S.mistakes.push(k);
+  else { S.mistakes = S.mistakes.filter(x => x!==k).concat(k); }  // send to the back of the queue
+  m.hist.push(m.cur); if (m.hist.length > 60) m.hist.shift();
+  m.pos = m.hist.length; m.cur = null;
+}
+
+/* ================= router ================= */
+function render(){
+  spReset();
+  if (!S.mode || V.screen === 'mode') return renderMode();
+  if (V.screen === 'menu') return renderMenu();
+  if (V.screen === 'speak') return renderSpeak();
+  if (V.screen === 'mistakes') return renderMistakes();
+  if (V.screen === 'end') return renderEnd();
+  if (V.screen === 'play') return renderPlay();
+  renderMenu();
+}
+function go(screen){ V.screen = screen; V.ex = false; save(); render(); window.scrollTo({ top:0 }); }
+
+function openSection(id){
+  S.last = id === 'mistakes' ? S.last : id;
+  V.sec = id; V.reviewing = false;
+  if (id === 'speak') return go('speak');
+  if (id === 'mistakes'){ S.sec.mistakes.pos = S.sec.mistakes.hist.length; return go('mistakes'); }
+  const want = S.mode==='teams' ? S.nTeams : 0;
+  if (!S.sec[id] || (!Object.keys(S.sec[id].ans).length && S.sec[id].nTeams !== want)) buildSection(id);
+  const sec = S.sec[id];
+  if (sec.done){ return go('end'); }
+  go('play');
+}
+
+/* ================= events ================= */
+function act(name, el){
+  sfx.tap0();
+  switch(name){
+    case 'home': closePanels(); return go('menu');
+    case 'modepage': closePanels(); return go('mode');
+    case 'settings': return openSettings();
+    case 'close': return closePanels();
+    case 'teams': S.mode = 'teams'; S.nTeams = +el.dataset.n; return go('menu');
+    case 'solo': S.mode = 'solo'; return go('menu');
+    case 'open': return openSection(el.dataset.id);
+    case 'ans': return doAnswer(+el.dataset.i);
+    case 'next': return doNext();
+    case 'prev': return doPrev();
+    case 'hurry': qtHurry(); return;
+    case 'hsecs': prefs.hurry = +el.dataset.s; savePrefs(); document.querySelectorAll('[data-act="hsecs"]').forEach(b => b.setAttribute('aria-pressed', +b.dataset.s===prefs.hurry)); return;
+    case 'pause': qtPause(); return;
+    case 'review': { const sec = S.sec[V.sec]; sec.pos = 0; V.reviewing = true; return go('play'); }
+    case 'again': if (confirmLike()) { buildSection(V.sec); S.last = V.sec; return go('play'); } return;
+    case 'sptime': return spStart(el.dataset.m);
+    case 'sppause': return spPause();
+    case 'sound': prefs.sound = !prefs.sound; savePrefs(); return openSettings();
+    case 'qr': return openQR();
+    case 'full': return toggleFull();
+    case 'reset': return askReset(el);
+  }
+}
+function confirmLike(){ return true; }   // no browser dialogs: "Play again" simply restarts this section
+function doAnswer(i){
+  if (V.screen === 'mistakes'){
+    const m = S.sec.mistakes; if (!m.cur || m.pos < m.hist.length) return;
+    const it = getItem(m.cur.k); if (i >= it.opts.length) return;
+    answer(m.cur.rec, it, i, {});
+    m.cur.rec.final ? (m.cur.rec.first ? sfx.good() : sfx.bad()) : sfx.bad();
+    save(); return renderMistakes();
+  }
+  if (V.screen !== 'play') return;
+  const sec = S.sec[V.sec], step = sec.steps[sec.pos]; if (step.t !== 'q') return;
+  const it = getItem(step.k); if (i >= it.opts.length) return;
+  const rec = sec.ans[sec.pos] || (sec.ans[sec.pos] = { tries:[], team: (sec.nTeams && S.mode==='teams') ? teamFor(sec, step) : -1 });
+  if (rec.final) return;
+  const late = rec.team >= 0 && qtTimeUp();
+  answer(rec, it, i, { late, mistakeKey: step.k });
+  if (rec.final){ qtStop(); (rec.tries[rec.tries.length-1] === it.a) ? sfx.good() : sfx.bad(); } else sfx.bad();
+  save(); renderPlay();
+  const fb = document.querySelector('.fb'); if (fb) fb.scrollIntoView({ block:'nearest', behavior:'smooth' });
+}
+function doNext(){
+  if (V.screen === 'speak'){
+    const sp = S.sec.speak;
+    if (sp.i < C.SPEAK.cards.length - 1){ sp.i++; save(); spReset(); return renderSpeak(); }
+    sp.i = 0; sp.order = null; return go('menu');
+  }
+  if (V.screen === 'mistakes'){ mistakesNext(); save(); V.ex = false; renderMistakes(); window.scrollTo({top:0}); return; }
+  if (V.screen !== 'play') return;
+  const sec = S.sec[V.sec], step = sec.steps[sec.pos], rec = sec.ans[sec.pos];
+  if (step.t === 'q' && !(rec && rec.final)) return;
+  V.ex = false;
+  if (sec.pos >= sec.steps.length - 1){ sec.done = true; sec.max = sec.steps.length; V.reviewing = false; return go('end'); }
+  sec.pos++; sec.max = Math.max(sec.max||0, sec.pos); save(); renderPlay(); window.scrollTo({ top:0 });
+}
+function doPrev(){
+  if (V.screen === 'speak'){ const sp = S.sec.speak; if (sp.i > 0){ sp.i--; save(); spReset(); renderSpeak(); } return; }
+  if (V.screen === 'mistakes'){ const m = S.sec.mistakes; if (m.pos > 0){ m.pos--; renderMistakes(); window.scrollTo({top:0}); } return; }
+  if (V.screen !== 'play') return;
+  const sec = S.sec[V.sec]; if (sec.pos > 0){ sec.pos--; V.ex = false; save(); renderPlay(); window.scrollTo({ top:0 }); }
+}
+
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b || b.disabled) return;
+  if (e.target.closest('.panel') && !e.target.closest('.box')) return;
+  act(b.dataset.act, b);
+});
+document.querySelectorAll('.panel').forEach(p => p.addEventListener('click', e => { if (e.target === p) closePanels(); }));
+addEventListener('keydown', e => {
+  if (e.target.closest('input, textarea, [contenteditable]')) return;
+  if (e.key === 'Escape') return closePanels();
+  if (document.querySelector('.panel.open')) return;
+  const k = e.key;
+  if (k === 'ArrowRight' && !$('#nextBtn').disabled && !$('#nav').hidden) doNext();
+  else if (k === 'ArrowLeft' && !$('#prevBtn').disabled && !$('#nav').hidden) doPrev();
+  else if (k === 'h' || k === 'H') qtHurry();
+  else if (k === ' ' && (V.screen === 'play' || V.screen === 'speak')){ e.preventDefault(); V.screen === 'speak' ? spPause() : qtPause(); }
+  else if (k === 'f' || k === 'F') toggleFull();
+  else if (/^[1-3]$/.test(k)){ const b = document.querySelector(`.opt[data-i="${+k-1}"]:not(:disabled)`); if (b) b.click(); }
+});
+
+/* ================= panels ================= */
+function openSettings(){
+  $('#setList').innerHTML = `
+    <button class="btn" data-act="qr">📱 Show QR code</button>
+    <button class="btn" data-act="sound">${prefs.sound ? '🔊 Sound: on' : '🔇 Sound: off'}</button>
+    <button class="btn" data-act="modepage">🎛️ Change mode (Teams / Just me)</button>
+    <button class="btn" data-act="full">⛶ Full screen (F)</button>
+    <button class="btn" data-act="reset" id="resetBtn">🗑️ Reset all progress on this device</button>
+    <p class="note">Keys: 1–3 choose an answer · ← → previous / next · H hurry up · Space pause · F full screen · Esc close.</p>
+    <p class="note">Progress is saved only in this browser. Nothing is sent anywhere.</p>`;
+  $('#p-settings').classList.add('open'); $('#p-settings .btn').focus();
+}
+function askReset(el){
+  if (el.dataset.sure){ S = freshState(); store.clear(); closePanels(); V.screen = 'mode'; render(); return; }
+  el.dataset.sure = '1'; el.textContent = '⚠️ Tap again to delete all progress'; el.classList.add('primary');
+}
+function openQR(){ $('#p-settings').classList.remove('open'); $('#qrUrl').textContent = C.url; $('#p-qr').classList.add('open'); }
+function closePanels(){ document.querySelectorAll('.panel.open').forEach(p => p.classList.remove('open')); }
+function toggleFull(){ const d = document, el = d.documentElement; try { (d.fullscreenElement ? d.exitFullscreen() : el.requestFullscreen()).catch(()=>{}); } catch(e){} }
+
+/* ================= sound ================= */
+let AC = null;
+function tone(freq, dur=.12, type='sine', gain=.08, when=0){
+  if (!prefs.sound) return;
+  try { AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+    const t = AC.currentTime + when, o = AC.createOscillator(), g = AC.createGain();
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(gain, t+.01); g.gain.exponentialRampToValueAtTime(.0001, t+dur);
+    o.connect(g).connect(AC.destination); o.start(t); o.stop(t+dur+.02);
+  } catch(e){}
+}
+const sfx = {
+  tap0(){},
+  tick(){ tone(880, .05, 'square', .03); },
+  good(){ [523,659,784,1047].forEach((f,i) => tone(f, .16, 'triangle', .06, i*.06)); },
+  bad(){ tone(196, .18, 'sawtooth', .035); },
+  chime(){ [784,988,1175,1568].forEach((f,i) => tone(f, .5, 'sine', .06, i*.15)); },
+};
+let lock = null;
+async function keepAwake(on=true){ try { if (on && 'wakeLock' in navigator && !lock) lock = await navigator.wakeLock.request('screen'); } catch(e){} }
+
+/* ================= utils ================= */
+function shuffle(a){ for (let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+
+/* ================= saving ================= */
+const store = {
+  load(){ try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch(e){ return null; } },
+  save(d){ try { localStorage.setItem(KEY, JSON.stringify(d)); } catch(e){} },
+  clear(){ try { localStorage.removeItem(KEY); } catch(e){} },
+};
+let saveT; function save(){ clearTimeout(saveT); saveT = setTimeout(() => { if (S) store.save(S); }, 120); }
+function savePrefs(){ try { localStorage.setItem(PREFKEY, JSON.stringify(prefs)); } catch(e){} }
+addEventListener('visibilitychange', () => { if (document.hidden && S) store.save(S); });
+
+function validKey(k){ try { return typeof k === 'string' && !!getItem(k); } catch(e){ return false; } }
+function loadState(){
+  const d = store.load(); const f = freshState();
+  if (!d || d.v !== 1 || typeof d !== 'object') return f;
+  try {
+    const s = Object.assign(f, { mode: ['teams','solo'].includes(d.mode) ? d.mode : null,
+      nTeams: [2,3,4].includes(d.nTeams) ? d.nTeams : 2,
+      last: C.sections.some(x => x.id === d.last) ? d.last : null,
+      mistakes: Array.isArray(d.mistakes) ? d.mistakes.filter(validKey) : [],
+      mastered: Array.isArray(d.mastered) ? d.mastered.filter(validKey) : [] });
+    ['sort','reviews'].forEach(id => {
+      const x = d.sec && d.sec[id];
+      if (x && Array.isArray(x.steps) && x.steps.every(st => st && (st.t==='phase' || validKey(st.k))) && typeof x.pos === 'number' && x.pos < x.steps.length)
+        s.sec[id] = { steps:x.steps, pos:x.pos, ans: (x.ans && typeof x.ans==='object') ? x.ans : {}, done:!!x.done, max:+x.max||0, nq:+x.nq||0, nTeams:[0,2,3,4].includes(x.nTeams)?x.nTeams:0 };
+    });
+    const sp = d.sec && d.sec.speak;
+    if (sp && Array.isArray(sp.order) && sp.order.length === C.SPEAK.cards.length && Number.isInteger(sp.i) && sp.i >= 0 && sp.i < C.SPEAK.cards.length) s.sec.speak = { order: sp.order.map(Number), i: sp.i };
+    return s;
+  } catch(e){ return freshState(); }
+}
+
+/* ================= start ================= */
+try { const p = JSON.parse(localStorage.getItem(PREFKEY)); if (p && typeof p === 'object'){ prefs.sound = p.sound !== false; if ([5,10,20].includes(p.hurry)) prefs.hurry = p.hurry; } } catch(e){}
+S = loadState();
+V.screen = S.mode ? 'menu' : 'mode';
+render();
+</script>
+</body>
+</html>
