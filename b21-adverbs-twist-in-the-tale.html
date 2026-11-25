@@ -262,13 +262,50 @@ button.cover:hover:not(:disabled){transform:translateY(-3px) rotate(-.4deg)}
 .coc-footer a{color:inherit;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:40px;padding:0 4px}
 .coc-footer a:focus-visible{outline:2px solid var(--coc-coffee-dark,#5A2D0C);outline-offset:3px;border-radius:4px}
 
+/* printable worksheets */
+.printonly{display:none}
+.sheet{background:#fff;color:#14121c;max-width:820px;margin:var(--sp-4) auto;padding:28px 34px;border-radius:6px;box-shadow:var(--shadow);font:400 1rem/1.45 var(--body)}
+.sheet .band{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 18px;border-radius:8px;background:var(--c);color:var(--fg,#fff)}
+.sheet .band .no{font:700 .8rem var(--mono);letter-spacing:.1em}
+.sheet h3{font-family:var(--display);font-style:italic;font-weight:900;font-size:1.7rem;line-height:1.05;margin:2px 0}
+.sheet .band .qr{width:92px;padding:4px;box-shadow:none;border-radius:6px}
+.sheet .box{border:2px solid #14121c;border-radius:8px;padding:8px 14px;margin:12px 0}
+.sheet .box ol,.sheet .box ul{margin:4px 0;padding-left:1.3em}
+.sheet .box .rl{margin:4px 0}
+.sheet ol.items{padding-left:1.8em;margin:12px 0}
+.sheet ol.items li{margin:0 0 10px;break-inside:avoid;page-break-inside:avoid}
+.sheet .ol{font-weight:700;white-space:nowrap;margin-left:6px}
+.sheet .ol::before{content:"→ ";font-weight:400}
+.sheet mark{background:#F7D98B;color:inherit;padding:0 .12em;border-radius:3px;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet h4{break-after:avoid;page-break-after:avoid}
+.sheet .snd{font-family:var(--display);font-weight:900;font-style:italic;margin-right:6px}
+.sheet h4{font-family:var(--display);font-size:1.2rem;margin:14px 0 4px}
+.sheet .storytxt{font-size:1.1em;line-height:1.6;break-inside:avoid}
+.sheet .credit{margin-top:14px;font-size:.8rem;color:#555;border-top:1px solid #bbb;padding-top:6px}
+.sheet.key{font-size:.92rem}
+.sheet.key .kst{break-inside:avoid;margin-bottom:8px}
+.sheet.key .kst p{margin:2px 0 6px}
+.wslist{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:var(--sp-2);margin-top:var(--sp-3)}
+.wsitem{display:flex;gap:6px;align-items:center;flex-wrap:wrap;background:var(--paper);border:2px solid var(--ink);border-radius:var(--r-m);padding:8px 10px}
+.wsitem .nm{flex:1 1 120px;font-weight:700}
 @media print{
   body{background:#fff;min-height:0} .board{min-height:0} .stage{padding:0} .sign:last-child{break-after:auto;page-break-after:auto}
   .grain,.bnav,.nav,.noprint,.coc-footer{display:none!important}
   .signs{display:block}
-  .sign{width:100%;height:auto;aspect-ratio:auto;min-height:170mm;page-break-after:always;break-after:page;margin:0 0 10mm;-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none}
+  .sign{width:100%;height:auto;aspect-ratio:auto;min-height:170mm;page-break-after:always;break-after:page;margin:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none}
   .sign .ttl{font-size:56pt;max-width:80%} .sign .sub{font-size:22pt} .signqr{position:absolute;width:55mm;left:14mm;bottom:12mm;padding:3mm;margin:0} .sign .no{font-size:18pt} .sign .bigno{font-size:180pt}
-  @page{size:A4 landscape;margin:12mm}
+  .sign{page:sign}
+  @page{size:A4 portrait;margin:14mm}
+  @page sign{size:A4 landscape;margin:12mm}
+  .printonly{display:block!important}
+  .pr.skip,.printonly.skipall{display:none!important}
+  .sheet{max-width:none;margin:0;padding:0;box-shadow:none;border:0;font-size:14pt;line-height:1.3;break-after:page;page-break-after:always;page:sheet}
+  .sheet ol.items{margin:8px 0} .sheet ol.items li{margin:0 0 5px} .sheet .box{padding:6px 12px;margin:8px 0} .sheet .box ol{margin:2px 0}
+  .sheet .band{padding:8px 14px} .sheet .band .qr{width:80px} .sheet h4{margin:8px 0 2px;font-size:15pt} .sheet .credit{margin-top:8px}
+  .sheet.lastp{break-after:auto;page-break-after:auto}
+  .sheet.key{font-size:10.5pt;page:sheet}
+  .sheet .band{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .sheet h3{font-size:22pt}
 }
 @media (min-width:1600px){html{font-size:20px}}
 @media (min-width:2200px){html{font-size:24px}}
@@ -347,8 +384,8 @@ const CONTENT = {
       steps: ['Read the sentence.', 'Choose the word that completes it.'] },
     { n: 4, block: 2, cls: 'c4', title: 'Lost in translation?', sub: 'Natural English, or does it sound translated?', price: '15<br>cards',
       steps: ['Read the text.', 'Decide: is it natural English, or does it sound translated from Catalan or Spanish?', 'If it sounds translated, tap the word that shows it.', 'Then choose the natural version.'] },
-    { n: 5, block: 2, cls: 'c5', title: 'Finish the scene', sub: 'Listen, read, and choose the adverb.', price: '10<br>scenes',
-      steps: ['Tap “Play the sound”. Turn the volume up.', 'Read the sentence.', 'Choose the adverb that completes it.'] },
+    { n: 5, block: 2, cls: 'c5', title: 'Finish the scene', sub: 'Read the scene and choose the adverb.', price: '10<br>scenes',
+      steps: ['Read the sentence.', 'Choose the adverb that completes it.'] },
     { n: 6, block: 2, cls: 'c6', title: 'Cut it to 50', sub: 'Edit two stories to exactly 50 words.', price: '50<br>words',
       steps: ['Read the whole story first.', 'Tap a word or phrase to cut it. Tap it again to put it back.', 'Stop when the counter shows exactly 50.', 'The story must still make sense and keep at least two adverbs.'] }
   ],
@@ -539,6 +576,7 @@ const CONTENT = {
   homework: 'Optional homework: write your own 50-word story (exercise 4a–d, page 49). Use at least two adverbs.',
   atHome: 'At home: scan the code or open the link on your own phone, choose <b>Station phone</b> and play the stations again on your own. Your phone will keep your own <b>My mistakes</b> cards.',
   scanText: 'One phone per group: scan the code and choose <b>Station phone</b>.',
+  copiesHelp: 'Suggested copies: one per group for Stations 1–3 (six of each), and two each of Stations 4–6 (one for each place the station is set up).',
   printHelp: 'If nothing happens, press Ctrl + P (Windows) or Cmd + P (Mac). Some previews block printing; it works when the file is open in a normal browser tab or on GitHub Pages.'
 };
 
@@ -1118,7 +1156,7 @@ function renderHub() {
 }
 
 /* ---------- board ---------- */
-const TABS = [['hook', 'Hook'], ['stories', 'Twist stories'], ['b1', 'Block 1'], ['pron', 'Pronunciation'], ['b2', 'Block 2'], ['sd', 'Showdown'], ['end', 'Wrap-up'], ['signs', 'Signs']];
+const TABS = [['hook', 'Hook'], ['stories', 'Twist stories'], ['b1', 'Block 1'], ['pron', 'Pronunciation'], ['b2', 'Block 2'], ['sd', 'Showdown'], ['end', 'Wrap-up'], ['signs', 'Printables']];
 function renderBoard(fresh) {
   const B = S.board;
   const nav = `<h1 class="sr">A Twist in the Tale · board view</h1><nav class="bnav noprint" aria-label="Lesson stages"><button class="tab" data-act="go" data-v="home" aria-label="Home">⌂</button>
@@ -1226,12 +1264,73 @@ function bEnd() {
     <p class="big" style="margin-top:16px;font-size:clamp(1.2rem,.8rem + 1.2vw,2rem)">${CONTENT.homework}</p>${footer()}`;
 }
 function bSigns() {
-  return `<div class="noprint"><div class="label">Printable station signs</div><h2 style="margin:12px 0">Station signs</h2>
-    <p>Print on A4, landscape. Print stations 4, 5 and 6 twice: each one is set up in two places.</p>
-    <button class="btn" data-act="print">🖨 Print the signs</button><p class="muted" style="margin-top:12px">${CONTENT.printHelp}</p>
-    <p class="muted">Each sign has its own QR code, which opens that station directly on a phone.</p></div>
-    <div class="signs">${CONTENT.stations.map(s => `<div class="cover sign ${s.cls}"><div class="no">STATION ${s.n} · BLOCK ${s.block}</div><div class="ttl">${s.title}</div><div class="sub">${s.sub}</div><div class="bigno">${s.n}</div><div class="qr signqr" aria-label="QR code for station ${s.n}">${qrSVG(CONTENT.url + '#st' + s.n)}</div></div>`).join('')}</div>`;
+  const prev = SESSION.wsPrev || 1;
+  const names = CONTENT.stations.map(st => [st.n, `Station ${st.n} · ${st.title}`]).concat([['key', 'Answer key (for the teacher)']]);
+  return `<div class="noprint"><div class="label">Printables</div><h2 style="margin:12px 0">Signs and worksheets</h2>
+    <p class="muted">${CONTENT.printHelp}</p>
+    <h3 style="font-family:var(--display);font-size:1.5rem;margin-top:20px">Worksheets</h3>
+    <p>One A4 sheet per station, with the same items as the phone and no answers, so the whole group can read along. ${CONTENT.copiesHelp}</p>
+    <div class="wslist">${names.map(([k, nm]) => `<div class="wsitem"><span class="nm">${nm}</span>
+      <button class="btn ghost small" data-act="wsPrev" data-k="${k}" aria-pressed="${String(prev) === String(k)}">${String(prev) === String(k) ? '👁 Showing' : 'Preview'}</button>
+      <button class="btn small" data-act="print" data-pr="${k === 'key' ? 'key' : 'ws' + k}">🖨 Print</button></div>`).join('')}</div>
+    <div class="row" style="margin-top:12px"><button class="btn" data-act="print" data-pr="ws1,ws2,ws3,ws4,ws5,ws6">🖨 Print all six worksheets</button></div>
+    <div class="wsprev">${prev === 'key' ? keySheet() : wsSheet(+prev)}</div>
+    <h3 style="font-family:var(--display);font-size:1.5rem;margin-top:28px">Station signs</h3>
+    <p>A4 landscape. Print Stations 4, 5 and 6 twice: each one is set up in two places. Each sign has its own QR code, which opens that station directly on a phone.</p>
+    <button class="btn" data-act="print" data-pr="signs">🖨 Print the signs</button></div>
+    <div class="signs pr" data-pr="signs">${CONTENT.stations.map(s => `<div class="cover sign ${s.cls}"><div class="no">STATION ${s.n} · BLOCK ${s.block}</div><div class="ttl">${s.title}</div><div class="sub">${s.sub}</div><div class="bigno">${s.n}</div><div class="qr signqr" aria-label="QR code for station ${s.n}">${qrSVG(CONTENT.url + '#st' + s.n)}</div></div>`).join('')}</div>
+    <div class="printonly">${[1, 2, 3, 4, 5, 6].map(n => `<div class="pr" data-pr="ws${n}">${wsSheet(n)}</div>`).join('')}<div class="pr" data-pr="key">${keySheet()}</div></div>`;
 }
+/* worksheets: built from the same CONTENT as the phone cards, never with answers */
+const bold = s => s.replace(/\[\[(.+?)\]\]/g, '<mark>$1</mark>');
+const gapLine = s => s.replace('___', '________');
+const letters = arr => arr.map((o, k) => `${'ABCDE'[k]}&nbsp;${o}`).join(' &nbsp;·&nbsp; ');
+function wsSheet(n) {
+  const st = ST(n), items = itemsFor(n), extra = bonusFor(n);
+  const head = `<div class="band ${st.cls}"><div><div class="no">STATION ${st.n} · BLOCK ${st.block} · ${CONTENT.level}</div><h3>${st.title}</h3><div>${st.sub}</div></div>
+    <div class="qr" aria-label="QR code for station ${st.n}">${qrSVG(CONTENT.url + '#st' + st.n)}</div></div>
+    <div class="box"><b>What to do</b><ol>${st.steps.map(x => `<li>${x}</li>`).join('')}</ol>
+    <div class="rl">One person taps the answers on the phone. Everyone reads this sheet. The numbers match the cards on the phone.</div></div>`;
+  const li = {
+    1: it => `<li>${bold(it.s)}</li>`,
+    2: it => `<li>${it.steps[0].s} <b>(${it.steps.map(x => x.adv).join(', ')})</b></li>`,
+    3: it => `<li>${gapLine(it.s)} <span class="ol">${letters(it.o)}</span></li>`,
+    4: it => `<li>${plain(it.t)}</li>`,
+    5: it => `<li><span class="snd">${it.word}</span>${gapLine(it.s)} <span class="ol">${letters(it.o)}</span></li>`
+  }[n];
+  let body = '';
+  if (n === 1) body = `<div class="box"><b>Types of adverb</b><div class="rl">${letters(CONTENT.cats)}</div></div>`;
+  if (n === 2) body = `<div class="box"><b>The rules</b>${CONTENT.rules.map(r => `<div class="rl"><b>${r.t}:</b> ${r.r} <i>${r.e}</i></div>`).join('')}</div>`;
+  if (n === 6) body = items.map((it, k) => `<h4>Story ${k + 1}: ${it.title} <span class="label">(${storyCount(it, [])} words)</span></h4><p class="storytxt">${esc(parseStory(it.text).map(p => p.t).join(''))}</p>`).join('');
+  else body += `<ol class="items">${items.map(li).join('')}</ol>`;
+  if (extra.length) body += `<h4>Extra cards (if you finish early)</h4><ol class="items" type="i">${extra.map(li).join('')}</ol>`;
+  return `<article class="sheet" lang="en-GB">${head}${body}<div class="credit">Class of Coffee – with AI assistance · ${CONTENT.title}</div></article>`;
+}
+function keySheet() {
+  const a1 = l => l.map((it, k) => `${k + 1} ${CONTENT.cats[it.a]}`).join(' · ');
+  const a2 = l => l.map((it, k) => `${k + 1} ${it.steps[it.steps.length - 1].out}`).join(' · ');
+  const a3 = l => l.map((it, k) => `${k + 1} ${it.o[it.a]}`).join(' · ');
+  const a4 = CONTENT.s4.map((it, k) => `${k + 1} ${it.natural ? '✓ natural' + (it.friend ? ' (true friend)' : '') : `✗ <b>${(it.t.match(/\[\[(.+?)\]\]/g) || []).map(x => x.slice(2, -2)).join(' ')}</b> → ${it.fix[it.a]}`}`).join('<br>');
+  const a6 = CONTENT.s6.map(it => `<b>${it.title}</b> (58 → 50): words that can go: ${parseStory(it.text).filter(p => p.cut).map(p => p.t.replace(/^[,\s]+|[,\s]+$/g, '')).join(', ')}. Any combination that removes 8 words and leaves at least two adverbs.`).join('<br>');
+  const sec = (t, x) => `<div class="kst"><b>${t}</b><p>${x}</p></div>`;
+  return `<article class="sheet key" lang="en-GB"><div class="band c4"><div><div class="no">FOR THE TEACHER · ${CONTENT.level}</div><h3>Answer key</h3><div>${CONTENT.title}</div></div></div>
+    ${sec('Station 1 · What kind of adverb?', a1(CONTENT.s1) + '<br>Extra: ' + CONTENT.s1bonus.map((it, k) => `${'i ii iii'.split(' ')[k]} ${CONTENT.cats[it.a]}`).join(' · '))}
+    ${sec('Station 2 · Where does it go?', a2(CONTENT.s2) + '<br>Extra: ' + CONTENT.s2bonus.map((it, k) => `${'i ii iii'.split(' ')[k]} ${it.steps[0].out}`).join(' · ') + '<br><i>Also accepted: Usually, Ana goes swimming… / In the morning, Ana usually goes swimming.</i>')}
+    ${sec('Station 3 · Confusing pairs', a3(CONTENT.s3) + '<br>Extra: ' + CONTENT.s3bonus.map((it, k) => `${'i ii iii'.split(' ')[k]} ${it.o[it.a]}`).join(' · '))}
+    ${sec('Station 4 · Lost in translation?', a4)}
+    ${sec('Station 5 · Finish the scene', a3(CONTENT.s5))}
+    ${sec('Station 6 · Cut it to 50', a6)}
+    <div class="credit">Class of Coffee – with AI assistance · ${CONTENT.title}</div></article>`;
+}
+function printPart(ids) {
+  const want = ids.split(',');
+  document.querySelectorAll('.pr').forEach(el => el.classList.toggle('skip', !want.includes(el.dataset.pr)));
+  document.querySelector('.printonly')?.classList.toggle('skipall', !want.some(x => x !== 'signs'));
+  const sheets = [...document.querySelectorAll('.printonly .pr:not(.skip) .sheet')];
+  sheets.forEach((el, i) => el.classList.toggle('lastp', i === sheets.length - 1));
+  try { window.print(); } catch (e) {}
+}
+addEventListener('afterprint', () => document.querySelectorAll('.pr.skip').forEach(el => el.classList.remove('skip')));
 function drawClocks() {
   const b1 = S.board.b1, b2 = S.board.b2;
   [['clk', b1], ['clk2', b2]].forEach(([id, t]) => { const el = $('#' + id); if (el) { const s = timerLeft(t); el.textContent = fmt(s); el.classList.toggle('warn', t.run && s <= CONTENT.warnAt * 60); } });
@@ -1337,7 +1436,8 @@ const ACT = {
   hurry: qtHurry,
   hurryS: b => { S.hurry = +b.dataset.s; save(); render(); },
   qtPause: qtPause,
-  print: () => window.print()
+  print: b => printPart(b.dataset.pr || 'signs'),
+  wsPrev: b => { SESSION.wsPrev = b.dataset.k === 'key' ? 'key' : +b.dataset.k; render(); }
 };
 // mistakes round on the board: answering does not score
 const _sdAnswer = sdAnswer;
