@@ -161,11 +161,12 @@ button.cover:hover:not(:disabled){transform:translateY(-3px) rotate(-.4deg)}
 .fw:hover:not(:disabled){background:var(--cream)}
 .fw.hit{background:var(--bad-bg);color:var(--bad);text-decoration:underline wavy;text-underline-offset:4px}
 .fw.miss{background:#eee}
+.fw:disabled{opacity:1;cursor:default}
 .frag.tapme{border-color:var(--navy);border-style:solid;box-shadow:0 0 0 4px rgba(47,75,154,.15)}
 .frag.tapme .fw:not(.miss){text-decoration:underline dotted var(--navy);text-underline-offset:5px}
 .fw:disabled{cursor:default;color:inherit}
 .verdicts{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2)}
-@media (max-width:420px){.verdicts,.opts.two{grid-template-columns:1fr}}
+@media (max-width:330px){.verdicts,.opts.two{grid-template-columns:1fr}}
 
 /* sound scene (station 5) */
 .scene{display:flex;align-items:center;gap:var(--sp-3);flex-wrap:wrap;margin:var(--sp-3) 0 var(--sp-4)}
@@ -181,6 +182,7 @@ button.cover:hover:not(:disabled){transform:translateY(-3px) rotate(-.4deg)}
 .story{font-family:var(--display);font-weight:500;font-size:clamp(1.1rem,1rem + .5vw,1.35rem);line-height:1.6;margin-top:var(--sp-3)}
 .cw{font:inherit;min-height:40px;padding:0 2px;border-radius:5px;background:transparent;border:0;position:relative}
 .cw:hover:not(:disabled){background:var(--cream)}
+.cw:disabled{opacity:1;cursor:default}
 .cw.cut{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:var(--tomato);text-decoration-thickness:3px}
 .cw.no{animation:shake .35s;background:var(--bad-bg)}
 .story .fixed{padding:0 2px}
@@ -188,8 +190,13 @@ button.cover:hover:not(:disabled){transform:translateY(-3px) rotate(-.4deg)}
 /* bottom nav (Previous / Next) */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;gap:var(--sp-2);justify-content:flex-end;
   padding:10px var(--sp-3) calc(10px + env(safe-area-inset-bottom));background:rgba(251,243,228,.96);border-top:2px solid var(--ink)}
-.nav .btn{min-width:130px}
-@media (max-width:620px){.nav .btn{flex:1;min-width:0}}
+.nav .btn{width:200px}
+.nav .btn.wide{width:280px}
+.fixw{width:170px}
+.fixw-m{width:200px}
+.fixw-l{width:240px}
+.nav .btn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:620px){.nav .btn,.nav .btn.wide{flex:1;width:auto;min-width:0}}
 
 /* end-of-station stamp */
 .returned{position:relative;text-align:center;padding:var(--sp-5) var(--sp-3);overflow:hidden}
@@ -229,8 +236,8 @@ button.cover:hover:not(:disabled){transform:translateY(-3px) rotate(-.4deg)}
 .team.now{background:var(--ink);color:var(--cream);transform:scale(1.06)}
 .team .pts{font-family:var(--mono);margin-left:6px}
 .timer{display:flex;flex-wrap:wrap;gap:var(--sp-3);align-items:center}
-.stopwatch{font:700 clamp(2rem,1.4rem + 2.4vw,3.4rem)/1 var(--mono)}
-.countdown{font:700 clamp(2rem,1.4rem + 2.4vw,3.4rem)/1 var(--mono);color:var(--tomato)}
+.stopwatch{font:700 clamp(2rem,1.4rem + 2.4vw,3.4rem)/1 var(--mono);min-width:5ch;font-variant-numeric:tabular-nums}
+.countdown{font:700 clamp(1.4rem,1rem + 1.6vw,2.4rem)/1 var(--mono);color:var(--tomato);min-width:11ch;font-variant-numeric:tabular-nums}
 .thumbs{background:var(--mustard);border-radius:var(--r-m);padding:10px 16px;font-weight:700;margin-top:var(--sp-2)}
 .setup input{font:inherit;font-size:16px;padding:8px 12px;border-radius:10px;border:2px solid var(--ink);background:#fff;min-height:44px;width:100%}
 .setup label{display:block}
@@ -283,6 +290,8 @@ button.cover:hover:not(:disabled){transform:translateY(-3px) rotate(-.4deg)}
 .sheet .storytxt{font-size:1.1em;line-height:1.6;break-inside:avoid}
 .sheet .credit{margin-top:14px;font-size:.8rem;color:#555;border-top:1px solid #bbb;padding-top:6px}
 .sheet.key{font-size:.92rem}
+.wsprev{height:75vh;overflow:auto;margin-top:var(--sp-3);border:2px solid var(--ink);border-radius:var(--r-m);background:#e9e1d1;padding:0 var(--sp-3)}
+.wsitem .btn{min-width:110px}
 .sheet.key .kst{break-inside:avoid;margin-bottom:8px}
 .sheet.key .kst p{margin:2px 0 6px}
 .wslist{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:var(--sp-2);margin-top:var(--sp-3)}
@@ -715,14 +724,14 @@ function finishStation() {
   itemsFor(n).forEach(it => { if (!S.phone.ans[it.id]?.solved) addMistake(it.id); });
   S.phone.done[n] = true; S.phone.at = 'end'; SESSION.thud = true; sfx.stamp(); save(); render(true);
 }
-function phoneNext() {
+function phoneNext() { SESSION.showRules = false;
   const list = S.phone.at === 'bonus' ? bonusFor(S.phone.st) : S.phone.at === 'mx' ? S.phone.mistakes.concat(SESSION.mxDone || []) : itemsFor(S.phone.st);
   if (S.phone.at === 'mx') { mxNext(); return; }
   if (S.phone.i < list.length - 1) { S.phone.i++; save(); render(true); }
   else if (S.phone.at === 'bonus') { S.phone.at = 'end'; save(); render(true); }
   else finishStation();
 }
-function phonePrev() { if (S.phone.i > 0) { S.phone.i--; save(); render(true); } }
+function phonePrev() { SESSION.showRules = false; if (S.phone.i > 0) { S.phone.i--; save(); render(true); } }
 /* mistakes deck */
 function openMistakes() { SESSION.mixFresh = {}; SESSION.mxList = S.phone.mistakes.slice(); S.phone.at = 'mx'; S.phone.mi = 0; save(); render(true); }
 function mxNext() {
@@ -975,7 +984,7 @@ function topBar(title) {
 }
 function renderPhone(fresh) {
   const P = S.phone, at = P.at;
-  if (at === 'hub') return renderHub();
+  if (at === 'hub') return renderHub(fresh);
   const st = ST(P.st || 1);
   if (at === 'intro') {
     app.innerHTML = topBar(`Station ${st.n}`) + `<div class="wrap enter">${coverHTML(st)}
@@ -1021,21 +1030,22 @@ function renderPhone(fresh) {
   const key = at + id;
   app.innerHTML = topBar(title) + `<div class="wrap"><div class="card ${SESSION.lastScreen !== key ? 'enter' : ''}">
     <div class="prog"><span class="label">${count}</span>
-      ${at === 'mx' ? `<span class="label">From station ${n}</span>` : (n === 2 ? '<button class="btn ghost small" data-act="rules">📜 Rules</button>' : '')}
+      ${at === 'mx' ? `<span class="label">From station ${n}</span>` : (n === 2 ? `<button class="btn ghost small fixw-m" data-act="rules">${SESSION.showRules ? '↩ Back to the card' : '📜 Rules'}</button>` : '')}
       ${at === 'st' ? '<button class="btn ghost small" data-act="finishSt">Finish station</button>' : ''}</div>
-    ${body}</div>
-    ${SESSION.showRules && n === 2 ? `<div class="card enter" id="rulesCard">${rulesHTML(true)}</div>` : ''}
+    ${SESSION.showRules && n === 2 ? rulesHTML(true) : body}</div>
   </div>
   <nav class="nav"><button class="btn ghost" data-act="${at === 'mx' ? 'mxPrev' : 'prev'}" ${i === 0 ? 'disabled' : ''}>Previous</button>
-    <button class="btn" data-act="${at === 'mx' ? 'mxNext' : 'next'}" ${n === 6 && !solved ? '' : ''}>${solved ? lastLabel : (at === 'mx' ? 'Skip' : lastLabel === 'Next' ? 'Skip for now' : lastLabel)}</button></nav>`;
+    <button class="btn" data-act="${at === 'mx' ? 'mxNext' : 'next'}">${solved ? lastLabel : (at === 'mx' ? 'Skip' : lastLabel === 'Next' ? 'Skip for now' : lastLabel)}</button></nav>`;
   SESSION.lastScreen = key;
   if (n === 5 && fresh) setTimeout(() => playScene(it), 250);
   if (fresh) scrollTo(0, 0);
-  else if (SESSION.scrollStep) { const all = app.querySelectorAll('.card .fb, .card .step-prompt'); const t = $('.tapme') || all[all.length - 1]; if (t) t.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' }); }
+  else if (SESSION.scrollStep) { // only when the next step is completely hidden below the bottom bar (small phones)
+    const t = $('.tapme') || $('.step-prompt'), bar = $('.nav');
+    if (t && bar && t.getBoundingClientRect().top > bar.getBoundingClientRect().top - 20) t.scrollIntoView({ block: 'nearest' }); }
   SESSION.scrollStep = false;
 }
 function rulesHTML(inline) {
-  return `<div class="${inline ? '' : 'card'}"><div class="prog"><h2 style="font-size:1.4rem">The rules</h2>${inline ? '<button class="btn ghost small" data-act="rules">Close the rules</button>' : ''}</div>
+  return `<div class="${inline ? '' : 'card'}"><div class="prog"><h2 style="font-size:1.4rem;margin-top:${inline ? '12px' : '0'}">The rules</h2></div>
    <div class="rules" style="margin-top:12px">${CONTENT.rules.map(r => `<div class="rule"><b>${r.t}:</b> ${r.r}<br><i>${r.e}</i></div>`).join('')}</div></div>`;
 }
 function feedback(ok, why, extra = '') {
@@ -1087,7 +1097,7 @@ function fragHTML(it) {
   const missed = a.tries.filter(t => String(t).startsWith('w')).map(t => +String(t).slice(1));
   const frag = parts.map(p => tapping
       ? `<button class="fw ${missed.includes(p.i) ? 'miss' : ''}" data-act="word" data-id="${it.id}" data-w="${p.i}" data-hit="${p.hit ? 1 : 0}">${esc(p.t)}</button>`
-      : `<span class="fw ${showHits && p.hit ? 'hit' : ''}">${esc(p.t)}</span>`).join(' ');
+      : `<button class="fw ${showHits && p.hit ? 'hit' : ''}" disabled tabindex="-1">${esc(p.t)}</button>`).join(' ');
   let below = '';
   if (a.verdict === null) {
     below = `<p class="label">Natural English, or does it sound translated?</p>
@@ -1097,9 +1107,9 @@ function fragHTML(it) {
     below = verdictRow(it, a) + feedback(a.verdict === true, it.note);
   } else {
     below = verdictRow(it, a);
-    if (a.verdict === true && !a.hit) below += `<div class="fb bad" role="status"><b>✗ Not quite. It sounds translated.</b><span class="why">Can you find the word that sounds translated?</span></div>`;
     if (!a.hit && a.verdict !== null) {
       below += `<p class="label" style="margin-top:12px">Next step ↑ Tap the word in the text that sounds translated.</p>${missed.length ? '<p class="muted">Not that word. Try again.</p>' : ''}`;
+      if (a.verdict === true) below += `<div class="fb bad" role="status"><b>✗ Not quite. It sounds translated.</b><span class="why">Can you find the word that sounds translated?</span></div>`;
     } else {
       below += `<div class="step-prompt"><p class="label" style="margin-top:12px">Next step ↓ Choose the natural version.</p>
         <div class="opts">${it.fix.map((f, k) => { const right = a.solved && k === it.a, wrong = a.fixTries.includes(k) && k !== it.a;
@@ -1116,31 +1126,25 @@ function verdictRow(it, a) {
 }
 function cutHTML(it) {
   const cuts = cutState(it.id), a = S.phone.ans[it.id], solved = a?.solved, n = storyCount(it, cuts);
-  if (solved) {
-    const txt = parseStory(it.text).filter(p => !(p.cut && cuts.includes(p.idx))).map(p => p.t).join('').replace(/\s+([,.;:!?’])/g, '$1').replace(/\s{2,}/g, ' ');
-    return `<h2 style="font-size:1.6rem;font-style:italic">${it.title}</h2>
-    <div class="counter" style="margin-top:12px"><span class="n done">${n}</span><span class="label">words · target 50</span></div>
-    <div class="story">${esc(txt)}</div>${feedback(true, `Exactly 50 words, and it still makes sense. Adverbs left: ${adverbsLeft(it, cuts)}.`)}`;
-  }
+  const clean = () => parseStory(it.text).filter(p => !(p.cut && cuts.includes(p.idx))).map(p => p.t).join('').replace(/\s+([,.;:!?’])/g, '$1').replace(/\s{2,}/g, ' ');
   const parts = parseStory(it.text).map(p => {
-    if (!p.cut) return p.t.split(/(\s+)/).map(t => /\S/.test(t) ? (/[A-Za-z]/.test(t) && !solved ? `<button class="cw" data-act="fixed">${esc(t)}</button>` : `<span class="fixed">${esc(t)}</span>`) : t).join('');
+    if (!p.cut) return p.t.split(/(\s+)/).map(t => /\S/.test(t) ? (/[A-Za-z]/.test(t) ? `<button class="cw" data-act="fixed" ${solved ? 'disabled' : ''}>${esc(t)}</button>` : `<span class="fixed">${esc(t)}</span>`) : t).join('');
     const isCut = cuts.includes(p.idx);
-    if (solved && isCut) return '';
     return `<button class="cw ${isCut ? 'cut' : ''}" data-act="cut" data-id="${it.id}" data-idx="${p.idx}" ${solved ? 'disabled' : ''} aria-pressed="${isCut}">${esc(p.t)}</button>`;
   }).join('');
   return `<h2 style="font-size:1.6rem;font-style:italic">${it.title}</h2>
     <div class="counter" style="margin-top:12px"><span class="n ${n === 50 ? 'done' : ''}" aria-live="polite">${n}</span><span class="label">words · target 50</span></div>
     <div class="story">${parts.replace(/\s+([,.;:!?’])/g, '$1')}</div>
-    ${solved ? feedback(true, `Exactly 50 words, and it still makes sense. Adverbs left: ${adverbsLeft(it, cuts)}.`) : SESSION.cutMsg ? `<div class="fb bad" role="status"><b>✗ ${SESSION.cutMsg}</b></div>` : ''}`;
+    ${solved ? feedback(true, `Exactly 50 words, and it still makes sense. Adverbs left: ${adverbsLeft(it, cuts)}.`, `<p class="story" style="color:var(--ink)">${esc(clean())}</p>`) : SESSION.cutMsg ? `<div class="fb bad" role="status"><b>✗ ${SESSION.cutMsg}</b></div>` : ''}`;
 }
 function playScene(it) { if (it && sfx.scene[it.snd]) sfx.scene[it.snd](); const o = $('.onomato'); if (o) { o.classList.remove('pop'); void o.offsetWidth; o.classList.add('pop'); } }
 
-function renderHub() {
+function renderHub(fresh) {
   const nxt = block1Next(), mx = S.phone.mistakes.length;
   const b1 = CONTENT.stations.filter(s => s.block === 1), b2 = CONTENT.stations.filter(s => s.block === 2);
   app.innerHTML = `<header class="top"><button class="iconbtn" data-act="go" data-v="home" aria-label="Home">⌂</button><h1 class="t">A Twist in the Tale</h1>
      <button class="iconbtn" data-act="sound" aria-label="Sound on or off">${S.sound ? '🔊' : '🔇'}</button></header>
-    <div class="wrap enter">
+    <div class="wrap ${fresh ? 'enter' : ''}">
     <div class="cando"><div class="label">Today’s aim</div>${CONTENT.cando}</div>
     <section class="block"><h2>Block 1</h2><p class="muted">Everyone together, in this order. Your teacher says when to move on.</p>
       <div class="path">${b1.map(s => {
@@ -1151,7 +1155,7 @@ function renderHub() {
     <section class="block"><h2>My mistakes</h2>
       <p>${mx ? `${mx} card${mx > 1 ? 's' : ''} to try again. Each card comes back until you get it right first time.` : 'Nothing here yet. Cards you get wrong, or skip, will appear here.'}</p>
       <div class="row"><button class="btn" data-act="mx" ${mx ? '' : 'disabled'}>Practise my mistakes</button>
-      <button class="btn ghost small" data-act="reset">${SESSION.resetArm ? 'Tap again to delete all progress' : 'Start again'}</button></div></section>
+      <button class="btn ghost small fixw-l" data-act="reset">${SESSION.resetArm ? 'Tap again to delete all' : 'Start again'}</button></div></section>
     </div>${footer()}`;
 }
 
@@ -1174,7 +1178,7 @@ function bHook() {
     <p class="big">${h.q}</p>
     ${B.hookShow ? `<div class="card enter"><p class="big" style="color:var(--teal)">${h.a}</p>${h.tip ? `<p>${h.tip}</p>` : ''}</div>` : ''}
     <div class="nav"><button class="btn ghost" data-act="hookPrev" ${B.hook === 0 && !B.hookShow ? 'disabled' : ''}>Previous</button>
-      <button class="btn" data-act="hookNext">${B.hookShow ? (B.hook < CONTENT.hook.length - 1 ? 'Next question' : 'Go to the twist stories') : 'Show the answer'}</button></div>`;
+      <button class="btn wide" data-act="hookNext">${B.hookShow ? (B.hook < CONTENT.hook.length - 1 ? 'Next question' : 'Go to the twist stories') : 'Show the answer'}</button></div>`;
 }
 function bStories() {
   const B = S.board, s = CONTENT.stories[B.story], all = s.lines.length;
@@ -1183,10 +1187,10 @@ function bStories() {
     <div class="big">${s.lines.map((l, k) => `<span class="storyline ${k < B.lines ? 'show' : ''}">${l} </span>`).join('')}${B.lines >= all ? '<span class="storyline show" style="color:var(--tomato)">…</span>' : ''}</div>
     ${B.showEnd ? `<p class="label" style="margin-top:20px">How does it end? Vote: A, B, C or D.</p>
       <div class="endings">${s.endings.map((e, k) => `<div class="ending ${B.reveal ? (k === s.a ? 'real' : 'not') : ''}"><span class="k">${B.reveal && k === s.a ? '✓' : 'ABCD'[k]}</span>${e}</div>`).join('')}</div>` : ''}
-    <div class="nav">${B.lines < all ? `<button class="btn" data-act="line">Next line (${B.lines}/${all})</button>`
-      : !B.showEnd ? `<button class="btn" data-act="showEnd">Show the four endings</button>`
-      : !B.reveal ? `<button class="btn" data-act="reveal">Reveal the real ending</button>`
-      : B.story < CONTENT.stories.length - 1 ? `<button class="btn" data-act="story" data-k="${B.story + 1}">Next story</button>` : `<button class="btn" data-act="tab" data-t="b1">Go to Block 1</button>`}
+    <div class="nav">${B.lines < all ? `<button class="btn wide" data-act="line">Next line (${B.lines}/${all})</button>`
+      : !B.showEnd ? `<button class="btn wide" data-act="showEnd">Show the four endings</button>`
+      : !B.reveal ? `<button class="btn wide" data-act="reveal">Reveal the real ending</button>`
+      : B.story < CONTENT.stories.length - 1 ? `<button class="btn wide" data-act="story" data-k="${B.story + 1}">Next story</button>` : `<button class="btn wide" data-act="tab" data-t="b1">Go to Block 1</button>`}
       <button class="btn ghost" data-act="story" data-k="${B.story}">Start again</button></div>
     ${B.story === 0 ? '<p class="muted" style="margin-top:20px">Both stories are exactly 50 words long, including the ending.</p>' : ''}`;
 }
@@ -1198,7 +1202,7 @@ function bBlock1() {
     <div class="map" style="margin-top:16px">${[1, 2, 3].map(n => coverHTML(ST(n), n - 1 === b.st ? '' : 'locked')).join('')}</div>
     <h2 style="margin-top:24px">Now: Station ${st.n} · ${st.title}</h2>
     ${clock(b, 'clk')}
-    <div class="ctrl"><button class="btn" data-act="t1go">${b.run ? '❚❚ Pause' : '▶ Start'}</button>
+    <div class="ctrl"><button class="btn fixw" data-act="t1go">${b.run ? '❚❚ Pause' : '▶ Start'}</button>
       <button class="btn ghost" data-act="t1add">+1 min</button>
       <button class="btn ghost" data-act="t1prev" ${b.st === 0 ? 'disabled' : ''}>Previous station</button>
       <button class="btn ghost" data-act="t1next">${b.st < 2 ? 'Next station' : 'Finish Block 1'}</button></div>
@@ -1220,7 +1224,7 @@ function bBlock2() {
     <div class="map">${[4, 5, 6].map(n => `<div>${coverHTML(ST(n))}<div class="groups">${byStation[n].join('')}</div>${nextMap ? `<div class="arrow">Next round: Groups ${map.indexOf(n) * 2 + 1}–${map.indexOf(n) * 2 + 2} → Station ${nextMap[map.indexOf(n)]}</div>` : ''}</div>`).join('')}</div>
     <p class="muted" style="margin-top:12px">Each station is set up in two places: one for each group.</p>
     ${clock(b, 'clk2')}
-    <div class="ctrl"><button class="btn" data-act="t2go">${b.run ? '❚❚ Pause' : '▶ Start'}</button><button class="btn ghost" data-act="t2add">+1 min</button>
+    <div class="ctrl"><button class="btn fixw" data-act="t2go">${b.run ? '❚❚ Pause' : '▶ Start'}</button><button class="btn ghost" data-act="t2add">+1 min</button>
       <button class="btn ghost" data-act="t2prev" ${b.round === 0 ? 'disabled' : ''}>Previous round</button>
       <button class="btn ghost" data-act="t2next">${b.round < 2 ? 'Next round' : 'Go to the showdown'}</button></div>`;
 }
@@ -1246,12 +1250,13 @@ function bShowdown() {
       ${!sd.review && !sd.mx ? `<div class="timer"><span class="label">Thinking time</span><span class="stopwatch" id="sw">0:00</span><span class="countdown" id="cd"></span>
         <button class="btn small" data-act="hurry">Hurry up (H)</button>
         <span class="seg">${[20, 10, 5].map(s => `<button class="${S.hurry === s ? 'on' : ''}" data-act="hurryS" data-s="${s}">${s}s</button>`).join('')}</span>
-        <button class="btn ghost small" id="qtPause" data-act="qtPause">❚❚ Pause</button></div>` : ''}</div>
+        <button class="btn ghost small fixw" id="qtPause" data-act="qtPause">❚❚ Pause</button></div>` : ''}</div>
     <div class="teams">${sd.teams.map((t, k) => `<span class="team ${k === team && !sd.review ? 'now' : ''}">${esc(t.name)}<span class="pts">${t.pts}</span></span>`).join('')}</div>
     ${!sd.review && !sd.mx ? `<p class="label" style="margin-top:12px">${esc(sd.teams[team].name)}’s turn</p>` : ''}
     <div class="frag" style="font-size:clamp(1.6rem,1rem + 2.4vw,3.2rem)">${frag}</div>
-    ${!r && !sd.review ? `<div class="thumbs">Everyone else: thumbs up 👍 for natural, thumbs down 👎 for translated. Now!</div>
-      <div class="verdicts" style="margin-top:12px"><button class="opt" data-act="sdA" data-nat="1"><span class="k">✓</span>Natural English</button><button class="opt" data-act="sdA" data-nat="0"><span class="k">✎</span>Sounds translated</button></div>` : ''}
+    ${!sd.review ? `<div class="thumbs" style="${r ? 'opacity:.45' : ''}">Everyone else: thumbs up 👍 for natural, thumbs down 👎 for translated. Now!</div>
+      <div class="verdicts" style="margin-top:12px">${[true, false].map(v => { const st = !r ? '' : (v === it.natural ? 'right' : (r.nat === v ? 'wrong' : 'dim'));
+        return `<button class="opt ${st}" data-act="sdA" data-nat="${v ? 1 : 0}" ${r ? 'disabled' : ''}><span class="k">${!r ? (v ? '✓' : '✎') : (v === it.natural ? '✓' : (r.nat === v ? '✗' : (v ? '✓' : '✎')))}</span>${v ? 'Natural English' : 'Sounds translated'}</button>`; }).join('')}</div>` : ''}
     ${r || sd.review ? `<div class="fb ${r?.right ? 'ok' : 'bad'}"><b>${r ? (sd.mx ? (r.right ? '✓ Right' : '✗ Not quite') : r.right ? `✓ Right${r.pts ? ' · +2 points' : ' · 0 points (time was up)'}` : '✗ Not quite · 0 points') : ''} — ${it.natural ? 'Natural English.' : 'It sounds translated.'}</b>
       <span class="why">${it.fix ? `Natural version: ${it.fix} ` : ''}${it.note}</span></div>` : ''}
     <div class="nav"><button class="btn ghost" data-act="sdPrev" ${sd.q === 0 ? 'disabled' : ''}>Previous</button>
@@ -1271,10 +1276,10 @@ function bSigns() {
     <h3 style="font-family:var(--display);font-size:1.5rem;margin-top:20px">Worksheets</h3>
     <p>One A4 sheet per station, with the same items as the phone and no answers, so the whole group can read along. ${CONTENT.copiesHelp}</p>
     <div class="wslist">${names.map(([k, nm]) => `<div class="wsitem"><span class="nm">${nm}</span>
-      <button class="btn ghost small" data-act="wsPrev" data-k="${k}" aria-pressed="${String(prev) === String(k)}">${String(prev) === String(k) ? '👁 Showing' : 'Preview'}</button>
+      <button class="btn ghost small" data-act="wsPrev" data-k="${k}" aria-pressed="${String(prev) === String(k)}" style="${String(prev) === String(k) ? 'background:var(--ink);color:var(--cream)' : ''}">Preview</button>
       <button class="btn small" data-act="print" data-pr="${k === 'key' ? 'key' : 'ws' + k}">🖨 Print</button></div>`).join('')}</div>
     <div class="row" style="margin-top:12px"><button class="btn" data-act="print" data-pr="ws1,ws2,ws3,ws4,ws5,ws6">🖨 Print all six worksheets</button></div>
-    <div class="wsprev">${prev === 'key' ? keySheet() : wsSheet(+prev)}</div>
+    <div class="wsprev" id="wsprev" tabindex="0" aria-label="Preview">${prev === 'key' ? keySheet() : wsSheet(+prev)}</div>
     <h3 style="font-family:var(--display);font-size:1.5rem;margin-top:28px">Station signs</h3>
     <p>A4 landscape. Print Stations 4, 5 and 6 twice: each one is set up in two places. Each sign has its own QR code, which opens that station directly on a phone.</p>
     <button class="btn" data-act="print" data-pr="signs">🖨 Print the signs</button></div>
@@ -1406,7 +1411,7 @@ const ACT = {
   cut: b => toggleCut(b.dataset.id, +b.dataset.idx),
   fixed: () => tapFixed(),
   play: b => playScene(findItem(b.dataset.id)),
-  rules: () => { SESSION.showRules = !SESSION.showRules; render(); if (SESSION.showRules) $('#rulesCard')?.scrollIntoView({ behavior: 'smooth' }); },
+  rules: () => { SESSION.showRules = !SESSION.showRules; render(); },
   reset: () => { if (!SESSION.resetArm) { SESSION.resetArm = true; render(); setTimeout(() => { SESSION.resetArm = false; if (S.phone.at === 'hub' && S.view === 'phone') render(); }, 4000); return; }
     S.phone = blankState().phone; SESSION.resetArm = false; save(); render(true); },
   /* board */
@@ -1437,7 +1442,11 @@ const ACT = {
   hurryS: b => { S.hurry = +b.dataset.s; save(); render(); },
   qtPause: qtPause,
   print: b => printPart(b.dataset.pr || 'signs'),
-  wsPrev: b => { SESSION.wsPrev = b.dataset.k === 'key' ? 'key' : +b.dataset.k; render(); }
+  wsPrev: b => { // update only the preview box and the pressed button, so nothing else on the page moves
+    SESSION.wsPrev = b.dataset.k === 'key' ? 'key' : +b.dataset.k;
+    const box = $('#wsprev'); if (box) { box.innerHTML = SESSION.wsPrev === 'key' ? keySheet() : wsSheet(SESSION.wsPrev); box.scrollTop = 0; }
+    document.querySelectorAll('[data-act=wsPrev]').forEach(x => { const on = x === b; x.setAttribute('aria-pressed', on); x.style.background = on ? 'var(--ink)' : ''; x.style.color = on ? 'var(--cream)' : ''; });
+  }
 };
 // mistakes round on the board: answering does not score
 const _sdAnswer = sdAnswer;
