@@ -1,0 +1,343 @@
+<!doctype html>
+<!--
+  Name:     "War of the Worlds" at 80 · B2.2 listening
+  Purpose:  Seven multiple-choice questions on the video "The original 'fake news'?
+            'War of the Worlds' at 80", answered over two listenings, with the
+            answer key and the place in the video shown after checking.
+  Version:  1.1 · 2026-11-26
+  Edit:     The video address, instructions, questions, answers and explanations are
+            all in the CONTENT section at the top of the script. Change the text
+            there; nothing else needs editing.
+  Video:    Plays from Google Drive. The file must be shared as "Anyone with the link".
+  Credit:   Class of Coffee – with AI assistance
+-->
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>"War of the Worlds" at 80 · B2.2 listening</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📻</text></svg>">
+<style>
+/* ================= tokens ================= */
+:root{
+  --bg:#FAF7F2; --paper:#FFFFFF; --ink:#4A3524; --ink-soft:#6E5640; --line:#E8DCC8;
+  --coffee:#5A2D0C; --rust:#A2521A; --tan:#E6C496; --cream:#F3E2BF; --gold:#D9B978;
+  --ok:#1C7C3C; --ok-bg:#E7F3EA; --bad:#A3261A; --bad-bg:#FBEAE7;
+  --display:'Montserrat','Segoe UI','Helvetica Neue',Arial,sans-serif;
+  --body:'Nunito','Segoe UI','Helvetica Neue',Verdana,sans-serif;
+  --r-s:10px; --r-m:16px; --r-l:22px;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+}
+/* ================= base ================= */
+*{box-sizing:border-box}
+html{touch-action:manipulation}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.55 var(--body);
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  min-height:100vh;display:flex;flex-direction:column}
+button{font:inherit;cursor:pointer;color:inherit}
+button:focus-visible,a:focus-visible{outline:3px solid var(--rust);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);color:var(--coffee);line-height:1.2;margin:0}
+
+/* ================= layout ================= */
+.wrap{width:100%;max-width:1240px;margin:0 auto;padding:20px 20px 120px;flex:1}
+header.top{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-bottom:18px}
+header.top h1{font-size:clamp(1.5rem,3.2vw,2.3rem);font-weight:800}
+.tag{font-family:var(--display);font-weight:700;font-size:.85rem;letter-spacing:.04em;
+  background:var(--cream);color:var(--coffee);border-radius:999px;padding:4px 12px}
+.grid{display:grid;gap:22px;grid-template-columns:1fr}
+@media (min-width:960px){
+  .grid{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:start}
+  .media{position:sticky;top:16px}
+}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-l);padding:18px}
+
+/* video */
+.video{position:relative;width:100%;aspect-ratio:16/9;background:#1d140c;border-radius:var(--r-m);overflow:hidden}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vlink{font-size:.9rem;color:var(--ink-soft);margin:8px 2px 0}
+.vlink a{color:#7D3410;display:inline-flex;align-items:center;min-height:40px}
+@media (min-width:1600px){html{font-size:20px}.coc-footer{font-size:15px}}
+
+/* listening stage */
+.stages{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 10px}
+.stage{flex:1 1 150px;min-height:48px;border:2px solid var(--line);background:var(--bg);
+  border-radius:var(--r-m);font-family:var(--display);font-weight:700;font-size:.98rem;padding:8px 12px}
+.stage[aria-pressed="true"]{border-color:var(--rust);background:var(--cream);color:var(--coffee)}
+.stage[aria-pressed="true"]::before{content:"▶ "}
+.instr{display:grid;margin:0}
+.instr>div{grid-area:1/1}
+.instr>div[aria-hidden="true"]{visibility:hidden}
+.instr p{margin:0 0 6px}
+.note{font-size:.95rem;color:var(--ink-soft);border-left:4px solid var(--gold);padding:4px 0 4px 12px;margin:12px 0 0}
+
+/* questions */
+.qs{display:flex;flex-direction:column;gap:16px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-l);padding:16px 16px 14px}
+.q h2{font-size:1.05rem;font-weight:700;display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.num{flex:none;min-width:2em;height:2em;border-radius:50%;background:var(--coffee);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;font-size:.9rem}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;min-height:48px;
+  border:2px solid var(--line);background:var(--bg);border-radius:var(--r-m);padding:10px 12px;line-height:1.4}
+.opt:hover:not(:disabled){border-color:var(--gold)}
+.opt .l{flex:none;font-family:var(--display);font-weight:800;color:var(--rust);width:1.4em}
+.opt .m{flex:none;margin-left:auto;font-weight:800;width:1.6em;text-align:right}
+.opt[aria-pressed="true"]{border-color:var(--rust);background:var(--cream)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-bg)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opt.right .m{color:var(--ok)} .opt.wrong .m{color:var(--bad)}
+.fb{margin-top:10px;border-radius:var(--r-s);padding:10px 12px;font-size:.98rem}
+.fb.ok{background:var(--ok-bg)} .fb.no{background:var(--bad-bg)}
+.fb strong{font-family:var(--display)}
+.fb .when{display:block;color:var(--ink-soft);font-size:.9rem;margin-top:4px}
+
+/* result */
+.result{display:none;text-align:center;padding:18px}
+.result.show{display:block}
+.result .score{font-family:var(--display);font-weight:800;font-size:2rem;color:var(--coffee)}
+
+/* fixed action bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(250,247,242,.97);
+  border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.bar-in{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:10px}
+.count{margin-right:auto;font-family:var(--display);font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+.btn{min-height:48px;min-width:13.5em;border-radius:var(--r-m);border:2px solid var(--coffee);
+  font-family:var(--display);font-weight:700;padding:8px 18px;white-space:nowrap}
+.btn.main{background:var(--coffee);color:#fff}
+.btn.sec{background:var(--paper);color:var(--coffee);min-width:9em}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+@media (max-width:560px){
+  .bar-in{gap:8px}
+  .count{width:100%;text-align:center;margin:0}
+  .btn{min-width:0;padding:8px 12px}
+  .btn.main{flex:1}
+  .btn.sec{flex:0 0 auto;min-width:0}
+}
+
+/* ================= footer ================= */
+.coc-footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 16px;padding:7px 20px;
+  margin-bottom:76px;background:var(--tan);color:var(--coffee);font-family:var(--body);font-size:13px;line-height:1.4}
+.coc-footer__brand{display:flex;align-items:center;gap:10px;font-weight:600}
+.coc-footer__mark{width:30px;height:30px;flex:none}
+.coc-footer a{color:inherit;text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:40px;padding:0 4px}
+@media (max-width:560px){.coc-footer{margin-bottom:118px}}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <h1 id="title"></h1>
+    <span class="tag" id="level"></span>
+  </header>
+  <div class="grid">
+    <section class="media">
+      <div class="card">
+        <div class="video"><iframe id="player" title="Video" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe></div>
+        <p class="vlink" id="vlink"></p>
+        <div class="stages" id="stages" role="group" aria-label="Listening"></div>
+        <div class="instr" id="instr" aria-live="polite"></div>
+        <p class="note" id="note"></p>
+      </div>
+    </section>
+    <section>
+      <div class="qs" id="qs"></div>
+      <div class="card result" id="result" aria-live="polite"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="coc-footer">
+  <span class="coc-footer__brand">
+    <svg class="coc-footer__mark" xmlns="http://www.w3.org/2000/svg" viewBox="4 4 48 48" aria-hidden="true" focusable="false"><path d="M42.57 20.25A16.5 16.5 0 1 0 42.57 35.75L38.77 33.73A12.2 12.2 0 1 1 38.77 22.27Z" fill="#EDE3D6"/><path d="M42.57 20.25A16.5 16.5 0 1 0 42.57 35.75L40.89 34.85A14.6 14.6 0 1 1 40.89 21.15Z" fill="#D9C8B2"/><path d="M48.31 17.2A23 23 0 1 0 48.31 38.8A3.25 3.25 0 0 0 42.57 35.75A16.5 16.5 0 1 1 42.57 20.25A3.25 3.25 0 0 0 48.31 17.2Z" fill="#A2521A" stroke="#5A2D0C" stroke-width="1.8" stroke-linejoin="round"/><circle cx="28" cy="28" r="12.2" fill="#744823" stroke="#5A3517" stroke-width="1"/><path d="M32.5 22.64A7.0 7.0 0 1 0 32.5 33.36L32.64 32.21A5.5 5.5 0 1 1 32.64 23.79Z" fill="#F3E2BF" stroke="#F3E2BF" stroke-width="0.7" stroke-linejoin="round"/></svg>
+    <span>Class of Coffee – with AI assistance</span>
+  </span>
+  <a href="https://classofcoffee.com">classofcoffee.com</a>
+</footer>
+
+<div class="bar">
+  <div class="bar-in">
+    <span class="count" id="count"></span>
+    <button class="btn sec" data-act="reset" id="resetBtn">Start again</button>
+    <button class="btn main" data-act="check" id="checkBtn">Check my answers</button>
+  </div>
+</div>
+
+<script>
+/* ================= CONTENT (edit here) ================= */
+// Each question: q = question, opts = four options (a–d, in this order),
+// a = index of the right option (0 = a, 1 = b, 2 = c, 3 = d),
+// why = explanation shown after checking, at = where in the video the answer is.
+const CONTENT = {
+  title: '“War of the Worlds” at 80',
+  level: 'B2.2 · Listening',
+  videoEmbed: 'https://drive.google.com/file/d/1M3c2UGgda0CIc9yEfwaDtRvd0hjpZm7y/preview',
+  videoOpen:  'https://drive.google.com/file/d/1M3c2UGgda0CIc9yEfwaDtRvd0hjpZm7y/view',
+  stages: [
+    { label: '1st listening',
+      text: ['Read the questions first.', 'Then watch the whole video.', 'Choose one answer for each question.'] },
+    { label: '2nd listening',
+      text: ['Watch the video again.', 'Check your answers and change them if you need to.', 'When you finish, press “Check my answers”.'] }
+  ],
+  note: 'Some questions ask what newspapers said in 1938. Other questions ask what the video says about those newspaper stories.',
+  questions: [
+    { q: 'What is the main purpose of the video?',
+      opts: ['To explain the origins of modern science-fiction radio',
+             'To investigate whether the War of the Worlds broadcast truly caused mass panic',
+             'To compare different versions of H. G. Wells’s novel',
+             'To analyse Orson Welles’s career as a filmmaker'],
+      a: 1, why: 'The video examines whether the broadcast really caused mass panic.', at: '0:22' },
+    { q: 'What was the social context in the United States in 1938, according to the video?',
+      opts: ['A time of economic depression and rising international tension',
+             'A period of rapid economic growth and optimism',
+             'A moment of political stability and low public anxiety',
+             'A period dominated by the success of television'],
+      a: 0, why: 'The US was experiencing economic depression and tension related to war in Europe.', at: '0:29' },
+    { q: 'How was the radio programme structured?',
+      opts: ['As a straightforward reading of the novel',
+             'As a comedy show with occasional interviews',
+             'As a fictional programme using simulated news bulletins and music',
+             'As a live report from an actual scientific expedition'],
+      a: 2, why: 'It used simulated news bulletins and music to create a realistic fake programme.', at: '0:37' },
+    { q: 'According to early newspaper coverage, how did some listeners reportedly react?',
+      opts: ['They began writing letters to the government requesting military action',
+             'They switched off their radios immediately',
+             'They protested outside radio stations',
+             'They fled their homes and panicked, believing an invasion was real'],
+      a: 3, why: 'Newspapers reported people fleeing their homes in panic.', at: '0:54' },
+    { q: 'What does the video suggest about those newspaper stories?',
+      opts: ['They were mostly untrue or exaggerated',
+             'They were verified thoroughly by investigators',
+             'They were created by Orson Welles as part of a publicity campaign',
+             'They were published only in small, local papers'],
+      a: 0, why: 'The stories were exaggerated or unverified.', at: '1:35' },
+    { q: 'What explanation does the video give for why some listeners did believe the broadcast?',
+      opts: ['They trusted radio more than newspapers',
+             'People in the 1930s were more gullible than people are today',
+             'The programme was broadcast during a power cut',
+             'They were influenced by existing fears and beliefs'],
+      a: 3, why: 'Some people believed it because the message aligned with their existing fears or beliefs.', at: '2:06' },
+    { q: 'What is the main conclusion of the video regarding “mass hysteria”?',
+      opts: ['It was widespread and affected the entire country',
+             'It was a rare but unavoidable result of radio technology at the time',
+             'It did not occur on the huge scale often claimed',
+             'It only affected listeners in large cities'],
+      a: 2, why: 'There was no mass hysteria on the large scale often claimed.', at: '3:20' }
+  ],
+  ui: { checked: 'Checked', answered: n => `${n} of ${CONTENT.questions.length} answered`,
+        right: 'Right.', wrong: 'Not quite.', rightIs: 'The answer is', heard: 'You hear this at about',
+        open: 'If the video does not play here, open it in Google Drive',
+        score: (s, t) => `${s} / ${t}`, scoreText: 'Look at the explanations above. Watch the parts again where you made a mistake.' }
+};
+const LETTERS = ['a', 'b', 'c', 'd'];
+const KEY = 'b22-war-of-the-worlds-listening.v2';
+
+/* ================= state ================= */
+let S = fresh();
+function fresh(){ return { v: 1, stage: 0, answers: CONTENT.questions.map(() => null), checked: false }; }
+
+/* ================= logic ================= */
+function choose(qi, oi){ if (S.checked) return; S.answers[qi] = oi; save(); }
+function setStage(i){ S.stage = i; save(); }
+function check(){ if (S.checked) return; S.checked = true; save(); }
+function reset(){ S = fresh(); save(); }
+function answeredCount(){ return S.answers.filter(a => a !== null).length; }
+function score(){ return S.answers.reduce((n, a, i) => n + (a === CONTENT.questions[i].a ? 1 : 0), 0); }
+
+/* ================= display ================= */
+const $ = id => document.getElementById(id);
+function el(tag, cls, text){ const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+function renderStatic(){
+  document.title = CONTENT.title.replace(/[“”]/g, '"') + ' · ' + CONTENT.level;
+  $('title').textContent = CONTENT.title;
+  $('level').textContent = CONTENT.level;
+  $('player').src = CONTENT.videoEmbed;
+  const a = el('a', null, CONTENT.ui.open); a.href = CONTENT.videoOpen; a.target = '_blank'; a.rel = 'noopener';
+  $('vlink').replaceChildren(a);
+  $('note').textContent = CONTENT.note;
+  $('instr').replaceChildren(...CONTENT.stages.map(s => { const d = el('div'); d.append(...s.text.map(t => el('p', null, t))); return d; }));
+  $('stages').replaceChildren(...CONTENT.stages.map((s, i) => {
+    const b = el('button', 'stage', s.label); b.dataset.act = 'stage'; b.dataset.i = i; return b; }));
+  // build the questions once; render() only updates them
+  $('qs').replaceChildren(...CONTENT.questions.map((q, qi) => {
+    const box = el('article', 'q'); box.id = 'q' + qi;
+    const h = el('h2'); h.append(el('span', 'num', String(qi + 1)), el('span', null, q.q)); box.append(h);
+    const opts = el('div', 'opts'); opts.setAttribute('role', 'group'); opts.setAttribute('aria-label', 'Question ' + (qi + 1));
+    q.opts.forEach((o, oi) => {
+      const b = el('button', 'opt'); b.dataset.act = 'choose'; b.dataset.q = qi; b.dataset.o = oi;
+      b.append(el('span', 'l', LETTERS[oi] + ')'), el('span', 't', o), el('span', 'm'));
+      opts.append(b);
+    });
+    box.append(opts);
+    const fb = el('div', 'fb'); fb.hidden = true; box.append(fb);
+    return box;
+  }));
+}
+
+function render(){
+  document.querySelectorAll('.stage').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.i === S.stage)));
+  // both texts sit in the same place, so the page never jumps when the stage changes
+  $('instr').querySelectorAll(':scope > div').forEach((d, i) => d.setAttribute('aria-hidden', String(i !== S.stage)));
+
+  CONTENT.questions.forEach((q, qi) => {
+    const box = $('q' + qi);
+    box.querySelectorAll('.opt').forEach(b => {
+      const oi = +b.dataset.o, mine = S.answers[qi] === oi, good = oi === q.a;
+      b.setAttribute('aria-pressed', String(mine));
+      b.disabled = S.checked;
+      b.classList.toggle('right', S.checked && good);
+      b.classList.toggle('wrong', S.checked && mine && !good);
+      b.querySelector('.m').textContent = S.checked ? (good ? '✓' : (mine ? '✗' : '')) : '';
+    });
+    const fb = box.querySelector('.fb');
+    if (S.checked){
+      const ok = S.answers[qi] === q.a;
+      fb.className = 'fb ' + (ok ? 'ok' : 'no');
+      const head = el('strong', null, ok ? CONTENT.ui.right : CONTENT.ui.wrong);
+      const body = ok ? ' ' + q.why : ` ${CONTENT.ui.rightIs} ${LETTERS[q.a]}). ${q.why}`;
+      fb.replaceChildren(head, document.createTextNode(body), el('span', 'when', `${CONTENT.ui.heard} ${q.at}.`));
+      fb.hidden = false;
+    } else { fb.hidden = true; fb.replaceChildren(); }
+  });
+
+  $('count').textContent = S.checked ? `${CONTENT.ui.checked}: ${CONTENT.ui.score(score(), CONTENT.questions.length)}` : CONTENT.ui.answered(answeredCount());
+  $('checkBtn').disabled = S.checked || answeredCount() === 0;
+  $('resetBtn').disabled = !S.checked && answeredCount() === 0;
+
+  const r = $('result');
+  if (S.checked){
+    r.replaceChildren(el('div', 'score', CONTENT.ui.score(score(), CONTENT.questions.length)), el('p', null, CONTENT.ui.scoreText));
+    r.classList.add('show');
+  } else { r.classList.remove('show'); r.replaceChildren(); }
+}
+
+/* ================= saving ================= */
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function load(){
+  try {
+    const d = JSON.parse(localStorage.getItem(KEY));
+    if (d && d.v === 1 && Array.isArray(d.answers) && d.answers.length === CONTENT.questions.length){
+      S = { v: 1, stage: d.stage === 1 ? 1 : 0, checked: !!d.checked,
+            answers: d.answers.map(a => (Number.isInteger(a) && a >= 0 && a < 4) ? a : null) };
+    }
+  } catch (e) {}
+}
+
+/* ================= events ================= */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]'); if (!b || b.disabled) return;
+  const act = b.dataset.act;
+  if (act === 'choose') choose(+b.dataset.q, +b.dataset.o);
+  else if (act === 'stage') setStage(+b.dataset.i);
+  else if (act === 'check') check();
+  else if (act === 'reset') reset();
+  render();
+});
+
+load(); renderStatic(); render();
+</script>
+</body>
+</html>
