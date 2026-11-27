@@ -2,6 +2,12 @@
 
 Coursebook lessons made interactive for EOI students. Click any link to open the lesson directly in your browser — no login or download needed.
 
+## Using these lessons
+
+All the lessons are free to use in your classes. They are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/): you may share and adapt them as long as you credit Class of Coffee, do not use them commercially, and share any adapted versions under the same licence. The licence covers only Class of Coffee's own work; coursebooks, songs and other works mentioned in the lessons belong to their own authors. See [LICENSE.md](LICENSE.md) for details.
+
+Please link to the lessons here rather than uploading copies elsewhere, so that everyone always gets the latest version.
+
 ---
 
 ## Grammar & Language
